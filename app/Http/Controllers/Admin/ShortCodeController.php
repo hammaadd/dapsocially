@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Shortcode;
+use Laravel\Ui\Presets\React;
+use Yajra\Datatables\Datatables;
+class ShortCodeController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    function shortcode(){
+        $data=Shortcode::all();
+        return view('admin.content.shortcode',compact("data"));
+    }
+    public function addcode(Request $request){
+        $validated = $request->validate([
+            'quote' => 'required',
+            'key' => 'required|unique:shortcodes',
+        ]);
+        
+    
+        $key = str_replace(' ', '', $request->key);
+        $key=str_replace(' ', '-', $key);
+        $key=preg_replace('/[^A-Za-z0-9\-]/', '', $key);
+        $table=new Shortcode;
+        $table->key=$key;
+        $table->content=$request->quote;
+        $table->save();
+        return redirect()->route('short.code');
+    
+       
+        
+      
+    }
+    public function editcode(Request $request, Shortcode $shortQ){
+        return view('admin/content/editshortcode',compact('shortQ'));
+    }
+    public function updatecode(Request $request){
+        
+        Shortcode::where('id', $request->id)->update(['key' => $request->keys,"content"=>$request->quote]);
+        return redirect()->route('short.code');
+
+        
+
+    }
+    public function deletecode($id){
+        $del=Shortcode::find($id);
+        $del->delete();
+        return redirect()->route('short.code');
+    }
+    public function get_shortcode(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Shortcode::select('id','key','content');
+            
+            return Datatables::of($data)
+                    ->addColumn('action', function($row){
+    
+                           $btn = '<a href="'.route('edit.code',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
+                            <a href="'.route('delete.code',$row).'" onclick="return confirm(\'Do you really want to delete the customer\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                            ';
+    
+    
+                            return $btn;
+                    })
+                    ->make();
+        }
+        
+    }
+}
