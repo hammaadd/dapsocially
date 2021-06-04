@@ -2,7 +2,14 @@
 @section('title','Profile Setting')
     
 @section('content')
+
+@if(Session::has('message'))
 <div class="mx-5 mr-5">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{ Session::get('message') }}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+@endif
       <div class="col">
         <div class="row">
           <div class="col mb-3">

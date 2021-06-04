@@ -7,7 +7,7 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="{{asset('admin/assets/images/logo/logo.png')}}" alt="Logo"></a>
+                        <a href="index.html"><img src="{{asset('admin/assets/images/logo/logo1.png')}}" style="height: 50px; " alt="Logo"></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
@@ -56,12 +56,12 @@
 
 
                     </form>
-                    <a href="{{ route('login.google') }}" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                    {{-- <a href="{{ route('login.google') }}" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
                         Log in with google
                     </a>
                     <a href="{{ route('login.facebook') }}" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
                         Log in with Facebook
-                    </a>
+                    </a> --}}
                     <div class="text-center mt-5 text-lg fs-4">
                         
                         <p>

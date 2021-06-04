@@ -12,6 +12,10 @@ use Laravel\Ui\Presets\React;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
    {
        return view('admin.content.addroles');

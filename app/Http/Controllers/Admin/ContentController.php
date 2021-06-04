@@ -9,6 +9,10 @@ use Yajra\Datatables\Datatables;
 
 class ContentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
    public function index()
    {
       return view('admin.content.content');
@@ -41,7 +45,7 @@ class ContentController extends Controller
                 ->addColumn('action', function($row){
 
                        $btn = '<a href="'.route('edit.content',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
-                        <a href="'.route('usersprofile.view',$row).'" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
+                        
                         ';
 
 

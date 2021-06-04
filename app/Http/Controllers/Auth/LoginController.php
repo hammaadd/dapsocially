@@ -46,7 +46,7 @@ class LoginController extends Controller
     {
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
-        } elseif ($user->hasRole('user')) {
+        } elseif ($user->hasRole('user') && $user->isactive==1) {
             return redirect()->route('user.home');
         }
     }

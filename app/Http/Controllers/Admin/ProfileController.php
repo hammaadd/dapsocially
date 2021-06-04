@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class ProfileController extends Controller
@@ -22,10 +23,10 @@ class ProfileController extends Controller
 
     }
     public function update_password(Request $request){
-        $validated = $request->validate([
+        $request->validate([
             'currentpassword' => 'required',
             'newpassword' => 'required|min:8|different:password',
-            'newpassword' => 'required|min:8|same:newpassword'
+            'confirmpassword' => 'required|min:8|same:newpassword'
             ]);
             
         $old_password=$request->currentpassword;
@@ -37,11 +38,11 @@ class ProfileController extends Controller
             
                 $new_password=Hash::make($new_password);
                 User::where('id',Auth::user()->id)->update(['password' => $new_password]);
-                $messages="Password changed";
+            Session::flash('message', 'Password Changed suucessfully!'); 
                
         }
         else {
-            $messages="";
+            Session::flash('message', 'Password does not change. Cuurent password not matched'); 
             
         }
 

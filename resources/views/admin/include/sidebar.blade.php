@@ -4,7 +4,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
-                        <a href="index.html"><img src="{{ asset('admin/assets/images/logo/logo.png') }}" alt="Logo"
+                        <a href="{{route('dashboard')}}"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}" alt="Logo" style="height: 40px"
                                 srcset=""></a>
                     </div>
                     <div class="toggler">
@@ -18,20 +18,20 @@
 
                     <li class="sidebar-item {{Request::is('dashboard')? 'active' : '' }} ">
                         <a href="{{route('dashboard')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Users List</span>
                         </a>
                     </li>
                     <li class="sidebar-item {{Request::is('short-code')? 'active' : '' }}  ">
                         <a href="{{route('short.code')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>short Codes</span>
+                            <i class="bi bi-file-code-fill"></i>
+                            <span>Short Codes</span>
                         </a>
                     </li>
                     
                     <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }}">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                            <i class="bi bi-person-check-fill"></i>
                             <span>Roles</span>
                         </a>
                         <ul class="submenu ">
@@ -44,8 +44,14 @@
                     
                     <li class="sidebar-item {{Request::is('contactus-list')? 'active' : '' }}  ">
                         <a href="{{route('contactus.list')}}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
+                            <i class="bi bi-chat-left-text-fill"></i>
                             <span>Contact us</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item {{Request::is('price-packages')? 'active' : '' }}  ">
+                        <a href="{{route('price.package')}}" class='sidebar-link'>
+                            <i class="bi bi-credit-card-fill"></i>
+                            <span>Payment Plans</span>
                         </a>
                     </li>
                     <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }}">
@@ -63,6 +69,12 @@
                             </li>
                            
                         </ul>
+                    </li>
+                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
+                        <a href="{{route('orders.list')}}" class='sidebar-link'>
+                            <i class="bi bi-archive-fill"></i>
+                            <span>Orders</span>
+                        </a>
                     </li>
 
                     

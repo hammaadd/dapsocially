@@ -56,7 +56,9 @@ class RegisterController extends Controller
             'dob'=>$data['dob'],
             'address'=>$data['address'],
             'mobile'=>$data['mobile'],
+            'image'=>"1.jpg",
             'profession'=>$data['profession'],
+            'isactive'=>1,
             
             
             
@@ -80,8 +82,10 @@ class RegisterController extends Controller
             'dob'=>$data['dob'],
             'address'=>$data['address'],
             'mobile'=>$data['mobile'],
+            'image'=>"1.jpg",
             'profession'=>$data['profession'],
             'isactive'=>1,
+            
 
         ]);
         

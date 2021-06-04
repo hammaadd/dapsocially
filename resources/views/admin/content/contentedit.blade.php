@@ -2,10 +2,16 @@
 @section('title', 'Edit content')
 
 @section('content')
-
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('show.content') }}">Content List</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Content</li>
+    </ol>
+</nav>
 <section id="basic-horizontal-layouts">
     <div class="row match-height">
-        <div class="col-md-6 col-12">
+        <div class="col-md-12 col-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Edit Content</h4>
@@ -14,7 +20,7 @@
                     <div class="card-body">
                         <form class="form form-horizontal" method="POST" action="{{ route('update.content') }}">
                             @csrf
-                            <div class="form-body">
+                            
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>key</label>
@@ -37,27 +43,29 @@
                                     <div class="col-md-8 form-group">
                                         <input type="text" id="heading" class="form-control" name="heading"
                                             placeholder="heading" value="{{$Content->heading}}">
+                                            <span class=" text-danger" role="alert">
+                                                @error('heading')
+                                                    <strong>{{ $message }}</strong>
+                                                @enderror
+                                            </span>
                                     </div>
-                                    @error('heading')
-                                        <span class="invalid-feedback text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                     
-                                    <section class="section">
+                                    
+                                    
                                         <div class="row">
                                             <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h4 class="card-title">Default Editor</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <textarea  id="content" name="content" cols="30" rows="10"  >{{$Content->content}}</textarea>
-                                                    </div>
-                                                </div>
+                                                
+                                                <h4 class="card-title">Default Editor</h4>
+                                                <textarea  id="content" name="content" cols="30" rows="10"  >{{$Content->content}}</textarea>
+                                                <span class=" text-danger" role="alert">
+                                                    @error('content')
+                                                        <strong>{{ $message }}</strong>
+                                                    @enderror
+                                                </span>  
                                             </div>
-                                        </div>
-                                    </section>
+                                                </div>
+                                            
+                                 
                         
                         
                                     <div class="col-sm-12 d-flex justify-content-end">
