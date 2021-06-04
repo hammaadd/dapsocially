@@ -1,0 +1,33 @@
+:checked + .cb-label:before {
+    content: '\f14a';
+    position: absolute;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    display: block;
+    color: #260fce;
+    text-align: center;
+    top: -6px;
+    right: -1px;
+    z-index: 10;
+}
+
+:checked + .cb--label:before {
+    content: '\f14a';
+    position: absolute;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 600;
+    display: block;
+    color: #260fce;
+    text-align: center;
+    top: -6px;
+    right: -1px;
+    z-index: 10;
+}
+
+:checked + label p.text-remove {
+    display: block !important;
+}
+
+:checked + label p.text-add {
+    display: none !important;
+}

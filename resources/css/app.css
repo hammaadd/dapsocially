@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+        .h-650 {
+            height: 650px;
+        }
+        .h-500 {
+            height: 500px;
+        }
+        .min-h-55 {
+            min-height: calc(100vh - 55px)
+        }
+        .section-title:before {
+            content: '';
+            position: absolute;
+            background: #260fce;
+            width: 4px;
+            height: 40px;
+            top: 6px;
+            left: -8px;
+        }
+        .form-side:after {
+            content: '';
+            width: 1px;
+            height: 60%;
+            background: #d1d5db;
+            position: absolute;
+            top: 20%;
+            right: 0;
+        }
+        .w--52 {
+            width: calc(100% - 52px) !important;
+        }
+        .min-h-40 {
+            min-height: 40px !important;
+        }
+        .masonry {
+            columns: 1;
+            column-gap: 20px;
+        }
+        .cols--3 {
+            columns: 3;
+        }
+        .cols--4 {
+            columns: 4;
+        }
+        .cols--5 {
+            columns: 5;
+        }
+    }
+}
+body {
+    @apply text-gray-900 font-roboto text-base
+}
+.nav-item {
+    @apply inline-block text-white text-lg font-medium mx-3
+}
+.btn-login {
+    @apply bg-blue-550 text-white text-lg uppercase px-8 py-1.5 rounded-3xl mx-3 hover:text-blue-550 hover:bg-white
+}
+.search-input {
+    @apply block w-full font-roboto text-base text-blue-550 rounded-3xl border-0 py-1.5 pl-10 pr-3 focus:border-blue-550 focus:ring-blue-550 focus:outline-none
+}
+.btn-add-event {
+    @apply px-5 py-1.5 text-lg text-blue-550 bg-white rounded-3xl border-2 border-white hover:text-white hover:bg-transparent
+}
+.btn-add-venue {
+    @apply px-5 py-1.5 text-lg text-white bg-transparent rounded-3xl border-2 border-white ml-5 hover:text-blue-550 hover:bg-white
+}
+.social-link {
+    @apply bg-white text-blue-550 h-8 w-8 text-center pt-1.5 border-2 border-white rounded-full hover:bg-transparent hover:text-white
+}
+.input-field {
+    @apply w-full bg-gray-100 shadow-md border border-gray-200 rounded-md mt-1
+}
+.cb-label {
+    @apply block relative bg-gray-100 rounded-xl border border-gray-200 cursor-pointer w-16 h-16 pt-2.5 text-center
+}
+.cb--label {
+    @apply block relative bg-gray-100 rounded-lg border border-gray-200 cursor-pointer w-10 h-10 pt-1.5 text-center
+}
+.input--field {
+    @apply bg-gray-100 shadow-md border border-gray-200 rounded-md h-10
+}
+.input---field {
+    @apply w-1/2 bg-gray-100 shadow-md border border-gray-200 mt-1 inline-block
+}
+.masonry-item {
+    @apply mb-5 inline-block align-top rounded-lg overflow-hidden shadow-md bg-white
+}
+.masonry-content {
+    @apply rounded-lg overflow-hidden
+}

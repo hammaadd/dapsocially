@@ -1,5 +1,6 @@
 <?php
 
+use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -12,6 +13,42 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Visitor Side
+
+Route::get('/', function () {
+    return view('visitor.content.main');
+})->name('homepage');
+Route::get('signin', function () {
+    return view('visitor.content.signin');
+})->name('signin');
+Route::get('signup', function () {
+    return view('visitor.content.signup');
+})->name('signup');
+
+
+// User Side
+
+Route::get('profile', function () {
+    return view('users.content.profile');
+})->name('profile');
+Route::get('add-venue', function () {
+    return view('users.content.add-venue');
+})->name('add-venue');
+Route::get('add-event', function () {
+    return view('users.content.add-event');
+})->name('add-event');
+Route::get('pricing', function () {
+    return view('users.content.pricing');
+})->name('pricing');
+Route::get('events', function () {
+    return view('users.content.events');
+})->name('events');
+Route::get('social-wall', function () {
+    return view('users.content.social-wall');
+})->name('social-wall');
+
+
 
 Route::get('/admin/login', function () {
     if (!Auth::check()) {
@@ -95,7 +132,9 @@ Route::get('payment-processing/{id}/{total_payment}', 'User\OrderController@paym
 
 Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
-
 //Square Api Route SquareApiController
 Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');
 Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
+=======
+Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
+
