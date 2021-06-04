@@ -2,7 +2,14 @@
 @section('title', 'Short Codes')
 
 @section('content')
-    <div class="col-md-6 col-12">
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Short Codes</li>
+    </ol>
+</nav>
+    <div class="col-md-8 col-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Short Codes</h4>
@@ -14,10 +21,10 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label>Key</label>
                                 </div>
-                                <div class="col-md-8 form-group">
+                                <div class="col-md-9 form-group">
                                     <input type="text" class="form-control" id="key" placeholder="Key" name="key">
                                     <span class="ml-5 text-danger">@error('key'){{ $message }}@enderror</span>
 
@@ -25,7 +32,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group with-title mb-3">
-                                            <textarea class="form-control" id="quote" rows="3" name="quote"></textarea>
+                                            <textarea class="form-control" id="quote" rows="5" name="quote"></textarea>
 
                                             <span
                                                 class="ml-5 text-danger">@error('quote'){{ $message }}@enderror</span>
@@ -35,7 +42,7 @@
                                 </div>
 
                                 <div class="col-sm-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Add Code</button>
                                    
                                 </div>
                             </div>
@@ -44,7 +51,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
 
 

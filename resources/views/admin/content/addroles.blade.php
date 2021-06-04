@@ -2,6 +2,12 @@
 @section('title', 'Add Roles')
 
 @section('content')
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Add Roles</li>
+    </ol>
+</nav>
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">

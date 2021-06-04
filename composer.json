@@ -15,13 +15,16 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "santigarcor/laratrust": "^6.3",
+        "square/square": "11.0.0.20210513",
         "yajra/laravel-datatables-oracle": "^9.18"
+    
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
+        "nikolag/square": "^2.6",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },

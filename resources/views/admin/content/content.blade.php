@@ -2,77 +2,81 @@
 @section('title', 'Content')
 
 @section('content')
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Content / Add Content</li>
+        </ol>
+    </nav>
+    <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-md-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add Content</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-horizontal" method="POST" action="{{ route('add.content') }}">
+                                @csrf
 
-<section id="basic-horizontal-layouts">
-    <div class="row match-height">
-        <div class="col-md-6 col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Add Roles</h4>
-                </div>
-                <div class="card-content">
-                    <div class="card-body">
-                        <form class="form form-horizontal" method="POST" action="{{ route('add.content') }}">
-                            @csrf
-                            <div class="form-body">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>key</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" id="key" class="form-control" name="key"
-                                            placeholder="key">
-                                    </div>
-                                    @error('key')
-                                        <span class="invalid-feedback text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                        <input type="text" id="key" class="form-control" name="key" placeholder="key">
+                                        <span class=" text-danger" role="alert">
+                                            @error('key')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </span>
-                                    @enderror
-                        
+                                    </div>
+
                                     <div class="col-md-4">
                                         <label>heading</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" id="heading" class="form-control" name="heading"
-                                            placeholder="heading">
-                                    </div>
-                                    @error('heading')
-                                        <span class="invalid-feedback text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                        <input type="text" id="heading" class="form-control" name="heading" placeholder="heading">
+                                        <span class=" text-danger" role="alert">
+                                            @error('heading')
+                                                <strong>{{ $message }}</strong>
+                                            @enderror
                                         </span>
-                                    @enderror
-                                    
-                                    <section class="section">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h4 class="card-title">Default Editor</h4>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <textarea  id="content" name="content" cols="30" rows="10"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <h4 class="card-title">Write Content</h4>
+                                            <textarea id="content" name="content" cols="30" rows="10"></textarea>
+                                            <span class=" text-danger" role="alert">
+                                                @error('content')
+                                                    <strong>{{ $message }}</strong>
+                                                @enderror
+                                            </span>
                                         </div>
-                                    </section>
-                        
-                        
+                                    </div>
+
+                                    <br>
+                                    <br>
                                     <div class="col-sm-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Add</button>
-                        
+
                                     </div>
                                 </div>
-                            </div>
-                            
+                        </div>
+
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        </div>
+    </section>
 
 
 
@@ -82,13 +86,20 @@
 
 @endsection
 @section('extrascripts')
-<script src="{{asset('admin/assets/vendors/tinymce/tinymce.min.js')}}"></script>
-<script src="{{asset('admin/assets/vendors/tinymce/plugins/code/plugin.min.js')}}"></script>
+    <script src="{{ asset('admin/assets/vendors/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/vendors/tinymce/plugins/code/plugin.min.js') }}"></script>
 
-<script>
-    tinymce.init({ selector: '#content' });
-    tinymce.init({ selector: '#dark', toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code', plugins: 'code' });
-</script>
+    <script>
+        tinymce.init({
+            selector: '#content'
+        });
+        tinymce.init({
+            selector: '#dark',
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
+            plugins: 'code'
+        });
 
-    
+    </script>
+
+
 @endsection

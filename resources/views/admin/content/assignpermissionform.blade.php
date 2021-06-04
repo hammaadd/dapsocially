@@ -2,12 +2,19 @@
 @section('title', 'Assign Permissions')
 
 @section('content')
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">User List</a></li>
+        <li class="breadcrumb-item active" aria-current="page">User Profile view</li>
+    </ol>
+</nav>
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Assign Roles</h4>
+                        <h4 class="card-title">Assign Permission</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

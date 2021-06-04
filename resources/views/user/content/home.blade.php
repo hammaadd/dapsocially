@@ -3,6 +3,16 @@
     
 
 @section('content')
+<a class="dropdown-item" href="{{ route('logout') }}"
+onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+ <i class="icon-mid bi bi-box-arrow-left me-2"></i> 
+ Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+ @csrf
+</form>
 <div class="row">
     <div class="col-sm-6">
       <div class="card">

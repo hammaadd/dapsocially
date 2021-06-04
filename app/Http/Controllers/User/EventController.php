@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Ui\Presets\React;
-use App\Models\Event;
+use App\Models\User\Event;
 use App\Models\Location;
 use App\Models\EventImages;
 class EventController extends Controller

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Location;
-use App\Models\Venue;
+use App\Models\User\Venue;
 use Illuminate\Support\Facades\File;
 
 class VenueController extends Controller
@@ -16,10 +16,9 @@ class VenueController extends Controller
     }
     public function add_venue(Request $request)
     {
-        $validated = $request->validate([
+            $request->validate([
             'vname' => 'required',
             'description' => 'required',
-        
             'image' => 'required',
             'ship_address'=>'required',
             ]);
