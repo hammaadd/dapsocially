@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('order_type',191);
             $table->string('order_status',191);
-            $table->string('account_type',191);
+            $table->string('account_type',191)->default('Standard Account');
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('set null');
             $table->unsignedBigInteger('user_id')->nullable();

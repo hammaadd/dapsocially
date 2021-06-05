@@ -8,9 +8,9 @@
                 <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
             </a>
             <div class="flex flex-wrap items-center cursor-pointer">
-                <img src="{{asset('assets/sample-profile.png')}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
                 <div class="text-white pl-2">
-                   <a href="{{route('profile')}}"> <p class="font-medium">Account Username</p>
+                   <a href="{{route('profile')}}"> <p class="font-medium">{{Auth::user()->name}}</p>
                     <p class="text-xs">Premium Account</p></a>
                 </div>
             </div>

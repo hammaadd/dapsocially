@@ -54,17 +54,18 @@ class ProfileController extends Controller
             'uname' => 'required',
             'mail'=>'required',
             ]);
-            if ($request->hasFile('img')) {
-                $newImagename=$request->file('img');
+            if ($request->hasFile('profile_photo')) {
+                $newImagename=$request->file('profile_photo');
                 $newImagename=str_replace(' ','',time().'-'.$newImagename->getClientOriginalName());
-                $request->img->move(public_path("admin/profile"),$newImagename);
-                File::delete(public_path('admin/profile/'.$request->path));
-                User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail,"image"=>$newImagename]);
+               
+                $request->profile_photo->move(public_path("user/profile/"),$newImagename);
+                File::delete(public_path('user/profile/'.$request->path));
+                User::where('id',Auth::user()->id)->update(['name' => $request->uname,'dob'=>$request->dob,'gender'=>$request->gender,"image"=>$newImagename]);
                 return back();
                 
             }
             else{
-                User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail]);
+                User::where('id',Auth::user()->id)->update(['name' => $request->uname,'dob'=>$request->dob,'gender'=>$request->gender]);
                 return back();
                 
             }

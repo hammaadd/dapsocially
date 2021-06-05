@@ -2,6 +2,29 @@
 @section('title','Profile')
 @section('headerExtra')
 <link rel="stylesheet" href="{{asset('css/checkboxes.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+       
+    $("#select-img").click(function(e) {
+     $("#imageUpload").click();
+ });
+
+function fasterPreview( uploader ) {
+    if ( uploader.files && uploader.files[0] ){
+          $('#profileImage').attr('src',
+             window.URL.createObjectURL(uploader.files[0]) );
+             document.getElementById('uploadAvatarBtn').style.display = 'inline';
+    }
+}
+
+$("#imageUpload").change(function(){
+    fasterPreview( this );
+});
+});
+</script>
+
 @endsection
 @section('content')
 @include('users.inc.nav')
@@ -12,7 +35,8 @@
 
     <section class="py-10 max-w-5xl mx-auto">
         <h3 class="text-lg font-medium">Account Details</h3>
-        <form action="#">
+        <form action="{{route('user.update.profile')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-2/3">
                     <div class="flex flex-wrap overflow-hidden md:-mx-2 lg:-mx-3 xl:-mx-3">
@@ -20,28 +44,28 @@
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="name">
                                 Name
-                                <input type="text" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
+                                <input type="text" id="uname" name="uname" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="email">
                                 Email
-                                <input type="email" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
+                                <input type="email" id="mail" name="mail" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="dob">
                                 Date of Birth
-                                <input type="date" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
+                                <input type="date" id="dob" name="dob" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="gender">
                                 Gender
-                                <select name="" id="" class="input-field">
+                                <select name="gender" id="gender" class="input-field">
                                     <option>Male</option>
                                     <option>Female</option>
                                    
@@ -58,10 +82,12 @@
                 <div class="w-full md:w-1/3">
                     <div class="flex flex-wrap overflow-hidden items-center flex-col">
                         <div class="w-36 h-36 relative rounded-full overflow-hidden">
-                            <img src="{{asset('assets/'.Auth::user()->image)}}" class="profile-img w-36 h-36 rounded-full object-cover" alt="">
+                            <img src="{{asset('user/profile/'.Auth::user()->image)}}" id="profileImage" class="profile-img w-36 h-36 rounded-full object-cover" alt="Profile">
                             <div class="absolute text-white bg-black bg-opacity-50 text-center w-full h-9 bottom-0">
                                 <i  id="select-img" name="img" class="fas fa-camera text-xl cursor-pointer pt-1.5"></i>
+                                <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo"  capture hidden>
                             </div>
+                            
                         </div>
                         <div class="text-center pt-2">
                             <p class="text-xl font-medium">{{Auth::user()->name}}</p>
@@ -153,24 +179,5 @@
     </section>
 </main>
 @include('users.inc.footer')
-@section('headerExtra')
-    <script>
-        $("#profileImage").click(function(e) {
-         $("#imageUpload").click();
-     });
-
-    function fasterPreview( uploader ) {
-        if ( uploader.files && uploader.files[0] ){
-              $('#profileImage').attr('src',
-                 window.URL.createObjectURL(uploader.files[0]) );
-                 document.getElementById('uploadAvatarBtn').style.display = 'inline';
-        }
-    }
-
-    $("#imageUpload").change(function(){
-        fasterPreview( this );
-    });
-    </script>
-@endsection
 
 @endsection
