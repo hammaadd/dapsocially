@@ -6,7 +6,7 @@
 
                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                     <!-- Column Content -->
-                    <a href="#" class="logo">
+                    <a href="{{route('homepage')}}" class="logo">
                         <img src="{{asset('assets/logo.png')}}" class=" w-56" alt="DapSocially Logo">
                     </a>
                 </div>

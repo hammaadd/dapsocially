@@ -30,13 +30,7 @@ Route::get('signup', function () {
 // User Side
 
 Route::get('profile', 'User\ProfileController@index')->name('profile');
-Route::get('add-venue', function () {
-    if (Auth::check()) {
-    return view('users.content.add-venue');
-    }else{
-        return redirect()->route('signin');
-    }
-})->name('add-venue');
+Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
 Route::get('add-event', function () {
     if (Auth::check()){
     return view('users.content.add-event');
@@ -60,7 +54,7 @@ Route::get('social-wall', function () {
     return view('users.content.social-wall');
 })->name('social-wall');
 Route::post('/user-update-password', 'User\ProfileController@update_password')->name('user.update.password');
-    Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
+Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
 
 
 Route::get('/admin/login', function () {

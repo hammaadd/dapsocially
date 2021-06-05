@@ -46,21 +46,30 @@ $("#imageUpload").change(function(){
                                 Name
                                 <input type="text" id="uname" name="uname" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
                             </label>
+                            <small class="text-red-600">@error('uname'){{$message}}@enderror</small>
+                            
                         </div>
-
+                        
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="email">
                                 Email
                                 <input type="email" id="mail" name="mail" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
                             </label>
+                            <small class="text-red-600">@error('mail'){{$message}}@enderror</small>
+                            
                         </div>
+                        
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="dob">
                                 Date of Birth
                                 <input type="date" id="dob" name="dob" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
                             </label>
+                            <small class="text-red-600">@error('dob'){{$message}}@enderror</small>
+                            
+                        
                         </div>
+                        
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="gender">
@@ -72,15 +81,17 @@ $("#imageUpload").change(function(){
                                 </select>
                             </label>
                         </div>
+                        
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
-                            <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550">Save Changes</button>
+                            <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550 focus:outline-none">Save Changes</button>
                         </div>
 
                       </div>
                 </div>
                 <div class="w-full md:w-1/3">
                     <div class="flex flex-wrap overflow-hidden items-center flex-col">
+                        
                         <div class="w-36 h-36 relative rounded-full overflow-hidden">
                             <img src="{{asset('user/profile/'.Auth::user()->image)}}" id="profileImage" class="profile-img w-36 h-36 rounded-full object-cover" alt="Profile">
                             <div class="absolute text-white bg-black bg-opacity-50 text-center w-full h-9 bottom-0">
@@ -91,7 +102,7 @@ $("#imageUpload").change(function(){
                         </div>
                         <div class="text-center pt-2">
                             <p class="text-xl font-medium">{{Auth::user()->name}}</p>
-                            <small>Premium User</small>
+                            <small>{{Auth::user()->account_type}}</small>
                         </div>
                     </div>
                 </div>

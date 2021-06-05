@@ -4,18 +4,18 @@
             <button class="text-white text-2xl focus:outline-none" @click=" nav = !nav ">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="#">
+            <a href="{{route('homepage')}}">
                 <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
             </a>
             <div class="flex flex-wrap items-center cursor-pointer">
                 <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
                 <div class="text-white pl-2">
                    <a href="{{route('profile')}}"> <p class="font-medium">{{Auth::user()->name}}</p>
-                    <p class="text-xs">Premium Account</p></a>
+                    <p class="text-xs">{{Auth::user()->account_type}}</p></a>
                 </div>
             </div>
         </div>
-        <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen"
+        <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10"
             x-show="nav"
             @click.away="nav = !nav"
             x-transition:enter="transition transform origin-top-left ease-out duration-300"

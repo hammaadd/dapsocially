@@ -53,6 +53,7 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'uname' => 'required',
             'mail'=>'required',
+            'dob'=>'required',
             ]);
             if ($request->hasFile('profile_photo')) {
                 $newImagename=$request->file('profile_photo');

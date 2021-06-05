@@ -12,7 +12,7 @@ class LogOutController extends Controller
     {
         $user=User::find($id);
         if ($user->hasRole('superadministrator')) {
-            return redirect()->route('admin/login');
+            return redirect()->route('admin.login');
         } elseif ($user->hasRole('user') && $user->isactive==1) {
             return redirect()->route('signin');
         }

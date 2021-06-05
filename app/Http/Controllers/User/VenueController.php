@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Location;
 use App\Models\User\Venue;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Auth;
 class VenueController extends Controller
 {
     public function index()
     {
-        return view('user.content.venue');
+        if (Auth::check()) {
+            return view('users.content.add-venue');
+            }else{
+                return redirect()->route('signin');
+            }
     }
     public function add_venue(Request $request)
     {

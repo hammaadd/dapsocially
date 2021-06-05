@@ -1,16 +1,15 @@
 @include('admin.include.head')
 
-<body>
+<body class="overflow-hidden">
     <div id="auth">
 
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="{{asset('admin/assets/images/logo/logo1.png')}}" style="height: 50px; " alt="Logo"></a>
+
                     </div>
-                    <h1 class="auth-title">Log in.</h1>
-                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+                    <h1 class="auth-title">Login.</h1>
 
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
@@ -63,7 +62,7 @@
                         Log in with Facebook
                     </a> --}}
                     <div class="text-center mt-5 text-lg fs-4">
-                        
+
                         <p>
                             @if (Route::has('password.request'))
                                 <a class="font-bold" href="{{ route('password.request') }}">Forgot password?</a>.
@@ -73,9 +72,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
-                <div id="auth-right">
-
+            <div class="col-lg-7 d-none d-lg-block ">
+                <div id="auth-right" class="h-100 d-flex align-items-center justify-content-center">
+                    <a href="index.html"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}"
+                            style="height: 50px; " alt="Logo"></a>
                 </div>
             </div>
         </div>
