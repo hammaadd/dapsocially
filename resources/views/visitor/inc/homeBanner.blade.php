@@ -15,12 +15,12 @@
                     <!-- Column Content -->
                     <div class="flex items-center justify-between">
                         <!-- Column Content -->
-                        <a href="#" class="nav-item">Home</a>
-                        <a href="#" class="nav-item">Events</a>
-                        <a href="#" class="nav-item">Venue</a>
+                        <a href="/" class="nav-item">Home</a>
+                        <a href="{{route('events')}}" class="nav-item">Events</a>
+                        <a href="{{route('add-venue')}}" class="nav-item">Venue</a>
                         <a href="#" class="nav-item">Get Started</a>
                     </div>
-                    <a href="#" class="btn-login">Login</a>
+                    <a href="{{route('signin')}}" class="btn-login">Login</a>
                     <form action="#" class=" w-44">
                         <div class="relative rounded-xl">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -44,8 +44,8 @@
                         social media feed.
                     </p>
                     <div class="pt-10">
-                        <a href="#" class="btn-add-event">ADD YOUR EVENT</a>
-                        <a href="#" class="btn-add-venue">ADD YOUR VENUE</a>
+                        <a href="{{route('add-event')}}" class="btn-add-event">ADD YOUR EVENT</a>
+                        <a href="{{route('add-venue')}}" class="btn-add-venue">ADD YOUR VENUE</a>
                     </div>
 
                 </div>

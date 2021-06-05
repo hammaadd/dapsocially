@@ -33,16 +33,30 @@ Route::get('profile', function () {
     return view('users.content.profile');
 })->name('profile');
 Route::get('add-venue', function () {
+    if (Auth::check()) {
     return view('users.content.add-venue');
+    }else{
+        return redirect()->route('signin');
+    }
 })->name('add-venue');
 Route::get('add-event', function () {
+    if (Auth::check()){
     return view('users.content.add-event');
+    }
+    else{
+        return redirect()->route('signin');
+    }
 })->name('add-event');
 Route::get('pricing', function () {
     return view('users.content.pricing');
 })->name('pricing');
 Route::get('events', function () {
+    if (Auth::check()) {
     return view('users.content.events');
+    }
+    else{
+        return redirect()->route('signin');
+    }
 })->name('events');
 Route::get('social-wall', function () {
     return view('users.content.social-wall');
@@ -58,7 +72,7 @@ Route::get('/admin/login', function () {
     
 })->name('admin.login');
 
-Auth::routes(['verify'=>true,'register'=>false]);
+Auth::routes(['verify'=>true,]);
 
 //middleware(['auth'=>'role:superadministrator'])->
 Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
@@ -135,6 +149,5 @@ Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('
 //Square Api Route SquareApiController
 Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');
 Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
-=======
 Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 

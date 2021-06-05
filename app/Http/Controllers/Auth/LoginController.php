@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    ///protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -44,10 +44,11 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
         } elseif ($user->hasRole('user') && $user->isactive==1) {
-            return redirect()->route('user.home');
+            return redirect()->route('events');
         }
     }
     public function redirectToGoogle()

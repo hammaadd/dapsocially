@@ -9,7 +9,7 @@
         <a href="#">
             <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
         </a>
-        <a href="#" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">SIGNUP</a>
+        <a href="{{route('signup')}}" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">SIGNUP</a>
     </div>
     <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen"
         x-show="nav"
@@ -50,10 +50,13 @@
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10 relative md:form-side">
                     <h3 class="text-white md:text-lg font-medium">Sign in to Your Account</h3>
-                    <form action="#" class="pt-3">
-                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4" placeholder="Email">
+                    <form action="{{ route('login') }}" method="POST" class="pt-3" >
+                        @csrf
+                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4 @error('email') is-invalid @enderror" name="email"
+                        value="{{ old('email') }}" required  autofocus placeholder="Email">
                         <div class="my-3 relative rounded-3xl" x-data="{ ptoggle: true}">
-                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 " placeholder="Password"/>
+                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 @error('password') is-invalid @enderror"
+                            required autocomplete="current-password" placeholder="Password"/>
                             <div class="absolute inset-y-0 right-0 pr-5 flex items-center">
                                 <span class="text-lg">
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
@@ -61,13 +64,17 @@
                             </div>
                         </div>
                         <label class="flex items-center mx-auto pl-3">
-                            <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember"/>
+                            <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember"
+                            {{ old('remember') ? 'checked' : '' }}/>
                             <span class="block ml-2 text-white cursor-pointer">Remember Me</span>
                         </label>
                         <div class="pt-3 flex flex-wrap items-center justify-between">
-                            <a href="#" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Login</a>
-                            <a href="#" class="text-white font-medium">Forget Password?</a>
+                            <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Login</button>
+                            @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="text-white font-medium">Forget Password?</a>
+                            @endif
                         </div>
+                    </form>
                         <div class="pt-4 text-center">
                             <p class="text-gray-300 text-sm">Sign-in with</p>
                             <div class="pt-2 text-center">
@@ -88,7 +95,7 @@
                                 </a>
                             </div>
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10">
                     <h3 class="text-white md:text-lg font-medium">Get In Touch</h3>

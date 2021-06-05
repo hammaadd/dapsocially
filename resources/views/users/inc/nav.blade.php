@@ -10,8 +10,8 @@
             <div class="flex flex-wrap items-center cursor-pointer">
                 <img src="{{asset('assets/sample-profile.png')}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
                 <div class="text-white pl-2">
-                    <p class="font-medium">Account Username</p>
-                    <p class="text-xs">Premium Account</p>
+                   <a href="{{route('profile')}}"> <p class="font-medium">Account Username</p>
+                    <p class="text-xs">Premium Account</p></a>
                 </div>
             </div>
         </div>
