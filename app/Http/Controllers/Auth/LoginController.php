@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class LoginController extends Controller
@@ -60,7 +61,7 @@ class LoginController extends Controller
         $user = Socialite::driver("google")->stateless()->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('admin.login');
+        return redirect()->route('events');
 
      
     }
@@ -73,7 +74,7 @@ class LoginController extends Controller
         $user = Socialite::driver("facebook")->stateless()->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('user.home');
+        return redirect()->route('events');
 
     }
     protected function _registerOrLoginUser($data)
@@ -85,12 +86,8 @@ class LoginController extends Controller
             $user->name = $data->name;
             $user->email = $data->email;
             $user->image = $data->avatar;
-            $user->dob = $data->name;
-            $user->profession = $data->name;
-            $user->mobile = $data->name;
-            $user->address = $data->name;
-            $user->password = $data->name;
-
+            $user->isactive = 1;
+            $user->password = Hash::make($data->name);
             $user->save();
             $user->attachRole('user');
         }

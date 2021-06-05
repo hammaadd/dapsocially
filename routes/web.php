@@ -29,9 +29,7 @@ Route::get('signup', function () {
 
 // User Side
 
-Route::get('profile', function () {
-    return view('users.content.profile');
-})->name('profile');
+Route::get('profile', 'User\ProfileController@index')->name('profile');
 Route::get('add-venue', function () {
     if (Auth::check()) {
     return view('users.content.add-venue');
@@ -61,7 +59,8 @@ Route::get('events', function () {
 Route::get('social-wall', function () {
     return view('users.content.social-wall');
 })->name('social-wall');
-
+Route::post('/user-update-password', 'User\ProfileController@update_password')->name('user.update.password');
+    Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
 
 
 Route::get('/admin/login', function () {
@@ -151,3 +150,4 @@ Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.pay
 Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
 Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
+Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');

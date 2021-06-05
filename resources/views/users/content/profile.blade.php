@@ -20,21 +20,21 @@
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="name">
                                 Name
-                                <input type="text" class="input-field" placeholder="Stephen K. Colins">
+                                <input type="text" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="email">
                                 Email
-                                <input type="email" class="input-field" placeholder="stephencolins@dayrap.com">
+                                <input type="email" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="dob">
                                 Date of Birth
-                                <input type="date" class="input-field" placeholder="Stephen K. Colins">
+                                <input type="date" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
                             </label>
                         </div>
 
@@ -44,7 +44,7 @@
                                 <select name="" id="" class="input-field">
                                     <option>Male</option>
                                     <option>Female</option>
-                                    <option>Not Specified</option>
+                                   
                                 </select>
                             </label>
                         </div>
@@ -58,20 +58,21 @@
                 <div class="w-full md:w-1/3">
                     <div class="flex flex-wrap overflow-hidden items-center flex-col">
                         <div class="w-36 h-36 relative rounded-full overflow-hidden">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="profile-img w-36 h-36 rounded-full object-cover" alt="">
+                            <img src="{{asset('assets/'.Auth::user()->image)}}" class="profile-img w-36 h-36 rounded-full object-cover" alt="">
                             <div class="absolute text-white bg-black bg-opacity-50 text-center w-full h-9 bottom-0">
-                                <i id="select-img" class="fas fa-camera text-xl cursor-pointer pt-1.5"></i>
+                                <i  id="select-img" name="img" class="fas fa-camera text-xl cursor-pointer pt-1.5"></i>
                             </div>
                         </div>
                         <div class="text-center pt-2">
-                            <p class="text-xl font-medium">Stephen K. Collins</p>
+                            <p class="text-xl font-medium">{{Auth::user()->name}}</p>
                             <small>Premium User</small>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-        <form action="#" class="pt-3">
+        <form action="{{route('user.update.password')}}" class="pt-3" method="POST">
+            @csrf
             <h3 class="text-lg font-medium">Security</h3>
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-2/3">
@@ -79,23 +80,28 @@
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="current-pass">
                                 Current Password
-                                <input type="password" class="input-field" placeholder="Current Password">
+                                <input type="password" class="input-field" placeholder="Current Password" name="currentpassword" id="currentpassword">
+                                
                             </label>
-                            <small class="text-red-600">*Password must be 8 characters long.</small>
+                            <small class="text-red-600">@error('currentpassword'){{$message}}@enderror</small>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="password">
                                 New Password
-                                <input type="password" class="input-field" placeholder="New Password">
+                                <input type="password" class="input-field" placeholder="New Password" name="newpassword" id="newpassword">
+                                
                             </label>
+                            <small class="text-red-600">@error('newpassword'){{$message}}@enderror</small>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="confirm-pass">
                                 Confirm New Password
-                                <input type="password" class="input-field" placeholder="Confirm Password">
+                                <input type="password" class="input-field" placeholder="Confirm Password" name="confirmpassword" id="confirmpassword">
+                                
                             </label>
+                            <small class="text-red-600">@error('confirmpassword'){{$message}}@enderror</small>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
@@ -147,4 +153,24 @@
     </section>
 </main>
 @include('users.inc.footer')
+@section('headerExtra')
+    <script>
+        $("#profileImage").click(function(e) {
+         $("#imageUpload").click();
+     });
+
+    function fasterPreview( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+              $('#profileImage').attr('src',
+                 window.URL.createObjectURL(uploader.files[0]) );
+                 document.getElementById('uploadAvatarBtn').style.display = 'inline';
+        }
+    }
+
+    $("#imageUpload").change(function(){
+        fasterPreview( this );
+    });
+    </script>
+@endsection
+
 @endsection

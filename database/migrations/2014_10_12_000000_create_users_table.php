@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile',191)->nullable();
             $table->string('address',191)->nullable();
             $table->string('profession',191)->nullable();
-            $table->unsignedBigInteger('isactive')->default('1');
+            $table->unsignedBigInteger('isactive')->default('sample-profile.png');
             $table->rememberToken();
             $table->timestamps();
         });

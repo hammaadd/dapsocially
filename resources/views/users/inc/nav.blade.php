@@ -29,9 +29,15 @@
             </div>
             <ul class="text-center text-white">
                 <li class="py-1"><a href="#" class="text-xl">Home</a></li>
-                <li class="py-1"><a href="#" class="text-xl">My Account</a></li>
+                <li class="py-1"><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                    class="text-xl">My Account</a></li>
                 <li class="py-1"><a href="#" class="text-xl">Add Event</a></li>
                 <li class="py-1"><a href="#" class="text-xl">Add Venue</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </ul>
             <hr class="w-4/5 mx-auto my-3 border-gray-400">
             <ul class="text-gray-300 text-center">
