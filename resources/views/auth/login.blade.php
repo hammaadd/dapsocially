@@ -1,10 +1,10 @@
 @include('admin.include.head')
 
 <body class="overflow-hidden">
-    <div id="auth">
+    <div id="auth" class="overflow-hidden">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-5 col-12 " >
                 <div id="auth-left">
                     <div class="auth-logo">
 
@@ -16,7 +16,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input id="email" type="email"
                                 class="form-control form-control-xl @error('email') is-invalid @enderror" name="email"
-                                value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -30,7 +30,7 @@
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input id="password" type="password"
                                 class="form-control form-control-xl @error('password') is-invalid @enderror"
-                                name="password" required autocomplete="current-password">
+                                name="password" required autocomplete="current-password" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
@@ -65,7 +65,7 @@
 
                         <p>
                             @if (Route::has('password.request'))
-                                <a class="font-bold" href="{{ route('password.request') }}">Forgot password?</a>.
+                                <a class="font-bold" href="#">Forgot password?</a>.
                             @endif
                         </p>
 
@@ -74,8 +74,8 @@
             </div>
             <div class="col-lg-7 d-none d-lg-block ">
                 <div id="auth-right" class="h-100 d-flex align-items-center justify-content-center">
-                    <a href="index.html"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}"
-                            style="height: 50px; " alt="Logo"></a>
+                    <img src="{{ asset('assets/logo@2x.png') }}"
+                            style="height: 100px; margin-bottom:30px" alt="Logo">
                 </div>
             </div>
         </div>

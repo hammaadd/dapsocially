@@ -1,30 +1,33 @@
 @extends('admin.layout.adminlayout')
-@section('title', 'Dashboard')
+@section('title', 'All Roles')
 
 @section('content')
 <div class="m-5">
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">User List</li>
+        
+        <li class="breadcrumb-item active" aria-current="page">All Role</li>
     </ol>
 </nav>
 
-    <table id="usersdata" class="table table-striped table-bordered user-table ml-2" >
-        <thead>
-            <tr>
-               
-                <th>Name</th>
-                <th>Email</th>
-                <th>Action</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-          
+<table id="usersdata" class="table table-striped table-bordered user-table ml-2" >
+    <thead>
+        <tr>
+           
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
             
-    </table>
+        </tr>
+    </thead>
+    <tbody>
+      
+        
+</table>
+</div>
 @endsection
+
 @section('extrascripts')
     <script>
         $(document).ready(function() {
@@ -34,11 +37,11 @@
               processing: true,
               serverSide: true,
               "destroy":true,
-              ajax: "{{ route('users.get') }}",
+              ajax: "{{ route('get.roles') }}",
               columns: [
                   
                   {data: 'name', name: 'Name'},
-                  {data: 'email', name: 'Email'},
+                  {data: 'description', name: 'Description'},
                   {data: 'action', name: 2, orderable: false, searchable: false},
               ]
           });

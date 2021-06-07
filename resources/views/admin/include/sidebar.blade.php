@@ -4,7 +4,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
-                        <a href="{{route('dashboard')}}"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}" alt="Logo" style="height: 40px"
+                        <a href="{{route('dashboard')}}"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}" alt="Logo" style="height: 40px;"
                                 srcset=""></a>
                     </div>
                     <div class="toggler">
@@ -29,16 +29,19 @@
                         </a>
                     </li>
                     
-                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }}">
+                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }}">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-check-fill"></i>
                             <span>Roles</span>
                         </a>
+                        
                         <ul class="submenu ">
+                            <li class="submenu-item {{Request::is('all-roles') ?  'active' : '' }} ">
+                                <a href="{{route('all.roles')}}">All Roles</a>
+                            </li>
                             <li class="submenu-item {{Request::is('add-roles')? 'active' : '' }} ">
                                 <a href="{{route('add.roles')}}">Add Roles</a>
                             </li>
-                           
                         </ul>
                     </li>
                     
@@ -48,13 +51,22 @@
                             <span>Contact us</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{Request::is('price-packages')? 'active' : '' }}  ">
-                        <a href="{{route('price.package')}}" class='sidebar-link'>
-                            <i class="bi bi-credit-card-fill"></i>
+                    <li class="sidebar-item  has-sub {{Request::is('price-packages')? 'active' : '' }} {{Request::is('all-payment_plans')? 'active' : '' }}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-check-fill"></i>
                             <span>Payment Plans</span>
                         </a>
+                        
+                        <ul class="submenu ">
+                            <li class="submenu-item {{Request::is('all-payment_plans')? 'active' : '' }} ">
+                                <a href="{{route('all.payment_plans')}}">All Payment plans</a>
+                            </li>
+                            <li class="submenu-item {{Request::is('price-packages')? 'active' : '' }} ">
+                                <a href="{{route('price.package')}}">Add Payment plan</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }}">
+                    <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }} {{Request::is('show.content')? 'active' : '' }} ">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Contents</span>

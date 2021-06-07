@@ -2,7 +2,7 @@
 @section('title', 'User Profile')
 
 @section('content')
-
+<div class="m-5">
     <div class="container">
         <div class="main-body">
 
@@ -21,7 +21,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ asset('user/profile/' . $data['users']->image . '') }}" alt="Admin"
+                                <img src="{{ asset('user/profile/' . $data['users']->image . '') }}" alt="avtar"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $data['users']->name }}</h4>
@@ -131,4 +131,5 @@
 
         </div>
     </div>
+</div>
 @endsection

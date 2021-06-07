@@ -3,12 +3,15 @@
     
 @section('content')
 
+<div class="m-5">
 @if(Session::has('message'))
-<div class="mx-5 mr-5">
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>{{ Session::get('message') }}</strong> 
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <strong>{{ Session::get('message') }}</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert"
+      aria-label="Close"></button>
+</div>
+
+ 
 @endif
       <div class="col">
         <div class="row">
@@ -31,7 +34,7 @@
                       <div class="text-center text-sm-left mb-2 mb-sm-0">
                         <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{Auth::user()->name}}</h4>
                        
-                            <input type="file" class="btn btn-primary" id="img" name="img">
+                            <input type="file" class="custom-file-input" id="img" name="img">
                             
                       </div>
                       <div class="text-center text-sm-right">
@@ -135,5 +138,6 @@
       </div>
     </div>
   </div>
-    
+</div>
+
  @endsection   

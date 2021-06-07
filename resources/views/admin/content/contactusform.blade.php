@@ -2,7 +2,7 @@
 @section('title', 'Add Roles')
 
 @section('content')
-
+<div class="m-5">
 <div class="card">
     <div class="card-header">
         <h4 class="card-title">Horizontal Form</h4>
@@ -52,5 +52,5 @@
         </div>
     </div>
 </div>
-
+</div>
 @endsection

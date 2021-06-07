@@ -65,7 +65,7 @@ Route::get('/admin/login', function () {
     
 })->name('admin.login');
 
-Auth::routes(['verify'=>true,]);
+Auth::routes(['verify'=>true,'reset' => false]);
 
 //middleware(['auth'=>'role:superadministrator'])->
 Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
@@ -76,9 +76,14 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('users/list', 'Admin\DashboardController@getUsers')->name('users.get');
     Route::get('users/profileview/{id}', 'Admin\UserProfileViewController@index')->name('usersprofile.view');
     Route::get('users/useractivation/{id}/{status}', 'Admin\UserProfileViewController@isActive')->name('users.activation');
-    Route::get('add-roles', 'Admin\RoleController@index')->name('add.roles');
+    Route::get('all-roles', 'Admin\RoleController@index')->name('all.roles');
+    Route::get('add-roles', 'Admin\RoleController@roles')->name('add.roles');
     Route::post('insertroles', 'Admin\RoleController@addrole')->name('insert.roles');
-    
+    Route::get('get-roles', 'Admin\RoleController@all_roles')->name('get.roles');
+    Route::get('delete-roles/{id}', 'Admin\RoleController@delete_role')->name('delete.roles');
+    Route::get('edit-roles/{role}', 'Admin\RoleController@edit_role')->name('edit.roles');
+    Route::post('update-roles', 'Admin\RoleController@updaterole')->name('update.roles');
+
     Route::get('getuserroles', 'Admin\RoleController@getuserrole')->name('getuser.role');
     Route::get('assignrole/{id}', 'Admin\RoleController@assignrole')->name('assign.role');
     Route::post('giveuserrole', 'Admin\RoleController@giveroletouser')->name('giveuser.roles');
@@ -107,10 +112,14 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::post('updatecontent', 'Admin\ContentController@update_content')->name('update.content');
     Route::get('price-packages', 'Admin\PricePackageController@index')->name('price.package');
     Route::post('add-package', 'Admin\PricePackageController@add_Package')->name('add.package');
-    
+    Route::get('all-payment_plans', 'Admin\PricePackageController@all_payment_plans')->name('all.payment_plans');
+    Route::get('list-packages', 'Admin\PricePackageController@list_payment_plans')->name('list.packages');
+    Route::get('delete-packages/{id}', 'Admin\PricePackageController@delete_package')->name('delete.packages');
+
     Route::get('orders-list', 'Admin\OrderDetailsController@index')->name('orders.list');
     Route::get('get.orders', 'Admin\OrderDetailsController@get_orders')->name('get.orders');
     Route::get('order/profileview/{id}', 'Admin\OrderDetailsController@profile_view')->name('orderusersprofile.view');
+    Route::get('delete-order/{id}', 'Admin\OrderDetailsController@delete_order')->name('order.delete');
     
     Route::get('notification-read/{id}', 'Admin\OrdersNotificationsController@index')->name('notification.read');
 });

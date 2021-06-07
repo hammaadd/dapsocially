@@ -2,6 +2,7 @@
 @section('title','Orders')
     
 @section('content')
+<div class="m-5">
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -45,5 +46,5 @@
         });
 
     </script>
-    
+</div>
 @endsection

@@ -1,12 +1,12 @@
 @extends('admin.layout.adminlayout')
-@section('title', 'Add Roles')
+@section('title', 'Edit Roles')
 
 @section('content')
 <div class="m-5">
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Add Roles</li>
+        <li class="breadcrumb-item active" aria-current="page">Update Role</li>
     </ol>
 </nav>
     <section id="basic-horizontal-layouts">
@@ -14,11 +14,11 @@
             <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Add Roles</h4>
+                        <h4 class="card-title">Update Roles</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal" method="POST" action="{{ route('insert.roles') }}">
+                            <form class="form form-horizontal" method="POST" action="{{ route('update.roles') }}">
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
@@ -26,10 +26,11 @@
                                             <label>Role Name</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="role-name" class="form-control" name="rname"
-                                                placeholder="Role Name">
+                                            <input type="text" name='id' id="id" value="{{ $role->id }}" hidden>
+                                            <input type="text" id="name" class="form-control" name="name"
+                                                placeholder="Role Name" value="{{ $role->name }}">
                                         </div>
-                                        @error('rname')
+                                        @error('name')
                                             <span class="invalid-feedback text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -39,7 +40,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="display" class="form-control" name="display"
-                                                placeholder="display name">
+                                                placeholder="display name" value="{{ $role->display_name }}">
                                             @error('display')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -51,7 +52,7 @@
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <input type="text" id="description" class="form-control" name="description"
-                                                placeholder="description">
+                                                placeholder="description" value="{{ $role->description }}">
                                             @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -60,7 +61,7 @@
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Add</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Update</button>
 
                                         </div>
                                     </div>
