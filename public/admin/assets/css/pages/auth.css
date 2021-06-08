@@ -1,4 +1,4 @@
-body{background-color:#fff}#auth{height:100vh;overflow-x:hidden}#auth #auth-right{height:100%;background:url(../../images/bg/4853433.jpg),linear-gradient(90deg,#2d499d,#3f5491)}#auth #auth-left{padding:5rem 8rem}#auth #auth-left .auth-title{font-size:4rem;margin-bottom:1rem}#auth #auth-left .auth-subtitle{font-size:1.7rem;line-height:2.5rem;color:#a8aebb}#auth #auth-left .auth-logo{margin-bottom:7rem}#auth #auth-left .auth-logo img{height:2rem}@media screen and (max-width:767px){#auth #auth-left{padding:5rem}}
+body{background-color:#eef5fa;}#auth{height:100vh;overflow-x:hidden}#auth #auth-right{height:100%;background:url(../../images/bg/4853433.jpg),linear-gradient(90deg,#2d499d,#3f5491)}#auth #auth-left{padding:5rem 8rem}#auth #auth-left .auth-title{font-size:4rem;margin-bottom:1rem}#auth #auth-left .auth-subtitle{font-size:1.7rem;line-height:2.5rem;color:#a8aebb}#auth #auth-left .auth-logo{margin-bottom:7rem}#auth #auth-left .auth-logo img{height:2rem}@media screen and (max-width:767px){#auth #auth-left{padding:5rem}}
 .dataTables_filter{
     width: 50%;
     float: right;
@@ -85,7 +85,7 @@ body{background-color:#fff}#auth{height:100vh;overflow-x:hidden}#auth #auth-righ
 }
 
 input#key {
-  width: 475px;
+  width: 108%;
 }
 input#heading {
   width: 569px;
@@ -95,7 +95,7 @@ input#ckey {
 }
 textarea#quote {
   margin-left: 78px;
-  width: 478px;
+  width: 91%;
 }
 
 button.btn.btn-primary.me-1.mb-1.con {
@@ -108,7 +108,9 @@ button.btn.btn-primary.me-1.mb-1.con {
 
 button.btn.btn-primary.me-1.mb-1{
   margin-top: 14px;
-  margin-right: 0.25rem!important;
+  margin-right:1.25rem!important;
+
+
 }
 
 .dataTables_filter {
@@ -133,3 +135,27 @@ input#eckey {
 
 .userm{
   width:445px;}
+  form.form {
+    background-color: white;
+}
+nav.navbar.navbar-expand.navbar-light.shadow-sm {
+  background: white;
+}
+.yajra-t.rounded {
+  border-radius: 1.25rem!important;
+  background: white;
+}
+  
+  .yajra-t {
+      margin: 2rem!important;
+      padding: 24px;
+  }
+
+.pcard {
+    width: 149%;
+}
+.rolecard {
+    width: 678px;
+    margin-left: 100px;
+}
+  

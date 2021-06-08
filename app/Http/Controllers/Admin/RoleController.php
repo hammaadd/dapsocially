@@ -93,7 +93,8 @@ class RoleController extends Controller
     public function permission_form(Request $request,$id)
     {
         $permissions=Permission::all();
-        return view('admin.content.assignpermissionform',compact('permissions','id'));
+        $user=User::find($id);
+        return view('admin.content.assignpermissionform',compact('permissions','id','user'));
     }
     public function assign_permission(Request $request)
     {

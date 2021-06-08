@@ -13,7 +13,7 @@
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">
-                <div class="card">
+                <div class="card rolecard">
                     <div class="card-header">
                         <h4 class="card-title">Assign Roles</h4>
                     </div>

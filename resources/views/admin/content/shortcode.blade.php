@@ -11,7 +11,7 @@
     </ol>
 </nav>
     <div class="col-md-8 col-12">
-        <div class="card">
+        <div class="card pcard">
             <div class="card-header">
                 <h4 class="card-title">Short Codes</h4>
             </div>
@@ -30,7 +30,7 @@
                                     <span class="ml-5 text-danger">@error('key'){{ $message }}@enderror</span>
 
                                   </div>
-                                <div class="card">
+                                <div class="card ">
                                  <div class="col-md-2">
                                     <label><b>Short Code</b></label>
                                 </div>

@@ -1,6 +1,6 @@
 <div id="app">
     <div id="sidebar" class="active">
-        <div class="sidebar-wrapper active">
+        <div class="sidebar-wrapper active shadow-sm">
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
@@ -14,21 +14,14 @@
             </div>
             <div class="sidebar-menu">
                 <ul class="menu">
-                    <li class="sidebar-title">Menu</li>
-
+                    
+                    <li class="sidebar-title">User</li>
                     <li class="sidebar-item {{Request::is('dashboard')? 'active' : '' }} ">
                         <a href="{{route('dashboard')}}" class='sidebar-link'>
                             <i class="bi bi-person-lines-fill"></i>
                             <span>Users List</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
-                        <a href="{{route('orders.list')}}" class='sidebar-link'>
-                            <i class="bi bi-archive-fill"></i>
-                            <span>Orders</span>
-                        </a>
-                    </li>
-                    
                     <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }}">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-check-fill"></i>
@@ -44,28 +37,7 @@
                             </li>
                         </ul>
                     </li>
-                    
-                    <li class="sidebar-item {{Request::is('contactus-list')? 'active' : '' }}  ">
-                        <a href="{{route('contactus.list')}}" class='sidebar-link'>
-                            <i class="bi bi-chat-left-text-fill"></i>
-                            <span>Contact us</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item  has-sub {{Request::is('price-packages')? 'active' : '' }} {{Request::is('all-payment_plans')? 'active' : '' }}">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-person-check-fill"></i>
-                            <span>Payment Plans</span>
-                        </a>
-                        
-                        <ul class="submenu ">
-                            <li class="submenu-item {{Request::is('all-payment_plans')? 'active' : '' }} ">
-                                <a href="{{route('all.payment_plans')}}">All Payment plans</a>
-                            </li>
-                            <li class="submenu-item {{Request::is('price-packages')? 'active' : '' }} ">
-                                <a href="{{route('price.package')}}">Add Payment plan</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li class="sidebar-title">Contenet Management</li>
                     <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }} {{Request::is('show.content')? 'active' : '' }} ">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
@@ -82,8 +54,6 @@
                            
                         </ul>
                     </li>
-
-
                     <li class="sidebar-item  has-sub {{Request::is('short-code')? 'active' : '' }} {{Request::is('list-shortcode')? 'active' : '' }} ">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
@@ -100,6 +70,43 @@
                            
                         </ul>
                     </li>
+                    <li class="sidebar-title">Payment Plans</li>
+                    <li class="sidebar-item  has-sub {{Request::is('price-packages')? 'active' : '' }} {{Request::is('all-payment_plans')? 'active d-block' : '' }}">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-check-fill"></i>
+                            <span>Payment Plans</span>
+                        </a>
+                        
+                        <ul class="submenu ">
+                            <li class="submenu-item {{Request::is('all-payment_plans')? 'active ' : '' }} ">
+                                <a href="{{route('all.payment_plans')}}">All Payment plans</a>
+                            </li>
+                            <li class="submenu-item {{Request::is('price-packages')? 'active' : '' }} ">
+                                <a href="{{route('price.package')}}">Add Payment plan</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-title">Others</li>
+                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
+                        <a href="{{route('orders.list')}}" class='sidebar-link'>
+                            <i class="bi bi-archive-fill"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+                    
+                   
+                    
+                    <li class="sidebar-item {{Request::is('contactus-list')? 'active' : '' }}  ">
+                        <a href="{{route('contactus.list')}}" class='sidebar-link'>
+                            <i class="bi bi-chat-left-text-fill"></i>
+                            <span>Contact us</span>
+                        </a>
+                    </li>
+                    
+                    
+
+
+                    
 
 
 

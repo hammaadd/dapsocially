@@ -6,9 +6,10 @@
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Orders List</li>
+        <li class="breadcrumb-item active" aria-current="page">Short Codes</li>
     </ol>
 </nav>
+<div class="yajra-t rounded">
 <table id="example" class="table table-striped table-bordered yajra-data-table ml-2" style="width:100%">
     <thead>
         <tr>
@@ -25,7 +26,7 @@
         
     </table>
 </div>
-
+</div>
 @endsection
 @section('extrascripts')
       <script>

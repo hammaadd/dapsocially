@@ -46,9 +46,24 @@ class ContactUsController extends Controller
         if ($request->ajax()) {
             $data = Contactus::select('id','name','email','message');
             
-            return Datatables::of($data)
+            return Datatables::of($data)->addColumn('action', function($row){
+
+                $btn = '
+                <a href="'.route('delete.messages',$row).'" onclick="return confirm(\'Do you really want to delete the content\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                    
+                 ';
+
+
+                 return $btn;
+         })
                     ->make();
                 }
         
+    }
+    public function delete_messages($id)
+    {
+        $del=Contactus::find($id);
+        $del->delete();
+        return back();
     }
 }

@@ -10,6 +10,7 @@
         <li class="breadcrumb-item active" aria-current="page">Contents List</li>
     </ol>
 </nav>
+<div class="yajra-t rounded">
     <table id="example" class="table table-striped table-bordered yajra-data-table ml-2" style="width:100%">
         <thead>
             <tr>
@@ -26,6 +27,8 @@
           
             
     </table>
+</div>
+</div>
 @endsection
 @section('extrascripts')
     <script>
@@ -47,5 +50,5 @@
         });
 
     </script>
-</div> 
+
 @endsection

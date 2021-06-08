@@ -9,7 +9,7 @@
         <li class="breadcrumb-item active" aria-current="page">User List</li>
     </ol>
 </nav>
-
+<div class="yajra-t rounded">
     <table id="usersdata" class="table table-striped table-bordered user-table ml-2" >
         <thead>
             <tr>
@@ -24,6 +24,8 @@
           
             
     </table>
+</div>
+</div>
 @endsection
 @section('extrascripts')
     <script>
@@ -45,5 +47,5 @@
         });
 
     </script>
-</div>    
+   
 @endsection

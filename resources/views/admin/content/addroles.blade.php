@@ -12,7 +12,7 @@
     <section id="basic-horizontal-layouts">
         <div class="row match-height">
             <div class="col-md-6 col-12">
-                <div class="card">
+                <div class="card pcard">
                     <div class="card-header">
                         <h4 class="card-title">Add Roles</h4>
                     </div>
@@ -50,8 +50,8 @@
                                             <label>Description</label>
                                         </div>
                                         <div class="col-md-8 form-group">
-                                            <input type="text" id="description" class="form-control" name="description"
-                                                placeholder="description">
+                                            <textarea type="text" id="description" class="form-control" name="description"
+                                                placeholder="description"> </textarea>
                                             @error('description')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                                         </div>
 
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Add</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Add Role</button>
 
                                         </div>
                                     </div>

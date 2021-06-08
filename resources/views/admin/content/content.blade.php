@@ -23,7 +23,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>key</label>
+                                        <label>Key</label>
                                     </div>
                                     <div class="col-md-8 form-group">
                                         <input type="text" id="ckey" class="form-control" name="key" placeholder="key">
@@ -35,7 +35,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label>heading</label>
+                                        <label>Heading</label>
                                     </div>
                                     <div class="col-md-8 form-group">
                                         <input type="text" id="heading" class="form-control" name="heading" placeholder="heading">

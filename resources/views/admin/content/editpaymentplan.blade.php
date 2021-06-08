@@ -11,7 +11,7 @@
     </ol>
 </nav>
 <div class="col-md-6 col-12">
-    <div class="card">
+    <div class="card pcard">
         <div class="card-header">
             <h4 class="card-title">Package</h4>
         </div>

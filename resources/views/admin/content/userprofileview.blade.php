@@ -2,7 +2,7 @@
 @section('title', 'User Profile')
 
 @section('content')
-<div class="m-5">
+<div class="m-5 ">
     <div class="container">
         <div class="main-body">
 
@@ -97,10 +97,12 @@
 
                                     @if ($user->isactive == 0)
                                         <b class="text-danger"> Status</b>
-                                        <a class="btn btn-danger" href="#">Deactive</a>
+                                        <span class="badge bg-danger">Deactive</span>
+                                       
                                     @else
                                         <b class="text-success"> Status</b>
-                                        <button class="btn btn-success">Active</button>
+                                        <span class="badge bg-danger">Active</span>
+                                        
                                     @endif
 
                                 </div>

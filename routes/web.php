@@ -104,6 +104,7 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::post('submitform', 'Admin\ContactUsController@add_Message')->name('add.message');
     Route::get('contactus', 'Admin\ContactUsController@get_contactus_list')->name('contactus.get');
     Route::get('contactus-list', 'Admin\ContactUsController@show_Contactus_list')->name('contactus.list');
+    Route::get('delete-messages/{id}', 'Admin\ContactUsController@delete_messages')->name('delete.messages');
     
     Route::get('content-form', 'Admin\ContentController@index')->name('content.form');
     Route::post('addcontent', 'Admin\ContentController@add_content')->name('add.content');
