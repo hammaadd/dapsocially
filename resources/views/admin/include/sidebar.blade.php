@@ -22,10 +22,10 @@
                             <span>Users List</span>
                         </a>
                     </li>
-                    <li class="sidebar-item {{Request::is('short-code')? 'active' : '' }}  ">
-                        <a href="{{route('short.code')}}" class='sidebar-link'>
-                            <i class="bi bi-file-code-fill"></i>
-                            <span>Short Codes</span>
+                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
+                        <a href="{{route('orders.list')}}" class='sidebar-link'>
+                            <i class="bi bi-archive-fill"></i>
+                            <span>Orders</span>
                         </a>
                     </li>
                     
@@ -82,12 +82,29 @@
                            
                         </ul>
                     </li>
-                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
-                        <a href="{{route('orders.list')}}" class='sidebar-link'>
-                            <i class="bi bi-archive-fill"></i>
-                            <span>Orders</span>
+
+
+                    <li class="sidebar-item  has-sub {{Request::is('short-code')? 'active' : '' }} {{Request::is('list-shortcode')? 'active' : '' }} ">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Short Codes</span>
                         </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item {{Request::is('short-code') ? 'active' : '' }} ">
+                                <a href="{{route('short.code')}}">Add short code</a>
+                            </li>
+                            
+                            <li class="submenu-item {{Request::is('list-shortcode')? 'active' : '' }} ">
+                                <a href="{{route('list.shortcode')}}">List Short codes</a>
+                            </li>
+                           
+                        </ul>
                     </li>
+
+
+
+                    
+                   
 
                     
 

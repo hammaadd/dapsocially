@@ -21,6 +21,7 @@ body{background-color:#fff}#auth{height:100vh;overflow-x:hidden}#auth #auth-righ
 .pagination
 {
     float: right;
+    margin-right: 14px;
 }
 .dataTables_filter label{
     float: right;
@@ -38,8 +39,6 @@ body{background-color:#fff}#auth{height:100vh;overflow-x:hidden}#auth #auth-righ
 }
 
 
-HTML CSSResult Skip Results Iframe
-EDIT ON
 .custom-file-input {
   color: transparent;
 }
@@ -56,6 +55,7 @@ EDIT ON
   padding: 5px 8px;
   outline: none;
   white-space: nowrap;
+  
   -webkit-user-select: none;
   cursor: pointer;
 
@@ -71,3 +71,65 @@ EDIT ON
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
 }
+/* element.style {
+    margin-top: 10px;
+   
+    margin-left: 402px;
+} */
+#auth #auth-left .auth-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.dataTables_wrapper .row{
+  align-items:center;
+}
+
+input#key {
+  width: 475px;
+}
+input#heading {
+  width: 569px;
+}
+input#ckey {
+  width: 569px;
+}
+textarea#quote {
+  margin-left: 78px;
+  width: 478px;
+}
+
+button.btn.btn-primary.me-1.mb-1.con {
+  margin-top: 14px;
+  margin-right: 1.25rem!important;
+
+
+
+}
+
+button.btn.btn-primary.me-1.mb-1{
+  margin-top: 14px;
+  margin-right: 0.25rem!important;
+}
+
+.dataTables_filter {
+  width: 70%;
+}
+.dataTables_filter label {
+  line-height: 31px;
+}
+
+.dataTables_filter .form-control {
+  width: 150px;
+  float: right;
+  margin-left: 10px;
+ margin-bottom: 20px;
+}
+div#usersdata_filter {
+  margin-right: 14px;
+}
+input#eckey {
+  width: 566px;
+}
+
+.userm{
+  width:445px;}

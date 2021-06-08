@@ -98,6 +98,7 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::post('update-code', 'Admin\ShortCodeController@updatecode')->name('update.code');
     Route::get('/delete-code/{id}', 'Admin\ShortCodeController@deletecode')->name('delete.code');
     Route::get('get-shortcode', 'Admin\ShortCodeController@get_shortcode')->name('get.shortcode');
+    Route::get('list-shortcode', 'Admin\ShortCodeController@list_shortcode')->name('list.shortcode');
     
     Route::get('contactus-form', 'Admin\ContactUsController@index')->name('contact.us');
     Route::post('submitform', 'Admin\ContactUsController@add_Message')->name('add.message');
@@ -110,11 +111,14 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('show-content', 'Admin\ContentController@show_content')->name('show.content');
     Route::get('editcontent/{id}', 'Admin\ContentController@content_edit')->name('edit.content');
     Route::post('updatecontent', 'Admin\ContentController@update_content')->name('update.content');
+    Route::get('delete-content/{id}', 'Admin\ContentController@delete_content')->name('delete.content');
     Route::get('price-packages', 'Admin\PricePackageController@index')->name('price.package');
     Route::post('add-package', 'Admin\PricePackageController@add_Package')->name('add.package');
     Route::get('all-payment_plans', 'Admin\PricePackageController@all_payment_plans')->name('all.payment_plans');
     Route::get('list-packages', 'Admin\PricePackageController@list_payment_plans')->name('list.packages');
     Route::get('delete-packages/{id}', 'Admin\PricePackageController@delete_package')->name('delete.packages');
+    Route::get('editpaymentplans/{id}', 'Admin\PricePackageController@edit_paymentplans')->name('edit.paymentplans');
+    Route::post('update-paymentplans', 'Admin\PricePackageController@update_paymentplans')->name('update.paymentplans');
 
     Route::get('orders-list', 'Admin\OrderDetailsController@index')->name('orders.list');
     Route::get('get.orders', 'Admin\OrderDetailsController@get_orders')->name('get.orders');

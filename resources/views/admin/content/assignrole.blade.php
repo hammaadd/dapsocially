@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <input type="text" id="id" name="id" value="{{$id}}" hidden>
                                             <select class="choices form-select" id="role" name="role">
-                                                <optgroup label="Figures">
+                                                <optgroup label="Roles">
                                                     @foreach ($roles as $role)
                                                     <option value="{{$role->name}}">{{$role->name}}</option>
                                                     @endforeach

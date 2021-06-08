@@ -2,7 +2,7 @@
     <div class="bg-gradient-to-tr from-blue-250 to-blue-550 pt-8">
         <div class="flex flex-wrap overflow-hidden max-w-7xl mx-auto pb-6">
             <div class="w-full md:w-1/2 lg:w-4/12 px-4">
-                <a href="#">
+                <a href="{{route('homepage')}}">
                     <img src="{{asset('assets/logo.png')}}" alt="">
                 </a>
                 <p class="text-gray-300 pt-5">

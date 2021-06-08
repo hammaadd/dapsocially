@@ -45,7 +45,8 @@ class ContentController extends Controller
                 ->addColumn('action', function($row){
 
                        $btn = '<a href="'.route('edit.content',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
-                        
+                       <a href="'.route('delete.content',$row).'" onclick="return confirm(\'Do you really want to delete the content\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                           
                         ';
 
 
@@ -68,6 +69,12 @@ class ContentController extends Controller
         Content::where('id', $request->id)->update(['key' => $request->heading,"content"=>$request->content]);
         return redirect()->route('show.content');
         
+    }
+    public function delete_content($id)
+    {
+        $del=Content::find($id);
+        $del->delete();
+        return back();
     }
 
 }

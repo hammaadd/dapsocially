@@ -50,7 +50,7 @@ public function list_payment_plans(Request $request)
                 ->addColumn('action', function($row){
 
                        $btn = '
-                       
+                       <a href="'.route('edit.paymentplans',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
                        <a href="'.route('delete.packages',$row).'" onclick="return confirm(\'Do you really want to delete the package\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                        ';
 
@@ -65,5 +65,19 @@ public function delete_package($id)
     $del=Payment_Plans::find($id);
     $del->delete();
     return back();
+}
+public function update_paymentplans(Request $request){
+        
+    Payment_Plans::where('id', $request->id)->update(['name' => $request->pname,"description"=>$request->descrip,"price"=>$request->price,"t_period"=>$request->timep]);
+    return redirect()->route('all.payment_plans');
+
+    
+
+}
+public function edit_paymentplans($id)
+{
+    $paymentplans=Payment_Plans::find($id);
+   
+    return view('admin.content.editpaymentplan',compact('paymentplans'));
 }
 }

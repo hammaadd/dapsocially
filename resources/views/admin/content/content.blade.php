@@ -26,7 +26,7 @@
                                         <label>key</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" id="key" class="form-control" name="key" placeholder="key">
+                                        <input type="text" id="ckey" class="form-control" name="key" placeholder="key">
                                         <span class=" text-danger" role="alert">
                                             @error('key')
                                                 <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                                     <br>
                                     <br>
                                     <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Add</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1 con">Add Content</button>
 
                                     </div>
                                 </div>

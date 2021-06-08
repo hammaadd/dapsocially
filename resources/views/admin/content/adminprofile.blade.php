@@ -55,7 +55,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label>Name</label>
-                                  <input class="form-control" type="text" name="uname"  id="uname" placeholder="{{Auth::user()->name}}" value="{{ Auth::user()->name }}">
+                                  <input class="form-control userm" type="text" name="uname"  id="uname" placeholder="{{Auth::user()->name}}" value="{{ Auth::user()->name }}">
                                   <span class="text-danger">@error('name'){{$message}}@enderror</span>
                                 </div>
                               </div>
@@ -71,7 +71,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label>Email</label>
-                                  <input class="form-control" type="text" name="mail" id="mail" value="{{Auth::user()->email}}">
+                                  <input class="form-control userm" type="text" name="mail" id="mail" value="{{Auth::user()->email}}">
                                   <span class="text-danger">@error('mail'){{$message}}@enderror</span>
                                 </div>
                               </div>

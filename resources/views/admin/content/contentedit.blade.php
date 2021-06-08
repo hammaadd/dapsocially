@@ -29,7 +29,7 @@
                                     <div class="col-md-8 form-group">
                                         <input type="text" id="id" class="form-control" name="id"
                                             placeholder="key" value="{{$Content->id}}" hidden>
-                                        <input type="text" id="key" class="form-control" name="key"
+                                        <input type="text" id="eckey" class="form-control" name="key"
                                             placeholder="key" value="{{$Content->key}}" disabled>
                                     </div>
                                     @error('key')
@@ -56,7 +56,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 
-                                                <h4 class="card-title">Default Editor</h4>
+                                                <h4 class="card-title">Write Content</h4>
                                                 <textarea  id="content" name="content" cols="30" rows="10"  >{{$Content->content}}</textarea>
                                                 <span class=" text-danger" role="alert">
                                                     @error('content')
@@ -70,7 +70,7 @@
                         
                         
                                     <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Update</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1 con">Update</button>
                         
                                     </div>
                                 </div>
