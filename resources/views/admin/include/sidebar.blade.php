@@ -16,13 +16,21 @@
                 <ul class="menu">
                     
                     <li class="sidebar-title">User</li>
+                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
+                        <a href="{{route('orders.list')}}" class='sidebar-link'>
+                            <i class="bi bi-archive-fill"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item {{Request::is('dashboard')? 'active' : '' }} ">
                         <a href="{{route('dashboard')}}" class='sidebar-link'>
                             <i class="bi bi-person-lines-fill"></i>
                             <span>Users List</span>
                         </a>
                     </li>
-                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }}">
+                    
+                    
+                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }} {{Request::is('assignpermission-form')? 'active' : '' }}"  >
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-check-fill"></i>
                             <span>Roles</span>
@@ -35,10 +43,13 @@
                             <li class="submenu-item {{Request::is('add-roles')? 'active' : '' }} ">
                                 <a href="{{route('add.roles')}}">Add Roles</a>
                             </li>
+                            <li class="submenu-item {{Request::is('assignpermission-form')? 'active' : '' }} ">
+                                <a href="{{route('assignpermission.form')}}">Permission to role</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-title">Contenet Management</li>
-                    <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }} {{Request::is('show.content')? 'active' : '' }} ">
+                    <li class="sidebar-item  has-sub {{Request::is('content-form')? 'active' : '' }} {{Request::is('show-content')? 'active' : '' }} ">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Contents</span>
@@ -56,7 +67,7 @@
                     </li>
                     <li class="sidebar-item  has-sub {{Request::is('short-code')? 'active' : '' }} {{Request::is('list-shortcode')? 'active' : '' }} ">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                            <i class="bi bi-file-code-fill"></i>
                             <span>Short Codes</span>
                         </a>
                         <ul class="submenu ">
@@ -73,7 +84,7 @@
                     <li class="sidebar-title">Payment Plans</li>
                     <li class="sidebar-item  has-sub {{Request::is('price-packages')? 'active' : '' }} {{Request::is('all-payment_plans')? 'active d-block' : '' }}">
                         <a href="#" class='sidebar-link'>
-                            <i class="bi bi-person-check-fill"></i>
+                            <i class="bi bi-wallet-fill"></i>
                             <span>Payment Plans</span>
                         </a>
                         
@@ -87,12 +98,6 @@
                         </ul>
                     </li>
                     <li class="sidebar-title">Others</li>
-                    <li class="sidebar-item {{Request::is('orders-list')? 'active' : '' }}  ">
-                        <a href="{{route('orders.list')}}" class='sidebar-link'>
-                            <i class="bi bi-archive-fill"></i>
-                            <span>Orders</span>
-                        </a>
-                    </li>
                     
                    
                     

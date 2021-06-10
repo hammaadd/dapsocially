@@ -101,5 +101,26 @@
     tinymce.init({ selector: '#dark', toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code', plugins: 'code' });
 </script>
 
-    
+<link rel="stylesheet" type="text/css" 
+href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+@if(Session::has('message'))
+ toastr.options =
+ {
+   "closeButton" : true,
+   "progressBar" : true
+ }
+     toastr.success("{{ session('message') }}");
+@endif
+@if(Session::has('error'))
+ toastr.options =
+ {
+   "closeButton" : true,
+   "progressBar" : true
+ }
+     toastr.warning("{{ session('error') }}");
+@endif
+</script>
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Payment_Plans;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Session;
 use Facade\Ignition\Support\Packagist\Package;
 
 class PricePackageController extends Controller
@@ -33,6 +34,7 @@ class PricePackageController extends Controller
     $table->price=$request->price;
     $table->t_period=$request->timep;
     $table->save();
+    Session::flash('message', 'Added suucessfully!'); 
     return back();
    }
    
@@ -64,12 +66,14 @@ public function delete_package($id)
 {
     $del=Payment_Plans::find($id);
     $del->delete();
+    Session::flash('message', 'Deleted suucessfully!'); 
     return back();
 }
 public function update_paymentplans(Request $request){
         
     Payment_Plans::where('id', $request->id)->update(['name' => $request->pname,"description"=>$request->descrip,"price"=>$request->price,"t_period"=>$request->timep]);
-    return redirect()->route('all.payment_plans');
+    Session::flash('message', 'Updated suucessfully!'); 
+    return back();
 
     
 

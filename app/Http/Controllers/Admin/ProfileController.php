@@ -42,7 +42,7 @@ class ProfileController extends Controller
                
         }
         else {
-            Session::flash('message', 'Password does not change. Cuurent password not matched'); 
+            Session::flash('error', 'Password does not change. Cuurent password not matched'); 
             
         }
 
@@ -61,11 +61,14 @@ class ProfileController extends Controller
                 $request->img->move(public_path("admin/profile"),$newImagename);
                 File::delete(public_path('admin/profile/'.$request->path));
                 User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail,"image"=>$newImagename]);
+                
+                Session::flash('message', 'profile Updated succesfully');
                 return back();
                 
             }
             else{
                 User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail]);
+                Session::flash('message', 'Profile updated succesfully');
                 return back();
                 
             }

@@ -4,15 +4,7 @@
 @section('content')
 
 <div class="m-5">
-@if(Session::has('message'))
-<div class="alert alert-primary alert-dismissible fade show" role="alert">
-  <strong>{{ Session::get('message') }}</strong> 
-  <button type="button" class="btn-close" data-bs-dismiss="alert"
-      aria-label="Close"></button>
-</div>
 
- 
-@endif
       <div class="col">
         <div class="row">
           <div class="col mb-3">
@@ -141,3 +133,27 @@
 </div>
 
  @endsection   
+ @section('extrascripts')
+ <link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    @if(Session::has('message'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+          toastr.success("{{ session('message') }}");
+  @endif
+  @if(Session::has('error'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+          toastr.warning("{{ session('error') }}");
+  @endif
+</script>
+ @endsection

@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">User List</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Assign Permission</li>
+        <li class="breadcrumb-item active" aria-current="page">deassign Permission</li>
     </ol>
 </nav>
     <section id="basic-horizontal-layouts">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-horizontal" method="POST" action="{{ route('assign.permission') }}">
+                            <form class="form form-horizontal" method="POST" action="{{ route('deassign.permission') }}">  
                                 @csrf
                                 <div class="form-body">
                                     <div class="row">
@@ -30,9 +30,9 @@
                                             
                                             <select class="choices form-select" id="role" name="role">
                                                 <optgroup label="Permissions">
-                                                    @foreach ($roles as $role)
+                                                 
                                                     <option value="{{ $role->display_name }}">{{ $role->display_name }}</option>
-                                                     @endforeach
+                                                     
                                                     
                                                    
                                                 </optgroup>
@@ -47,23 +47,23 @@
                                             @foreach ($permissions as $permission)
                                             <div class="checkbox">
                                                 
-                                               
+                                              
                                               
                                                 <input type="checkbox" id="checkbox1" name="permissions[]" class="form-check-input"
-                                                value="{{$permission->name}}" >
+                                                value="{{$permission->name}}" checked>
                                                
                                                 <label for="checkbox1">{{$permission->name}}</label>
-                                                     
+                                                
                                                
                                             </div>
                                             @endforeach
                                         </div>
-                                       
-                                        
                                         <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1" >Assign Permission</button>
+                                            <button type="submit" class="btn btn-primary me-1 mb-1" >deassign Permission</button>
 
                                         </div>
+                                        
+                                       
                                     </div>
                                 </div>
                             </form>

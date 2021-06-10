@@ -14,7 +14,7 @@
     <table id="example" class="table table-striped table-bordered yajra-data-table ml-2" style="width:100%">
         <thead>
             <tr>
-                
+                <th>Id</th>
                 <th>Type</th>
                 <th>Status</th>
                 <th>Total payment(USD $)</th>
@@ -40,11 +40,11 @@
               "destroy":true,
               ajax: "{{ route('get.orders') }}",
               columns: [
-                 
+                  {data: 'id', name: 'Id'},
                   {data: 'order_type', name: 'Type'},
                   {data: 'order_status', name: 'Status'},
-                  {data: 'total_payment', name: 'Total payment'},
-                  {data: 'action', name: 4, orderable: false, searchable: false},
+                  {data: 'total_payment', name: 2},
+                  {data: 'action', name: 3, orderable: false, searchable: false},
               ]
           });
         });

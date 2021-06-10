@@ -83,15 +83,17 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('delete-roles/{id}', 'Admin\RoleController@delete_role')->name('delete.roles');
     Route::get('edit-roles/{role}', 'Admin\RoleController@edit_role')->name('edit.roles');
     Route::post('update-roles', 'Admin\RoleController@updaterole')->name('update.roles');
-
+    Route::get('role-permission/{id}', 'Admin\RoleController@view_role_permissions')->name('role.permission');
+    
     Route::get('getuserroles', 'Admin\RoleController@getuserrole')->name('getuser.role');
     Route::get('assignrole/{id}', 'Admin\RoleController@assignrole')->name('assign.role');
     Route::post('giveuserrole', 'Admin\RoleController@giveroletouser')->name('giveuser.roles');
     
     Route::get('userpermissions/list', 'Admin\RoleController@userpermission_list')->name('userpermission.list');
-    Route::get('assignpermission/form/{id}', 'Admin\RoleController@permission_form')->name('assignpermission.form');
+    Route::get('assignpermission-form', 'Admin\RoleController@permission_form')->name('assignpermission.form');
     Route::post('assignpermission', 'Admin\RoleController@assign_permission')->name('assign.permission');
-    
+    Route::post('deassignpermission', 'Admin\RoleController@deassign_permission')->name('deassign.permission');
+
     Route::get('/short-code', 'Admin\ShortCodeController@shortcode')->name('short.code');
     Route::post('/add-code', 'Admin\ShortCodeController@addcode')->name('add.code');
     Route::get('/edit-code/{shortQ}', 'Admin\ShortCodeController@editcode')->name('edit.code');
@@ -159,3 +161,6 @@ Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')
 Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
+
+
+

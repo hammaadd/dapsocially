@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Shortcode;
 use Laravel\Ui\Presets\React;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Session;
 class ShortCodeController extends Controller
 {
     public function __construct()
@@ -31,7 +32,8 @@ class ShortCodeController extends Controller
         $table->key=$key;
         $table->content=$request->quote;
         $table->save();
-        return redirect()->route('short.code');
+        Session::flash('message', 'Added succesfully');
+        return back();
     
        
         
@@ -43,7 +45,8 @@ class ShortCodeController extends Controller
     public function updatecode(Request $request){
         
         Shortcode::where('id', $request->id)->update(['key' => $request->keys,"content"=>$request->quote]);
-        return redirect()->route('short.code');
+        Session::flash('message', 'Updated succesfully');
+        return back();
 
         
 
@@ -51,7 +54,8 @@ class ShortCodeController extends Controller
     public function deletecode($id){
         $del=Shortcode::find($id);
         $del->delete();
-        return redirect()->route('short.code');
+        Session::flash('error', 'Deleted succesfully');
+        return back();
     }
     public function get_shortcode(Request $request)
     {
