@@ -20,37 +20,20 @@ class VenueController extends Controller
     }
     public function add_venue(Request $request)
     {
-            $request->validate([
+        $request->validate([
             'vname' => 'required',
-            'description' => 'required',
-            'image' => 'required',
-            'ship_address'=>'required',
+            'e_descrip' => 'required',
+            'cover_img' => 'required',
+            'country' => 'required',
+            'loc_address'=>'required',
+            'locality'=>'required',
+            'state'=>'required',
+            'h_tag'=>'required',
+           'm_dap_wall'=>'required',
+           'wall_bg_img'=>'required',
+           's_date'=>'required',
+           's_time'=>'required',
             ]);
-            $location=new Location();
-            $location->country=$request->country;
-            $location->state=$request->state;
-            $location->city=$request->locality;
-            $location->address=$request->ship_address;
-            $location->lng=$request->longitude;
-            $location->lat=$request->latitude;
-            $location->save();
-            $venue=new Venue();
-            $venue->venue_name=$request->vname;
-            $venue->description=$request->description;
-            $venue->location_id=$location->id;
-            if ($request->hasFile('image')) {
-                $newImagename=$request->file('image');
-                $newImagename=str_replace(' ','',time().'-'.$newImagename->getClientOriginalName());
-                
-                $request->image->move(public_path("user/LocationsImages"),$newImagename);
-            
-                $venue->image=$newImagename;
-                
-            }
-            else{
-                $venue->image='bn';
-            }  
-            $venue->save();
             return back();
     }
     

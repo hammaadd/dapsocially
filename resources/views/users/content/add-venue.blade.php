@@ -67,12 +67,12 @@
 <script>
 
     $(document).ready(function(){
-       
+
     $("#select-img").click(function(e) {
      $("#imageUpload").click();
  });
 
-function fasterPreview( uploader ) {
+function fasterPreview1( uploader ) {
     if ( uploader.files && uploader.files[0] ){
           $('#coverImage').attr('src',
              window.URL.createObjectURL(uploader.files[0]) );
@@ -81,11 +81,11 @@ function fasterPreview( uploader ) {
 }
 
 $("#imageUpload").change(function(){
-    fasterPreview( this );
+    fasterPreview1( this );
 });
 
-  
-$("#select-bg-img").click(function(e) {
+
+$("#select-bgimg").click(function(e) {
      $("#wall_image").click();
  });
 
@@ -116,14 +116,40 @@ $("#e_descrip").on('keyup', function(e) {
       var trimmed = $(this).val().split(/\s+/, 200).join(" ");
       // Add a space at the end to make sure more typing creates new words
       $(this).val(trimmed + " ");
-     
+
     }
     else {
       $('#display_count').text(words);
       //$('#word_left').text(200-words);
     }
   });
+
+$("#m_dap_wall").on('keyup', function(e) {
+
+    var words = 0;
+
+    if ((this.value.match(/\S+/g)) != null) {
+      words = this.value.match(/\S+/g).length;
+    }
+
+    if (words > 20) {
+        e.preventDefault();
+      // Split the string on first 200 words and rejoin on spaces
+      var trimmed = $(this).val().split(/\s+/, 200).join(" ");
+      // Add a space at the end to make sure more typing creates new words
+      $(this).val(trimmed + " ");
+
+    }
+    else {
+      $('#w_counter').text(words);
+      //$('#word_left').text(200-words);
+    }
+  });
+
 });
+
+
+
 </script>
 
 @endsection
@@ -135,7 +161,8 @@ $("#e_descrip").on('keyup', function(e) {
     </section>
 
     <section class="py-10 max-w-5xl mx-auto">
-        <form action="#">
+        <form action="{{route('add.venue')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full">
                     <div class="flex flex-wrap overflow-hidden md:-mx-2 lg:-mx-3 xl:-mx-3">
@@ -143,9 +170,10 @@ $("#e_descrip").on('keyup', function(e) {
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="vname">
                                 Venue Name <span class="text-red-600">*</span>
-                                <input type="text" id="vname" id="vname" class="input-field" placeholder="Write your venue name">
+                                <input type="text" name="vname" id="vname" class="input-field" placeholder="Write your venue name">
                             </label>
-                            <small class="text-red-600">@error('vname'){{$message}}@enderror</small>
+                            @error('vname')<small class="text-red-600">Please enter the Venue name</small> @enderror
+
 
                         </div>
 
@@ -154,7 +182,8 @@ $("#e_descrip").on('keyup', function(e) {
                                 Location <span class="text-red-600">*</span>
                                 <input type="text"  id="loc_address" name="loc_address" class="input-field" placeholder="California" required autocomplete="off">
                             </label>
-                            <small class="text-red-600">@error('uname'){{$message}}@enderror</small>
+                            @error('loc_address') <small class="text-red-600">Enter the location</small>@enderror
+
 
                         </div>
 
@@ -163,20 +192,25 @@ $("#e_descrip").on('keyup', function(e) {
                                 City
                                 <input type="text" id="locality" name="locality" class="input-field" placeholder="City">
                             </label>
+                            @error('locality') <small class="text-red-600">Please enter city name</small>@enderror
                         </div>
+
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/3 lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
                             <label for="state">
                                 State
                                 <input type="text" id="state" name="state" class="input-field" placeholder="State">
                             </label>
+                            @error('state') <small class="text-red-600">Please enter state</small>@enderror
                         </div>
+
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/3 lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
                             <label for="country">
                                 Country
                                 <input type="text" id="country" name="country" class="input-field" placeholder="Country">
                             </label>
+                            @error('country') <small class="text-red-600">Please enter country name</small>@enderror
                         </div>
                         <input type="text" name="latitude" id="latitude" class="form-control" hidden>
                         <input type="text" name="longitude" id="longitude" class="form-control" hidden>
@@ -185,23 +219,28 @@ $("#e_descrip").on('keyup', function(e) {
                             <label for="cover">
                                 Add Cover Image <span class="text-red-600">*</span>
                                 <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
-                                    <img src="{{asset('assets/Rectangle 119.png')}}"  class="object-cover w-full rounded-md" alt="">
+                                    <img src="{{asset('assets/Rectangle 119.png')}}"   id="coverImage" class="object-cover w-full rounded-md" alt="">
                                     <div class="flex flex-wrap overflow-hidden items-center justify-center flex-col absolute top-0 left-0 right-0 h-full">
-                                        <img src="{{asset('assets/icons8_image_file_add.png')}}" id="coverImage" alt="">
+                                        <img src="{{asset('assets/icons8_image_file_add.png')}}" alt="">
                                         <small class="text-gray-400 pt-2">Drop an image to Upload</small>
                                         <p id="select-img" class="text-gray-400 border border-gray-400 px-3 py-1.5 mt-2 rounded-3xl bg-transparent hover:bg-gray-400 hover:text-white">Select Image</p>
                                         <input id="imageUpload" type="file" name="cover_img" placeholder="Photo"  capture hidden>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
 
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+                        @error('cover_img') <small class="text-red-600">Please add cover image</small>@enderror
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="description">
                                 Event Description <span class="text-red-600">*</span>
-                                <textarea name="e_descrip" id="e_descrip" rows="3" placeholder="Write briefly about your Event" class="input-field"></textarea>
+                                <textarea name="edescrip" id="e_descrip" rows="3" placeholder="Write briefly about your Event" class="input-field"></textarea>
                             </label>
                             <small id="display_count" name="display_count" class="float-right px-3" >0/20</small>
+                            @error('e_descrip') <small class="text-red-600">Please write some description about event</small>@enderror
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
@@ -209,6 +248,7 @@ $("#e_descrip").on('keyup', function(e) {
                                 Hashtag(s) <span class="text-red-600">*</span>
                                 <input type="text" name="h_tag" id="h_tag" placeholder="#party  #partytime" class="input-field"/>
                             </label>
+                            @error('h_tag') <small class="text-red-600">Please add some hashtags</small>@enderror
                             <p class="inline-block pt-1">Approve all <span class="text-blue-550">#hashtags</span> posts from your DapSocially Location Wall</p>
                             <div class="relative inline-block w-10 mx-2 align-middle select-none pt-1">
                                 <input type="checkbox" name="app_htag" id="Blue" class="checked:bg-white outline-none focus:outline-none right-5 checked:right-0 duration-200 ease-in absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
@@ -221,7 +261,7 @@ $("#e_descrip").on('keyup', function(e) {
                             <p class="">Where would you like to collect social media hashtags from?</p>
                             <ul class="list-none pt-3">
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb1" name="h_fb" checked>
+                                    <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" checked >
                                     <label for="cb1" class="cb-label">
                                         <img src="{{asset('assets/fb.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -229,7 +269,7 @@ $("#e_descrip").on('keyup', function(e) {
                                     </label>
                                 </li>
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb2" name="h_inst">
+                                    <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram">
                                     <label for="cb2" class="cb-label">
                                         <img src="{{asset('assets/Insta.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -237,7 +277,7 @@ $("#e_descrip").on('keyup', function(e) {
                                     </label>
                                 </li>
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tw">
+                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter">
                                     <label for="cb3" class="cb-label">
                                         <img src="{{asset('assets/twitter.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -245,7 +285,7 @@ $("#e_descrip").on('keyup', function(e) {
                                     </label>
                                 </li>
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_t">
+                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok">
                                     <label for="cb4" class="cb-label">
                                         <img src="{{asset('assets/tiktok.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -253,6 +293,7 @@ $("#e_descrip").on('keyup', function(e) {
                                     </label>
                                 </li>
                             </ul>
+
                         </div>
 
                         <div class="w-full overflow-hidden md:mt-2 md:px-2 lg:mt-3 lg:px-3 xl:mt-3 xl:px-3">
@@ -260,7 +301,7 @@ $("#e_descrip").on('keyup', function(e) {
                         </div>
                         <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
                             <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="fb" name="fb" checked>
+                                <input type="checkbox" class="cb-input hidden" id="fb" name="c_posts[]" checked>
                                 <label for="fb" class="cb--label">
                                     <img src="{{asset('assets/fb.png')}}" class="w-6 h-6 mx-auto" alt="">
                                 </label>
@@ -270,17 +311,17 @@ $("#e_descrip").on('keyup', function(e) {
 
                         <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
                             <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="insta" name="insta">
+                                <input type="checkbox" class="cb-input hidden" id="insta" name="c_posts[]">
                                 <label for="insta" class="cb--label">
                                     <img src="{{asset('assets/Insta.png')}}" class="w-6 h-6 mx-auto" alt="">
                                 </label>
                             </div>
-                            <input type="text" name="p_inst" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*">
+                            <input type="text" name="p_insta" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*">
                         </div>
 
                         <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
                             <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="twitter" name="twitter">
+                                <input type="checkbox" class="cb-input hidden" id="twitter" name="c_posts[]">
                                 <label for="twitter" class="cb--label">
                                     <img src="{{asset('assets/twitter.png')}}" class="w-6 h-6 mx-auto" alt="">
                                 </label>
@@ -290,12 +331,13 @@ $("#e_descrip").on('keyup', function(e) {
 
                         <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
                             <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="tiktok" name="tiktok">
+                                <input type="checkbox" class="cb-input hidden" id="tiktok" name="c_posts[]">
                                 <label for="tiktok" class="cb--label">
                                     <img src="{{asset('assets/tiktok.png')}}" class="w-6 h-6 mx-auto" alt="">
                                 </label>
                             </div>
                             <input type="text" name="p_tik" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*">
+                            @error('h_tag[]') <small class="text-red-600">Please add atleast one social platform to add posts</small>@enderror
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
@@ -303,22 +345,25 @@ $("#e_descrip").on('keyup', function(e) {
                                 Message for Dapsocially Locations Wall <span class="text-red-600">*</span>
                                 <textarea name="m_dap_wall" id="m_dap_wall" rows="3" placeholder="Write a Message for your Dapsocially Locations Wall*" class="input-field"></textarea>
                             </label>
-                            <small class="float-right px-3" >0/20</small>
+                            <small class="float-right px-3" id="w_counter">0/20</small>
+                            @error('m_dap_wall') <small class="text-red-600">Please write a message for dapsocially wall</small>@enderror
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="cover">
                                 Select Background image for your Social Wall <span class="text-red-600">*</span>
                                 <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
-                                    <img src="{{asset('assets/Rectangle 119.png')}}" class="object-cover w-full rounded-md" alt="">
+                                    <img src="{{asset('assets/Rectangle 119.png')}}"  id="wall_bg"  class="object-cover w-full rounded-md" alt="">
                                     <div class="flex flex-wrap overflow-hidden items-center justify-center flex-col absolute top-0 left-0 right-0 h-full">
-                                        <img src="{{asset('assets/icons8_image_file_add.png')}}" id="wall_bg" alt="">
+                                        <img src="{{asset('assets/icons8_image_file_add.png')}}" alt="">
                                         <small class="text-gray-400 pt-2">Drop an image to Upload</small>
-                                        <p id="select-bg-img" class="text-gray-400 border border-gray-400 px-3 py-1.5 mt-2 rounded-3xl bg-transparent hover:bg-gray-400 hover:text-white">Select Image</p>
+                                        <p id="select-bgimg" class="text-gray-400 border border-gray-400 px-3 py-1.5 mt-2 rounded-3xl bg-transparent hover:bg-gray-400 hover:text-white">Select Image</p>
                                         <input id="wall_image" type="file" name="wall_bg_img" placeholder="Photo"  capture hidden>
                                     </div>
                                 </div>
+
                             </label>
+                            @error('wall_bg_img') <small class="text-red-600">Upload an image for social wall background</small>@enderror
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
@@ -328,6 +373,8 @@ $("#e_descrip").on('keyup', function(e) {
                                     <input type="date" id="s_date" name="s_date" class="input---field rounded-r-none rounded-l-md">
                                     <input type="time" id="s_time" name="s_time" class="input---field rounded-l-none rounded-r-md">
                                 </div>
+
+                                @error('s_date') <small class="text-red-600">Enter start date and time properly </small>@enderror
                             </label>
                         </div>
 
@@ -337,16 +384,19 @@ $("#e_descrip").on('keyup', function(e) {
                                 <div class="flex">
                                     <input type="date" id="e_date" name="e_date" class="input---field rounded-r-none rounded-l-md">
                                     <input type="time" id="e_time" name="e_time" class="input---field rounded-l-none rounded-r-md">
+
                                 </div>
+                                @error('s_date') <small class="text-red-600">Enter end date and time properly </small>@enderror
                             </label>
                         </div>
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <h3 class="text-xl font-medium text-center uppercase mt-5">Pricing</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 py-5">
-                                <div class="flex flex-wrap overflow-hidden flex-col items-center p-4 shadow-md rounded-xl bg-blue-450">
+                                <div class="flex flex-wrap overflow-hidden flex-col items-center p-4 shadow-md rounded-xl bg-blue-450 " id="paymentcard">
                                     <p class="uppercase text-lg text-center font-medium text-white">Standard</p>
                                     <img src="{{asset('assets/Group 389.png')}}" class="mt-3" alt="">
+
                                     <hr class="w-3/5 mx-auto border-white my-3">
                                     <p class="text-white text-center">
                                         Unlimited Posts Collections from
@@ -354,7 +404,7 @@ $("#e_descrip").on('keyup', function(e) {
                                         Contains Ads.
                                     </p>
                                     <p class="text-2xl text-white text-center uppercase my-3 font-medium">Free</p>
-                                    <a href="#" class="bg-blue-550 text-white px-4 py-1.5 border-2 border-blue-550 rounded-3xl hover:bg-white hover:border-white hover:text-blue-550">Choose</a>
+                                    <a href="#" class="bg-blue-550 text-white px-4 py-1.5 border-2 border-blue-550 rounded-3xl hover:bg-white hover:border-white hover:text-blue-550 " id="choosee" onclick="select(this.id)">Choose</a>
                                 </div>
 
                                 <div class="flex flex-wrap overflow-hidden flex-col items-center p-4 shadow-md rounded-xl bg-white">
