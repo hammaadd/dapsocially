@@ -32,20 +32,21 @@
 
                                     <span class="ml-5 text-danger">@error('key'){{ $message }}@enderror</span>
                                     </div>
-                                    <div class="card">
-                                        <div class="col-md-2">
-                                           <label><b>Short Code</b></label>
-                                       </div>
-                                           <div class="card-body">
-                                               <div class="form-group with-title mb-3">
-                                                   <textarea class="form-control" id="quote" rows="5" name="quote">{{ $shortQ->content }}</textarea>
-       
-                                                   <span
-                                                   class="ml-5 text-danger">@error('quote'){{ $message }}@enderror</span>
-                                           </div>
-                                       </div>
-                                    
-                                        
+                                    <div class="col-md-2">
+                                        <label>Short code</label>
+                                    </div>
+                                    <div class="col-md-9 form-group">
+
+
+
+                                            <textarea class="form-control" id="quote" rows="5" name="quote">{{ $shortQ->content }}</textarea>
+
+                                            <span
+                                            class="ml-5 text-danger">@error('quote'){{ $message }}@enderror</span>
+
+                                    </div>
+
+
 
                                         <div class="col-sm-12 d-flex justify-content-end">
 
@@ -53,7 +54,7 @@
 
 
                                         </div>
-                                    
+
                                 </div>
 
                             </form>
@@ -64,9 +65,9 @@
 </div>
         @endsection
         @section('extrascripts')
-        <link rel="stylesheet" type="text/css" 
+        <link rel="stylesheet" type="text/css"
             href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-           
+
            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
        <script>
            @if(Session::has('message'))

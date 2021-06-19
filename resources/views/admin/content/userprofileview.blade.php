@@ -66,8 +66,8 @@
                                 </div>
                             </div>
 
-                          
-                            
+
+
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
@@ -98,11 +98,11 @@
                                     @if ($user->isactive == 0)
                                         <b class="text-danger"> Status</b>
                                         <span class="badge bg-danger">Deactive</span>
-                                       
+
                                     @else
                                         <b class="text-success"> Status</b>
-                                        <span class="badge bg-danger">Active</span>
-                                        
+                                        <span class="badge bg-success">Active</span>
+
                                     @endif
 
                                 </div>

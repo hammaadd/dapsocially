@@ -15,11 +15,10 @@ class CreateCollectEventHtagsTable extends Migration
     {
         Schema::create('collect__event__htags', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger('account_id')->nullable();
-            $table->foreign('account_id')->references('id')->on('attached__accounts')->onDelete('set null');
+
+            $table->string('account_name');
             $table->unsignedBigInteger('event_id')->nullable();
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('set null');
+             $table->foreign('event_id')->references('id')->on('events')->onDelete('set null');
             $table->timestamps();
         });
     }

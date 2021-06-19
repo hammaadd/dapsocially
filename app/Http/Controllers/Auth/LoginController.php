@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
@@ -45,12 +47,40 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        
+
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
         } elseif ($user->hasRole('user') && $user->isactive==1) {
-            return redirect()->route('events');
+
+            return redirect()->route('my.account');
         }
+    }
+    protected function logout(Request $request)
+    {
+        $user=User::find(Auth::user()->id);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        // return $request->wantsJson()
+        //     ? new JsonResponse([], 204)
+        //     : redirect('/admin/login');
+
+
+        if ($user->hasRole('superadministrator')) {
+            return redirect('/admin/login');
+         }
+         elseif ($user->hasRole('user') ) {
+            return redirect('signin');
+         }
+
+
     }
     public function redirectToGoogle()
     {
@@ -63,7 +93,7 @@ class LoginController extends Controller
 
         return redirect()->route('events');
 
-     
+
     }
     public function redirectToFacebook()
     {

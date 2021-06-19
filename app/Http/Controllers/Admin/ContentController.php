@@ -20,13 +20,13 @@ class ContentController extends Controller
    }
    public function add_content(Request $request)
    {
-    
+
     $validated = $request->validate([
-       
+
         'key' => 'required',
         'heading' => 'required',
         'content' => 'required',
-        
+
         ]);
         $table=new Content();
         $table->key=$request->key;
@@ -39,16 +39,16 @@ class ContentController extends Controller
    }
    public function get_contents(Request $request)
    {
-    
+
     if ($request->ajax()) {
         $data = Content::select('id','key','heading','content');
-        
+
         return Datatables::of($data)
                 ->addColumn('action', function($row){
 
                        $btn = '<a href="'.route('edit.content',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
                        <a href="'.route('delete.content',$row).'" onclick="return confirm(\'Do you really want to delete the content\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
-                           
+
                         ';
 
 
@@ -68,10 +68,10 @@ class ContentController extends Controller
    }
     public function update_content(Request $request)
     {
-        Content::where('id', $request->id)->update(['key' => $request->heading,"content"=>$request->content]);
+        Content::where('id', $request->id)->update(['heading' => $request->heading,"content"=>$request->content]);
         Session::flash('message', 'Updated suucessfully!');
         return back();
-        
+
     }
     public function delete_content($id)
     {

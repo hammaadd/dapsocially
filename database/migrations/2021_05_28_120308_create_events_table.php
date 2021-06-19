@@ -19,10 +19,13 @@ class CreateEventsTable extends Migration
             $table->string('c_image',191)->nullable();
             $table->text('e_description');
             $table->string('hashtag',191);
-            $table->unsignedBigInteger('approve_htag');
+            $table->string('approve_htag')->nullable();
             $table->string('wall_bg_image',191)->nullable();
             $table->string('start_time',191);
+            $table->string('start_date',191);
             $table->string('end_time',191);
+            $table->string('end_date',191);
+            $table->string('location',191);
             $table->string('wall_location_msg')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');

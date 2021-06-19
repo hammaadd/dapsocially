@@ -6,7 +6,7 @@
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-        
+
         <li class="breadcrumb-item active" aria-current="page">Short Codes</li>
     </ol>
 </nav>
@@ -18,7 +18,7 @@
             <div class="card-content">
                 <div class="card-body">
                     <form class="form form-horizontal " action="{{ route('add.code') }}" method="POST">
-                        @csrf 
+                        @csrf
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-body">
                             <div class="row">
@@ -30,21 +30,22 @@
                                     <span class="ml-5 text-danger">@error('key'){{ $message }}@enderror</span>
 
                                   </div>
-                                <div class="card ">
-                                 <div class="col-md-2">
-                                    <label><b>Short Code</b></label>
+                                  <div class="col-md-2">
+                                    <label>Short code</label>
                                 </div>
-                                    <div class="card-body">
-                                        <div class="form-group with-title mb-3">
-                                            <textarea class="form-control" id="quote" rows="5" name="quote"></textarea>
+                                <div class="col-md-9 form-group">
 
-                                           
-                                    </div>
+
+
+                                        <textarea class="form-control" id="quote" rows="5" name="quote"></textarea>
+
+                                        <span
+                                        class="ml-5 text-danger">@error('quote'){{ $message }}@enderror</span>
+
                                 </div>
-
                                 <div class="col-sm-12 d-flex justify-content-end">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">Add Code</button>
-                                   
+
                                 </div>
                             </div>
                     </div>
@@ -52,19 +53,19 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 
 
 
-        
+
 </div>
   @endsection
   @section('extrascripts')
-  <link rel="stylesheet" type="text/css" 
+  <link rel="stylesheet" type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-     
+
      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
  <script>
      @if(Session::has('message'))

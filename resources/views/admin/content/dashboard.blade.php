@@ -10,19 +10,19 @@
     </ol>
 </nav>
 <div class="yajra-t rounded">
-    <table id="usersdata" class="table table-striped table-bordered user-table ml-2" >
+    <table id="usersdata" class="table table-striped table-bordered user-table ml-2" style="width:100%">
         <thead>
             <tr>
-               
+
                 <th>Name</th>
                 <th>Email</th>
                 <th>Action</th>
-                
+
             </tr>
         </thead>
         <tbody>
-          
-            
+
+
     </table>
 </div>
 </div>
@@ -31,14 +31,14 @@
     <script>
         $(document).ready(function() {
             $('#usersdata').DataTable();
-            
+
           var table = $('.user-table').DataTable({
               processing: true,
               serverSide: true,
               "destroy":true,
               ajax: "{{ route('users.get') }}",
               columns: [
-                  
+
                   {data: 'name', name: 'Name'},
                   {data: 'email', name: 'Email'},
                   {data: 'action', name: 2, orderable: false, searchable: false},
@@ -47,5 +47,5 @@
         });
 
     </script>
-   
+
 @endsection

@@ -17,10 +17,13 @@
                         <!-- Column Content -->
                         <a href="/" class="nav-item">Home</a>
                         <a href="{{route('events')}}" class="nav-item">Events</a>
-                        <a href="{{route('add-venue')}}" class="nav-item">Venue</a>
+                        <a href="{{route('venue')}}" class="nav-item">Venue</a>
                         <a href="#" class="nav-item">Get Started</a>
                     </div>
+                    @if (!Auth::user())
                     <a href="{{route('signin')}}" class="btn-login">Login</a>
+                    @endif
+
                     <form action="#" class=" w-44">
                         <div class="relative rounded-xl">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

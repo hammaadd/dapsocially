@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Auth;
 
 // Visitor Side
 
-Route::get('/', function () {
-    return view('visitor.content.main');
-})->name('homepage');
+Route::get('/', 'Visitor\HomeController@index')->name('homepage');
+Route::post('search', 'Visitor\HomeController@search')->name('search');
 Route::get('signin', function () {
     return view('visitor.content.signin');
 })->name('signin');
@@ -30,26 +29,31 @@ Route::get('signup', function () {
 // User Side
 
 Route::get('profile', 'User\ProfileController@index')->name('profile');
+Route::get('my-account', 'User\AccountController@index')->name('my.account');
 Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
-Route::get('add-event', function () {
-    if (Auth::check()){
-    return view('users.content.add-event');
-    }
-    else{
-        return redirect()->route('signin');
-    }
-})->name('add-event');
+Route::get('venue', 'User\VenueController@venue')->name('venue');
+
+Route::get('add-event','User\EventController@index' )->name('add-event');
+Route::get('events','User\EventController@events' )->name('events');
+Route::get('more_events','User\EventController@load_more_events' )->name('load.events');
+Route::get('load-my-events','User\EventController@load_my_events' )->name('load.my.events');
+Route::get('delete_my-event/{event}','User\EventController@delete_myevent' )->name('delete.my.event');
+
+Route::get('more_venues','User\VenueController@load_more_venues' )->name('load.venues');
+Route::post('search-event','User\EventController@search_Event' )->name('search.event');
+Route::post('search-my-event','User\EventController@search_my_Event' )->name('search.my.event');
+
+Route::post('search-venue','User\VenueController@search_Venue' )->name('search.venue');
+Route::get('load-my-venues','User\VenueController@load_my_venues' )->name('load.my.venues');
+Route::get('delete_my-venue/{venue}','User\VenueController@delete_myvenue' )->name('delete.my.venue');
+Route::get('my-event','User\EventController@my_events' )->name('my.events');
+Route::get('my-venue','User\VenueController@my_venues' )->name('my.venues');
+Route::get('edit-venue/{venue}','User\VenueController@edit_vanue' )->name('edit.venue');
+
 Route::get('pricing', function () {
     return view('users.content.pricing');
 })->name('pricing');
-Route::get('events', function () {
-    if (Auth::check()) {
-    return view('users.content.events');
-    }
-    else{
-        return redirect()->route('signin');
-    }
-})->name('events');
+
 Route::get('social-wall', function () {
     return view('users.content.social-wall');
 })->name('social-wall');
@@ -62,7 +66,7 @@ Route::get('/admin/login', function () {
         return view('auth.login');
     }
 
-    
+
 })->name('admin.login');
 
 Auth::routes(['verify'=>true,'reset' => false]);
@@ -84,11 +88,11 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('edit-roles/{role}', 'Admin\RoleController@edit_role')->name('edit.roles');
     Route::post('update-roles', 'Admin\RoleController@updaterole')->name('update.roles');
     Route::get('role-permission/{id}', 'Admin\RoleController@view_role_permissions')->name('role.permission');
-    
+
     Route::get('getuserroles', 'Admin\RoleController@getuserrole')->name('getuser.role');
     Route::get('assignrole/{id}', 'Admin\RoleController@assignrole')->name('assign.role');
     Route::post('giveuserrole', 'Admin\RoleController@giveroletouser')->name('giveuser.roles');
-    
+
     Route::get('userpermissions/list', 'Admin\RoleController@userpermission_list')->name('userpermission.list');
     Route::get('assignpermission-form', 'Admin\RoleController@permission_form')->name('assignpermission.form');
     Route::post('assignpermission', 'Admin\RoleController@assign_permission')->name('assign.permission');
@@ -101,13 +105,13 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('/delete-code/{id}', 'Admin\ShortCodeController@deletecode')->name('delete.code');
     Route::get('get-shortcode', 'Admin\ShortCodeController@get_shortcode')->name('get.shortcode');
     Route::get('list-shortcode', 'Admin\ShortCodeController@list_shortcode')->name('list.shortcode');
-    
+
     Route::get('contactus-form', 'Admin\ContactUsController@index')->name('contact.us');
     Route::post('submitform', 'Admin\ContactUsController@add_Message')->name('add.message');
     Route::get('contactus', 'Admin\ContactUsController@get_contactus_list')->name('contactus.get');
     Route::get('contactus-list', 'Admin\ContactUsController@show_Contactus_list')->name('contactus.list');
     Route::get('delete-messages/{id}', 'Admin\ContactUsController@delete_messages')->name('delete.messages');
-    
+
     Route::get('content-form', 'Admin\ContentController@index')->name('content.form');
     Route::post('addcontent', 'Admin\ContentController@add_content')->name('add.content');
     Route::get('getcontents', 'Admin\ContentController@get_contents')->name('get.contents');
@@ -127,8 +131,45 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('get.orders', 'Admin\OrderDetailsController@get_orders')->name('get.orders');
     Route::get('order/profileview/{id}', 'Admin\OrderDetailsController@profile_view')->name('orderusersprofile.view');
     Route::get('delete-order/{id}', 'Admin\OrderDetailsController@delete_order')->name('order.delete');
-    
+
     Route::get('notification-read/{id}', 'Admin\OrdersNotificationsController@index')->name('notification.read');
+
+    Route::get('messages', 'Admin\MessageController@index')->name('messages');
+    Route::post('add-message', 'Admin\MessageController@add_message')->name('add.message');
+
+    Route::get('all-messages', 'Admin\MessageController@all_messages')->name('all.messages');
+    Route::get('get-messages', 'Admin\MessageController@get_messages')->name('get.messages');
+    Route::get('edit-messages/{message}', 'Admin\MessageController@editmessage')->name('edit.messages');
+    Route::post('update-messages', 'Admin\MessageController@updatemessage')->name('update.messages');
+    Route::get('delete-messages/{id}', 'Admin\MessageController@deletemessage')->name('delete.messages');
+
+    Route::get('send-notifications', 'Admin\NotificationsController@index')->name('send-notifications');
+    Route::post('send-notifications-freeuser', 'Admin\NotificationsController@send_notification_to_freeuser')->name('send.notifications.freeuse');
+
+    Route::get('image-adds', 'Admin\AddsController@index')->name('image.adds');
+    Route::post('add-image-uploads', 'Admin\AddsController@upload_image_add')->name('add.image.uploads');
+    Route::get('video-adds', 'Admin\AddsController@vidoe_add')->name('video.adds');
+    Route::post('add-video-uploads', 'Admin\AddsController@upload_video_add')->name('add.video.uploads');
+
+    Route::get('list-adds', 'Admin\AddsController@show_adds')->name('show.adds');
+    Route::get('get-adds', 'Admin\AddsController@get_adds')->name('get.adds');
+
+    Route::get('edit-adds/{add}', 'Admin\AddsController@edit_adds')->name('edit.adds');
+    Route::get('delete-adds/{id}', 'Admin\AddsController@delete_id')->name('delete.adds');
+    Route::post('update-image-add', 'Admin\AddsController@update_image_add')->name('update.image.add');
+    Route::post('update-video-add', 'Admin\AddsController@update_video_add')->name('update.video.add');
+
+    Route::get('add-category', 'Admin\CategoryController@index')->name('add.category');
+    Route::post('insert-category', 'Admin\CategoryController@add_category')->name('insert.category');
+
+    Route::get('list-category', 'Admin\CategoryController@show_category')->name('list.category');
+    Route::get('get-category', 'Admin\CategoryController@get_category')->name('get.category');
+    Route::get('edit-category/{category}', 'Admin\CategoryController@edit_category')->name('edit.category');
+    Route::post('update-category', 'Admin\CategoryController@update_category')->name('update.category');
+    Route::get('delete-/{id}', 'Admin\CategoryController@delete_category')->name('delete.category');
+
+
+
 });
 
 

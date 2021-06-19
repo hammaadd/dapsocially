@@ -18,7 +18,7 @@ class ProfileController extends Controller
     }
     public function profileSetting(){
         $messages="";
-     
+
         return view('admin.content.adminprofile',compact('messages'));
 
     }
@@ -28,26 +28,26 @@ class ProfileController extends Controller
             'newpassword' => 'required|min:8|different:password',
             'confirmpassword' => 'required|min:8|same:newpassword'
             ]);
-            
+
         $old_password=$request->currentpassword;
         $new_password=$request->newpassword;
         $confirm_password=$request->confirmpassword;
         $hashedPassword=Auth::user()->password;
         $message="";
         if (Hash::check($old_password, $hashedPassword)) {
-            
+
                 $new_password=Hash::make($new_password);
                 User::where('id',Auth::user()->id)->update(['password' => $new_password]);
-            Session::flash('message', 'Password Changed suucessfully!'); 
-               
+            Session::flash('message', 'Password Changed suucessfully!');
+
         }
         else {
-            Session::flash('error', 'Password does not change. Cuurent password not matched'); 
-            
+            Session::flash('error', 'Password does not change. Cuurent password not matched');
+
         }
 
         return back();
-        
+
 
     }
     public function update_profile(Request $request){
@@ -61,18 +61,18 @@ class ProfileController extends Controller
                 $request->img->move(public_path("admin/profile"),$newImagename);
                 File::delete(public_path('admin/profile/'.$request->path));
                 User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail,"image"=>$newImagename]);
-                
+
                 Session::flash('message', 'profile Updated succesfully');
                 return back();
-                
+
             }
             else{
                 User::where('id',Auth::user()->id)->update(['name' => $request->uname,'email'=>$request->mail]);
                 Session::flash('message', 'Profile updated succesfully');
                 return back();
-                
+
             }
-            
+
 
     }
 }
