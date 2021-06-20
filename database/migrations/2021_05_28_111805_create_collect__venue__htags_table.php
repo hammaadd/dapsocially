@@ -15,9 +15,7 @@ class CreateCollectVenueHtagsTable extends Migration
     {
         Schema::create('collect__venue__htags', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger('account_id')->nullable();
-            $table->foreign('account_id')->references('id')->on('attached__accounts')->onDelete('set null');
+            $table->string('account_name');
             $table->unsignedBigInteger('venue_id')->nullable();
             $table->foreign('venue_id')->references('id')->on('venues')->onDelete('set null');
             $table->timestamps();
