@@ -1,5 +1,5 @@
 @extends('visitor.layout.visitorLayout')
-@section('title','Events')
+@section('title','Venues')
 @section('content')
 @include('users.inc.nav')
 <main>
@@ -10,8 +10,8 @@
             </div>
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                 <p class="text-white">
-                    <span class="px-16 py-4 border-2 border-white text-2xl uppercase block w-1/2 text-center">Events</span><br>
-                    Find the latest events updates or create events, concerts,
+                    <span class="px-16 py-4 border-2 border-white text-2xl uppercase block w-1/2 text-center">Venues</span><br>
+                    Find the latest venues updates or create venues for concerts,
                     conferences, workshops, exhibitions and cultural events
                     in all cities of United States.
                 </p>
@@ -63,7 +63,7 @@
     </div>
 
     <section class="py-10 max-w-7xl mx-auto">
-        <form action="{{route('search.event')}}" method="POST">
+        <form action="{{route('search.venue')}}" method="POST">
             @csrf
             <div class="flex space-x-8 justify-center items-end">
                 <label for="keyword" class=" w-4/12">
@@ -81,7 +81,7 @@
                 </label>
                 <label for="activity" class=" w-3/12">
                     ACTIVITY
-                    <select name="" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+                    <select name="city" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         <option>Select Activity</option>
                         <option>Activity 1</option>
                         <option>Activity 2</option>
@@ -96,34 +96,34 @@
 
         <div class=" max-w-7xl mx-auto pt-10">
             <div class="masonry md:cols--3 lg:cols--4">
-                @foreach ($events as $event)
+                @foreach ($venues as $venue)
                 <div class="masonry-item">
                     <div class="masonry-content">
                         <div class="relative">
-                            <img class=" rounded-lg" src="{{asset('Users/EventImages/'.$event->c_image)}}" alt="Event Image">
+                            <img class=" rounded-lg" src="{{asset('Users/VenueImages/'.$venue->c_image)}}" alt="Event Image">
                             <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                         </div>
-                        <div class="pl-4 pt-2 pr-4 pb-2 ">
+                        <div class="pl-4 pt-2 pr-4 pb-2">
                             <h4>
-                                <b>{{$event->event_name}}</b>
+                                <b>{{$venue->venue_name}}</b>
                             </h4>
                         </div>
                         <div class="pb-4 pl-4 pr-4">
                             <p>
-                                {{$event->e_description}}
+                                {{$venue->v_description}}
                             </p>
                         </div>
                         <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
                             <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                                <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$event->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                                <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$venue->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                                 <div class="pl-2">
-                                    <p class="font-medium">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->name}}</p>
-                                    <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
+                                    <p class="font-medium">{{App\Models\User::where('id','=',$venue->created_by)->get()[0]->name}}</p>
+                                    <p class="text-xs">{{App\Models\User::where('id','=',$venue->created_by)->get()[0]->account_type}}</p>
                                 </div>
 
                             </div>
                             <div>
-                                <i class="far fa-clock"></i><span class="text-sm pl-2"> {{ date('h:i A', strtotime($event->start_time))}}</span>
+                                <i class="far fa-clock"></i><span class="text-sm pl-2"> {{ date('h:i A', strtotime($venue->start_time))}}</span>
                             </div>
                         </div>
                     </div>
@@ -521,8 +521,9 @@
                 </div> --}}
             </div>
 
+
             <div class="w-full text-center py-10">
-                <a href="{{route('load.events')}}" class="bg-transparent text-blue-550 uppercase px-5 py-2 border-2 border-blue-550 rounded-3xl hover:bg-blue-550 hover:text-white mx-3">Load More</a>
+                <a href="{{route('load.venues')}}" class="bg-transparent text-blue-550 uppercase px-5 py-2 border-2 border-blue-550 rounded-3xl hover:bg-blue-550 hover:text-white mx-3">Load More</a>
             </div>
         </div>
     </section>
