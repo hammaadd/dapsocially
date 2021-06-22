@@ -40,7 +40,10 @@ class CategoryController extends Controller
                     ->addColumn('action', function($row){
 
                            $btn = '<a href="'.route('edit.category',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
+
                            <a href="'.route('delete.category',$row).'" onclick="return confirm(\'Do you really want to delete the Adds\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+
+
 
                             ';
 

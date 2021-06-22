@@ -65,7 +65,7 @@
 
                         <p>
                             @if (Route::has('password.request'))
-                                <a class="font-bold" href="#">Forgot password?</a>.
+                                <a class="font-bold" href="{{route('password.request')}}">Forgot password?</a>.
                             @endif
                         </p>
 
