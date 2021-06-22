@@ -11,14 +11,11 @@ use App\Models\Location;
 use App\Models\EventImages;
 use App\Models\Order;
 use App\Models\Payment_Plans;
-use App\Models\User;
 use App\Models\User\Collect_Event_Htag;
-use App\Notifications\OrdersNotifications;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 
 class EventController extends Controller
 {
@@ -130,20 +127,8 @@ class EventController extends Controller
         $odr->event_id=$event->id;
         $odr->user_id=Auth::user()->id;
         $odr->total_payment=$p->price;
+        $odr->payment_plan_id=$request->plan;
         $odr->save();
-        User::where('id',Auth::user()->id)->update(['account_type'=>$p->name]);
-        $user =User::whereHas(
-            'roles', function($q){
-                $q->where('name', 'superadministrator');
-            }
-        )->get();
-
-        $details = [
-            'greeting' => 'Hi ',
-            'body' => 'A new Order is placed by user named '.Auth::user()->name.' ',
-            'thanks' => 'Thank you ',
-        ];
-        Notification::send($user, new OrdersNotifications($details));
         foreach ($request->h_tags as $h_tag) {
             $hashtag = new Collect_Event_Htag();
             $hashtag->account_name = $h_tag;
@@ -193,11 +178,33 @@ class EventController extends Controller
 
         $events = Event::all();
         $locations = Location::all();
+        $loc=[];
+        foreach($locations as $location ){
+            if (Arr::has($loc,$location->address)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->address,$location->address);
+
+               }
+        }
+        $locations=$loc;
         return view('users.content.events', compact('events', 'locations'));
     }
     public function my_events()
     {
         $locations = Location::all();
+        $loc=[];
+        foreach($locations as $location ){
+            if (Arr::has($loc,$location->address)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->address,$location->address);
+
+               }
+        }
+        $locations=$loc;
         $events = Event::where('created_by', '=', Auth::user()->id)->take(10)->get();
         return view('users.content.myevents',compact('locations','events'));
     }
@@ -205,6 +212,17 @@ class EventController extends Controller
     {
         $events = Event::where('created_by', '=', Auth::user()->id)->get();
         $locations = Location::all();
+        $loc=[];
+        foreach($locations as $location ){
+            if (Arr::has($loc,$location->address)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->address,$location->address);
+
+               }
+        }
+        $locations=$loc;
         return view('users.content.myevents', compact('events', 'locations'));
     }
     public function search_my_Event(Request $request)
@@ -225,7 +243,18 @@ class EventController extends Controller
 
 
     }
-        $locations = Location::all();
+    $locations = Location::all();
+    $loc=[];
+    foreach($locations as $location ){
+        if (Arr::has($loc,$location->address)) {
+
+           }
+           else{
+            $loc=Arr::add($loc,$location->address,$location->address);
+
+           }
+    }
+    $locations=$loc;
         return view('users.content.myevents', compact('events', 'locations'));
     }
     public function delete_myevent(Event $event)
@@ -251,9 +280,9 @@ class EventController extends Controller
 
         $locations=Location::all();
         $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
-
-
-        return view('users.content.editevents',compact('event','event_htags','locations'));
+        $odr=Order::where('venue_id',$event->id)->get();
+        $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
+        return view('users.content.editevents',compact('event','event_htags','locations','payment_details'));
 
 
     }
@@ -302,16 +331,7 @@ class EventController extends Controller
                 'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 
             }
-            // if(!is_null($request->longitude && $request->latitude))
-            // {
-
-            //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address,'lng'=>$request->longitude,'lat'=>$request->latitude]);
-            // }
-            // else{
-            //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address]);
-            // }
-
-            $vTags=Collect_Event_Htag::where('event_id',$event->id)->get();
+            $vTags=Collect_Event_Htag::where('event_id',$event->social_posts)->get();
             foreach($vTags as $vTag){
                 $vTag->delete();
 
@@ -327,9 +347,18 @@ class EventController extends Controller
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 
 
-            return redirect()->route('my.venues');
+            return redirect()->route('my.events');
+            // if(!is_null($request->longitude && $request->latitude))
+            // {
+
+            //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address,'lng'=>$request->longitude,'lat'=>$request->latitude]);
+            // }
+            // else{
+            //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address]);
+            // }
 
 
 
+
+        }
     }
-}

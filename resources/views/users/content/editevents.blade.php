@@ -256,7 +256,6 @@ else {
 
                                     @endforeach
                                 @endif
-
                             </ul>
                             @error('h_tags') <small class="text-red-600">Please select altleast one scoial media account</small>@enderror
                         </div>

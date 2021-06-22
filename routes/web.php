@@ -18,8 +18,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'Visitor\HomeController@index')->name('homepage');
 Route::post('search', 'Visitor\HomeController@search')->name('search');
+
 Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
 Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
+
 Route::get('signin', function () {
     return view('visitor.content.signin');
 })->name('signin');

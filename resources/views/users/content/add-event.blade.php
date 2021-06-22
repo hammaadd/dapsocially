@@ -282,12 +282,15 @@ else {
                             <label for="vname">
                                 Starts at <span class="text-red-600">*</span>
                                 <div class="flex">
+
                                     <input type="date" name="s_date" class="input---field rounded-r-none rounded-l-md" value="{{old('s_date')}}">
                                     <input type="time" name="s_time" class="input---field rounded-l-none rounded-r-md" value="{{old('s_time')}}">
                                 </div>
                                 <div class="flex">
                                 @error('s_date') <small class="text-red-600">Enter start date  properly </small>@enderror
                                 <div class="ml-16">  @error('s_time') <small class="text-red-600">Enter start  time properly </small>@enderror</div>
+
+
                                   </div>
 
                             </label>
@@ -297,6 +300,7 @@ else {
                             <label for="location">
                                 Ends at <span class="text-red-600">*</span>
                                 <div class="flex">
+
                                     <input type="date" name="e_date" class="input---field rounded-r-none rounded-l-md" value="{{old('e_date')}}">
                                     <input type="time" name="e_time" class="input---field rounded-l-none rounded-r-md" value="{{old('e_time')}}">
                                 </div>
@@ -304,7 +308,11 @@ else {
                             <div class="flex">
                             @error('e_date') <small class="text-red-600">Enter end date properly </small>@enderror
                             <div class="ml-16">  @error('e_time') <small class="text-red-600">Enter end time properly </small>@enderror</div>
-                            </div>
+
+
+                                </div>
+
+
                         </div>
                         </div>
 
@@ -327,10 +335,10 @@ else {
                                 </div>
 
                                 @else --}}
-                                <div class="flex flex-wrap overflow-hidden flex-col items-center p-4 shadow-md rounded-xl bg-white"
-                                    :class="{'bg-blue-450': isPkg === {{$plans->id}} }">
-                                    <p class="uppercase text-lg text-center font-medium"
-                                        :class="{'text-white': isPkg === {{$plans->id}} }">{{$plans->name}}</p>
+
+                                <div class="flex flex-wrap overflow-hidden flex-col items-center p-4 shadow-md rounded-xl bg-white"  :class="{'bg-blue-450': isPkg === {{$plans->id}} }">
+
+                                    <p class="uppercase text-lg text-center font-medium" :class="{'text-white': isPkg === {{$plans->id}} }">{{$plans->name}}</p>
                                     <img src="{{asset('assets/Group 392.png')}}" class="mt-3" alt="">
                                     <hr class="w-3/5 mx-auto border-gray-900 my-3"
                                     :class="{'border-white': isPkg === {{$plans->id}} }">

@@ -90,6 +90,7 @@
                 </label>
                 <div class="lg:w-2/12 xl:w-1/12">
                     <input type="submit" value="SEARCH" class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
+
                 </div>
             </div>
         </form>

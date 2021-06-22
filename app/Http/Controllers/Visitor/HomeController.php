@@ -98,8 +98,18 @@ class HomeController extends Controller
 
                }
         }
+        $venuecontent=Content::where('key','venues')->first();
+        $eventcontent=Content::where('key','events')->first();
+        $platform=Content::where('key','platforms')->first();
+
+        $contents=[
+            'venuec'=>$venuecontent,
+            'eventc'=>$eventcontent,
+            'platform'=>$platform,
+
+        ];
         $locations=$loc;
-        return view('visitor.content.main',compact('events','venues','locations'));
+        return view('visitor.content.main',compact('events','venues','locations','contents'));
 
 
     }
