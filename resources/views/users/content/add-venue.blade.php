@@ -306,7 +306,8 @@
                                         <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]"
                                             value="twitter">
                                         <label for="cb3" class="cb-label">
-                                            <img src="{{ asset('assets/twitter.png') }}" class="w-10 h-10 mx-auto" alt="">
+                                            <img src="{{ asset('assets/twitter.png') }}" class="w-10 h-10 mx-auto"
+                                                alt="">
                                             <p class="text-add pt-4 text-sm">Add</p>
                                             <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                         </label>
@@ -332,60 +333,75 @@
                             <div class="w-full overflow-hidden md:mt-2 md:px-2 lg:mt-3 lg:px-3 xl:mt-3 xl:px-3">
                                 <p>Collect Posts from your Profile Pages? <span class="text-red-600">*</span></p>
                             </div>
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
                             <div
-                                class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
+                                class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="fb" name="c_posts[]" checked>
+                                    <input type="checkbox" class="cb-input hidden" id="fb" name="c[]" value="facebook">
                                     <label for="fb" class="cb--label">
                                         <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="p_fb" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*">
+                                <input type="text" name="i_fb" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" value="{{old('i_fb')}}">
 
                             </div>
+                            @error('c') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
-                                class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
+                                class="flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="insta" name="c_posts[]">
+                                    <input type="checkbox" class="cb-input hidden" id="insta" name="c[]" value="insta">
                                     <label for="insta" class="cb--label">
                                         <img src="{{ asset('assets/Insta.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="p_insta" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*">
+                                <input type="text" name="i_insta" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" value="{{old('i_insta')}}">
                             </div>
+                            @error('c') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
-                                class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
+                                class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c_posts[]">
+                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter">
                                     <label for="twitter" class="cb--label">
                                         <img src="{{ asset('assets/twitter.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="p_tw" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*">
+                                <input type="text" name="i_twitter" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" value="{{old('i_twitter')}}">
                             </div>
+                            @error('c') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
-                                class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
+                                class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="tiktok" name="c_posts[]">
+                                    <input type="checkbox" class="cb-input hidden" id="tiktok" name="c[]"   value="tiktok">
                                     <label for="tiktok" class="cb--label">
                                         <img src="{{ asset('assets/tiktok.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="p_tik" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*">
+                                <input type="text" name="i_tiktok" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" value="{{old('i_tiktok')}}">
 
-                                @error('h_tag[]') <small class="text-red-600">Please add atleast one social platform to add
-                                    posts</small>@enderror
+
                             </div>
+                            @error('c') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
 
 
                         </div>
+                        @error('c_tiktok') <small class="text-red-600">Please select atleast one platform</small>@enderror
+                        @error('c_twitter') <small class="text-red-600">Please select atleast one platform</small>@enderror
+                        @error('c_insta') <small class="text-red-600">Please select atleast one platform</small>@enderror
+                        @error('c_fb') <small class="text-red-600">Please select atleast one platform</small>@enderror
                         <div class="ml-4">
                             @error('p_fb') <small class="text-red-600">Please add your public page id or
                                 post</small>@enderror
@@ -506,7 +522,7 @@
 
                                     <p class="bg-transparent text-blue-550 px-4 py-1.5 border-2 border-blue-550 rounded-3xl hover:text-white hover:bg-blue-550 "
                                         :class="{'hover:border-white hover:text-white bg-white': isPkg === {{ $plans->id }} }"
-                                        @click="isPkg = {{ $plans->id }} , message='{{$plans->id}}'">Choose</p>
+                                        @click="isPkg = {{ $plans->id }} , message='{{ $plans->id }}'">Choose</p>
 
                                 </div>
                             @endforeach
@@ -557,26 +573,25 @@
 @endsection
 @section('bodyExtra')
 
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>
-   @if(Session::has('message'))
-     toastr.options =
-     {
-       "closeButton" : true,
-       "progressBar" : true
-     }
-         toastr.success("{{ session('message') }}");
- @endif
- @if(Session::has('error'))
-     toastr.options =
-     {
-       "closeButton" : true,
-       "progressBar" : true
-     }
-         toastr.warning("{{ session('error') }}");
- @endif
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        @if (Session::has('message'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if (Session::has('error'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.warning("{{ session('error') }}");
+        @endif
+    </script>
 @endsection

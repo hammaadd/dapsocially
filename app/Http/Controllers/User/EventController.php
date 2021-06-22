@@ -11,11 +11,14 @@ use App\Models\Location;
 use App\Models\EventImages;
 use App\Models\Order;
 use App\Models\Payment_Plans;
+use App\Models\User;
 use App\Models\User\Collect_Event_Htag;
+use App\Notifications\OrdersNotifications;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class EventController extends Controller
 {
@@ -129,6 +132,19 @@ class EventController extends Controller
         $odr->total_payment=$p->price;
         $odr->payment_plan_id=$request->plan;
         $odr->save();
+        User::where('id',Auth::user()->id)->update(['account_type'=>$p->name]);
+        $user =User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'superadministrator');
+            }
+        )->get();
+
+        $details = [
+            'greeting' => 'Hi ',
+            'body' => 'A new Order is placed by user named '.Auth::user()->name.' ',
+            'thanks' => 'Thank you ',
+        ];
+        Notification::send($user, new OrdersNotifications($details));
         foreach ($request->h_tags as $h_tag) {
             $hashtag = new Collect_Event_Htag();
             $hashtag->account_name = $h_tag;
@@ -262,16 +278,19 @@ class EventController extends Controller
         $del=Event::find($event->id);
         if(!is_null(public_path('Users/EventImages/'.$event->c_image))){
             File::delete(public_path('Users/EventImages/'.$event->c_image));
+
         }
         if(!is_null(public_path('Users/EventImages/'.$event->wall_bg_image))){
             File::delete(public_path('Users/EventImages/'.$event->wall_bg_image));
+
         }
 
-        $del->delete();
+
         if(!is_null(Event_Social_Post::find($event->social_posts))){
         $del=Event_Social_Post::find($event->social_posts);
         $del->delete();
         }
+        $del->delete();
         return back();
     }
 
@@ -280,9 +299,11 @@ class EventController extends Controller
 
         $locations=Location::all();
         $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
-        $odr=Order::where('venue_id',$event->id)->get();
+        $odr=Order::where('event_id',$event->id)->first();
+
         $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
-        return view('users.content.editevents',compact('event','event_htags','locations','payment_details'));
+        $P_plans=Payment_Plans::all();
+        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans'));
 
 
     }
@@ -292,7 +313,7 @@ class EventController extends Controller
         $request->validate([
             'ename' => 'required',
             'e_descrip' => 'required',
-
+            'plan'=>'required',
             // 'country' => 'required',
             'location'=>'required',
             // 'locality'=>'required',
@@ -315,6 +336,7 @@ class EventController extends Controller
                 $coverImagename=$request->file('cover_img');
                 $coverImagename=str_replace(' ','',time().'-'.$coverImagename->getClientOriginalName());
                 File::delete(public_path('Users/EventImages/'.$event->c_image));
+
                 $request->cover_img->move(public_path("Users/EventImages"),$coverImagename);
 
                 Event::where('id',$event->id)->update(['c_image' => $coverImagename,'event_name'=>$request->ename,'e_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
@@ -331,8 +353,10 @@ class EventController extends Controller
                 'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 
             }
-            $vTags=Collect_Event_Htag::where('event_id',$event->social_posts)->get();
+            $vTags=Collect_Event_Htag::where('event_id',$event->id)->get();
+
             foreach($vTags as $vTag){
+
                 $vTag->delete();
 
             }
@@ -343,6 +367,8 @@ class EventController extends Controller
                $hashtag->save();
 
             }
+            $plans=Payment_Plans::where('id',$request->plan)->first();
+            Order::where('event_id',$event->id)->update(['account_type'=>$plans->name,'payment_plan_id'=>$request->plan,'total_payment'=>$plans->price]);
             Event::where('id',$event->id)->update(['event_name'=>$request->ename,'e_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 

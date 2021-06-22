@@ -20,7 +20,7 @@
                     <select name="location" id="location" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         @foreach ($locations as $location)
 
-                                    <option value="{{$location->address}}" >{{$location->address}}</option>
+                                    <option value="{{$location}}" >{{$location}}</option>
                         @endforeach
                     </select>
                 </label>

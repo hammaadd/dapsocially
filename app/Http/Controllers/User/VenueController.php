@@ -51,11 +51,27 @@ class VenueController extends Controller
 
     public function add_venue(Request $request)
     {
+        dd($request->c);
         $request->validate([
             'vname' => 'required',
             'e_descrip' => 'required',
             'cover_img' => 'required',
             'country' => 'required',
+            'plan'=>'required',
+            'c' => 'required',
+            // 'i_fb'       => 'required_with:c_fb,on',
+            // 'c_tiktok' => 'sometimes',
+            // 'i_tiktok'       => 'required_with:c_tiktok,on',
+            // 'c_insta' => 'sometimes',
+            // 'i_insta'       => 'required_with:c_insta,on',
+            // 'c_twitter' => 'sometimes',
+            // 'i_twitter'       => 'required_with:c_twitter,on',
+
+
+            // 'c_fb' => 'required_unless:c_twitter,on,required_unless:c_insta,on,required_unless:c_tiktok,on',
+
+            // 'c_tiktok' => 'required_unless:c_twitter,on,required_unless:c_insta,on,required_unless:c_fb,on',
+
 
             'loc_address' => 'required',
             'locality' => 'required',
@@ -120,7 +136,6 @@ class VenueController extends Controller
         $odr->order_status="Pending";
         $odr->account_type=$p->name;
         $odr->venue_id=$venue->id;
-
         $odr->user_id=Auth::user()->id;
         $odr->total_payment=$p->price;
         $odr->payment_plan_id=$request->plan;
@@ -187,6 +202,18 @@ class VenueController extends Controller
                 }
             }
         }
+        $locations = Location::all();
+    $loc=[];
+    foreach($locations as $location ){
+        if (Arr::has($loc,$location->address)) {
+
+           }
+           else{
+            $loc=Arr::add($loc,$location->address,$location->address);
+
+           }
+    }
+    $locations=$loc;
 
 
     //     $venues=[];
@@ -222,7 +249,7 @@ class VenueController extends Controller
     // }
 
 
-        $locations = Location::all();
+
         return view('users.content.myvenues', compact('venues', 'locations'));
     }
     public function search_Venue(Request $request)
@@ -310,37 +337,24 @@ public function load_my_venues()
     public function delete_myvenue(Venue $venue)
     {
 
-        $del = Venue::find($venue->id);
-        if (!is_null(public_path('Users/VenueImages/' . $venue->c_image))) {
-            File::delete(public_path('venues/VenueImages/' . $venue->c_image));
-        }
-        if (!is_null(public_path('Users/VenueImages/' . $venue->c_image))) {
-            File::delete(public_path('Users/VenueImaVenue' . $venue->wall_bg_image));
-        }
 
-        $del->delete();
-        $vTags = Collect_Venue_Htag::where('venue_id', $venue->social_posts)->get();
-        if (!is_null(Collect_Venue_Htag::where('venue_id', $venue->social_posts)->get())) {
-            foreach ($vTags as $vTag) {
-                $vTag->delete();
-            }
-        }
         $del=Venue::find($venue->id);
         if(!is_null(public_path('Users/VenueImages/'.$venue->c_image))){
             File::delete(public_path('venues/VenueImages/'.$venue->c_image));
         }
-        if(!is_null(public_path('Users/VenueImages/'.$venue->c_image)))
+        if(!is_null(public_path('Users/VenueImages/'.$venue->wall_bg_image)))
         {
             File::delete(public_path('Users/VenueImaVenue'.$venue->wall_bg_image));
         }
 
-        $del->delete();
+
         $vTags=Collect_Venue_Htag::where('venue_id',$venue->social_posts)->get();
         if(!is_null(Collect_Venue_Htag::where('venue_id',$venue->social_posts)->get())){
         foreach($vTags as $vTag){
                 $vTag->delete();
             }
         }
+        $del->delete();
         return back();
     }
     // public function edit_vavenueenue(Venue $venue)
@@ -355,11 +369,13 @@ public function load_my_venues()
 
         $location = Location::where('id', '=', $venue->location_id)->first();
         $venue_htags = Collect_Venue_Htag::where('venue_id', '=', $venue->id)->get();
-        $odr=Order::where('venue_id',$venue->id)->get();
+        $odr=Order::where('venue_id',$venue->id)->first();
+
         $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
+        $P_plans=Payment_Plans::all();
+        return view('users.content.editvenue',compact('venue','venue_htags','location','payment_details','P_plans'));
 
 
-        return view('users.content.editvenue', compact('venue', 'location', 'venue_htags','payment_details'));
     }
     // public function update_venue(Request $request, Venue $venue)
     // {
@@ -410,7 +426,7 @@ public function load_my_venues()
             'state'=>'required',
             'h_tag'=>'required',
            'm_dap_wall'=>'required',
-
+           'plan'=>'required',
            's_date'=>'required',
            's_time'=>'required',
            'e_date'=>'required',
@@ -451,7 +467,7 @@ public function load_my_venues()
                 Location::where('id',$venue->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address]);
             }
 
-            $vTags=Collect_Venue_Htag::where('venue_id',$venue->social_posts)->get();
+            $vTags=Collect_Venue_Htag::where('venue_id',$venue->id)->get();
             foreach($vTags as $vTag){
                 $vTag->delete();
 
@@ -463,6 +479,8 @@ public function load_my_venues()
                $hashtag->save();
 
             }
+            $plans=Payment_Plans::where('id',$request->plan)->first();
+            Order::where('venue_id',$venue->id)->update(['account_type'=>$plans->name,'payment_plan_id'=>$request->plan,'total_payment'=>$plans->price]);
             Venue::where('id',$venue->id)->update(['venue_name'=>$request->vname,'v_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id]);
 
