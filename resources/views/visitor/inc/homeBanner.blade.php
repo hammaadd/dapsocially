@@ -22,6 +22,8 @@
                     </div>
                     @if (!Auth::user())
                     <a href="{{route('signin')}}" class="btn-login">Login</a>
+                    @elseif (Auth::user())
+                    <a href="{{route('my.account')}}" class="btn-login">My Account</a>
                     @endif
 
                     <form action="#" class=" w-44">
@@ -39,12 +41,9 @@
             </nav>
             <div class="flex flex-wrap overflow-hidden max-w-7xl mx-auto h-5/6">
                 <div class="w-full md:w-1/2 overflow-hidden flex justify-center text-white flex-col pl-5">
-                    <h2 class="font-bold text-4xl uppercase">Dapsocially locations wall</h2>
-                    <p class=" text-2xl">FREE</p>
-                    <p class="text-3xl font-bold">SOCIAL MEDIA FEED</p>
-                    <p class="text-2xl font-light text-gray-300"><span class="font-normal">DAPSOCIALLY</span> is a simple way to collect all your events
-                        and venues social media post into a single amazing
-                        social media feed.
+                    <h2 class="font-bold text-4xl uppercase">{{ (App\Models\Content::where('key','dapintro')->first())->heading}}</h2>
+
+                    <p class="text-2xl font-light text-gray-300"> {!! (App\Models\Content::where('key','dapintro')->first())->content!!}
                     </p>
                     <div class="pt-10">
                         <a href="{{route('add-event')}}" class="btn-add-event">ADD YOUR EVENT</a>

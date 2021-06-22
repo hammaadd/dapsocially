@@ -13,6 +13,10 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
 class AddsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
         return view('admin.content.imageadd');
 

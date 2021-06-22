@@ -75,7 +75,7 @@
                     <select name="location" id="location" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         @foreach ($locations as $location)
 
-                                    <option value="{{$location->address}}" >{{$location->address}}</option>
+                                    <option value="{{$location}}" >{{$location}}</option>
                         @endforeach
                     </select>
                 </label>
@@ -101,7 +101,7 @@
                     <div class="masonry-content">
                         <div class="relative">
                             <img class=" rounded-lg" src="{{asset('Users/EventImages/'.$event->c_image)}}" alt="Event Image">
-                            <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                            {{-- <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt=""> --}}
                         </div>
                         <div class="pl-4 pt-2 pr-4 pb-2 ">
                             <h4>

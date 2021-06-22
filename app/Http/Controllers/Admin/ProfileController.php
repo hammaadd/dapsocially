@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\User\Attached_Account;
 
 class ProfileController extends Controller
 {

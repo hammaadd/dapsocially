@@ -103,49 +103,49 @@ $("#wall_image").change(function(){
 });
 
 
-$("#e_descrip").on('keyup', function(e) {
-
-    var words = 0;
-
-    if ((this.value.match(/\S+/g)) != null) {
-      words = this.value.match(/\S+/g).length;
-    }
-
-    if (words > 20) {
-        e.preventDefault();
-      // Split the string on first 200 words and rejoin on spaces
-      var trimmed = $(this).val().split(/\s+/, 200).join(" ");
-      // Add a space at the end to make sure more typing creates new words
-      $(this).val(trimmed + " ");
-
-    }
-    else {
-      $('#display_count').text(words);
-      //$('#word_left').text(200-words);
-    }
-  });
-
 $("#m_dap_wall").on('keyup', function(e) {
 
-    var words = 0;
+var wordss = 0;
 
-    if ((this.value.match(/\S+/g)) != null) {
-      words = this.value.match(/\S+/g).length;
-    }
+if ((this.value.match(/\S+/g)) != null) {
+  wordss = this.value.match(/\S+/g).length;
+}
 
-    if (words > 20) {
-        e.preventDefault();
-      // Split the string on first 200 words and rejoin on spaces
-      var trimmed = $(this).val().split(/\s+/, 200).join(" ");
-      // Add a space at the end to make sure more typing creates new words
-      $(this).val(trimmed + " ");
+if (wordss > 20) {
+    e.preventDefault();
+  // Split the string on first 200 words and rejoin on spaces
+  var trimmed = $(this).val().split(/\s+/, 20).join(" ");
+  // Add a space at the end to make sure more typing creates new words
+  $(this).val(trimmed + " ");
 
-    }
-    else {
-      $('#w_counter').text(words);
-      //$('#word_left').text(200-words);
-    }
-  });
+}
+else {
+  $('#w_counter').text(wordss);
+  //$('#word_left').text(200-words);
+}
+});
+
+$("#e_descrip").on('keyup', function(e) {
+
+var words = 0;
+
+if ((this.value.match(/\S+/g)) != null) {
+  words = this.value.match(/\S+/g).length;
+}
+
+if (words > 20) {
+    e.preventDefault();
+  // Split the string on first 200 words and rejoin on spaces
+  var trimmed = $(this).val().split(/\s+/, 20).join(" ");
+  // Add a space at the end to make sure more typing creates new words
+  $(this).val(trimmed + " ");
+
+}
+else {
+  $('#display_count').text(words);
+  //$('#word_left').text(200-words);
+}
+});
 
 });
 
@@ -159,11 +159,11 @@ $("#m_dap_wall").on('keyup', function(e) {
 <main>
 
     <section class="page-title bg-white py-5 shadow-md">
-        <h2 class="uppercase text-center text-xl font-medium">Add Your Venue</h2>
+        <h2 class="uppercase text-center text-xl font-medium">Edit Your Venue</h2>
     </section>
 
     <section class="py-10 max-w-5xl mx-auto">
-        <form action="{{route('add.venue')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('update.venue',$venue)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full">
@@ -265,6 +265,9 @@ $("#m_dap_wall").on('keyup', function(e) {
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <p class="">Where would you like to collect social media hashtags from?</p>
                             <ul class="list-none pt-3">
+
+                                @foreach ($venue_htags as $htags)
+                                @if ($htags->account_name=='facebook')
                                 <li class="inline-block mx-2">
                                     <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" checked >
                                     <label for="cb1" class="cb-label">
@@ -273,30 +276,40 @@ $("#m_dap_wall").on('keyup', function(e) {
                                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                     </label>
                                 </li>
+                                @endif
+                                @if ($htags->account_name=='instagram')
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram">
+                                    <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram" checked>
                                     <label for="cb2" class="cb-label">
                                         <img src="{{asset('assets/Insta.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
                                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                     </label>
                                 </li>
+                                @endif
+                                @if ($htags->account_name=='twitter')
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter">
+                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter" checked>
                                     <label for="cb3" class="cb-label">
                                         <img src="{{asset('assets/twitter.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
                                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                     </label>
                                 </li>
+                                @endif
+                                @if ($htags->account_name=='tiktok')
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok">
+                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok" checked>
                                     <label for="cb4" class="cb-label">
                                         <img src="{{asset('assets/tiktok.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
                                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                     </label>
                                 </li>
+                                @endif
+
+                                @endforeach
+
                             </ul>
                             @error('h_tags') <small class="text-red-600">Please select altleast one scoial media account</small>@enderror
                         </div>
@@ -351,7 +364,7 @@ $("#m_dap_wall").on('keyup', function(e) {
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="description">
                                 Message for Dapsocially Locations Wall <span class="text-red-600">*</span>
-                                <textarea name="m_dap_wall" id="m_dap_wall" rows="3" placeholder="Write a Message for your Dapsocially Locations Wall*" class="input-field"></textarea>
+                                <textarea name="m_dap_wall" id="m_dap_wall" rows="3" placeholder="Write a Message for your Dapsocially Locations Wall*" class="input-field">{{$venue->wall_location_msg}}</textarea>
                             </label>
                             <small class="float-right px-3" id="w_counter">0/20</small>
                             @error('m_dap_wall') <small class="text-red-600">Please write a message for dapsocially wall</small>@enderror
@@ -380,8 +393,8 @@ $("#m_dap_wall").on('keyup', function(e) {
                             <label for="vname">
                                 Starts at <span class="text-red-600">*</span>
                                 <div class="flex">
-                                    <input type="date" id="s_date" name="s_date" class="input---field rounded-r-none rounded-l-md">
-                                    <input type="time" id="s_time" name="s_time" class="input---field rounded-l-none rounded-r-md">
+                                    <input type="date" id="s_date" name="s_date" class="input---field rounded-r-none rounded-l-md" value="{{$venue->start_date}}">
+                                    <input type="time" id="s_time" name="s_time" class="input---field rounded-l-none rounded-r-md" value="{{$venue->start_time}}">
                                 </div>
                                 <div class="flex">
                                 @error('s_date') <small class="text-red-600">Enter start date and time properly </small>@enderror
@@ -394,8 +407,8 @@ $("#m_dap_wall").on('keyup', function(e) {
                             <label for="location">
                                 Ends at <span class="text-red-600">*</span>
                                 <div class="flex">
-                                    <input type="date" id="e_date" name="e_date" class="input---field rounded-r-none rounded-l-md">
-                                    <input type="time" id="e_time" name="e_time" class="input---field rounded-l-none rounded-r-md">
+                                    <input type="date" id="e_date" name="e_date" class="input---field rounded-r-none rounded-l-md" value="{{$venue->end_date}}">
+                                    <input type="time" id="e_time" name="e_time" class="input---field rounded-l-none rounded-r-md" value="{{$venue->end_time}}">
 
                                 </div>
                                 <div class="flex">
@@ -454,7 +467,7 @@ $("#m_dap_wall").on('keyup', function(e) {
 
                         <div class="w-full text-center py-1">
                             <a href="#" class="bg-transparent text-blue-550 uppercase px-5 py-2 border-2 border-blue-550 rounded-3xl hover:bg-blue-550 hover:text-white mx-3">Cancel</a>
-                            <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white uppercase rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550 mx-3">Start</button>
+                            <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white uppercase rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550 mx-3">Update</button>
                         </div>
 
                       </div>

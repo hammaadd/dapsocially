@@ -29,7 +29,11 @@ class ContentController extends Controller
 
         ]);
         $table=new Content();
-        $table->key=$request->key;
+        $key = str_replace(' ', '', $request->key);
+        $key=str_replace(' ', '-', $key);
+        $key=preg_replace('/[^A-Za-z0-9\-]/', '', $key);
+
+        $table->key=$key;
         $table->heading=$request->heading;
         $table->content=$request->content;
         $table->save();

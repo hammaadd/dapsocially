@@ -1,5 +1,5 @@
 @extends('visitor.layout.visitorLayout')
-@section('title','Events')
+@section('title','My Accounts')
 @section('content')
 @include('users.inc.nav')
 <main>
@@ -22,24 +22,27 @@
 
                     @foreach ($venues as $venue)
                     <div class="relative">
-                        <img src="{{asset('Users/VenueImages/'.$venue->c_image)}}" class="h-96 object-cover" alt="">
+                        <img src="{{asset('Users/venueImages/'.$venue->c_image)}}" class="h-96 object-cover" alt="">
                         <div class="absolute w-full h-full bg-black bg-opacity-60 top-0 left-0">
-                            <div class="absolute top-0 right-10 bg-black bg-opacity-70 text-white text-center px-3 py-2">
+                            <div class="absolute top-0 left-10 bg-black bg-opacity-70 text-white text-center px-3 py-2">
                                 <p class="text-2xl font-bold">{{Illuminate\Support\Str::substr($venue->start_date, 8, 9)}}</p>
                                 <p class="text-base">{{DateTime::createFromFormat('!m', Illuminate\Support\Str::substr($venue->start_date, 6, -3))->format('F')}}</p>
                                 <p class="text-base">{{Illuminate\Support\Str::substr($venue->start_date, 0,4)}}</p>
                             </div>
-                            <div class="left-0 right-0 bottom-4 absolute text-white px-5">
-                                <a href="#" class="text-xl font-medium">{{$venue->venue_name}}</a>
-                                <p>
-                                    <span class="text-sm m-1">{{$venue->hashtag}}</span>
+                            <div class="left-0 right-0 bottom-4 absolute text-white px-5 flex flex-wrap items-center">
+                                <div class="w-3/4">
+                                    <a href="#" class="text-xl font-medium">{{$venue->venue_name}}</a>
+                                    <p><span class="text-sm m-1">{{$venue->hashtag}}</span></p>
+                                </div>
+                                <div class="w-1/4 flex justify-end items-center">
+                                    <a href="{{route('edit.venue',$venue)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white mr-2">EDIT</a>
 
-                                </p>
+                                    <a href="{{route('delete.my.venue',$venue)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white ">DELETE</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
-
 
 
                 </div>
@@ -82,7 +85,7 @@
                                     <p><span class="text-sm m-1">{{$event->hashtag}}</span></p>
                                 </div>
                                 <div class="w-1/4 flex justify-end items-center">
-                                    <a href="#" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white mr-2">EDIT</a>
+                                    <a href="{{route('edit.event',$event)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white mr-2">EDIT</a>
 
                                     <a href="{{route('delete.my.event',$event)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white ">DELETE</a>
                                 </div>

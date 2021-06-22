@@ -18,6 +18,7 @@ class CreateSliderMessagesTable extends Migration
             $table->string('key',191);
             $table->longText('message');
             $table->timestamps();
+
         });
     }
 

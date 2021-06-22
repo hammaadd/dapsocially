@@ -20,6 +20,8 @@ class CreateOrdersTable extends Migration
             $table->string('account_type',191)->default('Standard Account');
             $table->unsignedBigInteger('event_id')->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('set null');
+            $table->unsignedBigInteger('venue_id')->nullable();
+            $table->foreign('venue_id')->references('id')->on('venues')->onDelete('set null');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->unsignedBigInteger('total_payment');

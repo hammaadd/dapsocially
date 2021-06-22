@@ -7,17 +7,28 @@ use Illuminate\Http\Request;
 use App\Models\User\Event;
 use App\Models\User\Venue;
 use App\Models\Location;
+use App\Models\User\Attached_Account;
 use Illuminate\Support\Facades\Auth;
 class AccountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $account=Attached_Account::where('user_id',Auth::user()->id)->get();
+
+       if(count($account)<1){
         $events = Event::where('created_by', '=', Auth::user()->id)->take(6)->get();
         $venues=Venue::where('created_by', '=', Auth::user()->id)->take(3)->get();
         $locations=Location::all();
 
         return view('users.content.myaccount',compact('events','venues','locations'));
-
+       }
+       else{
+                return redirect()->route('attach.social.account');
+       }
     }
     public function search_Event(Request $request)
     {
@@ -42,5 +53,9 @@ class AccountController extends Controller
         $locations = Location::all();
         return view('users.content.events', compact('events', 'locations'));
 
+    }
+    public function attach_account()
+    {
+        return view('users.content.addsocialaccount');
     }
 }

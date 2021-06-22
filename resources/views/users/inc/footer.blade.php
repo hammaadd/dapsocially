@@ -6,17 +6,17 @@
                     <img src="{{asset('assets/logo.png')}}" alt="">
                 </a>
                 <p class="text-gray-300 pt-5">
-                    Dapsocially is a simple way to collect all your events and venues social media post into a single amazing social media feed.
+                    {{ (App\Models\Shortcode::where('key','dapfooter')->first())->content}}
                 </p>
             </div>
             <div class="w-full md:w-1/2 lg:w-2/12 text-white lg:px-8">
                 <h3 class="font-bold text-lg">Company</h3>
                 <ul class="pt-4 text-gray-300">
                     <li class="py-1"><a href="#" class="hover:text-white">Features</a></li>
-                    <li class="py-1"><a href="#" class="hover:text-white">Pricing</a></li>
+                    <li class="py-1"><a href="{{route('pricing')}}" class="hover:text-white">Pricing</a></li>
                     <li class="py-1"><a href="#" class="hover:text-white">Our Work</a></li>
                     <li class="py-1"><a href="#" class="hover:text-white">Developers</a></li>
-                    <li class="py-1"><a href="#" class="hover:text-white">About Us</a></li>
+                    <li class="py-1"><a href="{{route('about.us')}}" class="hover:text-white">About Us</a></li>
                 </ul>
             </div>
             <div class="w-full md:w-1/2 lg:w-2/12 text-white lg:px-8">

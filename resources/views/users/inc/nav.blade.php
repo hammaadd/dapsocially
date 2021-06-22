@@ -30,6 +30,8 @@
             <ul class="text-center text-white">
                 <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
                 <li class="py-1"><a href="{{ route('my.account') }}"class="text-xl">My Account</a></li>
+                <li class="py-1"><a href="{{ route('events') }}"class="text-xl">All Events</a></li>
+                <li class="py-1"><a href="{{ route('venue') }}"class="text-xl">All Venues</a></li>
                 <li class="py-1"><a href="{{route('add-event')}}" class="text-xl">Add Event</a></li>
                 <li class="py-1"><a href="{{route('add-venue')}}" class="text-xl">Add Venue</a></li>
                 <li class="py-1"><a href="{{ route('logout') }}"

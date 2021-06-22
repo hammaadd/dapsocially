@@ -24,12 +24,12 @@
             <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
         </div>
         <ul class="text-center text-white">
-            <li class="py-1"><a href="#" class="text-xl">Home</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Events</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Venues</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Get Started</a></li>
+                <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
+                <li class="py-1"><a href="{{route('events')}}" class="text-xl">Events</a></li>
+                <li class="py-1"><a href="{{route('venue')}}" class="text-xl">Venues</a></li>
+            <li class="py-1"><a href="{{route('signin')}}" class="text-xl">Get Started</a></li>
             <li class="py-2">
-                <a href="#" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
+                <a href="{{route('signin')}}" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
             </li>
         </ul>
         <hr class="w-4/5 mx-auto my-3 border-gray-400">

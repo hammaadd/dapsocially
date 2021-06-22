@@ -8,7 +8,7 @@
 
 
     <section class="py-10 max-w-7xl mx-auto">
-        <form action="{{route('search.my.event')}}" method="POST">
+        <form action="{{route('search.my.venue')}}" method="POST">
             @csrf
             <div class="flex space-x-8 justify-center items-end">
                 <label for="keyword" class=" w-4/12">

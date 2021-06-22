@@ -64,7 +64,7 @@
                                     <p><span class="text-sm m-1">{{$event->hashtag}}</span></p>
                                 </div>
                                 <div class="w-1/4 flex justify-end items-center">
-                                    <a href="#" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white mr-2">EDIT</a>
+                                    <a href="{{route('edit.event',$event)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white mr-2">EDIT</a>
 
                                     <a href="{{route('delete.my.event',$event)}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white ">DELETE</a>
                                 </div>

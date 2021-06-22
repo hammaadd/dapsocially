@@ -6,10 +6,13 @@
     <main class="max-w-6xl mx-auto">
         {{-- Social Plateforms Section --}}
         <section class="py-10">
-            <p class=" text-center uppercase font-medium text-xl">COLLECT Amazing Content From DIFFERENT Social Media Platforms</p>
+            @if(!is_null($contents['platform']))
+
+            <p class=" text-center uppercase font-medium text-xl">{{$contents['platform']->heading}}</p>
             <p class=" text-center text-gray-400 text-lg">Our Social feed can be used to collect social media content from various platforms like Twitter,<br>
                 Instagram, Facebook and Tiktok to give you unlimited flow of user-generated content
             </p>
+            @endif
             <div class=" flex flex-wrap overflow-hidden justify-around max-w-3xl mx-auto py-5">
                 <div class="text-center">
                     <div class="bg-white shadow rounded-full w-20 h-20 mx-auto grid place-items-center">
@@ -51,18 +54,18 @@
                         LOCATION
                         <select name="location" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             @foreach ($locations as $location)
-                            <option value="{{$location->address}}" >{{$location->address}}</option>
+                            <option value="{{$location}}" >{{$location}}</option>
                             @endforeach
                         </select>
                     </label>
-                    <label for="activity" class=" w-3/12">
+                    {{-- <label for="activity" class=" w-3/12">
                         CITIY
                         <select name="city" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             @foreach ($locations as $location)
                             <option value="{{$location->city}}" >{{$location->city}}</option>
                             @endforeach
                         </select>
-                    </label>
+                    </label> --}}
                     <div class="lg:w-2/12 xl:w-1/12">
                         <input type="submit" value="SEARCH" class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
                     </div>
@@ -72,11 +75,17 @@
 
         {{-- Venues Section --}}
         <section class="pt-4 pb-10">
-            <h3 class="section-title relative text-xl font-medium">VENUES</h3>
+            @if(!is_null($contents['venuec']))
+            <h3 class="section-title relative text-xl font-medium">
+
+                {{$contents['venuec']->heading}}
+           </h3>
             <p>
-                Discover the best things to do & events in United States. explore concerts, meetups,<br>
-                open mics, art shows, music events and a lot more.
+
+                {!!$contents['venuec']->content!!}
+
             </p>
+            @endif
             @if (count($venues) < 1)
             <div class="text-center w-full">  <h3 class=" mt-6  text-center text-xl font-medium">NO VENUES </h3></div>
             @else
@@ -116,11 +125,17 @@
         <section class="py-10">
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-3/5 pl-2">
-                    <h3 class="section-title relative text-xl font-medium">EVENTS</h3>
+                    @if(!is_null($contents['eventc']))
+                    <h3 class="section-title relative text-xl font-medium">
+
+                        {{$contents['eventc']->heading}}
+                   </h3>
                     <p>
-                        Discover the best things to do & events in United States. explore concerts, meetups,<br>
-                        open mics, art shows, music events and a lot more.
+
+                        {!!$contents['eventc']->content!!}
+
                     </p>
+                    @endif
                 </div>
                 <div class="w-full md:w-2/5 flex items-center justify-end">
                     <a href="{{route('events')}}" class="bg-blue-550 text-white py-1.5 px-3 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">VIEW ALL EVENTS</a>
@@ -148,7 +163,7 @@
                                 <p><span class="text-sm m-1">{{$event->hashtag}}</span></p>
                             </div>
                             <div class="w-1/4 flex justify-end items-center">
-                                <a href="#" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white">VIEW</a>
+                                <a href="{{route('events')}}" class="bg-white text-gray-900 py-1.5 px-4 rounded-3xl text-sm hover:bg-blue-550 hover:text-white">VIEW</a>
                             </div>
                         </div>
                     </div>

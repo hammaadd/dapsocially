@@ -24,13 +24,14 @@
             <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
         </div>
         <ul class="text-center text-white">
-            <li class="py-1"><a href="#" class="text-xl">Home</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Events</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Venues</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Get Started</a></li>
+           <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
+                <li class="py-1"><a href="{{route('events')}}" class="text-xl">Events</a></li>
+                <li class="py-1"><a href="{{route('venue')}}" class="text-xl">Venues</a></li>
+            <li class="py-1"><a href="{{route('signin')}}" class="text-xl">Get Started</a></li>
             <li class="py-2">
-                <a href="#" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
+                <a href="{{route('signup')}}" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">SIGNUP</a>
             </li>
+
         </ul>
         <hr class="w-4/5 mx-auto my-3 border-gray-400">
         <ul class="text-gray-300 text-center">
@@ -58,13 +59,13 @@
                         <span class="text-danger">@error('email'){{$message}}@enderror</span>
                         <div class="my-3 relative rounded-3xl" x-data="{ ptoggle: true}">
                             <input :type="ptoggle ? 'password' : 'text'" name="password" id="password" class="block w-full rounded-3xl border-gray-200 px-4 @error('password') is-invalid @enderror" placeholder="Password" required/>
-                            
+
                             <div class="absolute inset-y-0 right-0 pr-5 flex items-center">
                                 <span class="text-lg">
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
                                 </span>
                             </div>
-                            
+
                         </div>
                         @error('password')
                                     <span class=" text-danger" role="alert">
@@ -78,7 +79,7 @@
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
                                 </span>
                             </div>
-                              
+
                         </div>
                         @error('password_confirmation')
                             <span class=" text-danger" role="alert">

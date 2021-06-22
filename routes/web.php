@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'Visitor\HomeController@index')->name('homepage');
 Route::post('search', 'Visitor\HomeController@search')->name('search');
+Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
+Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
 Route::get('signin', function () {
     return view('visitor.content.signin');
 })->name('signin');
@@ -27,7 +29,7 @@ Route::get('signup', function () {
 
 
 // User Side
-
+Route::middleware(['auth'=>'role:user'])->group(function(){
 Route::get('profile', 'User\ProfileController@index')->name('profile');
 Route::get('my-account', 'User\AccountController@index')->name('my.account');
 Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
@@ -42,6 +44,7 @@ Route::get('delete_my-event/{event}','User\EventController@delete_myevent' )->na
 Route::get('more_venues','User\VenueController@load_more_venues' )->name('load.venues');
 Route::post('search-event','User\EventController@search_Event' )->name('search.event');
 Route::post('search-my-event','User\EventController@search_my_Event' )->name('search.my.event');
+Route::post('search-my-venue','User\VenueController@search_my_Venue' )->name('search.my.venue');
 
 Route::post('search-venue','User\VenueController@search_Venue' )->name('search.venue');
 Route::get('load-my-venues','User\VenueController@load_my_venues' )->name('load.my.venues');
@@ -49,10 +52,14 @@ Route::get('delete_my-venue/{venue}','User\VenueController@delete_myvenue' )->na
 Route::get('my-event','User\EventController@my_events' )->name('my.events');
 Route::get('my-venue','User\VenueController@my_venues' )->name('my.venues');
 Route::get('edit-venue/{venue}','User\VenueController@edit_vanue' )->name('edit.venue');
+Route::post('update-venue/{venue}','User\VenueController@update_venue' )->name('update.venue');
 
-Route::get('pricing', function () {
-    return view('users.content.pricing');
-})->name('pricing');
+Route::get('edit-event/{event}','User\EventController@edit_event' )->name('edit.event');
+Route::post('update-event/{event}','User\EventController@update_event' )->name('update.event');
+
+// Route::get('pricing', function () {
+//     return view('users.content.pricing');
+// })->name('pricing');
 
 Route::get('social-wall', function () {
     return view('users.content.social-wall');
@@ -60,6 +67,10 @@ Route::get('social-wall', function () {
 Route::post('/user-update-password', 'User\ProfileController@update_password')->name('user.update.password');
 Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
 
+Route::get('/attach-social-account', 'User\AccountController@attach_account')->name('attach.social.account');
+
+
+});
 
 Route::get('/admin/login', function () {
     if (!Auth::check()) {

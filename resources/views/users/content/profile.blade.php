@@ -6,7 +6,7 @@
 <script>
 
     $(document).ready(function(){
-       
+
     $("#select-img").click(function(e) {
      $("#imageUpload").click();
  });
@@ -47,18 +47,18 @@ $("#imageUpload").change(function(){
                                 <input type="text" id="uname" name="uname" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
                             </label>
                             <small class="text-red-600">@error('uname'){{$message}}@enderror</small>
-                            
+
                         </div>
-                        
+
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="email">
                                 Email
                                 <input type="email" id="mail" name="mail" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
                             </label>
                             <small class="text-red-600">@error('mail'){{$message}}@enderror</small>
-                            
+
                         </div>
-                        
+
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="dob">
@@ -66,10 +66,10 @@ $("#imageUpload").change(function(){
                                 <input type="date" id="dob" name="dob" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
                             </label>
                             <small class="text-red-600">@error('dob'){{$message}}@enderror</small>
-                            
-                        
+
+
                         </div>
-                        
+
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <label for="gender">
@@ -77,11 +77,11 @@ $("#imageUpload").change(function(){
                                 <select name="gender" id="gender" class="input-field">
                                     <option>Male</option>
                                     <option>Female</option>
-                                   
+
                                 </select>
                             </label>
                         </div>
-                        
+
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                             <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550 focus:outline-none">Save Changes</button>
@@ -91,14 +91,14 @@ $("#imageUpload").change(function(){
                 </div>
                 <div class="w-full md:w-1/3">
                     <div class="flex flex-wrap overflow-hidden items-center flex-col">
-                        
+
                         <div class="w-36 h-36 relative rounded-full overflow-hidden">
                             <img src="{{asset('user/profile/'.Auth::user()->image)}}" id="profileImage" class="profile-img w-36 h-36 rounded-full object-cover" alt="Profile">
                             <div class="absolute text-white bg-black bg-opacity-50 text-center w-full h-9 bottom-0">
                                 <i  id="select-img" name="img" class="fas fa-camera text-xl cursor-pointer pt-1.5"></i>
                                 <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo"  capture hidden>
                             </div>
-                            
+
                         </div>
                         <div class="text-center pt-2">
                             <p class="text-xl font-medium">{{Auth::user()->name}}</p>
@@ -118,7 +118,7 @@ $("#imageUpload").change(function(){
                             <label for="current-pass">
                                 Current Password
                                 <input type="password" class="input-field" placeholder="Current Password" name="currentpassword" id="currentpassword">
-                                
+
                             </label>
                             <small class="text-red-600">@error('currentpassword'){{$message}}@enderror</small>
                         </div>
@@ -127,7 +127,7 @@ $("#imageUpload").change(function(){
                             <label for="password">
                                 New Password
                                 <input type="password" class="input-field" placeholder="New Password" name="newpassword" id="newpassword">
-                                
+
                             </label>
                             <small class="text-red-600">@error('newpassword'){{$message}}@enderror</small>
                         </div>
@@ -136,7 +136,7 @@ $("#imageUpload").change(function(){
                             <label for="confirm-pass">
                                 Confirm New Password
                                 <input type="password" class="input-field" placeholder="Confirm Password" name="confirmpassword" id="confirmpassword">
-                                
+
                             </label>
                             <small class="text-red-600">@error('confirmpassword'){{$message}}@enderror</small>
                         </div>
@@ -153,38 +153,54 @@ $("#imageUpload").change(function(){
         <form action="#" class="pt-3">
             <h3 class="text-lg font-medium">Connected Social Media Accounts</h3>
             <ul class="list-none pt-3">
+                @if (count($attach_accounts)<1)
+                <h4 class="text-lg font-medium">No Social Media Accounts Connected</h4>
+                @else
+
+
+                @foreach ($attach_accounts as $attach_account )
+                @if ($attach_account->verified_acc=='facebook')
                 <li class="inline-block mx-2">
-                    <input type="checkbox" class="cb-input hidden" id="cb1" checked>
+                    <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" checked >
                     <label for="cb1" class="cb-label">
                         <img src="{{asset('assets/fb.png')}}" class="w-10 h-10 mx-auto" alt="">
                         <p class="text-add pt-4 text-sm">Add</p>
                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                     </label>
                 </li>
+                @endif
+                @if ($attach_account->verified_acc=='instagram')
                 <li class="inline-block mx-2">
-                    <input type="checkbox" class="cb-input hidden" id="cb2">
+                    <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram" checked>
                     <label for="cb2" class="cb-label">
                         <img src="{{asset('assets/Insta.png')}}" class="w-10 h-10 mx-auto" alt="">
                         <p class="text-add pt-4 text-sm">Add</p>
                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                     </label>
                 </li>
+                @endif
+                @if ($attach_account->verified_acc=='twitter')
                 <li class="inline-block mx-2">
-                    <input type="checkbox" class="cb-input hidden" id="cb3">
+                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter" checked>
                     <label for="cb3" class="cb-label">
                         <img src="{{asset('assets/twitter.png')}}" class="w-10 h-10 mx-auto" alt="">
                         <p class="text-add pt-4 text-sm">Add</p>
                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                     </label>
                 </li>
+                @endif
+                @if ($attach_account->verified_acc=='tiktok')
                 <li class="inline-block mx-2">
-                    <input type="checkbox" class="cb-input hidden" id="cb4">
+                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok" checked>
                     <label for="cb4" class="cb-label">
                         <img src="{{asset('assets/tiktok.png')}}" class="w-10 h-10 mx-auto" alt="">
                         <p class="text-add pt-4 text-sm">Add</p>
                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                     </label>
                 </li>
+                @endif
+                @endforeach
+                @endif
             </ul>
         </form>
     </section>
