@@ -1,8 +1,44 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Venues')
+@section('headerExtra')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+$(document).ready(function (e) {
+
+    $('#c').on('change', function () {
+        var query=$(this).children("option:selected").val();
+alert(query);
+        $.ajax({
+   url:"{{ route('filter.location') }}",
+   method:'GET',
+   data:{'q':query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('#location')
+    .find('option')
+    .remove()
+    .end()
+
+;
+    for (var i in data) {
+            $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
+        }
+        alert(data[0]);
+    }
+
+  })
+   });
+});
+</script>
+@endsection
 @section('content')
 @include('users.inc.nav')
 <main>
+    <section class="page-title bg-white py-5 shadow-md">
+        <h2 class="uppercase text-center text-xl font-medium">All Venues</h2>
+    </section>
     <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
         <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
@@ -81,11 +117,11 @@
                 </label>
                 <label for="activity" class=" w-3/12">
                     ACTIVITY
-                    <select name="city" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-                        <option>Select Activity</option>
-                        <option>Activity 1</option>
-                        <option>Activity 2</option>
-                        <option>Activity 3</option>
+                    <select name="city" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+                        @foreach ($loc as $city)
+
+                                    <option value="{{$city}}" >{{$city}}</option>
+                        @endforeach
                     </select>
                 </label>
                 <div class="lg:w-2/12 xl:w-1/12">

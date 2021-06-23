@@ -3,6 +3,9 @@
 @section('content')
 @include('users.inc.nav')
 <main>
+    <section class="page-title bg-white py-5 shadow-md">
+        <h2 class="uppercase text-center text-xl font-medium">All Events</h2>
+    </section>
     <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
         <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">

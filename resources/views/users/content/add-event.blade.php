@@ -87,6 +87,54 @@ else {
 
 
     });
+    function checkInputBox(){
+
+var checkboxes = document.getElementsByName('c[]');
+var inp = document.getElementsByName('inp[]');
+
+
+for (var i=0, n=checkboxes.length;i<n;i++)
+{
+    if(checkboxes[i].checked && checkboxes[i].value=='facebook' && inp[0].value=="")
+    {
+        alert('Please add facebook page id or name ');
+
+        if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+                }
+        return false;
+    }
+    else if (checkboxes[i].checked && checkboxes[i].value=='twitter' && inp[2].value=="")
+    {
+        alert('Please add twitter page id or name ');
+
+        if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+                }
+        return false;
+
+    }
+    else if (checkboxes[i].checked && checkboxes[i].value=='insta' && inp[1].value=="")
+    {
+        alert('Please add instagram page id or name ');
+        if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+                }
+        return false;
+    }
+    else if (checkboxes[i].checked && checkboxes[i].value=='tiktok' && inp[3].value=="")
+    {
+        alert('Please add tiktok page id or name ');
+        if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+                }
+        return false;
+    }
+
+
+}
+
+}
 </script>
 @endsection
 @section('content')
@@ -97,7 +145,7 @@ else {
     </section>
 
     <section class="py-10 max-w-5xl mx-auto">
-        <form action="{{route('add.event')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('add.event')}}" method="POST" enctype="multipart/form-data" onsubmit="return checkInputBox()">
             @csrf
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full">
@@ -209,48 +257,75 @@ else {
                         <div class="w-full overflow-hidden md:mt-2 md:px-2 lg:mt-3 lg:px-3 xl:mt-3 xl:px-3">
                             <p>Collect Posts from your Profile Pages? <span class="text-red-600">*</span></p>
                         </div>
-                        <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
-                            <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="fb" name="fb" checked>
-                                <label for="fb" class="cb--label">
-                                    <img src="{{asset('assets/fb.png')}}" class="w-6 h-6 mx-auto" alt="">
-                                </label>
-                            </div>
-                            <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" name="fbi">
-                        </div>
+                        <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                            <div
+                                class=" flex py-1.5">
+                                <div class="inline-block mr-3">
+                                    <input type="checkbox" class="cb-input hidden" id="fb" name="c[]" value="facebook" >
+                                    <label for="fb" class="cb--label">
+                                        <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
+                                    </label>
+                                </div>
+                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" >
 
-                        <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
-                            <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="insta" name="insta">
-                                <label for="insta" class="cb--label">
-                                    <img src="{{asset('assets/Insta.png')}}" class="w-6 h-6 mx-auto" alt="">
-                                </label>
                             </div>
-                            <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" name="instap">
-                        </div>
+                            @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
 
-                        <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
-                            <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="twitter" name="twitter">
-                                <label for="twitter" class="cb--label">
-                                    <img src="{{asset('assets/twitter.png')}}" class="w-6 h-6 mx-auto" alt="">
-                                </label>
-                            </div>
-                            <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" name="twitterp">
-                        </div>
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
-                        <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2 flex py-1.5">
-                            <div class="inline-block mr-3">
-                                <input type="checkbox" class="cb-input hidden" id="tiktok" name="tiktok">
-                                <label for="tiktok" class="cb--label">
-                                    <img src="{{asset('assets/tiktok.png')}}" class="w-6 h-6 mx-auto" alt="">
-                                </label>
+                            <div
+                                class="flex py-1.5">
+                                <div class="inline-block mr-3">
+                                    <input type="checkbox" class="cb-input hidden" id="insta" name="c[]" value="insta" >
+                                    <label for="insta" class="cb--label">
+                                        <img src="{{ asset('assets/Insta.png') }}" class="w-6 h-6 mx-auto" alt="">
+                                    </label>
+                                </div>
+                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" >
                             </div>
-                            <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" name="tiktokp">
-                        </div>
-                        <div class="ml-4">
-                            @error('p_fb') <small class="text-red-600">Please add your public page id or post</small>@enderror
+                            @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+
+                            <div
+                                class=" flex py-1.5">
+                                <div class="inline-block mr-3">
+                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter" >
+                                    <label for="twitter" class="cb--label">
+                                        <img src="{{ asset('assets/twitter.png') }}" class="w-6 h-6 mx-auto" alt="">
+                                    </label>
+                                </div>
+                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" >
                             </div>
+                            @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+
+                            <div
+                                class=" flex py-1.5">
+                                <div class="inline-block mr-3">
+                                    <input type="checkbox" class="cb-input hidden" id="tiktok" name="c[]"   value="tiktok" >
+                                    <label for="tiktok" class="cb--label">
+                                        <img src="{{ asset('assets/tiktok.png') }}" class="w-6 h-6 mx-auto" alt="">
+                                    </label>
+                                </div>
+                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" >
+
+
+                            </div>
+
+                            @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
+                           </div>
+
+                        @error('c') <small class="text-red-600">Please select atleast one platform</small>@enderror
+
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="description">
                                 Message for Dapsocially Locations Wall <span class="text-red-600">*</span>

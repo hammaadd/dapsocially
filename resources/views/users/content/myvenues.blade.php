@@ -4,7 +4,9 @@
 @include('users.inc.nav')
 <main>
 
-
+    <section class="page-title bg-white py-5 shadow-md">
+        <h2 class="uppercase text-center text-xl font-medium">My Venues</h2>
+    </section>
 
 
     <section class="py-10 max-w-7xl mx-auto">

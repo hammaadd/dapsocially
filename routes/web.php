@@ -70,6 +70,7 @@ Route::post('/user-update-password', 'User\ProfileController@update_password')->
 Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
 
 Route::get('/attach-social-account', 'User\AccountController@attach_account')->name('attach.social.account');
+Route::get('/filter_location', 'User\VenueController@filter_location')->name('filter.location');
 
 
 });

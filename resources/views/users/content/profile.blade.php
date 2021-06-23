@@ -75,8 +75,19 @@ $("#imageUpload").change(function(){
                             <label for="gender">
                                 Gender
                                 <select name="gender" id="gender" class="input-field">
-                                    <option>Male</option>
-                                    <option>Female</option>
+
+                                    @if (Auth::user()->gender=='Male')
+                                    <option value="Male" selected>Male</option>
+                                    @else
+                                    <option value="Male">Male</option>
+                                    @endif
+                                    @if (Auth::user()->gender=='Female')
+                                    <option value="Female" selected>Female</option>
+                                    @else
+                                    <option value="Female">Female</option>
+                                    @endif
+
+
 
                                 </select>
                             </label>

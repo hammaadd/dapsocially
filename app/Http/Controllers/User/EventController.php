@@ -74,7 +74,7 @@ class EventController extends Controller
             'cover_img' => 'required',
             'plan'=>'required',
             'location' => 'required',
-
+            'c' => 'required',
             'h_tag' => 'required',
             'm_dap_wall' => 'required',
             'wall_bg_img' => 'required',
@@ -122,6 +122,7 @@ class EventController extends Controller
         $event->end_time = $request->e_time;
         $event->created_by = Auth::user()->id;
         $event->save();
+        $this->add_event_social_posts($event->id,$request);
         $p=Payment_Plans::where('id',$request->plan)->first();
         $odr=new Order();
         $odr->order_type="event";
@@ -154,6 +155,44 @@ class EventController extends Controller
         Session::flash('message', 'Event added succesfully succesfully');
         return back();
     }
+    public function add_event_social_posts($event_id, Request $request)
+    {
+            $count=count($request->c);
+
+            for($i=0;$i<$count;$i++){
+               if($request->c[$i]=='facebook'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[0];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='insta'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[1];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='twitter'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[2];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='tiktok'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[3];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+
+
+            }
+
+    }
     public function search_Event(Request $request)
     {
 
@@ -162,7 +201,7 @@ class EventController extends Controller
         $events=[];
         $locations=[];
 
-        if(!is_null($request->keyword) && !is_null($request->location)){
+    if(!is_null($request->keyword) && !is_null($request->location)){
         $events=Event::where('hashtag','=',$request->keyword)->where('location','=',$request->location)->get();
 
 
@@ -171,6 +210,11 @@ class EventController extends Controller
     }
     elseif(is_null($request->keyword) && !is_null($request->location) ){
         $events=Event::where('location','=',$request->location)->get();
+
+
+    }
+    if(!is_null($request->keyword )){
+        $events=Event::where('hashtag','=',$request->keyword)->get();
 
 
     }
@@ -284,12 +328,18 @@ class EventController extends Controller
             File::delete(public_path('Users/EventImages/'.$event->wall_bg_image));
 
         }
+        $vTags=Collect_Event_Htag::where('event_id',$event->id)->get();
+        if(!is_null(Collect_Event_Htag::where('event_id',$event->id)->get())){
+        foreach($vTags as $vTag){
+                $vTag->delete();
+            }
+        }
 
-
-        if(!is_null(Event_Social_Post::find($event->social_posts))){
-        $del=Event_Social_Post::find($event->social_posts);
+        if(!is_null(Event_Social_Post::where('event_id',$event->id)->get())){
+        $del=Event_Social_Post::where('event_id',$event->id)->get();
         $del->delete();
         }
+
         $del->delete();
         return back();
     }
@@ -303,7 +353,9 @@ class EventController extends Controller
 
         $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
         $P_plans=Payment_Plans::all();
-        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans'));
+        $posts=Event_Social_Post::where('event_id',$event->id)->get();
+
+        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans','posts'));
 
 
     }
@@ -320,14 +372,14 @@ class EventController extends Controller
             // 'state'=>'required',
             'h_tag'=>'required',
            'm_dap_wall'=>'required',
-
+           'c' => 'required',
            's_date'=>'required',
            's_time'=>'required',
            'e_date'=>'required',
 
            'e_date'=>'required',
 
-           'h_tags'=>'required|min:1',
+           'h_tags'=>'required',
         //    'c_posts'=>'sometimes',
         //    'p_fb'=>'required_with:c_posts,on'
             ]);
@@ -360,6 +412,14 @@ class EventController extends Controller
                 $vTag->delete();
 
             }
+            $Posts=Event_Social_Post::where('event_id',$event->id)->get();
+
+            foreach($Posts as $Post){
+
+                $Post->delete();
+
+            }
+            $this->update_event_social_posts($event->id,$request);
             foreach($request->h_tags as $h_tag){
                 $hashtag=new Collect_Event_Htag();
                $hashtag->account_name=$h_tag;
@@ -387,4 +447,42 @@ class EventController extends Controller
 
 
         }
+        public function update_event_social_posts($event_id, Request $request)
+    {
+            $count=count($request->c);
+
+            for($i=0;$i<$count;$i++){
+               if($request->c[$i]=='facebook'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='insta'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='twitter'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='tiktok'){
+                $posts=new Event_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$event_id;
+                $posts->save();
+               }
+
+
+            }
+
+    }
     }

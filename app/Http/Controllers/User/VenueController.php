@@ -45,13 +45,27 @@ class VenueController extends Controller
             }
         }
         $locations = $loc;
+        $locations=$loc;
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
         $venues = Venue::all();
-        return view('users.content.venues', compact('locations', 'venues'));
+
+        return view('users.content.venues', compact('locations', 'venues','loc'));
     }
 
     public function add_venue(Request $request)
     {
-        dd($request->c);
+
+
         $request->validate([
             'vname' => 'required',
             'e_descrip' => 'required',
@@ -59,6 +73,9 @@ class VenueController extends Controller
             'country' => 'required',
             'plan'=>'required',
             'c' => 'required',
+            // 'inp[1]'=>'required_with:c,insta',
+            // 'inp[2]'=>'required_with:c,twitter',
+            // 'inp[3]'=>'required_with:c,tiktok',
             // 'i_fb'       => 'required_with:c_fb,on',
             // 'c_tiktok' => 'sometimes',
             // 'i_tiktok'       => 'required_with:c_tiktok,on',
@@ -130,6 +147,7 @@ class VenueController extends Controller
         $venue->end_time = $request->e_time;
         $venue->created_by = Auth::user()->id;
         $venue->save();
+        $this->add_venue_social_posts($venue->id,$request);
         $p=Payment_Plans::where('id',$request->plan)->first();
         $odr=new Order();
         $odr->order_type="venue";
@@ -164,13 +182,86 @@ class VenueController extends Controller
 
         return back();
     }
+    public function add_venue_social_posts($venue_id, Request $request)
+    {
+            $count=count($request->c);
+
+            for($i=0;$i<$count;$i++){
+               if($request->c[$i]=='facebook'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[0];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='insta'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[1];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='twitter'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[2];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='tiktok'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[3];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+
+
+            }
+
+    }
+
 
     public function load_more_venues()
     {
         $venues=Venue::all();
-        $locations=Location::all();
-        return view('users.content.venues',compact('venues','locations'));
 
+        $locations=Location::all();
+        $loc=[];
+        foreach($locations as $location ){
+            if (Arr::has($loc,$location->address)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->address,$location->address);
+
+               }
+        }
+        $locations=$loc;
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+
+
+        return view('users.content.venues',compact('venues','locations','loc'));
+
+    }
+    public function filter_location(Request $request)
+    {
+        if($request->ajax())
+        {
+                $address=Location::where('city',$request->q)->get();
+            echo json_encode($address);
+
+        }
     }
     public function search_my_Venue(Request $request)
     {
@@ -214,6 +305,17 @@ class VenueController extends Controller
            }
     }
     $locations=$loc;
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
 
 
     //     $venues=[];
@@ -250,7 +352,7 @@ class VenueController extends Controller
 
 
 
-        return view('users.content.myvenues', compact('venues', 'locations'));
+        return view('users.content.myvenues', compact('venues', 'locations','loc'));
     }
     public function search_Venue(Request $request)
     {
@@ -294,7 +396,18 @@ class VenueController extends Controller
                }
         }
         $locations=$loc;
-        return view('users.content.venues', compact('venues', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.venues', compact('venues', 'locations','loc'));
     }
     public function my_venues()
     {
@@ -348,12 +461,19 @@ public function load_my_venues()
         }
 
 
-        $vTags=Collect_Venue_Htag::where('venue_id',$venue->social_posts)->get();
-        if(!is_null(Collect_Venue_Htag::where('venue_id',$venue->social_posts)->get())){
+        $vTags=Collect_Venue_Htag::where('venue_id',$venue->id)->get();
+        if(!is_null(Collect_Venue_Htag::where('venue_id',$venue->id)->get())){
         foreach($vTags as $vTag){
                 $vTag->delete();
             }
         }
+        $Posts=Venue_Social_Post::where('venue_id',$venue->id)->get();
+        if(!is_null(Venue_Social_Post::where('venue_id',$venue->id)->get())){
+        foreach($Posts as $post){
+                $post->delete();
+            }
+        }
+
         $del->delete();
         return back();
     }
@@ -373,7 +493,8 @@ public function load_my_venues()
 
         $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
         $P_plans=Payment_Plans::all();
-        return view('users.content.editvenue',compact('venue','venue_htags','location','payment_details','P_plans'));
+        $posts=Venue_Social_Post::where('venue_id',$venue->id)->get();
+        return view('users.content.editvenue',compact('venue','venue_htags','location','payment_details','P_plans','posts'));
 
 
     }
@@ -472,6 +593,14 @@ public function load_my_venues()
                 $vTag->delete();
 
             }
+            $Posts=Venue_Social_Post::where('venue_id',$venue->id)->get();
+
+            foreach($Posts as $Post){
+
+                $Post->delete();
+
+            }
+            $this->update_venue_social_posts($venue->id,$request);
             foreach($request->h_tags as $h_tag){
                 $hashtag=new Collect_Venue_Htag();
                $hashtag->account_name=$h_tag;
@@ -488,6 +617,44 @@ public function load_my_venues()
             return redirect()->route('my.venues');
 
 
+
+    }
+    public function update_venue_social_posts($venue_id, Request $request)
+    {
+            $count=count($request->c);
+
+            for($i=0;$i<$count;$i++){
+               if($request->c[$i]=='facebook'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='insta'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->venue_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='twitter'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$venue_id;
+                $posts->save();
+               }
+               if($request->c[$i]=='tiktok'){
+                $posts=new Venue_Social_Post();
+                $posts->platform=$request->c[$i];
+                $posts->page_name_id=$request->inp[$i];
+                $posts->event_id=$venue_id;
+                $posts->save();
+               }
+
+
+            }
 
     }
 
