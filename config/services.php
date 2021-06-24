@@ -37,7 +37,7 @@ return [
     'facebook' => [
         'client_id' => env('facebook_CLIENT_ID'),
         'client_secret' => env('facebook_CLIENT_SECRET'),
-        'redirect' => 'http://dapsocially.local/login/facebook/callback',
+        'redirect' => 'https://dapsocially.theairtech.com/login/facebook/callback',
     ],
 
 
