@@ -59,6 +59,9 @@ Route::post('update-venue/{venue}','User\VenueController@update_venue' )->name('
 Route::get('edit-event/{event}','User\EventController@edit_event' )->name('edit.event');
 Route::post('update-event/{event}','User\EventController@update_event' )->name('update.event');
 
+Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name('attach.facebook');
+// Route::get('attach/facebook/callback', 'User\AccountController@handleFacebookCallback');
+
 // Route::get('pricing', function () {
 //     return view('users.content.pricing');
 // })->name('pricing');
@@ -184,6 +187,7 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
 
 
 
+
 });
 
 
@@ -196,24 +200,24 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallba
 
 
 
-//User
-Route::middleware(['auth'=>'role:user'])->get('user/home', 'User\HomeController@index')->name('user.home');
-Route::get('user/venue', 'User\VenueController@index')->name('user.venue');
-Route::post('add-venue', 'User\VenueController@add_venue')->name('add.venue');
-Route::get('user/event', 'User\EventController@index')->name('user.event');
-Route::post('add-event', 'User\EventController@add_event')->name('add.event');
-Route::get('payment-details', 'User\OrderController@index')->name('payment.details');
-Route::get('order.details/{amount}', 'User\OrderController@order_details')->name('order.details');
-Route::post('place-order', 'User\OrderController@place_order')->name('place.order');
-Route::get('check-out/{id}/{total_payment}', 'User\OrderController@check_out')->name('check.out');
-Route::get('payment-processing/{id}/{total_payment}', 'User\OrderController@payment_process')->name('payment.processing');
+// //User
+// Route::middleware(['auth'=>'role:user'])->get('user/home', 'User\HomeController@index')->name('user.home');
+// Route::get('user/venue', 'User\VenueController@index')->name('user.venue');
+// Route::post('add-venue', 'User\VenueController@add_venue')->name('add.venue');
+// Route::get('user/event', 'User\EventController@index')->name('user.event');
+// Route::post('add-event', 'User\EventController@add_event')->name('add.event');
+// Route::get('payment-details', 'User\OrderController@index')->name('payment.details');
+// Route::get('order.details/{amount}', 'User\OrderController@order_details')->name('order.details');
+// Route::post('place-order', 'User\OrderController@place_order')->name('place.order');
+// Route::get('check-out/{id}/{total_payment}', 'User\OrderController@check_out')->name('check.out');
+// Route::get('payment-processing/{id}/{total_payment}', 'User\OrderController@payment_process')->name('payment.processing');
 
-Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
+// Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
-//Square Api Route SquareApiController
-Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');
-Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
-Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
+// //Square Api Route SquareApiController
+// Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');
+// Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
+// Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
 

@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\User\Event;
 use App\Models\User\Venue;
 use App\Models\Location;
+use App\Models\User;
 use App\Models\User\Attached_Account;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
+
 class AccountController extends Controller
 {
     public function __construct()
@@ -19,7 +22,7 @@ class AccountController extends Controller
     {
         $account=Attached_Account::where('user_id',Auth::user()->id)->get();
 
-       if(count($account)<1){
+       if(count($account)>1){
         $events = Event::where('created_by', '=', Auth::user()->id)->take(6)->get();
         $venues=Venue::where('created_by', '=', Auth::user()->id)->take(3)->get();
         $locations=Location::all();
@@ -58,4 +61,11 @@ class AccountController extends Controller
     {
         return view('users.content.addsocialaccount');
     }
+
+     public function redirectToFacebook()
+     {
+
+         return Socialite::driver('facebook')->redirect();
+     }
+
 }
