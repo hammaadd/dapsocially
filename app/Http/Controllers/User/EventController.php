@@ -62,7 +62,18 @@ class EventController extends Controller
                }
         }
         $locations=$loc;
-            return view('users.content.events', compact('events', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+            return view('users.content.events', compact('events', 'locations','loc'));
 
     }
     public function add_event(Request $request)
@@ -193,6 +204,30 @@ class EventController extends Controller
             }
 
     }
+    public function filter_location(Request $request)
+    {
+        if($request->ajax())
+        {
+                $locations=Location::where('city',$request->q)->get();
+                $loc=[];
+                foreach($locations as $location ){
+                    if (Arr::has($loc,$location->address)) {
+
+                       }
+                       else{
+                        $loc=Arr::add($loc,$location->address,$location->address);
+
+                       }
+                }
+                $locations=$loc;
+                $data='';
+                foreach($locations as $add) {
+                    $data.='<option value="' . $add . '">' . $add .'</option>';
+                }
+            echo json_encode($data);
+
+        }
+    }
     public function search_Event(Request $request)
     {
 
@@ -230,7 +265,18 @@ class EventController extends Controller
                }
         }
         $locations=$loc;
-        return view('users.content.events', compact('events', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.events', compact('events', 'locations','loc'));
 
     }
     public function load_more_events()
@@ -249,7 +295,18 @@ class EventController extends Controller
                }
         }
         $locations=$loc;
-        return view('users.content.events', compact('events', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.events', compact('events', 'locations','loc'));
     }
     public function my_events()
     {
@@ -266,7 +323,18 @@ class EventController extends Controller
         }
         $locations=$loc;
         $events = Event::where('created_by', '=', Auth::user()->id)->take(10)->get();
-        return view('users.content.myevents',compact('locations','events'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.myevents',compact('locations','events','loc'));
     }
     public function load_my_events()
     {
@@ -283,7 +351,18 @@ class EventController extends Controller
                }
         }
         $locations=$loc;
-        return view('users.content.myevents', compact('events', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.myevents', compact('events', 'locations','loc'));
     }
     public function search_my_Event(Request $request)
     {
@@ -315,7 +394,18 @@ class EventController extends Controller
            }
     }
     $locations=$loc;
-        return view('users.content.myevents', compact('events', 'locations'));
+    $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.myevents', compact('events', 'locations','loc'));
     }
     public function delete_myevent(Event $event)
     {

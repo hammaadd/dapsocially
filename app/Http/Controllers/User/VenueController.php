@@ -258,8 +258,23 @@ class VenueController extends Controller
     {
         if($request->ajax())
         {
-                $address=Location::where('city',$request->q)->get();
-            echo json_encode($address);
+                $locations=Location::where('city',$request->q)->get();
+                $loc=[];
+                foreach($locations as $location ){
+                    if (Arr::has($loc,$location->address)) {
+
+                       }
+                       else{
+                        $loc=Arr::add($loc,$location->address,$location->address);
+
+                       }
+                }
+                $locations=$loc;
+                $data='';
+                foreach($locations as $add) {
+                    $data.='<option value="' . $add . '">' . $add .'</option>';
+                }
+            echo json_encode($data);
 
         }
     }

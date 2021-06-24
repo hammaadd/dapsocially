@@ -8,7 +8,7 @@ $(document).ready(function (e) {
 
     $('#c').on('change', function () {
         var query=$(this).children("option:selected").val();
-alert(query);
+
         $.ajax({
    url:"{{ route('filter.location') }}",
    method:'GET',
@@ -22,10 +22,11 @@ alert(query);
     .end()
 
 ;
-    for (var i in data) {
-            $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
-        }
-        alert(data[0]);
+    // for (var i in data) {
+    //         $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
+    //     }
+    $('#location').append(data);
+
     }
 
   })
