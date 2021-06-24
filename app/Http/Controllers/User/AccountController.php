@@ -59,8 +59,7 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
-        dd(Auth::user());
-        //return view('users.content.addsocialaccount');
+        return view('users.content.addsocialaccount');
     }
 
      public function redirectToFacebook()
