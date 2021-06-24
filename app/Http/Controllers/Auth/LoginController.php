@@ -113,7 +113,7 @@ class LoginController extends Controller
     {
         dd($data);
         $user = User::where('email', '=', $data->email)->first();
-
+        
         if(!$user && Auth::user()){
             $ac=new Attached_Account();
             $ac->user_id=Auth::user()->id;

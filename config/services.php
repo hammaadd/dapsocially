@@ -37,7 +37,7 @@ return [
     'facebook' => [
         'client_id' => env('facebook_CLIENT_ID'),
         'client_secret' => env('facebook_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8000/login/facebook/callback',
+        'redirect' => 'http://dapsocially.local/login/facebook/callback',
     ],
 
 
