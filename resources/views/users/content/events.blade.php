@@ -40,6 +40,13 @@ $(document).ready(function (e) {
     <section class="page-title bg-white py-5 shadow-md">
         <h2 class="uppercase text-center text-xl font-medium">All Events</h2>
     </section>
+    <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <ol class="list-reset flex text-grey-dark">
+          <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li>All Events</li>
+        </ol>
+      </nav>
     <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
         <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
@@ -107,6 +114,14 @@ $(document).ready(function (e) {
                     SEARCH KEYWORD
                     <input type="text" id="keyword" name="keyword" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md" placeholder="#party">
                 </label>
+                <label for="activity" class=" w-3/12">
+                    City
+                    <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+                        @foreach ($loc as $city)
+                         <option value="{{$city}}" >{{$city}}</option>
+                        @endforeach
+                    </select>
+                </label>
                 <label for="location" class=" w-4/12">
                     LOCATION
                     <select name="location" id="location" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
@@ -116,15 +131,7 @@ $(document).ready(function (e) {
                         @endforeach
                     </select>
                 </label>
-                <label for="activity" class=" w-3/12">
-                    City
-                    <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-                        @foreach ($loc as $city)
 
-                        <option value="{{$city}}" >{{$city}}</option>
-            @endforeach
-                    </select>
-                </label>
                 <div class="lg:w-2/12 xl:w-1/12">
                     <input type="submit" value="SEARCH" class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
 

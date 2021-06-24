@@ -40,7 +40,18 @@ class HomeController extends Controller
                }
         }
         $locations=$loc;
-        return view('visitor.content.main',compact('events','venues','locations','contents'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('visitor.content.main',compact('events','venues','locations','contents','loc'));
     }
     public function about_us()
     {
@@ -87,6 +98,7 @@ class HomeController extends Controller
         }
 
     }
+
         $locations=Location::all();
         $loc=[];
         foreach($locations as $location ){
@@ -109,8 +121,20 @@ class HomeController extends Controller
 
         ];
         $locations=$loc;
-        return view('visitor.content.main',compact('events','venues','locations','contents'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('visitor.content.main',compact('events','venues','locations','contents','loc'));
 
 
     }
+
 }

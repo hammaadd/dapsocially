@@ -1,5 +1,40 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Homepage')
+@section('headerExtra')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+$(document).ready(function (e) {
+
+    $('#c').on('change', function () {
+
+        var query=$(this).children("option:selected").val();
+
+        $.ajax({
+   url:"{{ route('filter.location') }}",
+   method:'GET',
+   data:{'q':query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('#location')
+    .find('option')
+    .remove()
+    .end()
+
+;
+    // for (var i in data) {
+    //         $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
+    //     }
+    $('#location').append(data);
+
+    }
+
+  })
+   });
+});
+</script>
+@endsection
 @section('content')
 @include('visitor.inc.homeBanner')
 <section>
@@ -55,6 +90,14 @@
                         <select name="location" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             @foreach ($locations as $location)
                             <option value="{{$location}}" >{{$location}}</option>
+                            @endforeach
+                        </select>
+                    </label>
+                    <label for="activity" class=" w-3/12">
+                        City
+                        <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+                            @foreach ($loc as $city)
+                             <option value="{{$city}}" >{{$city}}</option>
                             @endforeach
                         </select>
                     </label>

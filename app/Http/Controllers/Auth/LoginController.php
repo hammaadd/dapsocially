@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\User\Attached_Account;
 use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
@@ -47,6 +48,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
 
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
@@ -89,9 +91,9 @@ class LoginController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver("google")->stateless()->user();
-        $this->_registerOrLoginUser($user);
+        $this->_registerOrLoginUser($user,'google');
 
-        return redirect()->route('events');
+
 
 
     }
@@ -102,17 +104,24 @@ class LoginController extends Controller
     public function handleFacebookCallback()
     {
         $user = Socialite::driver("facebook")->stateless()->user();
-        $this->_registerOrLoginUser($user);
+        $this->_registerOrLoginUser($user,'facebook');
 
-        return redirect()->route('events');
+
 
     }
-    protected function _registerOrLoginUser($data)
+    protected function _registerOrLoginUser($data,$attached_account)
     {
+        dd($data);
         $user = User::where('email', '=', $data->email)->first();
 
-
-        if (!$user) {
+        if(!$user && Auth::user()){
+            $ac=new Attached_Account();
+            $ac->user_id=Auth::user()->id;
+            $ac->verified_acc=$attached_account;
+            $ac->save();
+            return redirect()->route('my.account');
+        }
+        else if (!$user) {
             $user = new User();
             $user->name = $data->name;
             $user->email = $data->email;
@@ -121,10 +130,20 @@ class LoginController extends Controller
             $user->password = Hash::make($data->name);
             $user->save();
             $user->attachRole('user');
+            $ac=new Attached_Account();
+            $ac->user_id=$user->id;
+            $ac->verified_acc=$attached_account;
+            $ac->save();
+
         }
 
+
         Auth::login($user);
+        return redirect()->route('my.account');
     }
+
+
+
 
 
 }

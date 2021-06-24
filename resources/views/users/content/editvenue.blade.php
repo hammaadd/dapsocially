@@ -214,7 +214,17 @@ for (var i=0, n=checkboxes.length;i<n;i++)
     <section class="page-title bg-white py-5 shadow-md">
         <h2 class="uppercase text-center text-xl font-medium">Edit Your Venue</h2>
     </section>
-
+    <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <ol class="list-reset flex text-grey-dark">
+          <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li><a href="{{route('my.account')}}" class="text-blue-550 font-bold">My Account</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li><a href="{{route('my.venues')}}" class="text-blue-550 font-bold">My Venues</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li>Edit Venue</li>
+        </ol>
+      </nav>
     <section class="py-10 max-w-5xl mx-auto">
         <form action="{{route('update.venue',$venue)}}" method="POST" enctype="multipart/form-data" onsubmit="return checkInputBox()">
             @csrf

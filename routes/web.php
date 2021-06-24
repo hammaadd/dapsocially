@@ -59,6 +59,9 @@ Route::post('update-venue/{venue}','User\VenueController@update_venue' )->name('
 Route::get('edit-event/{event}','User\EventController@edit_event' )->name('edit.event');
 Route::post('update-event/{event}','User\EventController@update_event' )->name('update.event');
 
+Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name('attach.facebook');
+// Route::get('attach/facebook/callback', 'User\AccountController@handleFacebookCallback');
+
 // Route::get('pricing', function () {
 //     return view('users.content.pricing');
 // })->name('pricing');
@@ -184,6 +187,7 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
 
 
 
+
 });
 
 
@@ -196,7 +200,7 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallba
 
 
 
-//User
+// //User
 Route::middleware(['auth'=>'role:user'])->get('user/home', 'User\HomeController@index')->name('user.home');
 Route::get('user/venue', 'User\VenueController@index')->name('user.venue');
 Route::post('add-venue', 'User\VenueController@add_venue')->name('add.venue');

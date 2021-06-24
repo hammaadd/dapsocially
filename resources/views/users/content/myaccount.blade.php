@@ -3,7 +3,14 @@
 @section('content')
 @include('users.inc.nav')
 <main>
+    <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <ol class="list-reset flex text-grey-dark">
+          <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
+          <li><span class="mx-2">/</span></li>
+          <li>My Account</li>
 
+        </ol>
+      </nav>
 <div class="max-w-6xl mx-auto">
     <section class="py-10 max-w-7xl mx-auto">
 
