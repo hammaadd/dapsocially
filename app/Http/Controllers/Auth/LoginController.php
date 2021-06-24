@@ -103,7 +103,7 @@ class LoginController extends Controller
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver("facebook")->stateless()->user();
+        $user = Socialite::driver("facebook")->user();
         $this->_registerOrLoginUser($user,'facebook');
 
 
@@ -111,9 +111,9 @@ class LoginController extends Controller
     }
     protected function _registerOrLoginUser($data,$attached_account)
     {
-        dd($data);
+        // dd($data);
         $user = User::where('email', '=', $data->email)->first();
-        
+
         if(!$user && Auth::user()){
             $ac=new Attached_Account();
             $ac->user_id=Auth::user()->id;
@@ -134,6 +134,7 @@ class LoginController extends Controller
             $ac->user_id=$user->id;
             $ac->verified_acc=$attached_account;
             $ac->save();
+
 
         }
 
