@@ -440,7 +440,18 @@ class VenueController extends Controller
         }
         $locations=$loc;
         $venues = Venue::where('created_by', '=', Auth::user()->id)->take(9)->get();
-        return view('users.content.myvenues', compact('locations', 'venues'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.myvenues', compact('locations', 'venues','loc'));
     }
 
 public function load_my_venues()
@@ -460,7 +471,18 @@ public function load_my_venues()
                }
         }
         $locations=$loc;
-        return view('users.content.myvenues', compact('venues', 'locations'));
+        $locationss=Location::all();
+        $loc=[];
+        foreach($locationss as $location ){
+            if (Arr::has($loc,$location->city)) {
+
+               }
+               else{
+                $loc=Arr::add($loc,$location->city,$location->city);
+
+               }
+        }
+        return view('users.content.myvenues', compact('venues', 'locations','loc'));
     }
     public function delete_myvenue(Venue $venue)
     {
