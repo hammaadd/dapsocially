@@ -4,18 +4,18 @@
             <button class="text-white text-2xl focus:outline-none" @click=" nav = !nav ">
                 <i class="fas fa-bars"></i>
             </button>
-            <a href="#">
+            <a href="{{route('homepage')}}">
                 <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
             </a>
             <div class="flex flex-wrap items-center cursor-pointer">
-                <img src="{{asset('assets/sample-profile.png')}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
                 <div class="text-white pl-2">
-                    <p class="font-medium">Account Username</p>
-                    <p class="text-xs">Premium Account</p>
+                   <a href="{{route('profile')}}"> <p class="font-medium">{{Auth::user()->name}}</p>
+                    <p class="text-xs">{{Auth::user()->account_type}}</p></a>
                 </div>
             </div>
         </div>
-        <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen"
+        <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10"
             x-show="nav"
             @click.away="nav = !nav"
             x-transition:enter="transition transform origin-top-left ease-out duration-300"
@@ -28,10 +28,19 @@
                 <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
             </div>
             <ul class="text-center text-white">
-                <li class="py-1"><a href="#" class="text-xl">Home</a></li>
-                <li class="py-1"><a href="#" class="text-xl">My Account</a></li>
-                <li class="py-1"><a href="#" class="text-xl">Add Event</a></li>
-                <li class="py-1"><a href="#" class="text-xl">Add Venue</a></li>
+                <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
+                <li class="py-1"><a href="{{ route('my.account') }}"class="text-xl">My Account</a></li>
+                <li class="py-1"><a href="{{ route('events') }}"class="text-xl">All Events</a></li>
+                <li class="py-1"><a href="{{ route('venue') }}"class="text-xl">All Venues</a></li>
+                <li class="py-1"><a href="{{route('add-event')}}" class="text-xl">Add Event</a></li>
+                <li class="py-1"><a href="{{route('add-venue')}}" class="text-xl">Add Venue</a></li>
+                <li class="py-1"><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                    class="text-xl">Log Out</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </ul>
             <hr class="w-4/5 mx-auto my-3 border-gray-400">
             <ul class="text-gray-300 text-center">

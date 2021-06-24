@@ -2,7 +2,7 @@
 @section('title', 'User Profile')
 
 @section('content')
-
+<div class="m-5">
     <div class="container">
         <div class="main-body">
 
@@ -11,7 +11,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ route('orders.list') }}">Orders</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">User Profile view</li>
+                    <li class="breadcrumb-item active" aria-current="page">Order details</li>
                 </ol>
             </nav>
             <!-- /Breadcrumb -->
@@ -21,12 +21,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ asset('user/profile/' . $data['users']->image . '') }}" alt="Admin"
+                                <img src="{{ asset('user/profile/' . $data['users']->image . '') }}" alt="avtar"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $data['users']->name }}</h4>
                                     <p class="text-secondary mb-1">{{ $data['users']->profession }}</p>
-                                    <p class="text-muted font-size-sm">Address: {{ $data['users']->address }}</p>
+                                    <p class="text-muted font-size-sm">Email: {{ $data['users']->email }}</p>
                                     @if ($data['users']->isactive == 1)
                                         <a class="btn btn-primary"
                                             href="{{ route('users.activation', ['id' => $data['users']->id, 'status' => 0]) }}">Deactivate</a>
@@ -59,39 +59,37 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
+                                    <h6 class="mb-0">Order Type</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{$data['users']->email }}
+                                    {{$data['order']->order_type }}
                                 </div>
                             </div>
 
                             
                             <hr>
                             
-                         
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Role</h6>
+                                    <h6 class="mb-0">Account type</h6>
                                 </div>
 
                                 <div class="col-sm-9 text-secondary">
 
-                                    @foreach ($data['users']->roles as $role)
-                                        {{ $role->display_name }},
-                                    @endforeach
+                                  {{$data['order']->account_type}}
 
                                 </div>
-                            </div>
+                        </div>
+                            
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Account type</h6>
+                                        <h6 class="mb-0">Total Payment</h6>
                                     </div>
     
                                     <div class="col-sm-9 text-secondary">
     
-                                      {{$data['order']->account_type}}
+                                      {{$data['order']->total_payment}}$
     
                                     </div>
                             </div>
@@ -131,4 +129,5 @@
 
         </div>
     </div>
+</div>
 @endsection

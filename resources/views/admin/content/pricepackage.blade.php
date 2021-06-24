@@ -2,6 +2,7 @@
 @section('title','Payment Plans')
     
 @section('content')
+<div class="m-5">
 <nav aria-label="breadcrumb" class="main-breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -9,8 +10,9 @@
         <li class="breadcrumb-item active" aria-current="page">Payment Plans</li>
     </ol>
 </nav>
+<div class=" rounded">
 <div class="col-md-6 col-12">
-    <div class="card">
+    <div class="card pcard">
         <div class="card-header">
             <h4 class="card-title">Package</h4>
         </div>
@@ -65,5 +67,30 @@
         </div>
     </div>
 </div>
-
+</div>
+</div>
 @endsection
+@section('extrascripts')
+  <link rel="stylesheet" type="text/css" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+ <script>
+     @if(Session::has('message'))
+       toastr.options =
+       {
+         "closeButton" : true,
+         "progressBar" : true
+       }
+           toastr.success("{{ session('message') }}");
+   @endif
+   @if(Session::has('error'))
+       toastr.options =
+       {
+         "closeButton" : true,
+         "progressBar" : true
+       }
+           toastr.warning("{{ session('error') }}");
+   @endif
+ </script>
+ @endsection

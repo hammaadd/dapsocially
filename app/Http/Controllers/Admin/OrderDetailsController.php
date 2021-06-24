@@ -28,6 +28,7 @@ class OrderDetailsController extends Controller
                     ->addColumn('action', function($row){
     
                            $btn = '
+                           <a href="'.route('order.delete',$row).'" onclick="return confirm(\'Do you really want to delete the order\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                             <a href="'.route('orderusersprofile.view',$row).'" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
                            ';
     
@@ -36,6 +37,13 @@ class OrderDetailsController extends Controller
                     })
                     ->make();
     }
+}
+public function delete_order($id)
+{
+    
+    $del=Order::find($id);
+    $del->delete();
+    return back();
 }
 public function profile_view($id)
 {
@@ -49,4 +57,5 @@ public function profile_view($id)
  
     return view('admin.content.orderinguserprofile',compact('data'));
 }
+
 }

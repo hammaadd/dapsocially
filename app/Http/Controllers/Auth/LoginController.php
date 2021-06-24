@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 
 class LoginController extends Controller
 {
@@ -30,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    ///protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -44,11 +47,40 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
         } elseif ($user->hasRole('user') && $user->isactive==1) {
-            return redirect()->route('user.home');
+
+            return redirect()->route('my.account');
         }
+    }
+    protected function logout(Request $request)
+    {
+        $user=User::find(Auth::user()->id);
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        if ($response = $this->loggedOut($request)) {
+            return $response;
+        }
+
+        // return $request->wantsJson()
+        //     ? new JsonResponse([], 204)
+        //     : redirect('/admin/login');
+
+
+        if ($user->hasRole('superadministrator')) {
+            return redirect('/admin/login');
+         }
+         elseif ($user->hasRole('user') ) {
+            return redirect('signin');
+         }
+
+
     }
     public function redirectToGoogle()
     {
@@ -59,9 +91,9 @@ class LoginController extends Controller
         $user = Socialite::driver("google")->stateless()->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('admin.login');
+        return redirect()->route('events');
 
-     
+
     }
     public function redirectToFacebook()
     {
@@ -72,24 +104,21 @@ class LoginController extends Controller
         $user = Socialite::driver("facebook")->stateless()->user();
         $this->_registerOrLoginUser($user);
 
-        return redirect()->route('user.home');
+        return redirect()->route('events');
 
     }
     protected function _registerOrLoginUser($data)
     {
         $user = User::where('email', '=', $data->email)->first();
 
+
         if (!$user) {
             $user = new User();
             $user->name = $data->name;
             $user->email = $data->email;
             $user->image = $data->avatar;
-            $user->dob = $data->name;
-            $user->profession = $data->name;
-            $user->mobile = $data->name;
-            $user->address = $data->name;
-            $user->password = $data->name;
-
+            $user->isactive = 1;
+            $user->password = Hash::make($data->name);
             $user->save();
             $user->attachRole('user');
         }

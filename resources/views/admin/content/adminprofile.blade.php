@@ -3,13 +3,8 @@
     
 @section('content')
 
-@if(Session::has('message'))
-<div class="mx-5 mr-5">
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>{{ Session::get('message') }}</strong> 
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
+<div class="m-5">
+
       <div class="col">
         <div class="row">
           <div class="col mb-3">
@@ -31,7 +26,7 @@
                       <div class="text-center text-sm-left mb-2 mb-sm-0">
                         <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{Auth::user()->name}}</h4>
                        
-                            <input type="file" class="btn btn-primary" id="img" name="img">
+                            <input type="file" class="custom-file-input" id="img" name="img">
                             
                       </div>
                       <div class="text-center text-sm-right">
@@ -52,7 +47,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label>Name</label>
-                                  <input class="form-control" type="text" name="uname"  id="uname" placeholder="{{Auth::user()->name}}" value="{{ Auth::user()->name }}">
+                                  <input class="form-control userm" type="text" name="uname"  id="uname" placeholder="{{Auth::user()->name}}" value="{{ Auth::user()->name }}">
                                   <span class="text-danger">@error('name'){{$message}}@enderror</span>
                                 </div>
                               </div>
@@ -68,7 +63,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label>Email</label>
-                                  <input class="form-control" type="text" name="mail" id="mail" value="{{Auth::user()->email}}">
+                                  <input class="form-control userm" type="text" name="mail" id="mail" value="{{Auth::user()->email}}">
                                   <span class="text-danger">@error('mail'){{$message}}@enderror</span>
                                 </div>
                               </div>
@@ -135,5 +130,30 @@
       </div>
     </div>
   </div>
-    
+</div>
+
  @endsection   
+ @section('extrascripts')
+ <link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+    @if(Session::has('message'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+          toastr.success("{{ session('message') }}");
+  @endif
+  @if(Session::has('error'))
+      toastr.options =
+      {
+        "closeButton" : true,
+        "progressBar" : true
+      }
+          toastr.warning("{{ session('error') }}");
+  @endif
+</script>
+ @endsection

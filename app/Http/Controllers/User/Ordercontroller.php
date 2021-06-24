@@ -16,6 +16,10 @@ use SquareConnect\Model\Order as ModelOrder;
 
 class Ordercontroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('user.content.packages');
@@ -30,8 +34,8 @@ class Ordercontroller extends Controller
             'fname' => 'required',
             'email' => 'required',
             'contact' => 'required',
-            
-            
+
+
             ]);
             $table=new Order();
             $table->order_type='event';
@@ -46,7 +50,7 @@ class Ordercontroller extends Controller
                     $q->where('name', 'superadministrator');
                 }
             )->get();
-            
+
             $details = [
                 'greeting' => 'Hi '.Auth::user()->name,
                 'body' => 'A new Order is placed by user named '.Auth::user()->name.' ',
@@ -54,18 +58,18 @@ class Ordercontroller extends Controller
             ];
             Notification::send($user, new OrdersNotifications($details));
             //$user->notify(new OrdersNotifications($details));
-            
-    
+
+
             return redirect()->route('check.out',['id'=>$table->id, 'total_payment'=>$table->total_payment]);
         }
         public function check_out($id,$total_payment)
         {
          $data=['id'=>$id,'total_payment'=>$total_payment];
-         return view('user.content.checkout',compact('data'));    
+         return view('user.content.checkout',compact('data'));
         }
         public function payment_process($id,$total_payment)
         {
-            
+
             $table=new Payments();
             $table->account_type='event';
             $table->payment=$total_payment;

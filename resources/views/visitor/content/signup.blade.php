@@ -9,7 +9,7 @@
         <a href="#">
             <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
         </a>
-        <a href="#" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
+        <a href="{{route('signin')}}" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
     </div>
     <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen"
         x-show="nav"
@@ -24,13 +24,14 @@
             <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
         </div>
         <ul class="text-center text-white">
-            <li class="py-1"><a href="#" class="text-xl">Home</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Events</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Venues</a></li>
-            <li class="py-1"><a href="#" class="text-xl">Get Started</a></li>
+           <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
+                <li class="py-1"><a href="{{route('events')}}" class="text-xl">Events</a></li>
+                <li class="py-1"><a href="{{route('venue')}}" class="text-xl">Venues</a></li>
+            <li class="py-1"><a href="{{route('signin')}}" class="text-xl">Get Started</a></li>
             <li class="py-2">
-                <a href="#" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
+                <a href="{{route('signup')}}" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">SIGNUP</a>
             </li>
+
         </ul>
         <hr class="w-4/5 mx-auto my-3 border-gray-400">
         <ul class="text-gray-300 text-center">
@@ -50,46 +51,62 @@
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10 relative md:form-side">
                     <h3 class="text-white md:text-lg font-medium">Signup Using Your Email</h3>
-                    <form action="#" class="pt-3">
-                        <input type="text" class="w-full bg-white rounded-3xl border-gray-200 px-4 mb-3" placeholder="Name">
-                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4" placeholder="Email">
+                    <form action="{{ route('register') }}" class="pt-3" method="POST">
+                        @csrf
+                        <input type="text" class="w-full bg-white rounded-3xl border-gray-200 px-4 mb-3" placeholder="Name" id="name" name="name" value="{{ old('name') }}" required>
+                        <span class="text-danger">@error('name'){{$message}}@enderror</span>
+                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required autocomplete="new-password">
+                        <span class="text-danger">@error('email'){{$message}}@enderror</span>
                         <div class="my-3 relative rounded-3xl" x-data="{ ptoggle: true}">
-                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 " placeholder="Password"/>
+                            <input :type="ptoggle ? 'password' : 'text'" name="password" id="password" class="block w-full rounded-3xl border-gray-200 px-4 @error('password') is-invalid @enderror" placeholder="Password" required/>
+
                             <div class="absolute inset-y-0 right-0 pr-5 flex items-center">
                                 <span class="text-lg">
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
                                 </span>
                             </div>
+
                         </div>
+                        @error('password')
+                                    <span class=" text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
                         <div class="mb-3 relative rounded-3xl" x-data="{ ptoggle: true}">
-                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 " placeholder="Confirm Password"/>
+                            <input :type="ptoggle ? 'password' : 'text'" name="password_confirmation" id="password-confirm" class="block w-full rounded-3xl border-gray-200 px-4 @error('password_confirmation') is-invalid @enderror" placeholder="Confirm Password" autocomplete="new-password"/>
                             <div class="absolute inset-y-0 right-0 pr-5 flex items-center">
                                 <span class="text-lg">
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
                                 </span>
                             </div>
+
                         </div>
+                        @error('password_confirmation')
+                            <span class=" text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <p class="text-gray-300">
                             By creating an account, you are agreeing to our <a href="#" class="text-white hover:text-gray-300">Terms of Service</a> and <a href="#" class="text-white hover:text-gray-300">Privacy Policy</a>.
                         </p>
                         <div class="pt-3 flex flex-wrap items-center justify-between">
-                            <a href="#" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Signup</a>
+                            <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white" >Signup</button>
                             <a href="#" class="text-white font-medium">Or Login Here!</a>
                         </div>
                         <div class="pt-4 text-center">
                             <p class="text-gray-300 text-sm">Sign-in with</p>
                             <div class="pt-2 text-center">
-                                <a href="#" class="mx-1">
+                                <a href="{{route('login.google')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/icons8_google.png')}}" class="mx-auto" alt="">
                                     </div>
                                 </a>
-                                <a href="#" class="mx-1">
+                                <a href="{{route('login.facebook')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
                                     </div>
                                 </a>
-                                <a href="#" class="mx-1">
+                                <a href="{{route('login.google')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-3 inline-block">
                                         <img src="{{asset('assets/icons8_twitter_1.png')}}" class="mx-auto" alt="">
                                     </div>

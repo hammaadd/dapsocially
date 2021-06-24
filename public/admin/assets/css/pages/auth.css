@@ -1,1 +1,204 @@
-body{background-color:#fff}#auth{height:100vh;overflow-x:hidden}#auth #auth-right{height:100%;background:url(../../images/bg/4853433.jpg),linear-gradient(90deg,#2d499d,#3f5491)}#auth #auth-left{padding:5rem 8rem}#auth #auth-left .auth-title{font-size:4rem;margin-bottom:1rem}#auth #auth-left .auth-subtitle{font-size:1.7rem;line-height:2.5rem;color:#a8aebb}#auth #auth-left .auth-logo{margin-bottom:7rem}#auth #auth-left .auth-logo img{height:2rem}@media screen and (max-width:767px){#auth #auth-left{padding:5rem}}
+body{background-color:#eef5fa;}#auth{height:100vh;overflow-x:hidden}#auth #auth-right{height:100%;background:url(../../images/bg/4853433.jpg),linear-gradient(90deg,#2d499d,#3f5491)}#auth #auth-left{padding:5rem 8rem}#auth #auth-left .auth-title{font-size:4rem;margin-bottom:1rem}#auth #auth-left .auth-subtitle{font-size:1.7rem;line-height:2.5rem;color:#a8aebb}#auth #auth-left .auth-logo{margin-bottom:7rem}#auth #auth-left .auth-logo img{height:2rem}@media screen and (max-width:767px){#auth #auth-left{padding:5rem}}
+.dataTables_filter{
+    width: 50%;
+    float: right;
+}
+.form-control-sm{
+    width: 100%;
+}
+.dataTables_length label {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+
+}
+.dataTables_length label select {
+    width: 40px;
+}
+.sidebar-wrapper .sidebar-header {
+    padding: 0.7rem 2rem 1rem;}
+
+.pagination
+{
+    float: right;
+    margin-right: 14px;
+}
+.dataTables_filter label{
+    float: right;
+}
+#auth #auth-left {
+    padding: 0rem 8rem;
+}
+
+
+.text-nowrap{
+    margin-right: 250px;
+}
+#img{
+    margin-top:20px;
+}
+
+
+.custom-file-input {
+  color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: 'Select Picture';
+  color: white;
+  display: inline-block;
+  background: #435ebe;
+  border: 1px solid #435ebe;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+
+  -webkit-user-select: none;
+  cursor: pointer;
+
+  font-weight: 400;
+  font-size: 10pt;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+/* element.style {
+    margin-top: 10px;
+
+    margin-left: 402px;
+} */
+#auth #auth-left .auth-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.dataTables_wrapper .row{
+  align-items:center;
+}
+
+input#key {
+    margin-left: -47px;
+    width: 118%;
+}
+input#heading {
+  width: 569px;
+}
+input#ckey {
+  width: 569px;
+}
+textarea#quote {
+    margin-left: -47px;
+    width: 118%;
+}
+
+button.btn.btn-primary.me-1.mb-1.con {
+  margin-top: 14px;
+  margin-right: 1.25rem!important;
+
+
+
+}
+
+button.btn.btn-primary.me-1.mb-1{
+  margin-top: 14px;
+  margin-right:1.25rem!important;
+
+
+}
+
+.dataTables_filter {
+  width: 70%;
+}
+.dataTables_filter label {
+  line-height: 31px;
+}
+
+.dataTables_filter .form-control {
+  width: 150px;
+  float: right;
+  margin-left: 10px;
+ margin-bottom: 20px;
+}
+div#usersdata_filter {
+  margin-right: 14px;
+}
+input#eckey {
+  width: 566px;
+}
+
+.userm{
+  width:445px;}
+  form.form {
+    background-color: white;
+}
+nav.navbar.navbar-expand.navbar-light.shadow-sm {
+  background: white;
+}
+.yajra-t.rounded {
+  border-radius: 0.70rem!important;
+  background: white;
+}
+
+  .yajra-t {
+      margin: 2rem!important;
+      padding: 24px;
+  }
+
+.pcard {
+    width: 201%;
+}
+.scard{
+  width:151%;
+}
+.rolecard {
+    width: 198%;
+    margin-left: 17px;
+}
+
+.form-check.usercat {
+    margin-left: -43px;
+    margin-top: 15px;
+}
+
+.file.adds{
+    visibility: hidden;
+    position: absolute;
+  }
+  .ml-2.col-sm-6.uppic {
+    margin-left: 195px;
+}
+img#preview {
+    margin-left: 195px;
+}
+.form-check.adds {
+    margin-left: 195px;
+    margin-top: 15px;
+}
+.col-md-6.addtime{
+    margin-left: 192px;
+    margin-top: 10px;
+}
+img.add-img {
+    width: 39%;
+    margin-left: 198px;
+}
+select#basicSelect.add {
+
+        width: 122%;
+
+}
+.embed-responsive.embed-responsive-1by1 {
+    margin-left: 12%;
+}
+button.btn.btn-primary.me-1.mb-1.add{
+    margin-top: 14px;
+    margin-right: 7.25rem!important;
+}

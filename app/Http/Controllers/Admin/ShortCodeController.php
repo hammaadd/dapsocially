@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Shortcode;
 use Laravel\Ui\Presets\React;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Session;
 class ShortCodeController extends Controller
 {
     public function __construct()
@@ -31,7 +32,8 @@ class ShortCodeController extends Controller
         $table->key=$key;
         $table->content=$request->quote;
         $table->save();
-        return redirect()->route('short.code');
+        Session::flash('message', 'Added succesfully');
+        return back();
     
        
         
@@ -43,7 +45,8 @@ class ShortCodeController extends Controller
     public function updatecode(Request $request){
         
         Shortcode::where('id', $request->id)->update(['key' => $request->keys,"content"=>$request->quote]);
-        return redirect()->route('short.code');
+        Session::flash('message', 'Updated succesfully');
+        return back();
 
         
 
@@ -51,7 +54,8 @@ class ShortCodeController extends Controller
     public function deletecode($id){
         $del=Shortcode::find($id);
         $del->delete();
-        return redirect()->route('short.code');
+        Session::flash('error', 'Deleted succesfully');
+        return back();
     }
     public function get_shortcode(Request $request)
     {
@@ -62,7 +66,7 @@ class ShortCodeController extends Controller
                     ->addColumn('action', function($row){
     
                            $btn = '<a href="'.route('edit.code',$row).'" class="edit btn btn-warning btn-sm" title="Edit"><i class="bi bi-pencil" ></i></a>
-                            <a href="'.route('delete.code',$row).'" onclick="return confirm(\'Do you really want to delete the customer\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                            <a href="'.route('delete.code',$row).'" onclick="return confirm(\'Do you really want to delete the shortcode\');" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                             ';
     
     
@@ -71,5 +75,9 @@ class ShortCodeController extends Controller
                     ->make();
         }
         
+    }
+    public function list_shortcode()
+    {
+     return view('admin.content.listshortcode');
     }
 }

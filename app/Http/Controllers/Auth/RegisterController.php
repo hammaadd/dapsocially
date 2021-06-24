@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::DAPHOME;
 
     /**
      * Create a new controller instance.
@@ -49,22 +49,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $user= User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'dob'=>$data['dob'],
-            'address'=>$data['address'],
-            'mobile'=>$data['mobile'],
-            'image'=>"1.jpg",
-            'profession'=>$data['profession'],
-            'isactive'=>1,
-            
-            
-            
+        return  Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['required','same:password'],
         ]);
-        $user->attachRole('user');
-        return $user;
+ 
+       
     }
 
     /**
@@ -75,19 +67,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'dob'=>$data['dob'],
-            'address'=>$data['address'],
-            'mobile'=>$data['mobile'],
-            'image'=>"1.jpg",
-            'profession'=>$data['profession'],
-            'isactive'=>1,
+           
             
 
         ]);
+        $user->attachRole('user');
+        return $user;
         
        
     }

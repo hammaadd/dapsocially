@@ -32,7 +32,7 @@ public function getUsers(Request $request){
 
                        $btn = '<a href="'.route('usersprofile.view',$row).'" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
                         <a href="'.route('assign.role',$row).'" class="btn btn-success btn-sm" title="Role"><i class="bi  bi-bootstrap-reboot"></i></a>
-                        <a href="'.route('assignpermission.form',$row).'" class="btn btn-info btn-sm" title="Permission"><i class="bi  bi-pencil-square"></i></a>';
+                        ';
 
 
                         return $btn;

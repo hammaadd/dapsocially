@@ -2,7 +2,7 @@
 @section('title', 'User Profile')
 
 @section('content')
-
+<div class="m-5 ">
     <div class="container">
         <div class="main-body">
 
@@ -25,7 +25,7 @@
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ $user->name }}</h4>
-                                    <p class="text-secondary mb-1">{{ $user->profession }}</p>
+                                    {{-- <p class="text-secondary mb-1">{{ $user->profession }}</p> --}}
                                     <p class="text-muted font-size-sm">{{ $user->address }}</p>
                                     @if ($user->isactive == 1)
                                         <a class="btn btn-primary"
@@ -66,22 +66,15 @@
                                 </div>
                             </div>
 
+
+
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Mobile</h6>
+                                    <h6 class="mb-0">Account type</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{ $user->mobile }}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Address</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{ $user->address }}
+                                    {{ $user->account_type }}
                                 </div>
                             </div>
                             <hr>
@@ -104,10 +97,12 @@
 
                                     @if ($user->isactive == 0)
                                         <b class="text-danger"> Status</b>
-                                        <a class="btn btn-danger" href="#">Deactive</a>
+                                        <span class="badge bg-danger">Deactive</span>
+
                                     @else
                                         <b class="text-success"> Status</b>
-                                        <button class="btn btn-success">Active</button>
+                                        <span class="badge bg-success">Active</span>
+
                                     @endif
 
                                 </div>
@@ -122,4 +117,5 @@
 
         </div>
     </div>
+</div>
 @endsection

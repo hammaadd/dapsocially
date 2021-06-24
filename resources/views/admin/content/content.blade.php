@@ -2,6 +2,7 @@
 @section('title', 'Content')
 
 @section('content')
+<div class="m-5">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -22,10 +23,10 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>key</label>
+                                        <label>Key</label>
                                     </div>
                                     <div class="col-md-8 form-group">
-                                        <input type="text" id="key" class="form-control" name="key" placeholder="key">
+                                        <input type="text" id="ckey" class="form-control" name="key" placeholder="key">
                                         <span class=" text-danger" role="alert">
                                             @error('key')
                                                 <strong>{{ $message }}</strong>
@@ -34,7 +35,7 @@
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label>heading</label>
+                                        <label>Heading</label>
                                     </div>
                                     <div class="col-md-8 form-group">
                                         <input type="text" id="heading" class="form-control" name="heading" placeholder="heading">
@@ -63,7 +64,7 @@
                                     <br>
                                     <br>
                                     <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Add</button>
+                                        <button type="submit" class="btn btn-primary me-1 mb-1 con">Add Content</button>
 
                                     </div>
                                 </div>
@@ -83,7 +84,7 @@
 
 
 
-
+</div>
 @endsection
 @section('extrascripts')
     <script src="{{ asset('admin/assets/vendors/tinymce/tinymce.min.js') }}"></script>
@@ -100,6 +101,27 @@
         });
 
     </script>
+ <link rel="stylesheet" type="text/css" 
+ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+@if(Session::has('message'))
+  toastr.options =
+  {
+    "closeButton" : true,
+    "progressBar" : true
+  }
+      toastr.success("{{ session('message') }}");
+@endif
+@if(Session::has('error'))
+  toastr.options =
+  {
+    "closeButton" : true,
+    "progressBar" : true
+  }
+      toastr.warning("{{ session('error') }}");
+@endif
+</script>
 
 @endsection
