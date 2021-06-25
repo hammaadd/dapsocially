@@ -109,9 +109,12 @@ class AccountController extends Controller
         }
 
         
-
+        $response = $this->fb->get(
+            '/me/feed',
+            $accessToken->getValue()
+          );
          // Get login url 
-        dd($accessToken->getValue());
+        dd($response);
 
 
      }
