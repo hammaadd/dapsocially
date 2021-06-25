@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\User\Attached_Account;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -105,8 +106,8 @@ class LoginController extends Controller
     {
         $user = Socialite::driver('facebook')->stateless()->user();
 
-        dd($user);
-        //$this->_registerOrLoginUser($user,'facebook');
+        //dd($user);
+        $this->_registerOrLoginUser($user,'facebook');
 
 
 
@@ -120,6 +121,8 @@ class LoginController extends Controller
             $ac=new Attached_Account();
             $ac->user_id=Auth::user()->id;
             $ac->verified_acc=$attached_account;
+            $ac->token = $data->token;
+            $ac->user_social_id = $data->id;
             $ac->save();
             return redirect()->route('my.account');
         }
@@ -135,12 +138,14 @@ class LoginController extends Controller
             $ac=new Attached_Account();
             $ac->user_id=$user->id;
             $ac->verified_acc=$attached_account;
+            $ac->token = $data->token;
+            $ac->user_social_id = $data->id;
             $ac->save();
-
+           
 
         }
 
-
+        Session::put('fb_token',$data->token);
         Auth::login($user);
         return redirect()->route('my.account');
     }

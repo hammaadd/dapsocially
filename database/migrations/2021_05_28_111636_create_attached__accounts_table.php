@@ -17,7 +17,9 @@ class CreateAttachedAccountsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->string('verified_acc',191);
+            $table->enum('verified_acc',['facebook','instagram','twitter','tiktok']);
+            $table->longText('token')->nullable();
+            $table->text('user_social_id')->nullable();
             $table->timestamps();
         });
     }
