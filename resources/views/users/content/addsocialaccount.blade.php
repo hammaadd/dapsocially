@@ -19,7 +19,7 @@
                                         <img src="{{asset('assets/icons8_google.png')}}" class="mx-auto" alt="">
                                     </div>
                                 </a> --}}
-                                <a href="{{route('attach.facebook')}}" class="mx-1">
+                                <a href="{{route('get.token.facebook')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
                                     </div>
