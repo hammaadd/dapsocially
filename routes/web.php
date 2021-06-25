@@ -217,8 +217,10 @@ Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('
 
 //Square Api Route SquareApiController
 Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');
+Route::get('insta-posts', 'TestingApi\FetchFacebookPostController@instagram_posts')->name('insta.posts');
 Route::post('payment-process', 'TestingApi\SquareApiController@payment_process')->name('payment.process');
 Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
+
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
 

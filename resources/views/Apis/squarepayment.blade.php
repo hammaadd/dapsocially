@@ -3,6 +3,8 @@
 
 @section('content')
 <br><br><br><br>
+{{-- <a href='{{$ig->authorizationUrl}}'>Click here</a> --}}
+<a href='{{$ig->authorizationUrl}}'>Click here</a>
 <div id="form-container">
   <div id="sq-ccbox">
     <!--
@@ -69,10 +71,10 @@
   <link rel="stylesheet" type="text/css" href="{{asset('payment/css/sqpaymentform-basic.css')}}">
 <script>
  document.addEventListener("DOMContentLoaded", function(event) {
-   
+
   if (SqPaymentForm.isSupportedBrowser()) {
     paymentForm.build();
-    
+
   }
 });
 </script>
@@ -80,14 +82,14 @@
 
 {{-- <script>
     const  appId = 'sandbox-sq0idb-R9LmKFQSWNTm_aA4ZD04sw';
-    const locationId = 'LVTKK4KR6AXZ9'; 
+    const locationId = 'LVTKK4KR6AXZ9';
     async function initializeCard(payments) {
        const card = await payments.card();
-       await card.attach('#card-container'); 
-       return card; 
+       await card.attach('#card-container');
+       return card;
      }
       // Call this function to send a payment token, buyer name, and other details
- // to the project server code so that a payment can be created with 
+ // to the project server code so that a payment can be created with
  // Payments API
  async function createPayment(token) {
    const body = JSON.stringify({
@@ -109,7 +111,7 @@
    throw new Error(errorBody);
  }
 
- // This function tokenizes a payment method. 
+ // This function tokenizes a payment method.
  // The ‘error’ thrown from this async function denotes a failed tokenization,
  // which is due to buyer error (such as an expired card). It is up to the
  // developer to handle the error and provide the buyer the chance to fix
@@ -128,7 +130,7 @@
      throw new Error(errorMessage);
    }
  }
- 
+
  // Helper method for displaying the Payment Status on the screen.
  // status is either SUCCESS or FAILURE;
  function displayPaymentResults(status) {
@@ -144,11 +146,11 @@
    }
 
    statusContainer.style.visibility = 'visible';
- }    
+ }
 
-     
-     
-    
+
+
+
     document.addEventListener('DOMContentLoaded', async function () {
       if (!window.Square) {
         throw new Error('Square.js failed to load properly');
@@ -161,7 +163,7 @@
         console.error('Initializing Card failed', e);
         return;
       }
-    
+
       // Step 5.2: create card payment
       async function handlePaymentMethodSubmission(event, paymentMethod) {
    event.preventDefault();
@@ -190,7 +192,7 @@
  });
 
     });
-     
+
         </script> --}}
-        
+
 @endsection
