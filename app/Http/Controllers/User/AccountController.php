@@ -73,7 +73,7 @@ class AccountController extends Controller
         
         
 
-        $permissions = ['email','user_posts']; // Optional permissions 
+        $permissions = ['email','user_posts','pages_show_list']; // Optional permissions 
         $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
         
         // Render Facebook login button 
