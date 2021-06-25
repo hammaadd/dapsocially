@@ -111,7 +111,7 @@ class AccountController extends Controller
 
          // Get login url 
         
-        dd($accessToken->value);
+        dd($_SESSION['facebook_access_token']);
 
 
      }
