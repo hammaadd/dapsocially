@@ -112,8 +112,8 @@ class LoginController extends Controller
             'first_name', 'last_name', 'email', 'gender', 'birthday'
         ])->user();
 
-        dd($user);
-       /// $this->_registerOrLoginUser($user,'facebook');
+        //dd($user);
+       $this->_registerOrLoginUser($user,'facebook');
 
 
 
@@ -151,7 +151,7 @@ class LoginController extends Controller
             Auth::login($user);
         }
 
-        // Session::put('fb_token',$data->token);
+        Session::put('fb_token',$data->token);
         // dd(Session::get('fb_token'));
         // return redirect()->route('my.account');
     }
