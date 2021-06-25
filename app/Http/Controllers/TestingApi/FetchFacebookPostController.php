@@ -23,7 +23,7 @@ class FetchFacebookPostController extends Controller
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
               '/me/feed',
-               Session::get('fb_token')
+               
             );
           } catch(FacebookResponseException $e) {
             dd('Graph returned an error: ' . $e->getMessage());
