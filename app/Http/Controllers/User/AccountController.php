@@ -12,6 +12,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
 class AccountController extends Controller
@@ -110,8 +111,8 @@ class AccountController extends Controller
         
 
          // Get login url 
-        
-        dd($_SESSION['facebook_access_token']);
+         Session::put('fb_token',$accessToken->getValue());
+        dd($_SESSION['fb_token']);
 
 
      }
