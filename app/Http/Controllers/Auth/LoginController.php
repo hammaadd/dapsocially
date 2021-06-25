@@ -100,11 +100,17 @@ class LoginController extends Controller
     }
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'birthday'
+        ])->scopes([
+            'email', 'user_birthday','user_posts'
+        ])->redirect();
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'birthday'
+        ])->user();
 
         dd($user);
        /// $this->_registerOrLoginUser($user,'facebook');
