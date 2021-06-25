@@ -146,7 +146,7 @@ class LoginController extends Controller
         }
 
         Session::put('fb_token',$data->token);
-        dd(Session::get(fb_token));
+        dd(Session::get('fb_token'));
         // return redirect()->route('my.account');
     }
 
