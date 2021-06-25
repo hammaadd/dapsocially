@@ -111,7 +111,7 @@ class AccountController extends Controller
 
          // Get login url 
         
-        dd($accessToken);
+        dd($accessToken->value);
 
 
      }
