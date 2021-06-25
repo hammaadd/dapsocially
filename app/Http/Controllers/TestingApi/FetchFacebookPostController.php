@@ -17,7 +17,7 @@ class FetchFacebookPostController extends Controller
       $fb = new Facebook([
         'app_id' => env('FACEBOOK_CLIENT_ID'),
         'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'default_graph_version' => 'v2.3',
+        'default_graph_version' => 'v11.0',
         // . . .
         ]);
         try {
