@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\User\Event;
 use App\Models\User\Venue;
 use App\Models\Location;
-use App\Models\User;
 use App\Models\User\Attached_Account;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
-use Facebook\PersistentData\MyLaravelPersistentDataHandler;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -92,7 +90,7 @@ class AccountController extends Controller
      public function getFbToken(){
 
        
-        session_start();
+        
         try { 
             if(isset($_SESSION['facebook_access_token'])){ 
                 $accessToken = $_SESSION['facebook_access_token']; 
