@@ -70,10 +70,10 @@ class AccountController extends Controller
             'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
             'default_graph_version' => 'v11.0',
         )); 
-        $this->helper = $fb->getRedirectLoginHelper();
+        $helper = $fb->getRedirectLoginHelper();
 
         $permissions = ['email','user_posts']; // Optional permissions 
-        $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
+        $loginURL = $helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
         
         // Render Facebook login button 
         $output = $loginURL;
@@ -90,13 +90,18 @@ class AccountController extends Controller
 
      public function getFbToken(){
 
-       
+        $fb = new Facebook(array( 
+            'app_id' => env('FACEBOOK_CLIENT_ID'), 
+            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
+            'default_graph_version' => 'v11.0',
+        )); 
+        $helper = $fb->getRedirectLoginHelper();
         
         try { 
             if(isset($_SESSION['facebook_access_token'])){ 
                 $accessToken = $_SESSION['facebook_access_token']; 
             }else{ 
-                  $accessToken = $this->helper->getAccessToken(); 
+                  $accessToken = $helper->getAccessToken(); 
             } 
         } catch(FacebookResponseException $e) { 
              echo 'Graph returned an error: ' . $e->getMessage(); 
