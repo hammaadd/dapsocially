@@ -7,6 +7,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Helpers\FacebookRedirectLoginHelper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FetchFacebookPostController extends Controller
 {
@@ -14,17 +15,18 @@ class FetchFacebookPostController extends Controller
     public $helper='';
     public function getPost()
     {
+      $user_id =Session::get('user_id');
       $fb = new Facebook([
-        'app_id' => '3021116741456838',
-        'app_secret' => 'e42319cf4c7518766b46f4c59956b145',
-        'default_graph_version' => 'v2.3',
+        'app_id' => env('FACEBOOK_CLIENT_ID'),
+        'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'default_graph_version' => 'v11.0',
         // . . .
         ]);
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              '/me/feed',
-              'EAAq7sI4zE8YBAHd63ocObEC8OBsZA2QjpRqIS6rvXyScQkZCtgGNwWnuTvbKZCVroLreJagzwtzVsjxKpt7xs77NBZCxS5rzzGMcmK5Q2tNepyPrDIiCnifZAQYPKl1EZAlQ3SHVDCjQCQwwxh22Ewfj9iXe7aGTkJLJeg3DSSv92EuuxZAqbhya38nqnBuwS9tXC3vE9JOGH8rXccnZBtLU'
+              '/'.$user_id.'/feed',
+               Session::get('fb_token')
             );
           } catch(FacebookResponseException $e) {
             dd('Graph returned an error: ' . $e->getMessage());

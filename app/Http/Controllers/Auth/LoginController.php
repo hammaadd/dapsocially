@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\User\Attached_Account;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -99,27 +100,38 @@ class LoginController extends Controller
     }
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'birthday','user_posts'
+        ])->scopes([
+            'email', 'user_birthday'
+        ])->redirect();
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver("facebook")->stateless()->user();
-        $this->_registerOrLoginUser($user,'facebook');
+        $user = Socialite::driver('facebook')->fields([
+            'first_name', 'last_name', 'email', 'gender', 'birthday','user_posts'
+        ])->user();
+
+        //dd($user);
+       $this->_registerOrLoginUser($user,'facebook');
 
 
 
     }
     protected function _registerOrLoginUser($data,$attached_account)
     {
-        dd($data);
+        // dd($data);
         $user = User::where('email', '=', $data->email)->first();
-
+        // Session::put('fb_token',$data->token);
+        // Session::put('user_id',$data->id);
         if(!$user && Auth::user()){
             $ac=new Attached_Account();
             $ac->user_id=Auth::user()->id;
             $ac->verified_acc=$attached_account;
+            $ac->token = $data->token;
+            $ac->user_social_id = $data->id;
             $ac->save();
-            return redirect()->route('my.account');
+            //return redirect()->route('my.account');
         }
         else if (!$user) {
             $user = new User();
@@ -133,13 +145,16 @@ class LoginController extends Controller
             $ac=new Attached_Account();
             $ac->user_id=$user->id;
             $ac->verified_acc=$attached_account;
+            $ac->token = $data->token;
+            $ac->user_social_id = $data->id;
             $ac->save();
-
+           
+            Auth::login($user);
         }
 
-
-        Auth::login($user);
-        return redirect()->route('my.account');
+        
+        // dd(Session::get('fb_token'));
+        // return redirect()->route('my.account');
     }
 
 

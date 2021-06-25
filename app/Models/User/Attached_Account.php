@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Attached_Account extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+    
 }

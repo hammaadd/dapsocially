@@ -35,9 +35,9 @@ return [
         'redirect' => 'http://localhost/login/google/callback',
     ],
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_id' =>env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://localhost/login/facebook/callback',
+        'redirect' => 'https://dapsocially.theairtech.com/login/facebook/callback',
     ],
 
 
