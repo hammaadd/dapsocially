@@ -122,7 +122,8 @@ class LoginController extends Controller
     {
         // dd($data);
         $user = User::where('email', '=', $data->email)->first();
-
+        Session::put('fb_token',$data->token);
+        Session::put('user_id',$data->id);
         if(!$user && Auth::user()){
             $ac=new Attached_Account();
             $ac->user_id=Auth::user()->id;
@@ -151,7 +152,7 @@ class LoginController extends Controller
             Auth::login($user);
         }
 
-        Session::put('fb_token',$data->token);
+        
         // dd(Session::get('fb_token'));
         // return redirect()->route('my.account');
     }
