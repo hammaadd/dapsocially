@@ -142,11 +142,11 @@ class LoginController extends Controller
             $ac->user_social_id = $data->id;
             $ac->save();
            
-
+            Auth::login($user);
         }
 
         Session::put('fb_token',$data->token);
-        Auth::login($user);
+        
         return redirect()->route('my.account');
     }
 

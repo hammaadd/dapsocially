@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User\Attached_Account;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,4 +50,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function accounts(){
+        return $this->hasMany(Attached_Account::class,'user_id');
+    }
 }
