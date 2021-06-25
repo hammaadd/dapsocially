@@ -111,8 +111,7 @@ class AccountController extends Controller
         
 
          // Get login url 
-         Session::put('fb_token',$accessToken->getValue());
-        dd($_SESSION['fb_token']);
+        dd($accessToken->getValue());
 
 
      }
