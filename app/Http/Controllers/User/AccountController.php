@@ -95,11 +95,12 @@ class AccountController extends Controller
         
         
         try { 
-            if(isset($_SESSION['facebook_access_token'])){ 
-                $accessToken = $_SESSION['facebook_access_token']; 
-            }else{ 
-                  $accessToken = $this->helper->getAccessToken(); 
-            } 
+            $accessToken = $this->helper->getAccessToken(); 
+            // if(isset($_SESSION['facebook_access_token'])){ 
+            //     $accessToken = $_SESSION['facebook_access_token']; 
+            // }else{ 
+            //       $accessToken = $this->helper->getAccessToken(); 
+            // } 
         } catch(FacebookResponseException $e) { 
              echo 'Graph returned an error: ' . $e->getMessage(); 
               exit; 
