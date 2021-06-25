@@ -124,7 +124,7 @@ class LoginController extends Controller
             $ac->token = $data->token;
             $ac->user_social_id = $data->id;
             $ac->save();
-            return redirect()->route('my.account');
+            //return redirect()->route('my.account');
         }
         else if (!$user) {
             $user = new User();
@@ -146,7 +146,7 @@ class LoginController extends Controller
         }
 
         Session::put('fb_token',$data->token);
-        dd(Session::get());
+        dd(Session::get(fb_token));
         // return redirect()->route('my.account');
     }
 
