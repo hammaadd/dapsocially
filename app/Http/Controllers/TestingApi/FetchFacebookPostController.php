@@ -23,7 +23,7 @@ class FetchFacebookPostController extends Controller
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              '/{$user_id}/feed',
+              '/'.$user_id.'/feed',
                Session::get('fb_token')
             );
           } catch(FacebookResponseException $e) {
