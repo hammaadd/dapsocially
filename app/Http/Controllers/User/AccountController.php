@@ -19,6 +19,7 @@ class AccountController extends Controller
     public $hepler;
     public function __construct()
     {
+        $this->helper = '';
         $this->middleware('auth');
     }
     public function index()
