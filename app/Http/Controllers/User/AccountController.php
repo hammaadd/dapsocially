@@ -12,11 +12,13 @@ use App\Models\User\Attached_Account;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
+use Facebook\PersistentData\MyLaravelPersistentDataHandler;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class AccountController extends Controller
 {
+    public $hepler;
     public function __construct()
     {
         $this->middleware('auth');
@@ -62,7 +64,23 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
-        return view('users.content.addsocialaccount');
+        
+        session_start();
+        $fb = new Facebook(array( 
+            'app_id' => env('FACEBOOK_CLIENT_ID'), 
+            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
+            'default_graph_version' => 'v11.0',
+        )); 
+        $this->helper = $fb->getRedirectLoginHelper();
+
+        $permissions = ['email','user_posts']; // Optional permissions 
+        $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
+        
+        // Render Facebook login button 
+        $output = $loginURL;
+
+
+        return view('users.content.addsocialaccount',['url'=>$output]);
     }
 
      public function redirectToFacebook()
@@ -73,27 +91,26 @@ class AccountController extends Controller
 
      public function getFbToken(){
 
-        $fb = new Facebook(array( 
-            'app_id' => env('FACEBOOK_CLIENT_ID'), 
-            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
-            'default_graph_version' => 'v11.0', 
-        )); 
-        $helper = $fb->getRedirectLoginHelper();
-
+       
+        session_start();
         try { 
             if(isset($_SESSION['facebook_access_token'])){ 
                 $accessToken = $_SESSION['facebook_access_token']; 
             }else{ 
-                  $accessToken = $helper->getAccessToken(); 
+                  $accessToken = $this->helper->getAccessToken(); 
             } 
         } catch(FacebookResponseException $e) { 
              echo 'Graph returned an error: ' . $e->getMessage(); 
               exit; 
         } catch(FacebookSDKException $e) { 
-            echo 'Facebook SDK returned an error: ' . $e->getMessage(); 
+            echo 'Facebook SDK returned an error: ' . $e->getMessage();
               exit; 
         }
 
+        
+
+         // Get login url 
+        
         dd($accessToken);
 
 
