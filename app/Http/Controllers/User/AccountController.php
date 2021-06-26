@@ -20,14 +20,14 @@ class AccountController extends Controller
     public $hepler, $fb;
     public function __construct()
     {
-        session_start();
-        $this->fb = new Facebook(array( 
-            'app_id' => env('FACEBOOK_CLIENT_ID'), 
-            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
-            'default_graph_version' => 'v11.0',
-        )); 
-        $this->helper = $this->fb->getRedirectLoginHelper();
-        $this->middleware('auth');
+        // session_start();
+        // $this->fb = new Facebook(array(
+        //     'app_id' => env('FACEBOOK_CLIENT_ID'),
+        //     'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        //     'default_graph_version' => 'v11.0',
+        // ));
+        // $this->helper = $this->fb->getRedirectLoginHelper();
+        // $this->middleware('auth');
     }
     public function index()
     {
@@ -70,15 +70,15 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
-        
-        
-        
 
-        $permissions = ['email','user_posts','pages_show_list']; // Optional permissions 
-        $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
-        
-        // Render Facebook login button 
-        $output = $loginURL;
+
+
+
+        //  $permissions = ['email','user_posts','pages_show_list']; // Optional permissions
+        //  $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions);
+
+        // Render Facebook login button
+        $output = "";
 
 
         return view('users.content.addsocialaccount',['url'=>$output]);
@@ -92,28 +92,27 @@ class AccountController extends Controller
 
      public function getFbToken(){
 
-        
-        
-        try { 
-            if(isset($_SESSION['facebook_access_token'])){ 
-                $accessToken = $_SESSION['facebook_access_token']; 
-            }else{ 
-                  $accessToken = $this->helper->getAccessToken(); 
-            } 
-        } catch(FacebookResponseException $e) { 
-             echo 'Graph returned an error: ' . $e->getMessage(); 
-              exit; 
-        } catch(FacebookSDKException $e) { 
+
+        try {
+            if(isset($_SESSION['facebook_access_token'])){
+                $accessToken = $_SESSION['facebook_access_token'];
+            }else{
+                  $accessToken = $this->helper->getAccessToken();
+            }
+        } catch(FacebookResponseException $e) {
+             echo 'Graph returned an error: ' . $e->getMessage();
+              exit;
+        } catch(FacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              exit; 
+              exit;
         }
 
-        
+
         $response = $this->fb->get(
             '/me/feed',
             $accessToken->getValue()
           );
-         // Get login url 
+         // Get login url
         dd($response);
 
 
