@@ -33,7 +33,7 @@ class AccountController extends Controller
     {
         $account=Attached_Account::where('user_id',Auth::user()->id)->get();
 
-       if(count($account)>1){
+       if(count($account)<1){
         $events = Event::where('created_by', '=', Auth::user()->id)->take(6)->get();
         $venues=Venue::where('created_by', '=', Auth::user()->id)->take(3)->get();
         $locations=Location::all();
