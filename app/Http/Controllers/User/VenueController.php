@@ -512,6 +512,7 @@ public function load_my_venues()
         }
 
         $del->delete();
+        Session::flash('message', 'Venue deleted succesfully succesfully');
         return back();
     }
     // public function edit_vavenueenue(Venue $venue)
@@ -650,8 +651,8 @@ public function load_my_venues()
             Venue::where('id',$venue->id)->update(['venue_name'=>$request->vname,'v_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id]);
 
-
-            return redirect()->route('my.venues');
+            Session::flash('message', 'Venue updated succesfully succesfully');
+            return back();
 
 
 

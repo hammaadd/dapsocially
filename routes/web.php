@@ -86,7 +86,7 @@ Route::get('/admin/login', function () {
 
 })->name('admin.login');
 
-Auth::routes(['verify'=>true,'reset' => false]);
+Auth::routes(['verify'=>true,]);
 
 //middleware(['auth'=>'role:superadministrator'])->
 Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
