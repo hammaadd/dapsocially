@@ -25,6 +25,10 @@ class FetchFacebookPostController extends Controller
               '/me',
                Session::get('fb_token')
             );
+
+            // array(
+            //   'fields'=>'first_name','gender','last_name','name','profile_pic','id'
+            // )
           } catch(FacebookResponseException $e) {
             dd('Graph returned an error: ' . $e->getMessage());
             exit;
@@ -32,10 +36,12 @@ class FetchFacebookPostController extends Controller
             dd('Facebook SDK returned an error: ' . $e->getMessage());
             exit;
           }
-          dd($response);
+          //dd($response);
+          $data = $response->getDecodedBody();
           // // $graphNode = $response->getDecodedBody();
           // $graphNode = $response->getGraphEdge();
           // dd($graphNode);
+          dd($data);
     }
 
 }
