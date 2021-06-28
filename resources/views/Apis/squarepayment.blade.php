@@ -4,7 +4,7 @@
 @section('content')
 <br><br><br><br>
 {{-- <a href='{{$ig->authorizationUrl}}'>Click here</a> --}}
-<a href='{{$ig->authorizationUrl}}'>Click here</a>
+{{-- <a href='{{$ig->authorizationUrl}}'>Click here</a> --}}
 <div id="form-container">
   <div id="sq-ccbox">
     <!--

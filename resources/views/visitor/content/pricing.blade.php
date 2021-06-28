@@ -5,7 +5,7 @@
 <section>
     <main class="max-w-6xl mx-auto">
         {{-- Social Plateforms Section --}}
-        <section class="py-10">
+        <section class="py-5 px-5 lg:py-10">
             <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                 <h3 class="text-xl font-medium text-center uppercase mt-5">Pricing</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 py-5">

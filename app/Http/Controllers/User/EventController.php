@@ -426,11 +426,15 @@ class EventController extends Controller
         }
 
         if(!is_null(Event_Social_Post::where('event_id',$event->id)->get())){
-        $del=Event_Social_Post::where('event_id',$event->id)->get();
-        $del->delete();
+        $dat=Event_Social_Post::where('event_id',$event->id)->get();
+        foreach($dat as $dt){
+            $dt->delete();
+        }
+
         }
 
         $del->delete();
+        Session::flash('message', 'Event deleted succesfully succesfully');
         return back();
     }
 
@@ -522,8 +526,8 @@ class EventController extends Controller
             Event::where('id',$event->id)->update(['event_name'=>$request->ename,'e_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 
-
-            return redirect()->route('my.events');
+            Session::flash('message', 'Event updated  succesfully');
+            return back();
             // if(!is_null($request->longitude && $request->latitude))
             // {
 

@@ -6,12 +6,12 @@
         <button class="text-white text-2xl focus:outline-none" @click=" nav = !nav ">
             <i class="fas fa-bars"></i>
         </button>
-        <a href="#">
+        <a href="{{route('homepage')}}">
             <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
         </a>
         <a href="{{route('signin')}}" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
     </div>
-    <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen"
+    <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10"
         x-show="nav"
         @click.away="nav = !nav"
         x-transition:enter="transition transform origin-top-left ease-out duration-300"
@@ -91,7 +91,7 @@
                         </p>
                         <div class="pt-3 flex flex-wrap items-center justify-between">
                             <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white" >Signup</button>
-                            <a href="#" class="text-white font-medium">Or Login Here!</a>
+                            <a href="{{route('signin')}}" class="text-white font-medium">Or Login Here!</a>
                         </div>
                         <div class="pt-4 text-center">
                             <p class="text-gray-300 text-sm">Sign-in with</p>
@@ -125,7 +125,7 @@
                         <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-gray-300"><i class="fas fa-envelope pr-1"></i> admin@dapsocially.com</a></li>
                         <li class="py-1"><a href="#" class="hover:text-gray-300"><i class="fas fa-map-marked-alt pr-1"></i> 11 Brady Circle, Ste.300 St.Louis, MO 63114</a></li>
                     </ul>
-                    <div class="pt-4">
+                    <div class="pt-4 text-center md:text-left">
                         <a href="#" class="bg-transparent text-white px-5 py-1.5 rounded-3xl border-2 border-white hover:bg-white hover:text-blue-550">Contact Us</a>
                     </div>
                 </div>
