@@ -32,9 +32,10 @@ class FetchFacebookPostController extends Controller
             dd('Facebook SDK returned an error: ' . $e->getMessage());
             exit;
           }
-          // $graphNode = $response->getDecodedBody();
-          $graphNode = $response->getGraphEdge();
-          dd($graphNode);
+          dd($response);
+          // // $graphNode = $response->getDecodedBody();
+          // $graphNode = $response->getGraphEdge();
+          // dd($graphNode);
     }
 
 }
