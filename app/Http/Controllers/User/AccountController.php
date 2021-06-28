@@ -21,7 +21,14 @@ class AccountController extends Controller
     public function __construct()
     {
         session_start();
+        $this->fb = new Facebook(array( 
+            'app_id' => env('FACEBOOK_CLIENT_ID'), 
+            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
+            'default_graph_version' => 'v11.0',
+        )); 
+        $this->helper = $this->fb->getRedirectLoginHelper();
         $this->middleware('auth');
+        
     }
     public function index()
     {
