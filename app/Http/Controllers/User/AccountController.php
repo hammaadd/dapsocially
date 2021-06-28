@@ -80,7 +80,7 @@ class AccountController extends Controller
         // $this->helper = $this->fb->getRedirectLoginHelper();
         
 
-        $permissions = ['email','user_posts','pages_show_list','user_gender']; // Optional permissions 
+        $permissions = ['email','user_posts','pages_show_list','user_gender','user_videos']; // Optional permissions 
         $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
         
         // Render Facebook login button 
