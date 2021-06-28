@@ -40,7 +40,7 @@ $(document).ready(function (e) {
 <section>
     <main class="max-w-6xl mx-auto">
         {{-- Social Plateforms Section --}}
-        <section class="py-10">
+        <section class="py-5 lg:py-10 px-5">
             @if(!is_null($contents['platform']))
 
             <p class=" text-center uppercase font-medium text-xl">{{$contents['platform']->heading}}</p>
@@ -48,26 +48,26 @@ $(document).ready(function (e) {
                 Instagram, Facebook and Tiktok to give you unlimited flow of user-generated content
             </p>
             @endif
-            <div class=" flex flex-wrap overflow-hidden justify-around max-w-3xl mx-auto py-5">
-                <div class="text-center">
+            <div class=" grid grid-cols-2 md:grid-cols-4 gap-5 w-max max-w-3xl mx-auto py-5">
+                <div class="text-center w-24">
                     <div class="bg-white shadow rounded-full w-20 h-20 mx-auto grid place-items-center">
                         <img src="{{asset('assets/fb.png')}}" class="h-11 w-11" alt="">
                     </div>
                     <p class="mt-3 uppercase">Facebook</p>
                 </div>
-                <div class="text-center">
+                <div class="text-center w-24">
                     <div class="bg-white shadow rounded-full w-20 h-20 mx-auto grid place-items-center">
                         <img src="{{asset('assets/Insta.png')}}" class="h-11 w-11" alt="">
                     </div>
                     <p class="mt-3 uppercase">Instagram</p>
                 </div>
-                <div class="text-center">
+                <div class="text-center w-24">
                     <div class="bg-white shadow rounded-full w-20 h-20 mx-auto grid place-items-center">
                         <img src="{{asset('assets/twitter.png')}}" class="h-10 w-11" alt="">
                     </div>
                     <p class="mt-3 uppercase">Twitter</p>
                 </div>
-                <div class="text-center">
+                <div class="text-center w-24">
                     <div class="bg-white shadow rounded-full w-20 h-20 mx-auto grid place-items-center">
                         <img src="{{asset('assets/tiktok.png')}}" class="h-11 w-11" alt="">
                     </div>
@@ -77,15 +77,15 @@ $(document).ready(function (e) {
         </section>
 
         {{-- Search Form Section --}}
-        <section class="py-10">
+        <section class="lg:py-10 px-5">
             <form action="{{route('search')}}" method="POST" >
                 @csrf
-                <div class="flex space-x-8 justify-center items-end">
-                    <label for="keyword" class=" w-4/12">
+                <div class="flex flex-wrap md:flex-nowrap md:space-x-8 lg:space-x-8 justify-center items-end">
+                    <label for="keyword" class="w-full md:w-1/2 lg:w-4/12 py-2 lg:py-0">
                         SEARCH KEYWORD
                         <input type="text" name="keyword" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md" placeholder="#party">
                     </label>
-                    <label for="location" class=" w-4/12">
+                    <label for="location" class="w-full md:w-1/2 lg:w-4/12 py-2 lg:py-0">
                         LOCATION
                         <select name="location" id="" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             @foreach ($locations as $location)
@@ -93,7 +93,7 @@ $(document).ready(function (e) {
                             @endforeach
                         </select>
                     </label>
-                    <label for="activity" class=" w-3/12">
+                    <label for="activity" class="w-full md:w-1/2 lg:w-3/12 py-2 lg:py-0">
                         City
                         <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             @foreach ($loc as $city)
@@ -109,7 +109,7 @@ $(document).ready(function (e) {
                             @endforeach
                         </select>
                     </label> --}}
-                    <div class="lg:w-2/12 xl:w-1/12">
+                    <div class="w-full md:w-1/2 lg:w-2/12 xl:w-1/12 py-2 lg:py-0">
                         <input type="submit" value="SEARCH" class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
                     </div>
                 </div>
@@ -117,7 +117,7 @@ $(document).ready(function (e) {
         </section>
 
         {{-- Venues Section --}}
-        <section class="pt-4 pb-10">
+        <section class="pt-5 lg:pt-4 pb-10 px-5">
             @if(!is_null($contents['venuec']))
             <h3 class="section-title relative text-xl font-medium">
 
@@ -137,7 +137,7 @@ $(document).ready(function (e) {
 
                 @foreach ($venues as $venue)
                 <div class="relative">
-                    <img src="{{asset('Users/VenueImages/'.$venue->c_image)}}" class="h-96 object-cover" alt="">
+                    <img src="{{asset('Users/VenueImages/'.$venue->c_image)}}" class="h-72 lg:h-96 object-cover w-full" alt="">
                     <div class="absolute w-full h-full bg-black bg-opacity-60 top-0 left-0">
                         <div class="absolute top-0 right-10 bg-black bg-opacity-70 text-white text-center px-3 py-2">
                             <p class="text-2xl font-bold">{{Illuminate\Support\Str::substr($venue->start_date, 8, 9)}}</p>
@@ -165,9 +165,9 @@ $(document).ready(function (e) {
         </section>
 
         {{-- Events Section --}}
-        <section class="py-10">
-            <div class="flex flex-wrap overflow-hidden">
-                <div class="w-full md:w-3/5 pl-2">
+        <section class="py-5 lg:py-10 px-5">
+            <div class="flex flex-wrap overflow-hidden justify-between">
+                <div class="w-full md:w-3/4 pl-2">
                     @if(!is_null($contents['eventc']))
                     <h3 class="section-title relative text-xl font-medium">
 
@@ -180,7 +180,7 @@ $(document).ready(function (e) {
                     </p>
                     @endif
                 </div>
-                <div class="w-full md:w-2/5 flex items-center justify-end">
+                <div class="w-full md:w-1/4 w- flex items-center justify-center md:justify-end pt-5 md:pt-0">
                     <a href="{{route('events')}}" class="bg-blue-550 text-white py-1.5 px-3 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">VIEW ALL EVENTS</a>
                 </div>
             </div>
@@ -193,7 +193,7 @@ $(document).ready(function (e) {
 
                 @foreach ($events as $event)
                 <div class="relative">
-                    <img src="{{asset('Users/EventImages/'.$event->c_image)}}" class="h-96 object-cover" alt="">
+                    <img src="{{asset('Users/EventImages/'.$event->c_image)}}" class="h-72 lg:h-96 object-cover w-full" alt="">
                     <div class="absolute w-full h-full bg-black bg-opacity-60 top-0 left-0">
                         <div class="absolute top-0 left-10 bg-black bg-opacity-70 text-white text-center px-3 py-2">
                             <p class="text-2xl font-bold">{{Illuminate\Support\Str::substr($event->start_date, 8, 9)}}</p>
@@ -219,13 +219,13 @@ $(document).ready(function (e) {
         </section>
 
         {{-- Trust Section --}}
-        <section class="py-10">
+        <section class="py-5 lg:py-10 px-5">
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-1/2">
-                    <img src="{{asset('assets/OBJECTS.jpg')}}" class="lg:max-w-sm" alt="">
+                    <img src="{{asset('assets/OBJECTS.jpg')}}" class="w-full max-w-sm mx-auto" alt="">
                 </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <p class="text-xl font-medium pb-8">
+                <div class="w-full md:w-1/2 flex flex-col justify-center py-5 md:py-0">
+                    <p class="text-xl font-medium pb-8 text-center md:text-left">
                         A SOCIAL FEED TRUSTED BY THE WORLD'S LEADING BRANDS
                     </p>
                     <div class="grid grid-cols-3 gap-4">

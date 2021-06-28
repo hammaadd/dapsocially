@@ -86,7 +86,7 @@ Route::get('/admin/login', function () {
 
 })->name('admin.login');
 
-Auth::routes(['verify'=>true,'reset' => false]);
+Auth::routes(['verify'=>true,'login'=>true,]);
 
 //middleware(['auth'=>'role:superadministrator'])->
 Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
@@ -185,6 +185,8 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::post('update-category', 'Admin\CategoryController@update_category')->name('update.category');
     Route::get('delete-/{id}', 'Admin\CategoryController@delete_category')->name('delete.category');
 
+    Route::get('layout-control', 'Admin\LayoutController@index')->name('layout.control');
+
 
 
 
@@ -217,7 +219,7 @@ Route::post('place-order', 'User\OrderController@place_order')->name('place.orde
 Route::get('check-out/{id}/{total_payment}', 'User\OrderController@check_out')->name('check.out');
 Route::get('payment-processing/{id}/{total_payment}', 'User\OrderController@payment_process')->name('payment.processing');
 
-Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
+//Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('get.post');
 
 //Square Api Route SquareApiController
 Route::get('spayment', 'TestingApi\SquareApiController@index')->name('square.payment');

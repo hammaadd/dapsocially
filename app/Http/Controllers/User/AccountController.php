@@ -34,7 +34,7 @@ class AccountController extends Controller
     {
         $account=Attached_Account::where('user_id',Auth::user()->id)->get();
 
-       if(count($account)>1){
+       if(count($account)<1){
         $events = Event::where('created_by', '=', Auth::user()->id)->take(6)->get();
         $venues=Venue::where('created_by', '=', Auth::user()->id)->take(3)->get();
         $locations=Location::all();
@@ -87,10 +87,7 @@ class AccountController extends Controller
          return Socialite::driver('facebook')->redirect();
      }
 
-     public function getFbToken(){
-
-        
-        
+     public function getFbToken(){    
         try { 
             $accessToken = $this->helper->getAccessToken(); 
             $response = $this->fb->get(
@@ -106,7 +103,7 @@ class AccountController extends Controller
               exit; 
         } catch(FacebookSDKException $e) { 
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              exit; 
+              exit;
         }
 
           Attached_Account::updateOrCreate(
@@ -117,7 +114,7 @@ class AccountController extends Controller
             
         
           return redirect()->route('my.account');
-        
+ 
 
 
      }
