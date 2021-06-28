@@ -41,7 +41,7 @@ class FetchFacebookPostController extends Controller
           // // $graphNode = $response->getDecodedBody();
           // $graphNode = $response->getGraphEdge();
           // dd($graphNode);
-          dd($data);
+          dd($data['id']);
     }
 
 }
