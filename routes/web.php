@@ -86,7 +86,7 @@ Route::get('/admin/login', function () {
 
 })->name('admin.login');
 
-Auth::routes(['verify'=>true,'reset' => false]);
+Auth::routes(['verify'=>true,'login'=>true,]);
 
 //middleware(['auth'=>'role:superadministrator'])->
 Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
@@ -184,6 +184,8 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('edit-category/{category}', 'Admin\CategoryController@edit_category')->name('edit.category');
     Route::post('update-category', 'Admin\CategoryController@update_category')->name('update.category');
     Route::get('delete-/{id}', 'Admin\CategoryController@delete_category')->name('delete.category');
+
+    Route::get('layout-control', 'Admin\LayoutController@index')->name('layout.control');
 
 
 

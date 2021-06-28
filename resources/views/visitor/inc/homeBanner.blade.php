@@ -6,8 +6,8 @@
 
                 <div class="overflow-hidden lg:w-1/3 xl:w-1/3">
                     <!-- Column Content -->
-                    <a href="{{route('homepage')}}" class="logo">
-                        <img src="{{asset('assets/logo.png')}}" class=" w-56" alt="DapSocially Logo">
+                    <a href="{{ route('homepage') }}" class="logo">
+                        <img src="{{ asset('assets/logo.png') }}" class=" w-56" alt="DapSocially Logo">
                     </a>
                 </div>
 
@@ -16,14 +16,14 @@
                     <div class="flex items-center justify-between">
                         <!-- Column Content -->
                         <a href="/" class="nav-item">Home</a>
-                        <a href="{{route('events')}}" class="nav-item">Events</a>
-                        <a href="{{route('venue')}}" class="nav-item">Venue</a>
-                        <a href="#" class="nav-item">Get Started</a>
+                        <a href="{{ route('events') }}" class="nav-item">Events</a>
+                        <a href="{{ route('venue') }}" class="nav-item">Venue</a>
+                        <a href="{{ route('signin') }}" class="nav-item">Get Started</a>
                     </div>
                     @if (!Auth::user())
-                    <a href="{{route('signin')}}" class="btn-login">Login</a>
+                        <a href="{{ route('signin') }}" class="btn-login">Login</a>
                     @elseif (Auth::user())
-                    <a href="{{route('my.account')}}" class="btn-login">My Account</a>
+                        <a href="{{ route('my.account') }}" class="btn-login">My Account</a>
                     @endif
 
                     <form action="#" class=" w-44">
@@ -33,7 +33,7 @@
                                     <i class="fas fa-search"></i>
                                 </span>
                             </div>
-                            <input type="text" name="search" class="search-input" placeholder="Search Here"/>
+                            <input type="text" name="search" class="search-input" placeholder="Search Here" />
                         </div>
                     </form>
                 </div>

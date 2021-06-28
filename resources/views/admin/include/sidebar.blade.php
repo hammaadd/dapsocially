@@ -167,7 +167,12 @@
                             </li> --}}
                         </ul>
                     </li>
-
+                    <li class="sidebar-item {{Request::is('layout-control')? 'active' : '' }}  ">
+                        <a href="{{route('layout.control')}}" class='sidebar-link'>
+                            <i class="bi bi-chat-left-text-fill"></i>
+                            <span>Layout Control</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

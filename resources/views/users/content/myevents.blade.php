@@ -1,39 +1,6 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','My Events')
-@section('headerExtra')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script>
 
-$(document).ready(function (e) {
-
-    $('#c').on('change', function () {
-        var query=$(this).children("option:selected").val();
-
-        $.ajax({
-   url:"{{ route('filter.location') }}",
-   method:'GET',
-   data:{'q':query},
-   dataType:'json',
-   success:function(data)
-   {
-    $('#location')
-    .find('option')
-    .remove()
-    .end()
-
-;
-    // for (var i in data) {
-    //         $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
-    //     }
-    $('#location').append(data);
-
-    }
-
-  })
-   });
-});
-</script>
-@endsection
 @section('content')
 @include('users.inc.nav')
 <main>
@@ -129,3 +96,61 @@ $(document).ready(function (e) {
 </main>
 @include('users.inc.footer')
 @endsection
+@section('headerExtra')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+$(document).ready(function (e) {
+
+    $('#c').on('change', function () {
+        var query=$(this).children("option:selected").val();
+
+        $.ajax({
+   url:"{{ route('filter.location') }}",
+   method:'GET',
+   data:{'q':query},
+   dataType:'json',
+   success:function(data)
+   {
+    $('#location')
+    .find('option')
+    .remove()
+    .end()
+
+;
+    // for (var i in data) {
+    //         $('#location').append('<option value=' + data[i] + '>' + data[i] + '</option>');
+    //     }
+    $('#location').append(data);
+
+    }
+
+  })
+   });
+});
+</script>
+
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+   @if(Session::has('message'))
+     toastr.options =
+     {
+       "closeButton" : true,
+       "progressBar" : true
+     }
+         toastr.success("{{ session('message') }}");
+ @endif
+ @if(Session::has('error'))
+     toastr.options =
+     {
+       "closeButton" : true,
+       "progressBar" : true
+     }
+         toastr.warning("{{ session('error') }}");
+ @endif
+</script>
+@endsection
+

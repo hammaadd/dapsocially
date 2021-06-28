@@ -6,7 +6,7 @@
         <button class="text-white text-2xl focus:outline-none" @click=" nav = !nav ">
             <i class="fas fa-bars"></i>
         </button>
-        <a href="#">
+        <a href="{{route('homepage')}}">
             <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
         </a>
         <a href="{{route('signin')}}" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
@@ -91,7 +91,7 @@
                         </p>
                         <div class="pt-3 flex flex-wrap items-center justify-between">
                             <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white" >Signup</button>
-                            <a href="#" class="text-white font-medium">Or Login Here!</a>
+                            <a href="{{route('signin')}}" class="text-white font-medium">Or Login Here!</a>
                         </div>
                         <div class="pt-4 text-center">
                             <p class="text-gray-300 text-sm">Sign-in with</p>
