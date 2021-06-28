@@ -24,7 +24,7 @@ class FetchFacebookPostController extends Controller
             $response = $fb->get(
               '/me',
               array(
-                'fields'=>'first_name,gender,last_name,name,profile_pic,id'
+                'fields'=>'first_name','gender','last_name','name','profile_pic','id'
               )
               ,
                Session::get('fb_token')
