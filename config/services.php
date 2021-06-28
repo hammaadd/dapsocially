@@ -38,7 +38,9 @@ return [
         'client_id' =>env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => 'https://dapsocially.theairtech.com/login/facebook/callback',
+        'default_graph_version' => 'v11.0',
     ],
+
 
 
 

@@ -17,16 +17,10 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AccountController extends Controller
 {
-    public $hepler, $fb;
+    protected $hepler, $fb;
     public function __construct()
     {
         session_start();
-        $this->fb = new Facebook(array( 
-            'app_id' => env('FACEBOOK_CLIENT_ID'), 
-            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
-            'default_graph_version' => 'v11.0',
-        )); 
-        $this->helper = $this->fb->getRedirectLoginHelper();
         $this->middleware('auth');
     }
     public function index()
@@ -70,8 +64,13 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
+        $this->fb = new Facebook([
+            'app_id' => env('FACEBOOK_APP_ID'), 
+            'app_secret' => env('FACEBOOK_APP_SECRET'), 
+            'default_graph_version' => 'v11.0',
+        ]);
         
-        
+        $this->helper = $this->fb->getRedirectLoginHelper();
         
 
         $permissions = ['email','user_posts','pages_show_list']; // Optional permissions 
@@ -115,7 +114,16 @@ class AccountController extends Controller
             $accessToken->getValue()
           );
          // Get login url 
-        dd($response);
+
+         $ac=new Attached_Account();
+            $ac->user_id=Auth::user()->id;
+            $ac->verified_acc='facebook';
+            $ac->token = $accessToken->getValue();
+            $ac->save();
+            Session::put('fb_token',$ac->token);
+        
+          return redirect()->route('my.account');
+        
 
 
      }
