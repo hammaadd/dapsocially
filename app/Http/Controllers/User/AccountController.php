@@ -116,10 +116,10 @@ class AccountController extends Controller
         }
 
         
-        $response = $this->fb->get(
-            '/me/feed',
-            $accessToken->getValue()
-          );
+        // $response = $this->fb->get(
+        //     '/me/feed',
+        //     $accessToken->getValue()
+        //   );
          // Get login url 
 
           Attached_Account::updateOrCreate(
