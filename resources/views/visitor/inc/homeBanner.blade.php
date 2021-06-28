@@ -1,13 +1,13 @@
 <section>
     <div class="w-full relative">
-        <img src="{{asset('assets/Banner.jpg')}}" alt="">
+        <img src="{{ asset('assets/Banner.jpg') }}" alt="">
         <div class=" absolute h-full w-full top-0">
             <nav class="flex flex-wrap overflow-hidden max-w-7xl mx-auto py-3">
 
                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                     <!-- Column Content -->
-                    <a href="{{route('homepage')}}" class="logo">
-                        <img src="{{asset('assets/logo.png')}}" class=" w-56" alt="DapSocially Logo">
+                    <a href="{{ route('homepage') }}" class="logo">
+                        <img src="{{ asset('assets/logo.png') }}" class=" w-56" alt="DapSocially Logo">
                     </a>
                 </div>
 
@@ -16,14 +16,14 @@
                     <div class="flex items-center justify-between">
                         <!-- Column Content -->
                         <a href="/" class="nav-item">Home</a>
-                        <a href="{{route('events')}}" class="nav-item">Events</a>
-                        <a href="{{route('venue')}}" class="nav-item">Venue</a>
-                        <a href="#" class="nav-item">Get Started</a>
+                        <a href="{{ route('events') }}" class="nav-item">Events</a>
+                        <a href="{{ route('venue') }}" class="nav-item">Venue</a>
+                        <a href="{{ route('signin') }}" class="nav-item">Get Started</a>
                     </div>
                     @if (!Auth::user())
-                    <a href="{{route('signin')}}" class="btn-login">Login</a>
+                        <a href="{{ route('signin') }}" class="btn-login">Login</a>
                     @elseif (Auth::user())
-                    <a href="{{route('my.account')}}" class="btn-login">My Account</a>
+                        <a href="{{ route('my.account') }}" class="btn-login">My Account</a>
                     @endif
 
                     <form action="#" class=" w-44">
@@ -33,7 +33,7 @@
                                     <i class="fas fa-search"></i>
                                 </span>
                             </div>
-                            <input type="text" name="search" class="search-input" placeholder="Search Here"/>
+                            <input type="text" name="search" class="search-input" placeholder="Search Here" />
                         </div>
                     </form>
                 </div>
@@ -41,19 +41,20 @@
             </nav>
             <div class="flex flex-wrap overflow-hidden max-w-7xl mx-auto h-5/6">
                 <div class="w-full md:w-1/2 overflow-hidden flex justify-center text-white flex-col pl-5">
-                    <h2 class="font-bold text-4xl uppercase">{{ (App\Models\Content::where('key','dapintro')->first())->heading}}</h2>
+                    <h2 class="font-bold text-4xl uppercase">
+                        {{ App\Models\Content::where('key', 'dapintro')->first()->heading }}</h2>
 
-                    <p class="text-2xl font-light text-gray-300"> {!! (App\Models\Content::where('key','dapintro')->first())->content!!}
+                    <p class="text-2xl font-light text-gray-300"> {!! App\Models\Content::where('key', 'dapintro')->first()->content !!}
                     </p>
                     <div class="pt-10">
-                        <a href="{{route('add-event')}}" class="btn-add-event">ADD YOUR EVENT</a>
-                        <a href="{{route('add-venue')}}" class="btn-add-venue">ADD YOUR VENUE</a>
+                        <a href="{{ route('add-event') }}" class="btn-add-event">ADD YOUR EVENT</a>
+                        <a href="{{ route('add-venue') }}" class="btn-add-venue">ADD YOUR VENUE</a>
                     </div>
 
                 </div>
                 <div class="w-full md:w-1/2 overflow-hidden flex items-center justify-center">
                     <div>
-                        <img src="{{asset('assets/Group 511.png')}}" class=" max-w-lg mx-auto" alt="">
+                        <img src="{{ asset('assets/Group 511.png') }}" class=" max-w-lg mx-auto" alt="">
                     </div>
                 </div>
             </div>
