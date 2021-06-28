@@ -122,7 +122,7 @@ class AccountController extends Controller
           );
          // Get login url 
 
-         $ac = Attached_Account::updateOrCreate(
+          Attached_Account::updateOrCreate(
              ['verified_acc'=>'facebook', 'user_id'=>Auth::id()],
              ['token'=>$accessToken->getValue()]
          );
@@ -130,7 +130,7 @@ class AccountController extends Controller
             // $ac->verified_acc='facebook';
             // $ac->token = $accessToken->getValue();
             // $ac->save();
-            Session::put('fb_token',$ac->token);
+            Session::put('fb_token',$accessToken->getValue());
         
           return redirect()->route('my.account');
         
