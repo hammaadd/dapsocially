@@ -1,52 +1,54 @@
 <header>
     <nav class="bg-gradient-to-tr from-blue-250 to-blue-550 py-2 relative shadow-md" x-data="{ nav: false}">
-        <div x-data="{ isOpen: false}" class="w-full max-w-7xl mx-auto flex flex-wrap overflow-hidden items-center justify-between flex-row-reverse md:flex-row px-5">
+        <div class="w-full max-w-7xl mx-auto flex flex-wrap items-center justify-between flex-row-reverse md:flex-row px-5">
             <button class="text-white text-2xl focus:outline-none" @click=" nav = !nav ">
                 <i class="fas fa-bars"></i>
             </button>
             <a href="{{route('homepage')}}">
                 <img src="{{asset('assets/logo.png')}}" class="w-44 md:w-56 md:pl-10" alt="DapSocially Logo">
             </a>
-            <div class="relative hidden md:flex flex-wrap overflow-hidden items-center cursor-pointer" @click=" isOpen = !isOpen ">
-                <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
-                <div class="text-white pl-2">
-                   <a href="javascript:void(0);"> <p class="font-medium">{{Auth::user()->name}}</p>
-                    <p class="text-xs">{{Auth::user()->account_type}}</p></a>
+            <div class=" relative" x-data="{ isOpen: false}">
+                <div class="hidden md:flex flex-wrap overflow-hidden items-center cursor-pointer" @click=" isOpen = !isOpen ">
+                    <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                    <div class="text-white pl-2">
+                       <a href="javascript:void(0);"> <p class="font-medium">{{Auth::user()->name}}</p>
+                        <p class="text-xs">{{Auth::user()->account_type}}</p></a>
+                    </div>
                 </div>
+                <ul
+                    x-show="isOpen"
+                    @click.away="isOpen = false"
+                    x-transition:enter="transition transform origin-top-right ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-75"
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition transform origin-top-right ease-out duration-200"
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-75"
+                    class="absolute bg-white shadow overflow-hidden rounded-xl w-60 mt-2 py-1 right-0 top-full z-20">
+                    <li class="border-b border-green-150 px-3 py-1">
+                        <a href="{{ route('profile') }}" class="">
+                            <i class="fas fa-user text-blue-550"></i>
+                            <span class="ml-2">Profile</span>
+                        </a>
+                    </li>
+                    <li class="border-b border-green-150 px-3 py-1">
+                        <a href="{{ route('my.account') }}" class="">
+                            <i class="fas fa-home text-blue-550"></i>
+                            <span class="ml-2">My Account</span>
+                        </a>
+                    </li>
+                    <li class=" px-3 py-1">
+                        <a href="#" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();" class="">
+                            <i class="fas fa-sign-out-alt text-blue-550"></i>
+                            <span class="ml-2">Logout</span>
+                        </a>
+                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </ul>
             </div>
-            <ul
-                x-show="isOpen"
-                @click.away="isOpen = false"
-                x-transition:enter="transition transform origin-top-right ease-out duration-200"
-                x-transition:enter-start="opacity-0 scale-75"
-                x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition transform origin-top-right ease-out duration-200"
-                x-transition:leave-start="opacity-100 scale-100"
-                x-transition:leave-end="opacity-0 scale-75"
-                class="absolute bg-white shadow overflow-hidden rounded-xl w-60 mt-2 py-1 right-0 top-full z-20">
-                <li class="border-b border-green-150 px-3 py-1">
-                    <a href="{{ route('profile') }}" class="">
-                        <i class="fas fa-user text-blue-550"></i>
-                        <span class="ml-2">Profile</span>
-                    </a>
-                </li>
-                <li class="border-b border-green-150 px-3 py-1">
-                    <a href="{{ route('my.account') }}" class="">
-                        <i class="fas fa-home text-blue-550"></i>
-                        <span class="ml-2">My Account</span>
-                    </a>
-                </li>
-                <li class=" px-3 py-1">
-                    <a href="#" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class="">
-                        <i class="fas fa-sign-out-alt text-blue-550"></i>
-                        <span class="ml-2">Logout</span>
-                    </a>
-                </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </ul>
         </div>
         <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10"
             x-show="nav"
