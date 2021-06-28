@@ -1,14 +1,28 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Add Your Event')
-@section('headerExtra')
-<link rel="stylesheet" href="{{asset('css/checkboxes.css')}}">
+@section('bodyExtra')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $('#myselect').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  });
+</script>
+@endsection
+@section('headerExtra')
+
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('css/checkboxes.css')}}">
 <script>
 
     $(document).ready(function(){
 
-    $("#select-img").click(function(e) {
-     $("#imageUpload").click();
+        $("#select-img").click(function(e) {
+        $("#imageUpload").click();
  });
 
 function fasterPreview1( uploader ) {
@@ -91,11 +105,12 @@ else {
 
 var checkboxes = document.getElementsByName('c[]');
 var inp = document.getElementsByName('inp[]');
-
+var fb_page=document.getElementsByName('fb_page[]');
+alert(inp);
 
 for (var i=0, n=checkboxes.length;i<n;i++)
 {
-    if(checkboxes[i].checked && checkboxes[i].value=='facebook' && inp[0].value=="")
+    if(checkboxes[i].checked && checkboxes[i].value=='facebook' && fb_page[0].value=="")
     {
         alert('Please add facebook page id or name ');
 
@@ -235,6 +250,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     </label>
                                 </li>
                                 <li class="inline-block mx-2">
+
                                     <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram">
                                     <label for="cb2" class="cb-label">
                                         <img src="{{asset('assets/Insta.png')}}" class="w-10 h-10 mx-auto" alt="">
@@ -274,8 +290,13 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*" >
+
+                                  <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
+                                    <option value="">Select An Option</option>
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                  </select>
 
                             </div>
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror

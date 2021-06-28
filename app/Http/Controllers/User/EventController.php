@@ -93,6 +93,7 @@ class EventController extends Controller
             's_time' => 'required',
             'e_date' => 'required',
             'e_time' => 'required',
+            'fb_page'=>'required',
             // 'fb' => 'required|min:1',
             // 'c_posts.*'=>'required|min1'
             //    'c_posts'=>'sometimes',

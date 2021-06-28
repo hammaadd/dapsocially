@@ -29,7 +29,7 @@
 
                     @foreach ($venues as $venue)
                     <div class="relative">
-                        <img src="{{asset('Users/venueImages/'.$venue->c_image)}}" class="h-96 object-cover" alt="">
+                        <img src="{{asset('Users/VenueImages/'.$venue->c_image)}}" class="h-96 object-cover" alt="">
                         <div class="absolute w-full h-full bg-black bg-opacity-60 top-0 left-0">
                             <div class="absolute top-0 left-10 bg-black bg-opacity-70 text-white text-center px-3 py-2">
                                 <p class="text-2xl font-bold">{{Illuminate\Support\Str::substr($venue->start_date, 8, 9)}}</p>
