@@ -23,6 +23,10 @@ class FetchFacebookPostController extends Controller
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
               '/me',
+              array(
+                'fields'=>'first_name,gender,last_name,name,profile_pic,id'
+              )
+              ,
                Session::get('fb_token')
             );
           } catch(FacebookResponseException $e) {
