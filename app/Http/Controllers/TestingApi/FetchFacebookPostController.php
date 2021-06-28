@@ -13,17 +13,16 @@ class FetchFacebookPostController extends Controller
     // public $helper='';
     public function getPost()
     {
-      $user_id =Session::get('user_id');
-      $fb = new Facebook([
-        'app_id' => env('FACEBOOK_CLIENT_ID'),
-        'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
+      // $fb_token =Session::get('fb_token');
+      $fb = new Facebook(array( 
+        'app_id' => env('FACEBOOK_APP_ID'), 
+        'app_secret' => env('FACEBOOK_APP_SECRET'), 
         'default_graph_version' => 'v11.0',
-        // . . .
-        ]);
+    )); 
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              '/'.$user_id.'/feed',
+              '/me/feed',
                Session::get('fb_token')
             );
           } catch(FacebookResponseException $e) {
