@@ -22,8 +22,8 @@ class AccountController extends Controller
     {
         session_start();
         $this->fb = new Facebook(array( 
-            'app_id' => env('FACEBOOK_CLIENT_ID'), 
-            'app_secret' => env('FACEBOOK_CLIENT_SECRET'), 
+            'app_id' => env('FACEBOOK_APP_ID'), 
+            'app_secret' => env('FACEBOOK_APP_SECRET'), 
             'default_graph_version' => 'v11.0',
         )); 
         $this->helper = $this->fb->getRedirectLoginHelper();
@@ -71,13 +71,13 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
-        $this->fb = new Facebook([
-            'app_id' => env('FACEBOOK_APP_ID'), 
-            'app_secret' => env('FACEBOOK_APP_SECRET'), 
-            'default_graph_version' => 'v11.0',
-        ]);
+        // $this->fb = new Facebook([
+        //     'app_id' => env('FACEBOOK_APP_ID'), 
+        //     'app_secret' => env('FACEBOOK_APP_SECRET'), 
+        //     'default_graph_version' => 'v11.0',
+        // ]);
         
-        $this->helper = $this->fb->getRedirectLoginHelper();
+        // $this->helper = $this->fb->getRedirectLoginHelper();
         
 
         $permissions = ['email','user_posts','pages_show_list']; // Optional permissions 
