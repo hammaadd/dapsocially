@@ -22,10 +22,7 @@ class FetchFacebookPostController extends Controller
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              '/'.Session::get('fb_id'),
-              array(
-                'fields'=>'first_name','gender','last_name','name'
-              ),
+              '/me?fields=birthday,email,gender,name',
                Session::get('fb_token')
             );
 
