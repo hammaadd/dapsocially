@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "atymic/twitter": "^3.1",
         "facebook/php-sdk-v4": "^5.7",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -17,7 +18,6 @@
         "santigarcor/laratrust": "^6.3",
         "square/square": "11.0.0.20210513",
         "yajra/laravel-datatables-oracle": "^9.18"
-    
     },
     "require-dev": {
         "facade/ignition": "^2.5",
