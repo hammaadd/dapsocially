@@ -17,17 +17,18 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AccountController extends Controller
 {
-    public $hepler, $fb;
+    protected $hepler, $fb;
     public function __construct()
     {
-        // session_start();
-        // $this->fb = new Facebook(array(
-        //     'app_id' => env('FACEBOOK_CLIENT_ID'),
-        //     'app_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        //     'default_graph_version' => 'v11.0',
-        // ));
-        // $this->helper = $this->fb->getRedirectLoginHelper();
-        // $this->middleware('auth');
+        session_start();
+        $this->fb = new Facebook(array( 
+            'app_id' => env('FACEBOOK_APP_ID'), 
+            'app_secret' => env('FACEBOOK_APP_SECRET'), 
+            'default_graph_version' => 'v11.0',
+        )); 
+        $this->helper = $this->fb->getRedirectLoginHelper();
+        $this->middleware('auth');
+        
     }
     public function index()
     {
@@ -72,13 +73,11 @@ class AccountController extends Controller
     {
 
 
-
-
-        //  $permissions = ['email','user_posts','pages_show_list']; // Optional permissions
-        //  $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions);
-
-        // Render Facebook login button
-        $output = "";
+        $permissions = ['email','user_posts','pages_show_list','user_gender','user_videos']; // Optional permissions 
+        $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions); 
+        
+        // Render Facebook login button 
+        $output = $loginURL;
 
 
         return view('users.content.addsocialaccount',['url'=>$output]);
@@ -90,30 +89,34 @@ class AccountController extends Controller
          return Socialite::driver('facebook')->redirect();
      }
 
-     public function getFbToken(){
+     public function getFbToken(){    
+        try { 
+            $accessToken = $this->helper->getAccessToken(); 
+            $response = $this->fb->get(
+                '/me',
+                $accessToken->getValue()
+              );
 
+            $data = $response->getDecodedBody();
+            Session::put('fb_id',$data['id']);
 
-        try {
-            if(isset($_SESSION['facebook_access_token'])){
-                $accessToken = $_SESSION['facebook_access_token'];
-            }else{
-                  $accessToken = $this->helper->getAccessToken();
-            }
-        } catch(FacebookResponseException $e) {
-             echo 'Graph returned an error: ' . $e->getMessage();
-              exit;
-        } catch(FacebookSDKException $e) {
+        } catch(FacebookResponseException $e) { 
+             echo 'Graph returned an error: ' . $e->getMessage(); 
+              exit; 
+        } catch(FacebookSDKException $e) { 
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
               exit;
         }
 
-
-        $response = $this->fb->get(
-            '/me/feed',
-            $accessToken->getValue()
-          );
-         // Get login url
-        dd($response);
+          Attached_Account::updateOrCreate(
+             ['verified_acc'=>'facebook', 'user_id'=>Auth::id()],
+             ['token'=>$accessToken->getValue(),'user_social_id'=>$data['id']]
+         );
+            Session::put('fb_token',$accessToken->getValue());
+            
+        
+          return redirect()->route('my.account');
+ 
 
 
      }
