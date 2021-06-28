@@ -32,22 +32,22 @@ $("#imageUpload").change(function(){
     <section class="page-title bg-white py-5 shadow-md">
         <h2 class="uppercase text-center text-xl font-medium">User Profile</h2>
     </section>
-    <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+    <nav class="p-5">
         <ol class="list-reset flex text-grey-dark">
           <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
           <li><span class="mx-2">/</span></li>
           <li>My Profile</li>
         </ol>
       </nav>
-    <section class="py-10 max-w-5xl mx-auto">
+    <section class="px-5 py-5 lg:py-10 max-w-5xl mx-auto">
         <h3 class="text-lg font-medium">Account Details</h3>
         <form action="{{route('user.update.profile')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="flex flex-wrap overflow-hidden">
+            <div class="flex flex-wrap overflow-hidden flex-col-reverse md:flex-row pt-5 md:pt-0">
                 <div class="w-full md:w-2/3">
                     <div class="flex flex-wrap overflow-hidden md:-mx-2 lg:-mx-3 xl:-mx-3">
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="name">
                                 Name
                                 <input type="text" id="uname" name="uname" class="input-field" placeholder="Your name" value="{{Auth::user()->name}}">
@@ -56,7 +56,7 @@ $("#imageUpload").change(function(){
 
                         </div>
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="email">
                                 Email
                                 <input type="email" id="mail" name="mail" class="input-field" placeholder="stephencolins@dayrap.com" value="{{Auth::user()->email}}">
@@ -66,7 +66,7 @@ $("#imageUpload").change(function(){
                         </div>
 
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="dob">
                                 Date of Birth
                                 <input type="date" id="dob" name="dob" class="input-field" placeholder="Stephen K. Colins" value="{{Auth::user()->dob}}">
@@ -77,7 +77,7 @@ $("#imageUpload").change(function(){
                         </div>
 
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="gender">
                                 Gender
                                 <select name="gender" id="gender" class="input-field">
@@ -100,7 +100,7 @@ $("#imageUpload").change(function(){
                         </div>
 
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0 text-center md:text-left">
                             <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550 focus:outline-none">Save Changes</button>
                         </div>
 
@@ -109,8 +109,8 @@ $("#imageUpload").change(function(){
                 <div class="w-full md:w-1/3">
                     <div class="flex flex-wrap overflow-hidden items-center flex-col">
 
-                        <div class="w-36 h-36 relative rounded-full overflow-hidden">
-                            <img src="{{asset('user/profile/'.Auth::user()->image)}}" id="profileImage" class="profile-img w-36 h-36 rounded-full object-cover" alt="Profile">
+                        <div class="w-28 h-28 md:w-36 md:h-36 relative rounded-full overflow-hidden">
+                            <img src="{{asset('user/profile/'.Auth::user()->image)}}" id="profileImage" class="profile-img w-28 h-28 md:w-36 md:h-36 rounded-full object-cover" alt="Profile">
                             <div class="absolute text-white bg-black bg-opacity-50 text-center w-full h-9 bottom-0">
                                 <i  id="select-img" name="img" class="fas fa-camera text-xl cursor-pointer pt-1.5"></i>
                                 <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo"  capture hidden>
@@ -131,7 +131,7 @@ $("#imageUpload").change(function(){
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-2/3">
                     <div class="flex flex-wrap overflow-hidden md:-mx-2 lg:-mx-3 xl:-mx-3">
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3 pt-3 md:pt-0">
                             <label for="current-pass">
                                 Current Password
                                 <input type="password" class="input-field" placeholder="Current Password" name="currentpassword" id="currentpassword">
@@ -140,7 +140,7 @@ $("#imageUpload").change(function(){
                             <small class="text-red-600">@error('currentpassword'){{$message}}@enderror</small>
                         </div>
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="password">
                                 New Password
                                 <input type="password" class="input-field" placeholder="New Password" name="newpassword" id="newpassword">
@@ -149,7 +149,7 @@ $("#imageUpload").change(function(){
                             <small class="text-red-600">@error('newpassword'){{$message}}@enderror</small>
                         </div>
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0">
                             <label for="confirm-pass">
                                 Confirm New Password
                                 <input type="password" class="input-field" placeholder="Confirm Password" name="confirmpassword" id="confirmpassword">
@@ -158,7 +158,7 @@ $("#imageUpload").change(function(){
                             <small class="text-red-600">@error('confirmpassword'){{$message}}@enderror</small>
                         </div>
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                        <div class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2 pt-3 md:pt-0 text-center md:text-left">
                             <button type="submit" class="px-5 py-1.5 bg-blue-550 text-white rounded-3xl border-2 border-blue-550 hover:bg-transparent hover:text-blue-550">Change Password</button>
                         </div>
                     </div>
@@ -171,7 +171,7 @@ $("#imageUpload").change(function(){
             <h3 class="text-lg font-medium">Connected Social Media Accounts</h3>
             <ul class="list-none pt-3">
                 @if (count($attach_accounts)<1)
-                <h4 class="text-lg font-medium">No Social Media Accounts Connected</h4>
+                <p>No Social Media Accounts Connected</p>
                 @else
 
 

@@ -68,7 +68,7 @@ body {
     @apply px-5 py-1.5 text-lg text-blue-550 bg-white rounded-3xl border-2 border-white hover:text-white hover:bg-transparent
 }
 .btn-add-venue {
-    @apply px-5 py-1.5 text-lg text-white bg-transparent rounded-3xl border-2 border-white ml-5 hover:text-blue-550 hover:bg-white
+    @apply px-5 py-1.5 text-lg text-white bg-transparent rounded-3xl border-2 border-white sm:ml-5 hover:text-blue-550 hover:bg-white
 }
 .social-link {
     @apply bg-white text-blue-550 h-8 w-8 text-center pt-1.5 border-2 border-white rounded-full hover:bg-transparent hover:text-white
