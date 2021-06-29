@@ -52,7 +52,7 @@
 
     <section class="p-5 bg-black w-full">
         <div class="masonry md:cols--3 lg:cols--5">
-            <div class="masonry-item" @click=" ad = !ad ">
+            {{-- <div class="masonry-item" @click=" ad = !ad ">
                 <div class="masonry-content">
                     <div class="relative">
                         <img class=" rounded-lg" src="https://picsum.photos/450/325?image=100" alt="Dummy Image">
@@ -77,95 +77,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="masonry-item"">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/280?image=300" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> --}}
+            @if(count($posts)>1)
+            @foreach ($posts as $post)
+
+
             <div class="masonry-item">
                 <div class="masonry-content">
                     <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/540?image=400" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/400?image=700" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/280?image=900" alt="Dummy Image">
+                        <img class=" rounded-lg" src="{{$post['full_picture']}}" alt="Dummy Image">
                         <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                     </div>
                     <div class="p-4">
                         <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
+                            {{$post['message']}}
                         </p>
                     </div>
                     <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
@@ -182,266 +107,9 @@
                     </div>
                 </div>
             </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/550?image=950" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/325?image=25" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/280?image=75" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/380?image=125" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/550?image=950" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/280?image=75" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/325?image=100" alt="Dummy Image">
-                        <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/280?image=300" alt="Dummy Image">
-                        <img src="{{asset('assets/Insta.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/540?image=400" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="masonry-item">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/400?image=700" alt="Dummy Image">
-                        <img src="{{asset('assets/tiktok.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            @endif
+
         </div>
     </section>
 

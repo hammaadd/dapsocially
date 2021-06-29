@@ -12,8 +12,12 @@ use App\Models\EventImages;
 use App\Models\Order;
 use App\Models\Payment_Plans;
 use App\Models\User;
+use App\Models\User\Attached_Account;
 use App\Models\User\Collect_Event_Htag;
 use App\Notifications\OrdersNotifications;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
@@ -22,6 +26,7 @@ use Illuminate\Support\Facades\Notification;
 
 class EventController extends Controller
 {
+    public $page_data=[];
     public function __construct()
     {
         $this->middleware('auth');
@@ -43,7 +48,14 @@ class EventController extends Controller
         }
         $locations=$loc;
         $P_plans=Payment_Plans::all();
-        return view('users.content.add-event', compact('locations','P_plans'));
+        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+
+        $accestoken=$attach_acc->token;
+        $data=$this->getPages($accestoken);
+        $this->page_data=$data['data'];
+        $data=$data['data'];
+
+        return view('users.content.add-event', compact('locations','P_plans','data'));
 
     }
     public function events()
@@ -170,33 +182,47 @@ class EventController extends Controller
     public function add_event_social_posts($event_id, Request $request)
     {
             $count=count($request->c);
-
+            $counter=0;
             for($i=0;$i<$count;$i++){
                if($request->c[$i]=='facebook'){
-                $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[0];
-                $posts->event_id=$event_id;
-                $posts->save();
+                foreach($request->fb_page as $fb){
+                    $posts=new Event_Social_Post();
+                    $posts->platform='facebook';
+                    $posts->page_name=$fb;
+                    $posts->event_id=$event_id;
+                    $posts->save();
+                }
+
+                $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+                $accestoken=$attach_acc->token;
+                $data=$this->getPages($accestoken);
+                $data=$data['data'];
+
+                foreach($data as $page){
+
+                    Event_Social_Post::where('event_id',$event_id)->where('platform','facebook')->update(['page_id'=>$page['id']]);
+
+                }
+
                }
                if($request->c[$i]=='insta'){
                 $posts=new Event_Social_Post();
                 $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[1];
+                $posts->page_name=$request->inp[1];
                 $posts->event_id=$event_id;
                 $posts->save();
                }
                if($request->c[$i]=='twitter'){
                 $posts=new Event_Social_Post();
                 $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[2];
+                $posts->page_name=$request->inp[2];
                 $posts->event_id=$event_id;
                 $posts->save();
                }
                if($request->c[$i]=='tiktok'){
                 $posts=new Event_Social_Post();
                 $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[3];
+                $posts->page_name=$request->inp[3];
                 $posts->event_id=$event_id;
                 $posts->save();
                }
@@ -580,4 +606,82 @@ class EventController extends Controller
             }
 
     }
+    public function getPages($accestoken)
+    {
+      // $fb_token =Session::get('fb_token');
+      $fb = new Facebook(array(
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v11.0',
+    ));
+
+
+
+        try {
+            // Returns a `FacebookFacebookResponse` object
+            $response = $fb->get(
+              '/me/accounts',$accestoken
+            );
+
+
+          } catch(FacebookResponseException $e) {
+            dd('Graph returned an error: ' . $e->getMessage());
+            exit;
+          } catch(FacebookSDKException $e) {
+            dd('Facebook SDK returned an error: ' . $e->getMessage());
+            exit;
+          }
+          return $response->getDecodedBody();
+
+          // // $graphNode = $response->getDecodedBody();
+          // $graphNode = $response->getGraphEdge();
+          // dd($graphNode);
+
+    }
+    public function show_posts($event_id)
+    {
+
+        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+        $accesstoken=$attach_acc->token;
+        $event=Event_Social_Post::where('event_id',$event_id)->first();
+        $data=$this->getPost($accesstoken,$event->page_id);
+        $this->page_data=$data['data'];
+        $posts=$data['data'];
+
+        return view('users.content.social-wall',compact('posts'));
+    }
+    public function getPost($accesstoken,$page_id)
+    {
+
+      // $fb_token =Session::get('fb_token');
+      $fb = new Facebook(array(
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v11.0',
+    ));
+
+
+
+        try {
+            // Returns a `FacebookFacebookResponse` object
+            $response = $fb->get(
+              $page_id.'/posts?fields=message,shares,permalink_url,full_picture',$accesstoken
+            );
+
+
+          } catch(FacebookResponseException $e) {
+            dd('Graph returned an error: ' . $e->getMessage());
+            exit;
+          } catch(FacebookSDKException $e) {
+            dd('Facebook SDK returned an error: ' . $e->getMessage());
+            exit;
+          }
+          return $response->getDecodedBody();
+
+          // // $graphNode = $response->getDecodedBody();
+          // $graphNode = $response->getGraphEdge();
+          // dd($graphNode);
+
+    }
+
     }

@@ -11,12 +11,6 @@
     allowClear: true
   });
 </script>
-@endsection
-@section('headerExtra')
-
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="{{asset('css/checkboxes.css')}}">
 <script>
 
     $(document).ready(function(){
@@ -151,6 +145,13 @@ for (var i=0, n=checkboxes.length;i<n;i++)
 
 }
 </script>
+@endsection
+@section('headerExtra')
+
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('css/checkboxes.css')}}">
+
 @endsection
 @section('content')
 @include('users.inc.nav')
@@ -292,10 +293,10 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                 </div>
 
                                   <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
-                                    <option value="">Select An Option</option>
-                                    <option value="1">Option 1</option>
-                                    <option value="2">Option 2</option>
-                                    <option value="3">Option 3</option>
+                                    @foreach ($data as $page)
+                                    <option value="{{$page['category']}}">{{$page['category']}}</option>
+                                    @endforeach
+
                                   </select>
 
                             </div>
