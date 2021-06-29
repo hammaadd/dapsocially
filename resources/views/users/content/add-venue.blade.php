@@ -1,8 +1,17 @@
 @extends('visitor.layout.visitorLayout')
 @section('title', 'Add Your Venue')
-@section('headerExtra')
-    <link rel="stylesheet" href="{{ asset('css/checkboxes.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.min.js"
+@section('bodyExtra')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $('#myselect').select2({
+    width: '100%',
+    placeholder: "Select an Option",
+    allowClear: true
+  });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.min.js"
         integrity="sha512-Atu8sttM7mNNMon28+GHxLdz4Xo2APm1WVHwiLW9gW4bmHpHc/E2IbXrj98SmefTmbqbUTOztKl5PDPiu0LD/A=="
         crossorigin="anonymous"></script>
     <script
@@ -196,6 +205,12 @@
         }
 
     </script>
+
+@endsection
+@section('headerExtra')
+    <link rel="stylesheet" href="{{ asset('css/checkboxes.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 @endsection
 @section('content')
@@ -396,8 +411,12 @@
                                         <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*" >
+                                <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
+                                    @foreach ($data as $page)
+                                    <option value="{{$page['category']}}">{{$page['category']}}</option>
+                                    @endforeach
+
+                                </select>
 
                             </div>
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror

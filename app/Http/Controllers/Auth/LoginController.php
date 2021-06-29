@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\User\Attached_Account;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {

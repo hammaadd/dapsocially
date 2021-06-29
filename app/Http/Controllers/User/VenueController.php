@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
 use App\Models\Location;
 use App\Models\Order;
 use App\Models\Payment_Plans;
 use App\Models\User;
+use App\Models\User\Attached_Account;
 use App\Models\User\Venue;
 use App\Models\User\Collect_Venue_Htag;
 use App\Models\Venue_Social_Post;
 
 use App\Notifications\OrdersNotifications;
-
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +35,13 @@ class VenueController extends Controller
     public function index()
     {
         $P_plans = Payment_Plans::all();
-        return view('users.content.add-venue', compact('P_plans'));
+        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+
+        $accestoken=$attach_acc->token;
+        $data=$this->getPages($accestoken);
+        $this->page_data=$data['data'];
+        $data=$data['data'];
+        return view('users.content.add-venue', compact('P_plans','data'));
     }
     public function venue()
     {
@@ -188,11 +198,24 @@ class VenueController extends Controller
 
             for($i=0;$i<$count;$i++){
                if($request->c[$i]=='facebook'){
-                $posts=new Venue_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[0];
-                $posts->venue_id=$venue_id;
-                $posts->save();
+                foreach($request->fb_page as $fb){
+                    $posts=new Venue_Social_Post();
+                    $posts->platform='facebook';
+                    $posts->page_name=$fb;
+                    $posts->venue_id=$venue_id;
+                    $posts->save();
+                }
+
+                $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+                $accestoken=$attach_acc->token;
+                $data=$this->getPages($accestoken);
+                $data=$data['data'];
+
+                foreach($data as $page){
+
+                    Venue_Social_Post::where('venue_id',$venue_id)->where('platform','facebook')->update(['page_id'=>$page['id']]);
+
+                }
                }
                if($request->c[$i]=='insta'){
                 $posts=new Venue_Social_Post();
@@ -741,5 +764,84 @@ public function load_my_venues()
 
     //     return redirect()->route('my.venues');
     // }
+
+    public function getPages($accestoken)
+    {
+      // $fb_token =Session::get('fb_token');
+      $fb = new Facebook(array(
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v11.0',
+    ));
+
+
+
+        try {
+            // Returns a `FacebookFacebookResponse` object
+            $response = $fb->get(
+              '/me/accounts',$accestoken
+            );
+
+
+          } catch(FacebookResponseException $e) {
+            dd('Graph returned an error: ' . $e->getMessage());
+            exit;
+          } catch(FacebookSDKException $e) {
+            dd('Facebook SDK returned an error: ' . $e->getMessage());
+            exit;
+          }
+          return $response->getDecodedBody();
+
+          // // $graphNode = $response->getDecodedBody();
+          // $graphNode = $response->getGraphEdge();
+          // dd($graphNode);
+
+    }
+    public function show_posts(Venue $venue)
+    {
+
+        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+        $accesstoken=$attach_acc->token;
+        $venue_post=Venue_Social_Post::where('venue_id',$venue->id)->first();
+        $data=$this->getPost($accesstoken,$venue_post->page_id);
+        $this->page_data=$data['data'];
+        $posts=$data['data'];
+        $event=$venue;
+        return view('users.content.social-wall',compact('posts','event'));
+    }
+    public function getPost($accesstoken,$page_id)
+    {
+
+      // $fb_token =Session::get('fb_token');
+      $fb = new Facebook(array(
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v11.0',
+    ));
+
+
+
+        try {
+            // Returns a `FacebookFacebookResponse` object
+            $response = $fb->get(
+              $page_id.'/posts?fields=message,shares,permalink_url,full_picture,created_time',$accesstoken
+            );
+
+
+          } catch(FacebookResponseException $e) {
+            dd('Graph returned an error: ' . $e->getMessage());
+            exit;
+          } catch(FacebookSDKException $e) {
+            dd('Facebook SDK returned an error: ' . $e->getMessage());
+            exit;
+          }
+          return $response->getDecodedBody();
+
+          // // $graphNode = $response->getDecodedBody();
+          // $graphNode = $response->getGraphEdge();
+          // dd($graphNode);
+
+    }
+
 }
 
