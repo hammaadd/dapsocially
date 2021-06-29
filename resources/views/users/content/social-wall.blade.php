@@ -81,7 +81,7 @@
             @if(count($posts)>1)
             @foreach ($posts as $post)
 
-
+        <a href="{{$post['permalink_url']}}">
             <div class="masonry-item">
                 <div class="masonry-content">
                     <div class="relative">
@@ -95,18 +95,18 @@
                     </div>
                     <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
                         <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                            <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$event->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                             <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
+                                <p class="font-medium">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->name}}</p>
+                                <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                             </div>
                         </div>
                         <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
+                            <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('h:i A', strtotime($post['created_time']))}}</span>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></a>
             @endforeach
             @endif
 

@@ -144,7 +144,7 @@ $(document).ready(function (e) {
                         </div>
                         <div class="pl-4 pt-2 pr-4 pb-2 ">
                             <h4>
-                              <a href="{{route('facebook.posts',$event->id)}}">  <b>{{$event->event_name}}</b></a>
+                              <a href="{{route('facebook.posts.event',$event)}}">  <b>{{$event->event_name}}</b></a>
                             </h4>
                         </div>
                         <div class="pb-4 pl-4 pr-4">

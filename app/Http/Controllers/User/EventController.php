@@ -638,17 +638,17 @@ class EventController extends Controller
           // dd($graphNode);
 
     }
-    public function show_posts($event_id)
+    public function show_posts(Event $event)
     {
 
         $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
         $accesstoken=$attach_acc->token;
-        $event=Event_Social_Post::where('event_id',$event_id)->first();
-        $data=$this->getPost($accesstoken,$event->page_id);
+        $event_post=Event_Social_Post::where('event_id',$event->id)->first();
+        $data=$this->getPost($accesstoken,$event_post->page_id);
         $this->page_data=$data['data'];
         $posts=$data['data'];
 
-        return view('users.content.social-wall',compact('posts'));
+        return view('users.content.social-wall',compact('posts','event'));
     }
     public function getPost($accesstoken,$page_id)
     {
@@ -665,7 +665,7 @@ class EventController extends Controller
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              $page_id.'/posts?fields=message,shares,permalink_url,full_picture',$accesstoken
+              $page_id.'/posts?fields=message,shares,permalink_url,full_picture,created_time',$accesstoken
             );
 
 
