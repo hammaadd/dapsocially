@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Atymic\Twitter\Facade\Twitter;
 
 class EventController extends Controller
 {
@@ -51,7 +52,10 @@ class EventController extends Controller
         $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
 
         $accestoken=$attach_acc->token;
+
         $data=$this->getPages($accestoken);
+        $tw_data = $this->getTwUserProfile();
+        dd($tw_data);
         $this->page_data=$data['data'];
         $data=$data['data'];
 
@@ -605,6 +609,11 @@ class EventController extends Controller
 
             }
 
+    }
+
+    public function getTwUserProfile(){
+        $user = Twitter::getUsers(['screen_name'=>Session::get('tw_screen_name')]);
+        return $user;
     }
     public function getPages($accestoken)
     {
