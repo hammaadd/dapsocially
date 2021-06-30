@@ -205,6 +205,9 @@ Route::get('get/facebook/token','User\AccountController@getFbToken')->name('get.
 
 
 Route::get('get/twitter/token','User\AccountController@getTwitterToken')->name('get.token.twitter');
+Route::get('attach/twitter/account','User\AccountController@attachTwitter')->name('attach.twitter');
+
+Route::get('/search/tweet','User\AccountController@searchTweet')->name('search.tweet');
 
 
 // //User
