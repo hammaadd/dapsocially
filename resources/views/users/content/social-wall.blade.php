@@ -1,7 +1,7 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Social Wall')
 @section('content')
-<main class="relative" x-data="{ ad: false, card: true }">
+<main class="relative" x-data="{ ad: false, card: false }">
     <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url({{asset('assets/Group-397.png')}})">
         <div class="w-full mx-auto flex flex-wrap overflow-hidden flex-col justify-between h-full">
             <div class="bg-transparent py-4">
