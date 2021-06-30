@@ -89,8 +89,9 @@ class AccountController extends Controller
      }
 
      public function getFbToken(){
-        try {
-            $accessToken = "EAAH3of3x0GoBAKZA1Oo8BMXiqDiccroSVkiRQB4ynefcZBww1KBoqGFHcnEB0WUTr0Oi4l7m276ZA4BtMBAnYZCXfaikLEgeBZA1HDCB1NnarwZC8twxYWD2nKZA4iIR0YrNQ9ioxUt3VoMR056Pm4Iw9ZBnsgjJLzmrjZBFP7vK7huDIbxk5QacCCuh1QqphIlMPRELtBlZC61aJYGTxGZBHTn";
+        try { 
+            $accessToken = $this->helper->getAccessToken();
+            $accessToken = $accessToken->getValue();
             $response = $this->fb->get(
                 '/me',
                 $accessToken
