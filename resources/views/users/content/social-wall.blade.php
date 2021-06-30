@@ -70,7 +70,7 @@
                         <div class="flex flex-wrap overflow-hidden justify-between items-center">
                             <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$event->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                             <div class="pl-2">
-                                <p class="font-medium">{{$post['from']->name}}</p>
+                                <p class="font-medium">{{$post['from']['name']}}</p>
                                 <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                             </div>
                         </div>
