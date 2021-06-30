@@ -657,7 +657,15 @@ class EventController extends Controller
         $this->page_data=$data['data'];
         $posts=$data['data'];
 
-        return view('users.content.social-wall',compact('posts','event'));
+        //Get twitter data
+        $tw_attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','twitter')->first();
+        $tw_attach_acc = json_decode($tw_attach_acc->token);
+        $screen_name = $tw_attach_acc->screen_name;
+        $user_tweets  = Twitter::getUserTimeline(['count'=>'5','screen_name'=>Session::get('tw_screen_name')]);
+        
+        
+
+        return view('users.content.social-wall',compact('posts','event','user_tweets'));
     }
     public function getPost($accesstoken,$page_id)
     {

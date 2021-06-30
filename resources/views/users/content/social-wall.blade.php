@@ -2,7 +2,7 @@
 @section('title','Social Wall')
 @section('content')
 <main class="relative" x-data="{ ad: false, card: true }">
-    <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/Group-397.png)">
+    <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url({{asset('assets/Group-397.png')}})">
         <div class="w-full mx-auto flex flex-wrap overflow-hidden flex-col justify-between h-full">
             <div class="bg-transparent py-4">
                 <div class="max-w-full mx-auto">
@@ -53,33 +53,69 @@
     <section class="p-5 bg-black w-full">
         <div class="masonry md:cols--3 lg:cols--5">
 @if(count($posts)>1)
-    @foreach ($posts as $post)
-        <a href="{{$post['permalink_url']}}">
+    @for($i = 0 ; $i< 5 ; $i++)
+    
+        @if(array_key_exists($i,$posts))
+        @php $post = $posts[$i]; @endphp
+            <a href="{{$post['permalink_url']}}">
+                <div class="masonry-item">
+                    <div class="masonry-content">
+                        <div class="relative">
+                            <img class=" rounded-lg" src="{{$post['full_picture']}}" alt="Dummy Image">
+                            <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                        </div>
+                        <div class="p-4">
+                            <p>
+                                {{$post['message']}}
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
+                            <div class="flex flex-wrap overflow-hidden justify-between items-center">
+                                <img src="{{$post['from']['picture']['data']['url']}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                                <div class="pl-2">
+                                    <p class="font-medium">{{$post['from']['name']}}</p>
+                                    <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('Y-m-d h:i', strtotime($post['created_time']))}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        @endif
+        @if(array_key_exists($i,$user_tweets))
+        @php $tweet = $user_tweets[$i]; @endphp
+        <a href="{{Twitter::linkTweet($tweet)}}">
             <div class="masonry-item">
                 <div class="masonry-content">
                     <div class="relative">
-                        <img class=" rounded-lg" src="{{$post['full_picture']}}" alt="Dummy Image">
-                        <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                        <img class=" rounded-lg" src="" alt="Dummy Image">
+                        <img src="{{asset('assets/twitter.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                     </div>
                     <div class="p-4">
                         <p>
-                            {{$post['message']}}
+                            {{$tweet->text}}
                         </p>
                     </div>
                     <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
                         <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{$post['from']['picture']['data']['url']}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                            <img src="{{$tweet->user->profile_image_url_https}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                             <div class="pl-2">
-                                <p class="font-medium">{{$post['from']['name']}}</p>
+                                <p class="font-medium">{{$tweet->user->name}}</p>
                                 <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                             </div>
                         </div>
                         <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('Y-m-d h:i', strtotime($post['created_time']))}}</span>
+                            <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('Y-m-d h:i', strtotime($tweet->created_at))}}</span>
                         </div>
                     </div>
                 </div>
-            </div></a>
+            </div>
+        </a>
+        @endif
+
     @endforeach
 @endif
 
