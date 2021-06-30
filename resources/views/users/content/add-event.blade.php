@@ -314,7 +314,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     </label>
                                 </div>
                                 <select id="" name="tw_page" class="input--field w--52 min-h-40">
-                                    <option value="{{$tw_user->screen_name}}">{{$tw_name}}</option>
+                                    <option value="{{$tw_user->screen_name}}">{{$tw_user->name}}</option>
                                 </select>
                                 {{-- <input type="text" name="inp[]" class="input--field w--52 min-h-40"
                                     placeholder="Enter your Public Page id or Username*" > --}}
