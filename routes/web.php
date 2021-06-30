@@ -207,6 +207,13 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallba
 Route::get('get/facebook/token','User\AccountController@getFbToken')->name('get.token.facebook');
 
 
+
+Route::get('get/twitter/token','User\AccountController@getTwitterToken')->name('get.token.twitter');
+Route::get('attach/twitter/account','User\AccountController@attachTwitter')->name('attach.twitter');
+
+Route::get('/search/tweet','User\AccountController@searchTweet')->name('search.tweet');
+
+
 // //User
 Route::middleware(['auth'=>'role:user'])->get('user/home', 'User\HomeController@index')->name('user.home');
 Route::get('user/venue', 'User\VenueController@index')->name('user.venue');
