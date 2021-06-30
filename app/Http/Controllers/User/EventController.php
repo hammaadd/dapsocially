@@ -352,11 +352,25 @@ class EventController extends Controller
     public function my_events()
     {
         
-        $token = json_decode(Auth::user()->twitter()->token);
-        //$twitter = Twitter::usingCredentials($token->oauth_token, $token->oauth_token_secret);
-        config(['TWITTER_ACCESS_TOKEN' => $token]);
-        config(['TWITTER_ACCESS_TOKEN_SECRET'=>$token->oauth_token_secret]);
         
+    //     $config = ["consumer_key" => ENV('TWITTER_CONSUMER_KEY'),
+    //     "consumer_secret"  => ENV('TWITTER_CONSUMER_SECRET'),
+    //     "access_token" => ,
+    //     "access_token_secret" => ,
+    //     'api_version' => '1.1',
+    //     'api_url' => 'api.twitter.com',
+    //     'upload_url' => 'upload.twitter.com',
+    //     'authenticate_url' => 'https://api.twitter.com/oauth/authenticate',
+    //     'access_token_url' => 'https://api.twitter.com/oauth/access_token',
+    //     'request_token_url' => 'https://api.twitter.com/oauth/request_token',
+    //     'debug' => env('APP_DEBUG', false),
+    // ];
+
+    //     Twitter::usingConfiguration(\Atymic\Twitter\Configuration::fromLaravelConfiguration($config));
+        //$twitter = Twitter::usingCredentials($token->oauth_token, $token->oauth_token_secret);
+        // config(['TWITTER_ACCESS_TOKEN' => $token]);
+        // config(['TWITTER_ACCESS_TOKEN_SECRET'=>$token->oauth_token_secret]);
+
         // $credentials = $twitter->getCredentials();
 
         // dd($credentials);
@@ -683,9 +697,11 @@ class EventController extends Controller
 
         //Get twitter data
         $tw_attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','twitter')->first();
+        //$token = json_decode(Auth::user()->twitter()->token);
         $tw_attach_acc = json_decode($tw_attach_acc->token);
         $screen_name = $tw_attach_acc->screen_name;
-        $user_tweets  = Twitter::getUserTimeline(['count'=>'5','screen_name'=>Session::get('tw_screen_name')]);
+        $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
+        $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
         
         
 
