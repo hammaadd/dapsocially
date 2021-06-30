@@ -313,8 +313,11 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         <img src="{{ asset('assets/Insta.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*" >
+                                <select id="" name="tw_page" class="input--field w--52 min-h-40">
+                                    <option value="{{$tw_user->screen_name}}">{{$tw_name}}</option>
+                                </select>
+                                {{-- <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" > --}}
                             </div>
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
