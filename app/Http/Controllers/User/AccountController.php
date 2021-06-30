@@ -14,7 +14,8 @@ use Facebook\Facebook;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
-
+use Atymic\Twitter\Facade\Twitter;
+use Illuminate\Support\Facades\Redirect;
 class AccountController extends Controller
 {
     protected $hepler, $fb;
@@ -118,5 +119,77 @@ class AccountController extends Controller
 
 
      }
+
+
+     public function attachTwitter(){
+        $token = Twitter::getRequestToken(route('get.token.twitter'));
+
+        if (isset($token['oauth_token_secret'])) {
+            $url = Twitter::getAuthenticateUrl($token['oauth_token']);
+    
+            Session::put('oauth_state', 'start');
+            Session::put('oauth_request_token', $token['oauth_token']);
+            Session::put('oauth_request_token_secret', $token['oauth_token_secret']);
+    
+            
+            return Redirect::to($url);
+        }
+    
+        // return Redirect::route('twitter.error');
+     }
+
+     public function getTwitterToken(){
+        if (Session::has('oauth_request_token')) {
+            $twitter = Twitter::usingCredentials(session('oauth_request_token'), session('oauth_request_token_secret'));
+            $token = $twitter->getAccessToken(request('oauth_verifier'));
+    
+            if (!isset($token['oauth_token_secret'])) {
+                echo "Error";
+                // return Redirect::route('twitter.error')->with('flash_error', 'We could not log you in on Twitter.');
+            }
+    
+            // use new tokens
+            $twitter = Twitter::usingCredentials($token['oauth_token'], $token['oauth_token_secret']);
+            $credentials = $twitter->getCredentials();
+    
+            if (is_object($credentials) && !isset($credentials->error)) {
+    
+                // This is also the moment to log in your users if you're using Laravel's Auth class
+                // Auth::login($user) should do the trick.
+    
+                Session::put('access_token', $token);
+                $data = Session::get('access_token');
+                $data2 = json_encode($data);
+                Attached_Account::updateOrCreate(
+                    ['verified_acc'=>'twitter', 'user_id'=>Auth::id()],
+                    ['token'=>$data2,'user_social_id'=>$data['user_id']]
+                );
+
+                $tweets =  Twitter::getSettings(['response_format' => 'json']);
+                
+                $tweets = json_decode($tweets);
+
+                Session::put('tw_screen_name',$tweets->screen_name);
+                //$tweets  = Twitter::getUserTimeline(['screen_name'=>$tweets->screen_name]);
+               
+                // dd($tweets);
+                return redirect()->route('attach.social.account');
+                // return Redirect::to('/')->with('notice', 'Congrats! You\'ve successfully signed in!');
+            }
+        }
+
+        
+    
+        // return Redirect::route('twitter.error')
+        //         ->with('error', 'Crab! Something went wrong while signing you up!');
+     }
+
+     public function searchTweet(Request $request){
+        $q = $request->q;
+        $tweets = Twitter::getSearch(['count'=>'20','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
+
+        dd($tweets);
+     }
+
 
 }
