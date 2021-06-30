@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">{{ diffForHumans($post['created_time'])}}</span>
+                            <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('Y-m-d h:i:s', strtotime($post['created_time']))->diffForHumans()}}</span>
                         </div>
                     </div>
                 </div>
