@@ -52,35 +52,8 @@
 
     <section class="p-5 bg-black w-full">
         <div class="masonry md:cols--3 lg:cols--5">
-            {{-- <div class="masonry-item" @click=" ad = !ad ">
-                <div class="masonry-content">
-                    <div class="relative">
-                        <img class=" rounded-lg" src="https://picsum.photos/450/325?image=100" alt="Dummy Image">
-                        <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
-                    </div>
-                    <div class="p-4">
-                        <p>
-                            Ryan Reynolds teams up with Salma Hayek to save Samuel L. Jackson in The Hitman's Wife's Bodyguard!
-                            Coming to Event Cinemas this June!
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{asset('assets/sample-profile.png')}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                            <div class="pl-2">
-                                <p class="font-medium">Account Username</p>
-                                <p class="text-xs">Premium Account</p>
-                            </div>
-                        </div>
-                        <div>
-                            <i class="far fa-clock"></i><span class="text-sm pl-2">12:34 PM</span>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            @if(count($posts)>1)
-            @foreach ($posts as $post)
-
+@if(count($posts)>1)
+    @foreach ($posts as $post)
         <a href="{{$post['permalink_url']}}">
             <div class="masonry-item">
                 <div class="masonry-content">
@@ -97,7 +70,7 @@
                         <div class="flex flex-wrap overflow-hidden justify-between items-center">
                             <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$event->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                             <div class="pl-2">
-                                <p class="font-medium">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->name}}</p>
+                                <p class="font-medium">{{$post['from']->name}}</p>
                                 <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                             </div>
                         </div>
@@ -107,8 +80,8 @@
                     </div>
                 </div>
             </div></a>
-            @endforeach
-            @endif
+    @endforeach
+@endif
 
         </div>
     </section>
