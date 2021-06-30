@@ -648,7 +648,7 @@ class EventController extends Controller
         $this->page_data=$data['data'];
         $posts=$data['data'];
 
-        // return view('users.content.social-wall',compact('posts','event'));
+        return view('users.content.social-wall',compact('posts','event'));
     }
     public function getPost($accesstoken,$page_id)
     {
