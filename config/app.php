@@ -234,7 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Datatables' => yajra\Datatables\Datatables::class,
         // 'Twitter'=> Atymic\Twitter::class,
-        'Twitter'=> \Atymic\Twitter\Facade::class,
+        'Twitter'=> Atymic\Twitter\Facade\Twitter::class,
     ],
 
 ];
