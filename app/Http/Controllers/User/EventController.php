@@ -688,7 +688,7 @@ class EventController extends Controller
     public function show_posts(Event $event)
     {
 
-        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+        $attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','facebook')->first();
         $accesstoken=$attach_acc->token;
         $event_post=Event_Social_Post::where('event_id',$event->id)->first();
         $data=$this->getPost($accesstoken,$event_post->page_id);
@@ -696,10 +696,12 @@ class EventController extends Controller
         $posts=$data['data'];
 
         //Get twitter data
-        $tw_attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','twitter')->first();
+        $tw_attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','twitter')->first();
         //$token = json_decode(Auth::user()->twitter()->token);
         $tw_attach_acc = json_decode($tw_attach_acc->token);
         $screen_name = $tw_attach_acc->screen_name;
+
+        //Set user credentials
         $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
         $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
         
