@@ -68,7 +68,7 @@
                     </div>
                     <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
                         <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                            <img src="{{$post['from']['name']['picture']['data']['url']}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                            <img src="{{$post->from->name->picture->data->url}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                             <div class="pl-2">
                                 <p class="font-medium">{{$post['from']['name']}}</p>
                                 <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
