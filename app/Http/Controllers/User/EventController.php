@@ -54,12 +54,12 @@ class EventController extends Controller
         $accestoken=$attach_acc->token;
 
         $data=$this->getPages($accestoken);
-        $tw_data = $this->getTwUserProfile();
-        dd($tw_data);
+        $tw_user = $this->getTwUserProfile();
+        // dd($tw_user);
         $this->page_data=$data['data'];
         $data=$data['data'];
 
-        return view('users.content.add-event', compact('locations','P_plans','data'));
+        return view('users.content.add-event', compact('locations','P_plans','data','tw_user'));
 
     }
     public function events()
