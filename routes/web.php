@@ -1,6 +1,7 @@
 <?php
 
 use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -64,6 +65,10 @@ Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name
 
 Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
 Route::get('facebook/posts/venue/{venue}', 'User\VenueController@show_posts')->name('facebook.posts.venue');
+
+Route::get('migrate-tables', function(){
+    Artisan::call('migrate');
+});
 // Route::get('attach/facebook/callback', 'User\AccountController@handleFacebookCallback');
 
 // Route::get('pricing', function () {
