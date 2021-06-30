@@ -54,4 +54,14 @@ class User extends Authenticatable
     public function accounts(){
         return $this->hasMany(Attached_Account::class,'user_id');
     }
+
+    public function twitter(){
+        return $this->accounts->where('verified_acc','twitter')->first();
+    }
+
+    public function facebook(){
+        return $this->accounts->where('verified_acc','facebook')->first();
+    }
+
+
 }

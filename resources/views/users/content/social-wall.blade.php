@@ -57,7 +57,7 @@
     
         @if(array_key_exists($i,$posts))
         @php $post = $posts[$i]; @endphp
-            <a href="{{$post['permalink_url']}}">
+            <a target="_blank" href="{{$post['permalink_url']}}">
                 <div class="masonry-item">
                     <div class="masonry-content">
                         <div class="relative">
@@ -87,7 +87,7 @@
         @endif
         @if(array_key_exists($i,$user_tweets))
         @php $tweet = $user_tweets[$i]; @endphp
-        <a href="{{Twitter::linkTweet($tweet)}}">
+        <a target="_blank" href="{{Twitter::linkTweet($tweet)}}">
             <div class="masonry-item">
                 <div class="masonry-content">
                     <div class="relative">

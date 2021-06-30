@@ -21,7 +21,7 @@ class AccountController extends Controller
     protected $hepler, $fb;
     public function __construct()
     {
-        session_start();
+        // session_start();
         $this->fb = new Facebook(array(
             'app_id' => env('FACEBOOK_APP_ID'),
             'app_secret' => env('FACEBOOK_APP_SECRET'),
@@ -138,6 +138,9 @@ class AccountController extends Controller
     
         // return Redirect::route('twitter.error');
      }
+
+
+    
 
      public function getTwitterToken(){
         if (Session::has('oauth_request_token')) {

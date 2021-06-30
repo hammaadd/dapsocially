@@ -48,6 +48,16 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
 
+        //  oauth_request_token
+    //  oauth_request_token_secret
+    //  access_token
+    //  tw_screen_name
+
+    //Set the twitter session after login
+
+    
+
+
 
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
@@ -154,6 +164,8 @@ class LoginController extends Controller
         // dd(Session::get('fb_token'));
         // return redirect()->route('my.account');
     }
+
+    
 
 
 

@@ -49,21 +49,14 @@ class EventController extends Controller
         }
         $locations=$loc;
         $P_plans=Payment_Plans::all();
-        $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
-
-        $accestoken=$attach_acc->token;
-
-        $data=$this->getPages($accestoken);
-        $tw_user = $this->getTwUserProfile();
-        // dd($tw_user);
-        $this->page_data=$data['data'];
-        $data=$data['data'];
+        
 
         return view('users.content.add-event', compact('locations','P_plans','data','tw_user'));
 
     }
     public function events()
     {
+        
 
             $events = Event::all()->take(8);
             $locations = Location::all();
@@ -180,12 +173,14 @@ class EventController extends Controller
             $hashtag->event_id = $event->id;
             $hashtag->save();
         }
-        Session::flash('message', 'Event added succesfully succesfully');
+        Session::flash('message', 'Event added succesfully');
         return back();
     }
     public function add_event_social_posts($event_id, Request $request)
     {
+
             $count=count($request->c);
+
             $counter=0;
             for($i=0;$i<$count;$i++){
                if($request->c[$i]=='facebook'){
@@ -233,6 +228,21 @@ class EventController extends Controller
 
 
             }
+
+            ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+
+            $accestoken=Auth::user()->facebook()->token;
+
+            Twitter::reconfig();
+
+            $data=$this->getPages($accestoken);
+            $tw_user = $this->getTwUserProfile();
+            // dd($tw_user);
+            $this->page_data=$data['data'];
+            $data=$data['data'];
+
+
+            
 
     }
     public function filter_location(Request $request)
@@ -341,6 +351,16 @@ class EventController extends Controller
     }
     public function my_events()
     {
+        
+        $token = json_decode(Auth::user()->twitter()->token);
+        //$twitter = Twitter::usingCredentials($token->oauth_token, $token->oauth_token_secret);
+        config(['TWITTER_ACCESS_TOKEN' => $token]);
+        config(['TWITTER_ACCESS_TOKEN_SECRET'=>$token->oauth_token_secret]);
+        
+        // $credentials = $twitter->getCredentials();
+
+        // dd($credentials);
+
         $locations = Location::all();
         $loc=[];
         foreach($locations as $location ){
@@ -395,6 +415,7 @@ class EventController extends Controller
         }
         return view('users.content.myevents', compact('events', 'locations','loc'));
     }
+
     public function search_my_Event(Request $request)
     {
          $venues=[];
@@ -438,6 +459,7 @@ class EventController extends Controller
         }
         return view('users.content.myevents', compact('events', 'locations','loc'));
     }
+
     public function delete_myevent(Event $event)
     {
         $del=Event::find($event->id);
@@ -484,6 +506,7 @@ class EventController extends Controller
 
 
     }
+
     public function update_event(Request $request, Event $event)
     {
 
@@ -572,8 +595,9 @@ class EventController extends Controller
 
 
         }
+
         public function update_event_social_posts($event_id, Request $request)
-    {
+        {
             $count=count($request->c);
 
             for($i=0;$i<$count;$i++){
