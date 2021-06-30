@@ -665,7 +665,7 @@ class EventController extends Controller
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-              $page_id.'/posts?fields=message,shares,permalink_url,full_picture,created_time',$accesstoken
+              $page_id.'/posts?fields=message,shares,permalink_url,full_picture,created_time,from',$accesstoken
             );
 
 
