@@ -190,7 +190,7 @@ class AccountController extends Controller
         // $tweets = Twitter::getSearch(['count'=>'20','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
 
         // $tweets = Twitter::getUsers(['screen_name'=>Session::get('tw_screen_name')]);
-        $tweets  = Twitter::getUserTimeline(['screen_name'=>Session::get('tw_screen_name')]);
+        $tweets  = Twitter::getUserTimeline(['count'=>'5','screen_name'=>Session::get('tw_screen_name')]);
 
         dd($tweets);
      }
