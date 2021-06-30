@@ -173,7 +173,7 @@ class EventController extends Controller
             'body' => 'A new Order is placed by user named '.Auth::user()->name.' ',
             'thanks' => 'Thank you ',
         ];
-        Notification::send($user, new OrdersNotifications($details));
+        // Notification::send($user, new OrdersNotifications($details));
         foreach ($request->h_tags as $h_tag) {
             $hashtag = new Collect_Event_Htag();
             $hashtag->account_name = $h_tag;
@@ -219,7 +219,7 @@ class EventController extends Controller
                if($request->c[$i]=='twitter'){
                 $posts=new Event_Social_Post();
                 $posts->platform=$request->c[$i];
-                $posts->page_name=$request->inp[2];
+                $posts->page_name=$request->tw_page;
                 $posts->event_id=$event_id;
                 $posts->save();
                }
