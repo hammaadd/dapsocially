@@ -177,6 +177,8 @@ return [
         //Yajra Providers
         
         Yajra\DataTables\DataTablesServiceProvider::class,
+        // Atymic\Twitter\ServiceProvider\LaravelServiceProvider::class,
+        \Atymic\Twitter\ServiceProvider\LaravelServiceProvider::class,
 
     ],
 
@@ -231,7 +233,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Datatables' => yajra\Datatables\Datatables::class,
-
+        // 'Twitter'=> Atymic\Twitter::class,
+        'Twitter'=> \Atymic\Twitter\Facade::class,
     ],
 
 ];
