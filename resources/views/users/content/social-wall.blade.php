@@ -116,7 +116,7 @@
         </a>
         @endif
 
-    @endforeach
+    @endfor
 @endif
 
         </div>
