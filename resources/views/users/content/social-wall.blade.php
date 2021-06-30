@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-white py-4 text-center text-5xl uppercase" >Event Message Or Venue Message</h3>
+            <h3 class="text-white py-4 text-center text-5xl uppercase" >{{$event->wall_location_msg}}</h3>
         </div>
     </section>
 
