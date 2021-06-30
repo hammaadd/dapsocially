@@ -92,11 +92,11 @@
                 <div class="masonry-content">
                     <div class="relative">
                         <img class=" rounded-lg" src="
-                        @isset($tweet->entities->media[0]->media_url)
+                        @if(isset($tweet->entities->media[0]->media_url))
                         {{$tweet->entities->media[0]->media_url}}
-                        @empty
+                        @else
                         {{asset('assets/Group 389.png')}}
-                        @endisset
+                        @endif
                         " alt="Dummy Image">
                         <img src="{{asset('assets/twitter.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                     </div>
