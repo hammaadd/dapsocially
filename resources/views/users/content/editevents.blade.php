@@ -324,7 +324,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         </label>
                                     </div>
                                     <input type="text" id="fbi" name="inp[]" class="input--field w--52 min-h-40"
-                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name_id}}">
+                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}">
                                 </div>
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                                </div>
@@ -341,7 +341,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         </label>
                                     </div>
                                     <input type="text" id="insi" name="inp[]" class="input--field w--52 min-h-40"
-                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name_id}}">
+                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}">
                                 </div>
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                                </div>
@@ -358,7 +358,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         </label>
                                     </div>
                                     <input type="text" id="twi" name="inp[]" class="input--field w--52 min-h-40"
-                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name_id}}">
+                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}">
                                 </div>
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                                </div>
@@ -375,7 +375,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         </label>
                                     </div>
                                     <input type="text" id="tiki" name="inp[]" class="input--field w--52 min-h-40"
-                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name_id}}">
+                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}">
                                 </div>
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                                </div>

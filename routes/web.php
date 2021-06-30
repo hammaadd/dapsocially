@@ -60,6 +60,10 @@ Route::get('edit-event/{event}','User\EventController@edit_event' )->name('edit.
 Route::post('update-event/{event}','User\EventController@update_event' )->name('update.event');
 
 Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name('attach.facebook');
+
+
+Route::get('facebook/posts/event/{event}', 'User\EventController@show_posts')->name('facebook.posts.event');
+Route::get('facebook/posts/venue/{venue}', 'User\VenueController@show_posts')->name('facebook.posts.venue');
 // Route::get('attach/facebook/callback', 'User\AccountController@handleFacebookCallback');
 
 // Route::get('pricing', function () {

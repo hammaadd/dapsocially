@@ -16,7 +16,8 @@ class CreateVenueSocialPostsTable extends Migration
         Schema::create('venue__social__posts', function (Blueprint $table) {
             $table->id();
             $table->string('platform',191)->nullable();
-            $table->string('page_name_id',191)->nullable();
+            $table->string('page_name',191)->nullable();
+            $table->string('page_id',191)->nullable();
             $table->unsignedBigInteger('venue_id')->nullable();
             $table->foreign('venue_id')->references('id')->on('venues')->onDelete('set null');
 

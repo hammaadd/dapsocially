@@ -48,7 +48,7 @@ $(document).ready(function (e) {
             </div>
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                 <p class="text-white">
-                    <span class="px-16 py-4 border-2 border-white text-2xl uppercase block w-1/2 text-center">Events</span><br>
+                    <span class="px-16 py-4 border-2 border-white text-2xl uppercase block text-center">Events</span><br>
                     Find the latest events updates or create events, concerts,
                     conferences, workshops, exhibitions and cultural events
                     in all cities of United States.
@@ -144,7 +144,7 @@ $(document).ready(function (e) {
                         </div>
                         <div class="pl-4 pt-2 pr-4 pb-2 ">
                             <h4>
-                                <b>{{$event->event_name}}</b>
+                              <a href="{{route('facebook.posts.event',$event)}}">  <b>{{$event->event_name}}</b></a>
                             </h4>
                         </div>
                         <div class="pb-4 pl-4 pr-4">
