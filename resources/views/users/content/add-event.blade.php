@@ -243,7 +243,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <p class="">Where would you like to collect social media hashtags from?</p>
                             <ul class="list-none pt-3">
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" checked >
+                                    <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" >
                                     <label for="cb1" class="cb-label">
                                         <img src="{{asset('assets/fb.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
