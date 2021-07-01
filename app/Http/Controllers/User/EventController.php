@@ -236,7 +236,7 @@ class EventController extends Controller
             $tw->save();
         }
 
-        $hashtag = $event->hastag;
+        $hashtag = $event->hashtag;
         $q = Str::replaceFirst('#', '%23', $hashtag);
         $tweets = $twitter->getSearch(['count'=>'5','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
         foreach($tweets->statuses as $tweet){
