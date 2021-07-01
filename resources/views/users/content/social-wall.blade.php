@@ -53,39 +53,43 @@
     <section class="p-5 bg-black w-full">
         <div class="masonry md:cols--3 lg:cols--5">
 @if(count($posts)>1)
-    @for($i = 0 ; $i< 5 ; $i++)
-    
-        @if(array_key_exists($i,$posts))
-        @php $post = $posts[$i]; @endphp
-            <a target="_blank" href="{{$post['permalink_url']}}">
+    {{-- @for($i = 0 ; $i< 5 ; $i++) --}}
+    @foreach($posts as $post)
+        {{-- @if(array_key_exists($i,$posts)) --}}
+        {{-- @php $post = $posts[$i]; @endphp --}}
+            <a target="_blank" href="{{$post->url}}">
                 <div class="masonry-item">
                     <div class="masonry-content">
                         <div class="relative">
-                            <img class=" rounded-lg" src="{{$post['full_picture']}}" alt="Dummy Image">
-                            <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                            <img class=" rounded-lg" src="{{$post->image}}" alt="Dummy Image">
+                            @if($post->platform == 'facebook')
+                                <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                            @elseif($post->platform =='twitter')
+                                <img src="{{asset('assets/twitter.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
+                            @endif
                         </div>
                         <div class="p-4">
                             <p>
-                                {{$post['message']}}
+                                {{$post->text}}
                             </p>
                         </div>
                         <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
                             <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                                <img src="{{$post['from']['picture']['data']['url']}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                                <img src="{{$post->user_img}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
                                 <div class="pl-2">
-                                    <p class="font-medium">{{$post['from']['name']}}</p>
+                                    <p class="font-medium">{{$post->username}}</p>
                                     <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                                 </div>
                             </div>
                             <div>
-                                <i class="far fa-clock"></i><span class="text-sm pl-2">{{ date('Y-m-d h:i', strtotime($post['created_time']))}}</span>
+                                <i class="far fa-clock"></i><span class="text-sm pl-2">{{$post->posted_at}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </a>
-        @endif
-        @if(array_key_exists($i,$user_tweets))
+        {{-- @endif --}}
+        {{-- @if(array_key_exists($i,$user_tweets))
         @php $tweet = $user_tweets[$i]; @endphp
         <a target="_blank" href="{{Twitter::linkTweet($tweet)}}">
             <div class="masonry-item">
@@ -120,9 +124,9 @@
                 </div>
             </div>
         </a>
-        @endif
+        @endif --}}
 
-    @endfor
+    @endforeach
 @endif
 
         </div>
