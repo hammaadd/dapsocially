@@ -189,11 +189,11 @@ class AccountController extends Controller
      }
 
      public function searchTweet(Request $request){
-        // $q = $request->q;
-        // $tweets = Twitter::getSearch(['count'=>'5','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
+        $q = $request->q;
+        $tweets = Twitter::getSearch(['count'=>'5','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
 
         // $tweets = Twitter::getUsers(['screen_name'=>Session::get('tw_screen_name')]);
-        $tweets  = Twitter::getUserTimeline(['count'=>'5','screen_name'=>Session::get('tw_screen_name')]);
+        // $tweets  = Twitter::getUserTimeline(['count'=>'5','screen_name'=>Session::get('tw_screen_name')]);
 
         dd($tweets);
      }
