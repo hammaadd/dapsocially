@@ -70,6 +70,7 @@
                 <li class="py-1"><a href="{{ route('venue') }}"class="text-xl">All Venues</a></li>
                 <li class="py-1"><a href="{{route('add-event')}}" class="text-xl">Add Event</a></li>
                 <li class="py-1"><a href="{{route('add-venue')}}" class="text-xl">Add Venue</a></li>
+                <li class="py-1"><a href="{{ route('attach.social.account') }}" class="text-xl"> Attach Social Accounts</a></li>
                 <li class="py-1"><a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();"
