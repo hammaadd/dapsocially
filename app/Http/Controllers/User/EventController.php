@@ -763,7 +763,7 @@ class EventController extends Controller
     
         
 
-        return view('users.content.social-wall',compact('posts'));
+        return view('users.content.social-wall',compact('posts','event'));
     }
     public function getPost($accesstoken,$page_id)
     {
