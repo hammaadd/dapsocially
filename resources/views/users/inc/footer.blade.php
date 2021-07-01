@@ -30,7 +30,7 @@
             <div class="w-full md:w-1/3 lg:w-4/12 text-white pt-5 lg:pt-0">
                 <h3 class="font-bold text-lg text-center md:text-left">Contact Us</h3>
                 <ul class="pt-4 text-gray-300 text-center md:text-left">
-                    <li class="py-1"><a href="tel:3045015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> {{ (App\Models\Shortcode::where('key','phone')->first())->content}}</a></li>
+                    <li class="py-1"><a href="tel:3145015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> {{ (App\Models\Shortcode::where('key','phone')->first())->content}}</a></li>
                     <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-white"><i class="fas fa-envelope pr-1"></i> {{ (App\Models\Shortcode::where('key','email')->first())->content}}</a></li>
                     <li class="py-1"><a href="#" class="hover:text-white"><i class="fas fa-map-marked-alt pr-1"></i> {{ (App\Models\Shortcode::where('key','phone')->first())->content}}</a></li>
                 </ul>

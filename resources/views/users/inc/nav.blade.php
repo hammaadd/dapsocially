@@ -81,7 +81,7 @@
             </ul>
             <hr class="w-4/5 mx-auto my-3 border-gray-400">
             <ul class="text-gray-300 text-center">
-                <li class="py-1"><a href="tel:3045015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> (304) 501-5100</a></li>
+                <li class="py-1"><a href="tel:3045015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> {{ (App\Models\Shortcode::where('key','phone')->first())->content}}</a></li>
                 <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-white"><i class="fas fa-envelope pr-1"></i> admin@dapsocially.com</a></li>
             </ul>
             <div class="pt-3 text-center">
