@@ -742,26 +742,28 @@ class EventController extends Controller
     public function show_posts(Event $event)
     {
 
-        $attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','facebook')->first();
-        $accesstoken=$attach_acc->token;
-        $event_post=Event_Social_Post::where('event_id',$event->id)->first();
-        $data=$this->getPost($accesstoken,$event_post->page_id);
-        $this->page_data=$data['data'];
-        $posts=$data['data'];
+        // $attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','facebook')->first();
+        // $accesstoken=$attach_acc->token;
+        // $event_post=Event_Social_Post::where('event_id',$event->id)->first();
+        // $data=$this->getPost($accesstoken,$event_post->page_id);
+        // $this->page_data=$data['data'];
+        // $posts=$data['data'];
 
-        //Get twitter data
-        $tw_attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','twitter')->first();
-        //$token = json_decode(Auth::user()->twitter()->token);
-        $tw_attach_acc = json_decode($tw_attach_acc->token);
-        $screen_name = $tw_attach_acc->screen_name;
+        // //Get twitter data
+        // $tw_attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','twitter')->first();
+        // //$token = json_decode(Auth::user()->twitter()->token);
+        // $tw_attach_acc = json_decode($tw_attach_acc->token);
+        // $screen_name = $tw_attach_acc->screen_name;
 
-        //Set user credentials
-        $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
-        $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
+        // //Set user credentials
+        // $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
+        // $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
+
+        $posts = E_social_wall::where('event_id',$event->id)->get();
+    
         
-        
 
-        return view('users.content.social-wall',compact('posts','event','user_tweets'));
+        return view('users.content.social-wall',compact('posts','event'));
     }
     public function getPost($accesstoken,$page_id)
     {
