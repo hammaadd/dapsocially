@@ -725,7 +725,12 @@ class EventController extends Controller
     }
 
     public function getTwUserProfile(){
-        $user = Twitter::getUsers(['screen_name'=>Session::get('tw_screen_name')]);
+        $tw_attach_acc = json_decode(Auth::user()->twitter()->token);
+        $screen_name = $tw_attach_acc->screen_name;
+
+        //Set user credentials
+        $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
+        $user = $twitter->getUsers(['screen_name'=>$screen_name]);
         return $user;
     }
     public function getPages($accestoken)
