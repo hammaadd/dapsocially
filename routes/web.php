@@ -78,6 +78,9 @@ Route::get('migrate-tables', function(){
 Route::get('social-wall', function () {
     return view('users.content.social-wall');
 })->name('social-wall');
+Route::get('social-new', function () {
+    return view('users.content.social-new');
+})->name('social-new');
 Route::post('/user-update-password', 'User\ProfileController@update_password')->name('user.update.password');
 Route::post('/user-update-profile', 'User\ProfileController@update_profile')->name('user.update.profile');
 

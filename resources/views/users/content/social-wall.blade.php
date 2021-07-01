@@ -54,7 +54,7 @@
         <div class="masonry md:cols--3 lg:cols--5">
 @if(count($posts)>1)
     @for($i = 0 ; $i< 5 ; $i++)
-    
+
         @if(array_key_exists($i,$posts))
         @php $post = $posts[$i]; @endphp
             <a target="_blank" href="{{$post['permalink_url']}}">
