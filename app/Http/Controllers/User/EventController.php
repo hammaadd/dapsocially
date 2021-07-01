@@ -54,8 +54,8 @@ class EventController extends Controller
         $P_plans=Payment_Plans::all();
          ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
 
-         $accestoken=Auth::user()->facebook()->token;
-         $tw_token = json_decode(Auth::user()->twitter()->token);
+        $accestoken=Auth::user()->facebook()->token;
+        $tw_token = json_decode(Auth::user()->twitter()->token);
         Session::put('tw_screen_name',$tw_token->screen_name);
          
 
@@ -64,8 +64,8 @@ class EventController extends Controller
          // dd($tw_user);
          $this->page_data=$data['data'];
          $data=$data['data'];
-
-        return view('users.content.add-event', compact('locations','P_plans','data','tw_user'));
+        $data = [];
+        return view('users.content.add-event', compact('locations','P_plans','tw_user','data'));
 
     }
     public function events()
@@ -116,7 +116,7 @@ class EventController extends Controller
             's_time' => 'required',
             'e_date' => 'required',
             'e_time' => 'required',
-            'fb_page'=>'required',
+            // 'fb_page'=>'required',
             // 'fb' => 'required|min:1',
             // 'c_posts.*'=>'required|min1'
             //    'c_posts'=>'sometimes',

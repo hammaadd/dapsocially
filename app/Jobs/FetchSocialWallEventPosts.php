@@ -17,6 +17,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class FetchSocialWallEventPosts implements ShouldQueue
 {
@@ -87,9 +88,30 @@ class FetchSocialWallEventPosts implements ShouldQueue
             $tw->save();
         }
 
+        $hashtag = $this->event->hashtag;
+        $q = Str::replaceFirst('#', '', $hashtag);
+        $tweets = $twitter->getSearch(['count'=>'5','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
+        foreach($tweets->statuses as $tweet){
+            if(isset($tweet->entities->media[0]->media_url)):
+                $media_url = $tweet->entities->media[0]->media_url;
+            else:
+                $media_url = asset('assets/Group 389.png');
+            endif;
+            $tw = new E_social_wall;
+            $tw->text = $tweet->text;
+            $tw->image = $media_url;
+            $tw->platform = 'twitter';
+            $tw->user_img =$tweet->user->profile_image_url_https;
+            $tw->username = $tweet->user->name;
+            $tw->posted_at = date('Y-m-d h:i', strtotime($tweet->created_at));
+            $tw->url = Twitter::linkTweet($tweet) ;
+            $tw->event_id = $this->event->id;
+            $tw->save();
+        }
+
         Session::flash('message', 'Social Wall Created succesfully');
 
-        
+
     }
 
     public function getPost($accesstoken,$page_id)
