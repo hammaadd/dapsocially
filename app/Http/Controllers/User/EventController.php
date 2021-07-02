@@ -64,7 +64,7 @@ class EventController extends Controller
          // dd($tw_user);
          $this->page_data=$data['data'];
          $data=$data['data'];
-        $data = [];
+        // $data = [];
         return view('users.content.add-event', compact('locations','P_plans','tw_user','data'));
 
     }
