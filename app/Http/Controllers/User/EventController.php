@@ -189,7 +189,7 @@ class EventController extends Controller
         }
 
         FetchSocialWallEventPosts::dispatchAfterResponse($event);
-        
+
         Session::flash('message', 'Event added succesfully');
         return back();
     }
@@ -546,7 +546,7 @@ class EventController extends Controller
            's_time'=>'required',
            'e_date'=>'required',
 
-           'e_date'=>'required',
+           'e_time'=>'required',
 
            'h_tags'=>'required',
         //    'c_posts'=>'sometimes',
