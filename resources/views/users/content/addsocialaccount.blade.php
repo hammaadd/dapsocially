@@ -22,11 +22,19 @@
                                 <a href="{{$url}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
+                                        <div class="text-green-500">
+                                            <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
                                     </div>
+                                    
                                 </a>
+                                
                                 <a href="{{route('attach.facebook')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/Insta@2x.png')}}" class="mx-auto w-5 h-5" alt="">
+                                        <div class="text-green-500">
+                                            <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
                                     </div>
                                 </a>
                                 <a href="{{route('attach.twitter')}}" class="mx-1">
