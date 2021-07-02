@@ -53,17 +53,25 @@ class EventController extends Controller
         $locations=$loc;
         $P_plans=Payment_Plans::all();
          ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
-
-        $accestoken=Auth::user()->facebook()->token;
-        $tw_token = json_decode(Auth::user()->twitter()->token);
-        Session::put('tw_screen_name',$tw_token->screen_name);
+        $data = [];
+        if($this->event->facebook_added() > 0):
+            $accestoken=Auth::user()->facebook()->token;
+            $data=$this->getPages($accestoken);
+        endif;
+      
+        if($this->event->twitter_added() > 0):
+            $tw_token = json_decode(Auth::user()->twitter()->token);
+            Session::put('tw_screen_name',$tw_token->screen_name);
+            $tw_user = $this->getTwUserProfile();
+            $this->page_data=$data['data'];
+            $data=$data['data'];
+        endif;
          
 
-         $data=$this->getPages($accestoken);
-         $tw_user = $this->getTwUserProfile();
+         
+         
          // dd($tw_user);
-         $this->page_data=$data['data'];
-         $data=$data['data'];
+         
         // $data = [];
         return view('users.content.add-event', compact('locations','P_plans','tw_user','data'));
 
