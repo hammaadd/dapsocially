@@ -21,9 +21,9 @@ class AccountController extends Controller
     protected $hepler, $fb;
     public function __construct()
     {
-        // if(session_status() === PHP_SESSION_NONE):
-        //     session_start();
-        // endif;
+        if(session_status() === PHP_SESSION_NONE):
+            session_start();
+        endif;
         $this->fb = new Facebook(array(
             'app_id' => env('FACEBOOK_APP_ID'),
             'app_secret' => env('FACEBOOK_APP_SECRET'),
