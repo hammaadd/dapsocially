@@ -304,7 +304,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
-                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                           {{-- <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
                                 class="flex py-1.5">
@@ -319,7 +319,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     placeholder="Enter your Public Page id or Username*" >
                             </div>
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
-                           </div>
+                           </div> --}}
 
                            <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
@@ -338,7 +338,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
-                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                           {{-- <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
                                 class=" flex py-1.5">
@@ -355,7 +355,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             </div>
 
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
-                           </div>
+                           </div> --}}
 
                         @error('c') <small class="text-red-600">Please select atleast one platform</small>@enderror
 
