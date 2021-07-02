@@ -21,9 +21,9 @@ class AccountController extends Controller
     protected $hepler, $fb;
     public function __construct()
     {
-        if(session_status() === PHP_SESSION_NONE):
-            session_start();
-        endif;
+        // if(session_status() === PHP_SESSION_NONE):
+        //     session_start();
+        // endif;
         $this->fb = new Facebook(array(
             'app_id' => env('FACEBOOK_APP_ID'),
             'app_secret' => env('FACEBOOK_APP_SECRET'),
@@ -106,8 +106,9 @@ class AccountController extends Controller
              echo 'Graph returned an error: ' . $e->getMessage();
               exit;
         } catch(FacebookSDKException $e) {
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              exit;
+            //echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            Session::flash('error', 'Unable to add contact support for help.');
+            return redirect()->route('attach.social.account');
         }
 
           Attached_Account::updateOrCreate(
@@ -116,8 +117,8 @@ class AccountController extends Controller
          );
             Session::put('fb_token',$accessToken);
 
-
-          return redirect()->route('my.account');
+        Session::flash('message', 'Facebook Attached Successfully');
+        return redirect()->route('my.account');
 
 
 
