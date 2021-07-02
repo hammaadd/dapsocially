@@ -58,19 +58,20 @@ class EventController extends Controller
         if(Auth::user()->facebook()):
             $accestoken=Auth::user()->facebook()->token;
             $data=$this->getPages($accestoken);
+            $this->page_data=$data['data'];
+            $data=$data['data'];
         endif;
       
         if(Auth::user()->twitter()):
             $tw_token = json_decode(Auth::user()->twitter()->token);
             Session::put('tw_screen_name',$tw_token->screen_name);
             $tw_user = $this->getTwUserProfile();
-            $this->page_data=$data['data'];
-            $data=$data['data'];
+            
         endif;
          
 
          
-         dd($data);
+        //  dd($data);
          // dd($tw_user);
          
         // $data = [];
