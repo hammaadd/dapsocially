@@ -193,12 +193,12 @@ class EventController extends Controller
             'thanks' => 'Thank you ',
         ];
         // Notification::send($user, new OrdersNotifications($details));
-        foreach ($request->h_tags as $h_tag) {
-            $hashtag = new Collect_Event_Htag();
-            $hashtag->account_name = $h_tag;
-            $hashtag->event_id = $event->id;
-            $hashtag->save();
-        }
+        // foreach ($request->h_tags as $h_tag) {
+        //     $hashtag = new Collect_Event_Htag();
+        //     $hashtag->account_name = $h_tag;
+        //     $hashtag->event_id = $event->id;
+        //     $hashtag->save();
+        // }
 
         FetchSocialWallEventPosts::dispatchAfterResponse($event);
 
