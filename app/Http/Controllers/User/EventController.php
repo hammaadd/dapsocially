@@ -728,7 +728,7 @@ class EventController extends Controller
         // //Set user credentials
         // $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
         // $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
-        dd($event->facebook_added());
+        
         $posts = E_social_wall::where('event_id',$event->id)->get();
     
         
