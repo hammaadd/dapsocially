@@ -16,10 +16,10 @@ class Event extends Model
     }
 
     public function twitter_added(){
-        return $this->platform->where('platform','twitter')->count();
+        return $this->platform->where('platform','twitter')->get();
     }
 
     public function facebook_added(){
-        return $this->platform->where('platform','facebook')->count();
+        return $this->platform->where('platform','facebook')->get();
     }
 }
