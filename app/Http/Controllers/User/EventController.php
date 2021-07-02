@@ -112,7 +112,7 @@ class EventController extends Controller
     public function add_event(Request $request)
     {
 
-        dd($request->file('cover_img'));
+        //dd($request->file('cover_img'));
 
         $request->validate([
             'ename' => 'required',
@@ -121,7 +121,7 @@ class EventController extends Controller
             'plan'=>'required',
             'location' => 'required',
             'c' => 'required',
-            'h_tag' => 'required',
+            // 'h_tag' => 'required',
             'm_dap_wall' => 'required',
             'wall_bg_img' => 'required',
             's_date' => 'required',

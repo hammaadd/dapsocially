@@ -226,7 +226,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
 
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <label for="hashtag">
-                                Hashtag(s) <span class="text-red-600">*</span>
+                                Hashtag(s)
                                 <input type="text" name="h_tag" placeholder="party,partytime" value="{{old('h_tag')}}" class="input-field"/>
                                 <small class="text-gray-600">Add Hashtag without using #. Multiple hashtags will be comma seperated</small>
                             </label>
