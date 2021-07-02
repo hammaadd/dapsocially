@@ -44,7 +44,8 @@ class FetchSocialWallEventPosts implements ShouldQueue
     public function handle()
     {
         //
-        if($this->event->facebook_added()):
+        $event = Event::find('id',$this->event->id);
+        if($event->facebook_added()):
             $attach_acc=Attached_Account::where('user_id',$this->event->created_by)->where('verified_acc','facebook')->first();
             $accesstoken=$attach_acc->token;
             $event_post=Event_Social_Post::where('event_id',$this->event->id)->first();
@@ -65,7 +66,7 @@ class FetchSocialWallEventPosts implements ShouldQueue
             }
         endif;
 
-        if($this->event->twitter_added()):
+        if($event->twitter_added()):
             $tw_attach_acc=Attached_Account::where('user_id',$this->event->created_by)->where('verified_acc','twitter')->first();
             $tw_attach_acc = json_decode($tw_attach_acc->token);
             $screen_name = $tw_attach_acc->screen_name;
