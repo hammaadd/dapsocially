@@ -70,7 +70,7 @@ class EventController extends Controller
          
 
          
-         
+         dd($data);
          // dd($tw_user);
          
         // $data = [];
