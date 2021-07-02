@@ -102,6 +102,8 @@ class EventController extends Controller
     public function add_event(Request $request)
     {
 
+        dd($request->m_dap_wall);
+
         $request->validate([
             'ename' => 'required',
             'e_descrip' => 'required|max:1000',

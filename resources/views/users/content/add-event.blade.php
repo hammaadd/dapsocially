@@ -287,7 +287,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <div
                                 class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="fb" name="c[]" value="facebook" >
+                                    <input type="checkbox" class="cb-input hidden" id="fb" name="c[]" value="facebook" @if(old('c[1]')=='facebook') checked @endif >
                                     <label for="fb" class="cb--label">
                                         <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
@@ -326,7 +326,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <div
                                 class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter" >
+                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter" @if(old('c[1]')=='twitter') checked @endif >
                                     <label for="twitter" class="cb--label">
                                         <img src="{{ asset('assets/twitter.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
