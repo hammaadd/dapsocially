@@ -243,7 +243,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                         <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                             <p class="">Where would you like to collect social media hashtags from?</p>
                             <ul class="list-none pt-3">
-                                <li class="inline-block mx-2">
+                                {{-- <li class="inline-block mx-2">
                                     <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook" >
                                     <label for="cb1" class="cb-label">
                                         <img src="{{asset('assets/fb.png')}}" class="w-10 h-10 mx-auto" alt="">
@@ -259,7 +259,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         <p class="text-add pt-4 text-sm">Add</p>
                                         <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                     </label>
-                                </li>
+                                </li> --}}
                                 <li class="inline-block mx-2">
                                     <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter">
                                     <label for="cb3" class="cb-label">
