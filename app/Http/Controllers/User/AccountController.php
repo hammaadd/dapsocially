@@ -74,7 +74,7 @@ class AccountController extends Controller
     }
     public function attach_account()
     {
-        $permissions = ['email','user_posts','pages_show_list','user_gender','user_videos','pages_read_engagement']; // Optional permissions
+        $permissions = ['user_posts','pages_show_list','pages_read_engagement']; // Optional permissions
         $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions);
 
         // Render Facebook login button
@@ -101,23 +101,25 @@ class AccountController extends Controller
 
             $data = $response->getDecodedBody();
             Session::put('fb_id',$data['id']);
-
+            Session::put('fb_token',$accessToken);
+            Attached_Account::updateOrCreate(
+                ['verified_acc'=>'facebook', 'user_id'=>Auth::id()],
+                ['token'=>$accessToken,'user_social_id'=>$data['id']]
+            );
+               
+   
+           Session::flash('message', 'Facebook Attached Successfully');
         } catch(FacebookResponseException $e) {
-             echo 'Graph returned an error: ' . $e->getMessage();
-              exit;
+            //  echo 'Graph returned an error: ' . $e->getMessage();
+            Session::flash('error', 'Unable to add contact support for help.');
+            return redirect()->route('attach.social.account');
         } catch(FacebookSDKException $e) {
             //echo 'Facebook SDK returned an error: ' . $e->getMessage();
             Session::flash('error', 'Unable to add contact support for help.');
             return redirect()->route('attach.social.account');
         }
 
-          Attached_Account::updateOrCreate(
-             ['verified_acc'=>'facebook', 'user_id'=>Auth::id()],
-             ['token'=>$accessToken,'user_social_id'=>$data['id']]
-         );
-            Session::put('fb_token',$accessToken);
-
-        Session::flash('message', 'Facebook Attached Successfully');
+          
         return redirect()->route('my.account');
 
 
