@@ -102,7 +102,7 @@ class EventController extends Controller
     public function add_event(Request $request)
     {
 
-        dd($request->file('m_dap_wall'));
+        dd($request->file('cover_img'));
 
         $request->validate([
             'ename' => 'required',
