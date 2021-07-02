@@ -200,8 +200,25 @@ class EventController extends Controller
         //     $hashtag->save();
         // }
 
-        FetchSocialWallEventPosts::dispatchAfterResponse($event);
-
+        // FetchSocialWallEventPosts::dispatch($event);
+        $attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','facebook')->first();
+        $accesstoken=$attach_acc->token;
+        $event_post=Event_Social_Post::where('event_id',$event->id)->first();
+        $data=$this->getPost($accesstoken,$event_post->page_id);
+        $posts=$data['data'];
+        dd($posts);
+        foreach($posts as $post){
+            $soc = new E_social_wall;
+            $soc->text = $post['message'];
+            $soc->image = $post['full_picture'];
+            $soc->platform = 'facebook';
+            $soc->user_img =$post['from']['picture']['data']['url'];
+            $soc->username = $post['from']['name'];
+            $soc->posted_at = date('Y-m-d h:i', strtotime($post['created_time']));
+            $soc->url = $post['permalink_url'] ;
+            $soc->event_id = $this->event->id;
+            $soc->save();
+        }
         Session::flash('message', 'Event added succesfully');
         return back();
     }
