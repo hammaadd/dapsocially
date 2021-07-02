@@ -294,9 +294,11 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                 </div>
 
                                   <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
-                                    @foreach ($data as $page)
+                                    @forelse ($data as $page)
                                     <option value="{{$page['category']}}">{{$page['category']}}</option>
-                                    @endforeach
+                                    @empty
+                                    <option>No Page Connected</option>
+                                    @endforelse
 
                                   </select>
 
@@ -332,7 +334,9 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     </label>
                                 </div>
                                 <select id="" name="tw_page" class="input--field w--52 min-h-40">
+                                    @if($tw_user)
                                     <option value="{{$tw_user->screen_name}}">{{$tw_user->name}}</option>
+                                    @endif
                                 </select>
                             </div>
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror

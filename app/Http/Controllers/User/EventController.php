@@ -54,7 +54,7 @@ class EventController extends Controller
         $P_plans=Payment_Plans::all();
          ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
         $data = null;
-        $tw_user = '';
+        $tw_user = null;
         if(Auth::user()->facebook()):
             $accestoken=Auth::user()->facebook()->token;
             $data=$this->getPages($accestoken);
