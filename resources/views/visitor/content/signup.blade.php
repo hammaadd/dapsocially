@@ -35,7 +35,7 @@
         </ul>
         <hr class="w-4/5 mx-auto my-3 border-gray-400">
         <ul class="text-gray-300 text-center">
-            <li class="py-1"><a href="tel:3045015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> (304) 501-5100</a></li>
+            <li class="py-1"><a href="tel:3145015100" class="hover:text-white"><i class="fas fa-phone-alt pr-1"></i> (314) 501-5100</a></li>
             <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-white"><i class="fas fa-envelope pr-1"></i> admin@dapsocially.com</a></li>
         </ul>
         <div class="pt-3 text-center">
@@ -121,7 +121,7 @@
                         If you would like to find out more about how we can help you, please give us a call or drop us an email.
                     </p>
                     <ul class="pt-4 text-white">
-                        <li class="py-1"><a href="tel:3045015100" class="hover:text-gray-300"><i class="fas fa-phone-alt pr-1"></i> (304) 501-5100</a></li>
+                        <li class="py-1"><a href="tel:3145015100" class="hover:text-gray-300"><i class="fas fa-phone-alt pr-1"></i> (314) 501-5100</a></li>
                         <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-gray-300"><i class="fas fa-envelope pr-1"></i> admin@dapsocially.com</a></li>
                         <li class="py-1"><a href="#" class="hover:text-gray-300"><i class="fas fa-map-marked-alt pr-1"></i> 11 Brady Circle, Ste.300 St.Louis, MO 63114</a></li>
                     </ul>

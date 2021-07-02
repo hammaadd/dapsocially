@@ -23,7 +23,7 @@
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
                                         @if(Auth::user()->facebook())
-                                            <div class="text-green-500">
+                                            <div class="text-green-500" title="Account Attached">
                                                 <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="white" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             </div>
                                         @endif
@@ -41,7 +41,7 @@
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/Twitter@2x.png')}}" class="mx-auto w-5 h-5" alt="">
                                         @if(Auth::user()->twitter())
-                                            <div class="text-green-500">
+                                            <div class="text-green-500" title="Account Attached">
                                                 <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="white" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                             </div>
                                         @endif
@@ -51,20 +51,20 @@
                         </div>
 
                 </div>
-                {{-- <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10">
+                <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10">
                     <h3 class="text-white md:text-lg font-medium">Get In Touch</h3>
                     <p class="text-gray-300 text-base">
                         If you would like to find out more about how we can help you, please give us a call or drop us an email.
                     </p>
                     <ul class="pt-4 text-white">
-                        <li class="py-1"><a href="tel:3045015100" class="hover:text-gray-300"><i class="fas fa-phone-alt pr-1"></i> (304) 501-5100</a></li>
+                        <li class="py-1"><a href="tel:3145015100" class="hover:text-gray-300"><i class="fas fa-phone-alt pr-1"></i> (314) 501-5100</a></li>
                         <li class="py-1"><a href="mailto:admin@dapsocially.com" class="hover:text-gray-300"><i class="fas fa-envelope pr-1"></i> admin@dapsocially.com</a></li>
                         <li class="py-1"><a href="#" class="hover:text-gray-300"><i class="fas fa-map-marked-alt pr-1"></i> 11 Brady Circle, Ste.300 St.Louis, MO 63114</a></li>
                     </ul>
                     <div class="pt-4">
                         <a href="#" class="bg-transparent text-white px-5 py-1.5 rounded-3xl border-2 border-white hover:bg-white hover:text-blue-550">Contact Us</a>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>
