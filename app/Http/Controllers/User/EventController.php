@@ -54,12 +54,12 @@ class EventController extends Controller
         $P_plans=Payment_Plans::all();
          ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
         $data = [];
-        if($this->event->facebook_added() > 0):
+        if(Auth::user()->facebook()):
             $accestoken=Auth::user()->facebook()->token;
             $data=$this->getPages($accestoken);
         endif;
       
-        if($this->event->twitter_added() > 0):
+        if(Auth::user()->twitter()):
             $tw_token = json_decode(Auth::user()->twitter()->token);
             Session::put('tw_screen_name',$tw_token->screen_name);
             $tw_user = $this->getTwUserProfile();
