@@ -231,6 +231,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                 <small class="text-gray-600">Add Hashtag without using #. Multiple hashtags will be comma seperated</small>
                             </label>
                             @error('h_tag') <small class="text-red-600">Please add some hashtags</small>@enderror
+                            <br>
                             <p class="inline-block pt-1">Approve all <span class="text-blue-550">#hashtags</span> posts from your DapSocially Location Wall</p>
                             <div class="relative inline-block w-10 mx-2 align-middle select-none pt-1">
                                 <input type="checkbox" name="app_htag" id="Blue" class="checked:bg-white outline-none focus:outline-none right-5 checked:right-0 duration-200 ease-in absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
