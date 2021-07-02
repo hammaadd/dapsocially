@@ -189,76 +189,7 @@ class EventController extends Controller
         }
 
         FetchSocialWallEventPosts::dispatchAfterResponse($event);
-        // $attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','facebook')->first();
-        // $accesstoken=$attach_acc->token;
-        // $event_post=Event_Social_Post::where('event_id',$event->id)->first();
-        // $data=$this->getPost($accesstoken,$event_post->page_id);
-        // $this->page_data=$data['data'];
-        // $posts=$data['data'];
-
-        // foreach($posts as $post){
-        //     $soc = new E_social_wall;
-        //     $soc->text = $post['message'];
-        //     $soc->image = $post['full_picture'];
-        //     $soc->platform = 'facebook';
-        //     $soc->user_img =$post['from']['picture']['data']['url'];
-        //     $soc->username = $post['from']['name'];
-        //     $soc->posted_at = date('Y-m-d h:i', strtotime($post['created_time']));
-        //     $soc->url = $post['permalink_url'] ;
-        //     $soc->event_id = $event->id;
-        //     $soc->save();
-        // }
-
-        //Get twitter data
-        // $tw_attach_acc=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','twitter')->first();
-        // //$token = json_decode(Auth::user()->twitter()->token);
-        // $tw_attach_acc = json_decode($tw_attach_acc->token);
-        // $screen_name = $tw_attach_acc->screen_name;
-
-        // //Set user credentials
-        // $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
-        // $user_tweets  = $twitter->getUserTimeline(['count'=>'5','screen_name'=>$screen_name]);
-
-        // foreach($user_tweets as $tweet){
-        //     if(isset($tweet->entities->media[0]->media_url)):
-        //         $media_url = $tweet->entities->media[0]->media_url;
-        //     else:
-        //         $media_url = asset('assets/Group 389.png');
-        //     endif;
-        //     $tw = new E_social_wall;
-        //     $tw->text = $tweet->text;
-        //     $tw->image = $media_url;
-        //     $tw->platform = 'twitter';
-        //     $tw->user_img =$tweet->user->profile_image_url_https;
-        //     $tw->username = $tweet->user->name;
-        //     $tw->posted_at = date('Y-m-d h:i', strtotime($tweet->created_at));
-        //     $tw->url = Twitter::linkTweet($tweet) ;
-        //     $tw->event_id = $event->id;
-        //     $tw->save();
-        // }
-
-        // $hashtag = $event->hashtag;
-        // $q = Str::replaceFirst('#', '%23', $hashtag);
-        // $tweets = $twitter->getSearch(['count'=>'5','q'=>$q,'tweet.fields'=>'id,text,attachments,created_at,possibly_sensitive,public_metrics,entities']);
-        // foreach($tweets->statuses as $tweet){
-        //     if(isset($tweet->entities->media[0]->media_url)):
-        //         $media_url = $tweet->entities->media[0]->media_url;
-        //     else:
-        //         $media_url = asset('assets/Group 389.png');
-        //     endif;
-        //     $tw = new E_social_wall;
-        //     $tw->text = $tweet->text;
-        //     $tw->image = $media_url;
-        //     $tw->platform = 'twitter';
-        //     $tw->user_img =$tweet->user->profile_image_url_https;
-        //     $tw->username = $tweet->user->name;
-        //     $tw->posted_at = date('Y-m-d h:i', strtotime($tweet->created_at));
-        //     $tw->url = Twitter::linkTweet($tweet) ;
-        //     $tw->event_id = $event->id;
-        //     $tw->save();
-        // }
-
-
+        
         Session::flash('message', 'Event added succesfully');
         return back();
     }
