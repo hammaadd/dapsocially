@@ -303,6 +303,9 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                   </select>
 
                             </div>
+                            @if(Auth::user()->facebook())
+                                <a href="{{route('attach.social.account')}}" class="text-red-600 underline text-right">Attach Facebook Account</a>
+                            @endif
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
@@ -339,6 +342,9 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     @endif
                                 </select>
                             </div>
+                            @if(Auth::user()->twitter())
+                                <a href="{{route('attach.social.account')}}" class="text-red-600 underline text-right">Attach Twitter Account</a>
+                            @endif
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
