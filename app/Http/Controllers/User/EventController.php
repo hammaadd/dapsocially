@@ -529,22 +529,6 @@ class EventController extends Controller
     public function edit_event(Event $event)
     {
 
-        $locations=Location::all();
-        $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
-        $odr=Order::where('event_id',$event->id)->first();
-
-        $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
-        $P_plans=Payment_Plans::all();
-        $posts=Event_Social_Post::where('event_id',$event->id)->get();
-
-        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans','posts'));
-
-
-    }
-
-    public function update_event(Request $request, Event $event)
-    {
-
         $data = [];
         $tw_user = null;
         if(Auth::user()->facebook()):
@@ -562,6 +546,24 @@ class EventController extends Controller
             $tw_user = $this->getTwUserProfile();
             
         endif;
+        
+        $locations=Location::all();
+        $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
+        $odr=Order::where('event_id',$event->id)->first();
+
+        $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
+        $P_plans=Payment_Plans::all();
+        $posts=Event_Social_Post::where('event_id',$event->id)->get();
+
+        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans','posts'));
+
+
+    }
+
+    public function update_event(Request $request, Event $event)
+    {
+
+       
 
         $request->validate([
             'ename' => 'required',
