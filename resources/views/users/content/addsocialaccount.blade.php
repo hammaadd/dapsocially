@@ -31,12 +31,12 @@
                                     
                                 </a>
                                 
-                                <a href="{{route('attach.facebook')}}" class="mx-1">
+                                {{-- <a href="{{route('attach.facebook')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/Insta@2x.png')}}" class="mx-auto w-5 h-5" alt="">
                                        
                                     </div>
-                                </a>
+                                </a> --}}
                                 <a href="{{route('attach.twitter')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/Twitter@2x.png')}}" class="mx-auto w-5 h-5" alt="">

@@ -190,7 +190,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                 <select name="location" id="location" class="input-field">
                                     @foreach ($locations as $location)
 
-                                    <option value="{{$location}}" >{{$location}}</option>
+                                    <option value="{{$location}}" @if(old('location')==$location) selected @endif >{{$location}}</option>
                                     @endforeach
                                 </select>
                             </label>
