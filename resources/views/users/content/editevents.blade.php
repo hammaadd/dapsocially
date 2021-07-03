@@ -398,7 +398,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <label for="cover">
                                 Select Background image for your Social Wall <span class="text-red-600">*</span>
                                 <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
-                                    <img src="{{asset('Users/EventImages/'.$event->wall_bg_image)}}" id="wall_bg" class="object-cover w-auto h-100 rounded-md" alt="">
+                                    <img src="{{asset('Users/EventImages/'.$event->wall_bg_image)}}" id="wall_bg" class="object-cover w-auto rounded-md mx-auto h-full" alt="">
                                     <div class="flex flex-wrap overflow-hidden items-center justify-center flex-col absolute top-0 left-0 right-0 h-full">
                                         <img src="{{asset('assets/icons8_image_file_add.png')}}" alt="">
                                         <p id="select-bgimg" class="text-gray-400 border border-gray-400 px-3 py-1.5 mt-2 rounded-3xl bg-transparent hover:bg-gray-400 hover:text-white">Select Image</p>
