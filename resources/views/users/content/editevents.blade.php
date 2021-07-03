@@ -323,8 +323,17 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                             <img src="{{ asset('assets/fb.png') }}" class="w-6 h-6 mx-auto" alt="">
                                         </label>
                                     </div>
-                                    <input type="text" id="fbi" name="inp[]" class="input--field w--52 min-h-40"
-                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}">
+                                    {{-- <input type="text" id="fbi" name="inp[]" class="input--field w--52 min-h-40"
+                                        placeholder="Enter your Public Page id or Username*" value="{{$post->page_name}}"> --}}
+
+                                        <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
+                                            @forelse ($data as $page)
+                                            <option value="{{$page['category']}}">{{$page['category']}}</option>
+                                            @empty
+                                            <option>No Page Connected</option>
+                                            @endforelse
+        
+                                          </select>
                                 </div>
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                                </div>

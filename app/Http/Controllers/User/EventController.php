@@ -545,6 +545,24 @@ class EventController extends Controller
     public function update_event(Request $request, Event $event)
     {
 
+        $data = [];
+        $tw_user = null;
+        if(Auth::user()->facebook()):
+            $accestoken=Auth::user()->facebook()->token;
+            $data=$this->getPages($accestoken);
+            $this->page_data=$data['data'];
+            $data=$data['data'];
+        endif;
+
+        dd($data);
+      
+        if(Auth::user()->twitter()):
+            $tw_token = json_decode(Auth::user()->twitter()->token);
+            Session::put('tw_screen_name',$tw_token->screen_name);
+            $tw_user = $this->getTwUserProfile();
+            
+        endif;
+
         $request->validate([
             'ename' => 'required',
             'e_descrip' => 'required',
@@ -640,7 +658,7 @@ class EventController extends Controller
                if($request->c[$i]=='facebook'){
                 $posts=new Event_Social_Post();
                 $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[$i];
+                $posts->page_name=$request->inp[$i];
                 $posts->event_id=$event_id;
                 $posts->save();
                }
