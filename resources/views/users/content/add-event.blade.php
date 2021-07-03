@@ -261,7 +261,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     </label>
                                 </li> --}}
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter">
+                                    <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter" @if(old('h_tags[0]')=='twitter') selected @endif>
                                     <label for="cb3" class="cb-label">
                                         <img src="{{asset('assets/twitter.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -269,7 +269,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                     </label>
                                 </li>
                                 <li class="inline-block mx-2">
-                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok">
+                                    <input type="checkbox" class="cb-input hidden" id="cb4" name="h_tags[]" value="tiktok" @if(old('h_tags[1]')=='twitter') selected @endif>
                                     <label for="cb4" class="cb-label">
                                         <img src="{{asset('assets/tiktok.png')}}" class="w-10 h-10 mx-auto" alt="">
                                         <p class="text-add pt-4 text-sm">Add</p>
@@ -281,7 +281,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                         </div>
 
                         <div class="w-full overflow-hidden md:mt-2 md:px-2 lg:mt-3 lg:px-3 xl:mt-3 xl:px-3">
-                            <p>Collect Posts from your Profile Pages? <span class="text-red-600">*</span></p>
+                            <p>Collect Posts from your Profile Pages? <span class="text-red-600">*<small>Make sure to check the icon from which service you want to fetch data?</small></span></p>
                         </div>
                         <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
                             <div
