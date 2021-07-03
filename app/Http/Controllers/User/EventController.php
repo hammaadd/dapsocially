@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\FetchPostsUpdateEvent;
 use App\Jobs\FetchSocialWallEventPosts;
+use App\Jobs\UpdateEventSocialWall;
 use App\Models\E_social_wall;
 use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
@@ -613,6 +615,7 @@ class EventController extends Controller
             Event::where('id',$event->id)->update(['event_name'=>$request->ename,'e_description'=>$request->e_descrip,'hashtag'=>$request->h_tag,'approve_htag'=>$request->app_htag,
             'start_time'=>$request->s_time,'start_date'=>$request->s_date,'end_time'=>$request->e_time,'end_date'=>$request->e_date,'created_by'=>Auth::user()->id,'location'=>$request->location]);
 
+            FetchPostsUpdateEvent::dispatchAfterResponse($event);
             Session::flash('message', 'Event updated  succesfully');
             return back();
             // if(!is_null($request->longitude && $request->latitude))

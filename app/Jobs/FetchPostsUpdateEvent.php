@@ -13,14 +13,16 @@ class FetchPostsUpdateEvent implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $event;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Event $event)
     {
         //
+        $this->event = $event;
     }
 
     /**
@@ -31,5 +33,9 @@ class FetchPostsUpdateEvent implements ShouldQueue
     public function handle()
     {
         //
+
+        $event = Event::where('id','=',$this->event->id)->first();
+        
+        Session::flash('message', 'Social Wall Created succesfully');
     }
 }

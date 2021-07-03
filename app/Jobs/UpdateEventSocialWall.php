@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\User\Event;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,7 +22,10 @@ class UpdateEventSocialWall implements ShouldQueue
     public function __construct()
     {
         //
-    }
+        
+
+        
+    }   
 
     /**
      * Execute the job.
@@ -31,5 +35,6 @@ class UpdateEventSocialWall implements ShouldQueue
     public function handle()
     {
         //
+        
     }
 }
