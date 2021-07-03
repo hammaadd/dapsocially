@@ -197,7 +197,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <label for="cover">
                                 Add Cover Image <span class="text-red-600">*</span>
                                 <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
-                                    <img src="{{asset('Users/EventImages/'.$event->c_image)}}" id="coverImage" class="object-cover w-full rounded-md" alt="">
+                                    <img src="{{asset('Users/EventImages/'.$event->c_image)}}" id="coverImage" class="object-cover w-auto rounded-md mx-auto h-full" alt="">
                                     <div class="flex flex-wrap overflow-hidden items-center justify-center flex-col absolute top-0 left-0 right-0 h-full">
                                         <img src="{{asset('assets/icons8_image_file_add.png')}}" alt="">
                                         <small class="text-gray-400 pt-2">Drop an image to Upload</small>
