@@ -242,22 +242,22 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <p class="">Where would you like to collect social media hashtags from?</p>
                             <ul class="list-none pt-3">
                                 @if(count($event_htags)<1)
-                                    <li class="inline-block mx-2">
+                                    {{-- <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]" value="facebook"  >
                                         <label for="cb1" class="cb-label">
                                             <img src="{{asset('assets/fb.png')}}" class="w-10 h-10 mx-auto" alt="">
                                             <p class="text-add pt-4 text-sm">Add</p>
                                             <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                         </label>
-                                    </li>
-                                    <li class="inline-block mx-2">
+                                    </li> --}}
+                                    {{-- <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]" value="instagram" >
                                         <label for="cb2" class="cb-label">
                                             <img src="{{asset('assets/Insta.png')}}" class="w-10 h-10 mx-auto" alt="">
                                             <p class="text-add pt-4 text-sm">Add</p>
                                             <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                         </label>
-                                    </li>
+                                    </li> --}}
                                     <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]" value="twitter">
                                         <label for="cb3" class="cb-label">
@@ -398,7 +398,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             <label for="cover">
                                 Select Background image for your Social Wall <span class="text-red-600">*</span>
                                 <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
-                                    <img src="{{asset('Users/EventImages/'.$event->wall_bg_image)}}" id="wall_bg" class="object-cover w-full rounded-md" alt="">
+                                    <img src="{{asset('Users/EventImages/'.$event->wall_bg_image)}}" id="wall_bg" class="object-cover w-auto h-100 rounded-md" alt="">
                                     <div class="flex flex-wrap overflow-hidden items-center justify-center flex-col absolute top-0 left-0 right-0 h-full">
                                         <img src="{{asset('assets/icons8_image_file_add.png')}}" alt="">
                                         <p id="select-bgimg" class="text-gray-400 border border-gray-400 px-3 py-1.5 mt-2 rounded-3xl bg-transparent hover:bg-gray-400 hover:text-white">Select Image</p>

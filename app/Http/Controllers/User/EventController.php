@@ -551,7 +551,7 @@ class EventController extends Controller
             'location'=>'required',
             // 'locality'=>'required',
             // 'state'=>'required',
-            'h_tag'=>'required',
+            // 'h_tag'=>'required',
            'm_dap_wall'=>'required',
            'c' => 'required',
            's_date'=>'required',
@@ -560,7 +560,7 @@ class EventController extends Controller
 
            'e_time'=>'required',
 
-           'h_tags'=>'required',
+        //    'h_tags'=>'required',
         //    'c_posts'=>'sometimes',
         //    'p_fb'=>'required_with:c_posts,on'
             ]);
