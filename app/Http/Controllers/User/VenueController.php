@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\FetchSocialWallVenuePosts;
 use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
 use App\Models\Location;
@@ -71,7 +72,7 @@ class VenueController extends Controller
         $user = $twitter->getUsers(['screen_name'=>$screen_name]);
         return $user;
     }
-    
+
     public function venue()
     {
 
@@ -112,23 +113,6 @@ class VenueController extends Controller
             'country' => 'required',
             'plan'=>'required',
             'c' => 'required',
-            // 'inp[1]'=>'required_with:c,insta',
-            // 'inp[2]'=>'required_with:c,twitter',
-            // 'inp[3]'=>'required_with:c,tiktok',
-            // 'i_fb'       => 'required_with:c_fb,on',
-            // 'c_tiktok' => 'sometimes',
-            // 'i_tiktok'       => 'required_with:c_tiktok,on',
-            // 'c_insta' => 'sometimes',
-            // 'i_insta'       => 'required_with:c_insta,on',
-            // 'c_twitter' => 'sometimes',
-            // 'i_twitter'       => 'required_with:c_twitter,on',
-
-
-            // 'c_fb' => 'required_unless:c_twitter,on,required_unless:c_insta,on,required_unless:c_tiktok,on',
-
-            // 'c_tiktok' => 'required_unless:c_twitter,on,required_unless:c_insta,on,required_unless:c_fb,on',
-
-
             'loc_address' => 'required',
             'locality' => 'required',
             'state' => 'required',
@@ -137,11 +121,7 @@ class VenueController extends Controller
             'wall_bg_img' => 'required',
             's_date' => 'required',
             's_time' => 'required',
-            'e_date' => 'required',
-
-            'e_date' => 'required',
-            'e_time' => 'required',
-            'h_tags' => 'required|min:1',
+            // 'h_tags' => 'required|min:1',
             //    'c_posts'=>'sometimes',
             //    'p_fb'=>'required_with:c_posts,on'
         ]);
@@ -210,13 +190,15 @@ class VenueController extends Controller
             'body' => 'A new Order is placed by user named '.Auth::user()->name.' ',
             'thanks' => 'Thank you ',
         ];
-        Notification::send($user, new OrdersNotifications($details));
-        foreach ($request->h_tags as $h_tag) {
-            $hashtag = new Collect_Venue_Htag();
-            $hashtag->account_name = $h_tag;
-            $hashtag->venue_id = $venue->id;
-            $hashtag->save();
-        }
+        // Notification::send($user, new OrdersNotifications($details));
+        // foreach ($request->h_tags as $h_tag) {
+        //     $hashtag = new Collect_Venue_Htag();
+        //     $hashtag->account_name = $h_tag;
+        //     $hashtag->venue_id = $venue->id;
+        //     $hashtag->save();
+        // }
+        FetchSocialWallVenuePosts::dispatchAfterResponse();
+
         Session::flash('message', 'Venue added succesfully succesfully');
 
         return back();
