@@ -295,7 +295,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
 
                                   <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
                                     @forelse ($data as $page)
-                                    <option value="{{$page['category']}}">{{$page['category']}}</option>
+                                    <option value="{{$page['name']}}">{{$page['name']}}</option>
                                     @empty
                                     <option>No Page Connected</option>
                                     @endforelse

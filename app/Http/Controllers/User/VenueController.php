@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Arr;
+use Atymic\Twitter\Facade\Twitter;
 
 use Illuminate\Support\Facades\Notification;
 
@@ -37,12 +38,40 @@ class VenueController extends Controller
         $P_plans = Payment_Plans::all();
         $attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
 
+         ///$attach_acc=Attached_Account::where('user_id',Auth::user()->id)->where('verified_acc','facebook')->first();
+        $data = [];
+        $tw_user = null;
+        if(Auth::user()->facebook()):
+            $accestoken=Auth::user()->facebook()->token;
+            $data=$this->getPages($accestoken);
+            $this->page_data=$data['data'];
+            $data=$data['data'];
+        endif;
+      
+        if(Auth::user()->twitter()):
+            $tw_token = json_decode(Auth::user()->twitter()->token);
+            Session::put('tw_screen_name',$tw_token->screen_name);
+            $tw_user = $this->getTwUserProfile();
+            
+        endif;
+
         $accestoken=$attach_acc->token;
         $data=$this->getPages($accestoken);
         $this->page_data=$data['data'];
         $data=$data['data'];
-        return view('users.content.add-venue', compact('P_plans','data'));
+        return view('users.content.add-venue', compact('P_plans','tw_user','data'));
     }
+
+    public function getTwUserProfile(){
+        $tw_attach_acc = json_decode(Auth::user()->twitter()->token);
+        $screen_name = $tw_attach_acc->screen_name;
+
+        //Set user credentials
+        $twitter = Twitter::usingCredentials($tw_attach_acc->oauth_token,$tw_attach_acc->oauth_token_secret);
+        $user = $twitter->getUsers(['screen_name'=>$screen_name]);
+        return $user;
+    }
+    
     public function venue()
     {
 

@@ -32,6 +32,8 @@ Route::get('signup', function () {
 
 
 // User Side
+Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
+
 Route::middleware(['auth'=>'role:user'])->group(function(){
 Route::get('profile', 'User\ProfileController@index')->name('profile');
 Route::get('my-account', 'User\AccountController@index')->name('my.account');
@@ -63,7 +65,7 @@ Route::post('update-event/{event}','User\EventController@update_event' )->name('
 Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name('attach.facebook');
 
 
-Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
+
 Route::get('facebook/posts/venue/{venue}', 'User\VenueController@show_posts')->name('facebook.posts.venue');
 
 Route::get('migrate-tables', function(){

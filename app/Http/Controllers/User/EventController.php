@@ -5,20 +5,16 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Jobs\FetchPostsUpdateEvent;
 use App\Jobs\FetchSocialWallEventPosts;
-use App\Jobs\UpdateEventSocialWall;
 use App\Models\E_social_wall;
 use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
-use Laravel\Ui\Presets\React;
 use App\Models\User\Event;
 use App\Models\Location;
-use App\Models\EventImages;
 use App\Models\Order;
 use App\Models\Payment_Plans;
 use App\Models\User;
 use App\Models\User\Attached_Account;
 use App\Models\User\Collect_Event_Htag;
-use App\Notifications\OrdersNotifications;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook;
@@ -26,16 +22,14 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Notification;
 use Atymic\Twitter\Facade\Twitter;
-use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
     public $page_data=[];
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function index()
@@ -130,11 +124,7 @@ class EventController extends Controller
             's_time' => 'required',
             'e_date' => 'required',
             'e_time' => 'required',
-            // 'fb_page'=>'required',
-            // 'fb' => 'required|min:1',
-            // 'c_posts.*'=>'required|min1'
-            //    'c_posts'=>'sometimes',
-            //    'p_fb'=>'required_with:c_posts,on'
+            
         ]);
 
 
@@ -372,29 +362,7 @@ class EventController extends Controller
     }
     public function my_events()
     {
-        
-        
-    //     $config = ["consumer_key" => ENV('TWITTER_CONSUMER_KEY'),
-    //     "consumer_secret"  => ENV('TWITTER_CONSUMER_SECRET'),
-    //     "access_token" => ,
-    //     "access_token_secret" => ,
-    //     'api_version' => '1.1',
-    //     'api_url' => 'api.twitter.com',
-    //     'upload_url' => 'upload.twitter.com',
-    //     'authenticate_url' => 'https://api.twitter.com/oauth/authenticate',
-    //     'access_token_url' => 'https://api.twitter.com/oauth/access_token',
-    //     'request_token_url' => 'https://api.twitter.com/oauth/request_token',
-    //     'debug' => env('APP_DEBUG', false),
-    // ];
-
-    //     Twitter::usingConfiguration(\Atymic\Twitter\Configuration::fromLaravelConfiguration($config));
-        //$twitter = Twitter::usingCredentials($token->oauth_token, $token->oauth_token_secret);
-        // config(['TWITTER_ACCESS_TOKEN' => $token]);
-        // config(['TWITTER_ACCESS_TOKEN_SECRET'=>$token->oauth_token_secret]);
-
-        // $credentials = $twitter->getCredentials();
-
-        // dd($credentials);
+    
 
         $locations = Location::all();
         $loc=[];
@@ -529,6 +497,16 @@ class EventController extends Controller
     public function edit_event(Event $event)
     {
 
+        
+
+        $locations=Location::all();
+        $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
+        $odr=Order::where('event_id',$event->id)->first();
+
+        $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
+        $P_plans=Payment_Plans::all();
+        $posts=Event_Social_Post::where('event_id',$event->id)->get();
+
         $data = [];
         $tw_user = null;
         if(Auth::user()->facebook()):
@@ -538,24 +516,10 @@ class EventController extends Controller
             $data=$data['data'];
         endif;
 
-        dd($data);
       
-        if(Auth::user()->twitter()):
-            $tw_token = json_decode(Auth::user()->twitter()->token);
-            Session::put('tw_screen_name',$tw_token->screen_name);
-            $tw_user = $this->getTwUserProfile();
-            
-        endif;
         
-        $locations=Location::all();
-        $event_htags=Collect_Event_Htag::where('event_id', '=', $event->id)->get();
-        $odr=Order::where('event_id',$event->id)->first();
 
-        $payment_details=Payment_Plans::where('id',$odr->payment_plan_id)->first();
-        $P_plans=Payment_Plans::all();
-        $posts=Event_Social_Post::where('event_id',$event->id)->get();
-
-        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans','posts'));
+        return view('users.content.editevents',compact('event','event_htags','locations','payment_details','P_plans','posts','data'));
 
 
     }
@@ -657,37 +621,15 @@ class EventController extends Controller
             $count=count($request->c);
 
             for($i=0;$i<$count;$i++){
-               if($request->c[$i]=='facebook'){
-                $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name=$request->inp[$i];
-                $posts->event_id=$event_id;
-                $posts->save();
-               }
-               if($request->c[$i]=='insta'){
-                $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[$i];
-                $posts->event_id=$event_id;
-                $posts->save();
-               }
-               if($request->c[$i]=='twitter'){
-                $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[$i];
-                $posts->event_id=$event_id;
-                $posts->save();
-               }
-               if($request->c[$i]=='tiktok'){
-                $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
-                $posts->page_name_id=$request->inp[$i];
-                $posts->event_id=$event_id;
-                $posts->save();
-               }
-
+                
+                $post = Event_Social_Post::updateOrCreate(
+                    ['event_id'=>$event_id , 'platform'=>$request->c[$i]],
+                    ['page_name'=>$request->inp[$i]]
+                );
 
             }
+
+            return $post;
 
     }
 

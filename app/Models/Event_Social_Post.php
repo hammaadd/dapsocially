@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Event_Social_Post extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 }

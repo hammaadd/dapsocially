@@ -11,135 +11,135 @@
      $("#imageUpload").click();
  });
 
-function fasterPreview1( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#coverImage').attr('src',
-             window.URL.createObjectURL(uploader.files[0]) );
-             document.getElementById('uploadAvatarBtn').style.display = 'inline';
+    function fasterPreview1( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+            $('#coverImage').attr('src',
+                window.URL.createObjectURL(uploader.files[0]) );
+                document.getElementById('uploadAvatarBtn').style.display = 'inline';
+        }
     }
-}
 
-$("#imageUpload").change(function(){
-    fasterPreview1( this );
-});
-
-
-$("#select-bgimg").click(function(e) {
-     $("#wall_image").click();
- });
-
-function fasterPreview( uploader ) {
-    if ( uploader.files && uploader.files[0] ){
-          $('#wall_bg').attr('src',
-             window.URL.createObjectURL(uploader.files[0]) );
-             document.getElementById('uploadAvatarBtn').style.display = 'inline';
-    }
-}
-
-$("#wall_image").change(function(){
-    fasterPreview( this );
-});
-
-$("#m_dap_wall").on('keyup', function(e) {
-
-var wordss = 0;
-
-if ((this.value.match(/\S+/g)) != null) {
-  wordss = this.value.match(/\S+/g).length;
-}
-
-if (wordss > 20) {
-    e.preventDefault();
-  // Split the string on first 200 words and rejoin on spaces
-  var trimmed = $(this).val().split(/\s+/, 20).join(" ");
-  // Add a space at the end to make sure more typing creates new words
-  $(this).val(trimmed + " ");
-
-}
-else {
-  $('#w_counter').text(wordss);
-  //$('#word_left').text(200-words);
-}
-});
-
-$("#e_descrip").on('keyup', function(e) {
-
-var words = 0;
-
-if ((this.value.match(/\S+/g)) != null) {
-  words = this.value.match(/\S+/g).length;
-}
-
-if (words > 20) {
-    e.preventDefault();
-  // Split the string on first 200 words and rejoin on spaces
-  var trimmed = $(this).val().split(/\s+/, 20).join(" ");
-  // Add a space at the end to make sure more typing creates new words
-  $(this).val(trimmed + " ");
-
-}
-else {
-  $('#display_count').text(words);
-  //$('#word_left').text(200-words);
-}
-});
-
+    $("#imageUpload").change(function(){
+        fasterPreview1( this );
     });
 
-    function checkInputBox(){
 
-var checkboxes = document.getElementsByName('c[]');
-var fb = document.getElementById('fbi');
+    $("#select-bgimg").click(function(e) {
+        $("#wall_image").click();
+    });
 
-var insta = document.getElementById('insi');
-
-var twit = document.getElementById('twi');
-var tiki = document.getElementById('tiki');
-
-
-for (var i=0, n=checkboxes.length;i<n;i++)
-{
-
-    if(checkboxes[i].checked && checkboxes[i].value=='facebook' && fb.value=="")
-    {
-        alert('Please add facebook page id or name ');
-
-        if ( window.history.replaceState ) {
-              window.history.replaceState( null, null, window.location.href );
-                }
-        return false;
-    }
-    else if (checkboxes[i].checked && checkboxes[i].value=='twitter' && insta.value=="")
-    {
-        alert('Please add twitter page id or name ');
-
-        if ( window.history.replaceState ) {
-              window.history.replaceState( null, null, window.location.href );
-                }
-        return false;
-
-    }
-    else if (checkboxes[i].checked && checkboxes[i].value=='insta' && twit.value=="")
-    {
-        alert('Please add instagram page id or name ');
-        if ( window.history.replaceState ) {
-              window.history.replaceState( null, null, window.location.href );
-                }
-        return false;
-    }
-    else if (checkboxes[i].checked && checkboxes[i].value=='tiktok' && tiki.value=="")
-    {
-        alert('Please add tiktok page id or name ');
-        if ( window.history.replaceState ) {
-              window.history.replaceState( null, null, window.location.href );
-                }
-        return false;
+    function fasterPreview( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+            $('#wall_bg').attr('src',
+                window.URL.createObjectURL(uploader.files[0]) );
+                document.getElementById('uploadAvatarBtn').style.display = 'inline';
+        }
     }
 
+    $("#wall_image").change(function(){
+        fasterPreview( this );
+    });
 
-}
+    $("#m_dap_wall").on('keyup', function(e) {
 
-}
+    var wordss = 0;
+
+    if ((this.value.match(/\S+/g)) != null) {
+    wordss = this.value.match(/\S+/g).length;
+    }
+
+    if (wordss > 20) {
+        e.preventDefault();
+    // Split the string on first 200 words and rejoin on spaces
+    var trimmed = $(this).val().split(/\s+/, 20).join(" ");
+    // Add a space at the end to make sure more typing creates new words
+    $(this).val(trimmed + " ");
+
+    }
+    else {
+    $('#w_counter').text(wordss);
+    //$('#word_left').text(200-words);
+    }
+    });
+
+    $("#e_descrip").on('keyup', function(e) {
+
+    var words = 0;
+
+    if ((this.value.match(/\S+/g)) != null) {
+    words = this.value.match(/\S+/g).length;
+    }
+
+    if (words > 20) {
+        e.preventDefault();
+    // Split the string on first 200 words and rejoin on spaces
+    var trimmed = $(this).val().split(/\s+/, 20).join(" ");
+    // Add a space at the end to make sure more typing creates new words
+    $(this).val(trimmed + " ");
+
+    }
+    else {
+    $('#display_count').text(words);
+    //$('#word_left').text(200-words);
+    }
+    });
+
+        });
+
+        function checkInputBox(){
+
+    var checkboxes = document.getElementsByName('c[]');
+    var fb = document.getElementById('fbi');
+
+    var insta = document.getElementById('insi');
+
+    var twit = document.getElementById('twi');
+    var tiki = document.getElementById('tiki');
+
+
+    for (var i=0, n=checkboxes.length;i<n;i++)
+    {
+
+        if(checkboxes[i].checked && checkboxes[i].value=='facebook' && fb.value=="")
+        {
+            alert('Please add facebook page id or name ');
+
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+                    }
+            return false;
+        }
+        else if (checkboxes[i].checked && checkboxes[i].value=='twitter' && insta.value=="")
+        {
+            alert('Please add twitter page id or name ');
+
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+                    }
+            return false;
+
+        }
+        else if (checkboxes[i].checked && checkboxes[i].value=='insta' && twit.value=="")
+        {
+            alert('Please add instagram page id or name ');
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+                    }
+            return false;
+        }
+        else if (checkboxes[i].checked && checkboxes[i].value=='tiktok' && tiki.value=="")
+        {
+            alert('Please add tiktok page id or name ');
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+                    }
+            return false;
+        }
+
+
+    }
+
+    }
 </script>
 @endsection
 @section('content')
@@ -515,29 +515,4 @@ for (var i=0, n=checkboxes.length;i<n;i++)
     </section>
 </main>
 @include('users.inc.footer')
-@endsection
-@section('bodyExtra')
-
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script>
-   @if(Session::has('message'))
-     toastr.options =
-     {
-       "closeButton" : true,
-       "progressBar" : true
-     }
-         toastr.success("{{ session('message') }}");
- @endif
- @if(Session::has('error'))
-     toastr.options =
-     {
-       "closeButton" : true,
-       "progressBar" : true
-     }
-         toastr.warning("{{ session('error') }}");
- @endif
-</script>
 @endsection
