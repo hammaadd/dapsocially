@@ -356,7 +356,7 @@
                             <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <p class="">Where would you like to collect social media hashtags from?</p>
                                 <ul class="list-none pt-3">
-                                    <li class="inline-block mx-2">
+                                    {{-- <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb1" name="h_tags[]"
                                             value="facebook" checked>
                                         <label for="cb1" class="cb-label">
@@ -364,8 +364,8 @@
                                             <p class="text-add pt-4 text-sm">Add</p>
                                             <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                         </label>
-                                    </li>
-                                    <li class="inline-block mx-2">
+                                    </li> --}}
+                                    {{-- <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb2" name="h_tags[]"
                                             value="instagram">
                                         <label for="cb2" class="cb-label">
@@ -373,7 +373,7 @@
                                             <p class="text-add pt-4 text-sm">Add</p>
                                             <p class="text-remove pt-4 text-sm hidden">Remove</p>
                                         </label>
-                                    </li>
+                                    </li> --}}
                                     <li class="inline-block mx-2">
                                         <input type="checkbox" class="cb-input hidden" id="cb3" name="h_tags[]"
                                             value="twitter">
@@ -400,7 +400,7 @@
                             </div>
 
                             <div class="w-full overflow-hidden md:mt-2 md:px-2 lg:mt-3 lg:px-3 xl:mt-3 xl:px-3">
-                                <p>Collect Posts from your Profile Pages? <span class="text-red-600">*</span></p>
+                                <p>Collect Posts from your Profile Pages? <span class="text-red-600">*<small>Make sure to check the icon from which service you want to fetch data?</small></span></p>
                             </div>
                            <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
                             <div
@@ -412,13 +412,18 @@
                                     </label>
                                 </div>
                                 <select id='myselect' name="fb_page[]" multiple class="input--field w--52 min-h-40">
-                                    @foreach ($data as $page)
-                                    <option value="{{$page['category']}}">{{$page['category']}}</option>
-                                    @endforeach
+                                    @forelse ($data as $page)
+                                    <option value="{{$page['name']}}">{{$page['name']}}</option>
+                                    @empty
+                                    <option>No Page Connected</option>
+                                    @endforelse
 
-                                </select>
+                                  </select>
 
                             </div>
+                            @if(!Auth::user()->facebook())
+                                <a href="{{route('attach.social.account')}}" class="text-red-600 underline text-right">Attach Facebook Account</a>
+                            @endif
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
@@ -442,14 +447,20 @@
                             <div
                                 class=" flex py-1.5">
                                 <div class="inline-block mr-3">
-                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter" >
+                                    <input type="checkbox" class="cb-input hidden" id="twitter" name="c[]"  value="twitter" @if(old('c[1]')=='twitter') checked @endif >
                                     <label for="twitter" class="cb--label">
                                         <img src="{{ asset('assets/twitter.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*" >
+                                <select id="" name="tw_page" class="input--field w--52 min-h-40">
+                                    @if($tw_user)
+                                    <option value="{{$tw_user->screen_name}}">{{$tw_user->name}}</option>
+                                    @endif
+                                </select>
                             </div>
+                            @if(!Auth::user()->twitter())
+                                <a href="{{route('attach.social.account')}}" class="text-red-600 underline text-right">Attach Twitter Account</a>
+                            @endif
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
                            <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
@@ -543,7 +554,7 @@
 
                     <div
                         class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
-                        <label for="location">
+                        {{-- <label for="location">
                             Ends at <span class="text-red-600">*</span>
                             <div class="flex">
                                 <input type="date" id="e_date" name="e_date"
@@ -560,7 +571,7 @@
 
                             </div>
 
-                        </label>
+                        </label> --}}
                     </div>
 
                     <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3"
