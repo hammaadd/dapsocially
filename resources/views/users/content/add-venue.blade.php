@@ -601,7 +601,7 @@
                                         </p>
                                     @endif
 
-                                    <p class="bg-transparent text-blue-550 px-4 py-1.5 border-2 border-blue-550 rounded-3xl hover:text-white hover:bg-blue-550 "
+                                    <p class="bg-transparent text-blue-550 px-4 py-1.5 border-2 border-blue-550 rounded-3xl hover:text-white hover:bg-blue-550 hover:text-white"
                                         :class="{'hover:border-white hover:text-white bg-white': isPkg === {{ $plans->id }} }"
                                         @click="isPkg = {{ $plans->id }} , message='{{ $plans->id }}'">Choose</p>
 
