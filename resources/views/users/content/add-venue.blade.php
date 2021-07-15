@@ -15,7 +15,7 @@
         integrity="sha512-Atu8sttM7mNNMon28+GHxLdz4Xo2APm1WVHwiLW9gW4bmHpHc/E2IbXrj98SmefTmbqbUTOztKl5PDPiu0LD/A=="
         crossorigin="anonymous"></script>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdV4ukitqwrOQ08JZwG7AeLK-6b7cJRhs&callback=initAutocomplete&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGPqdnfVCiwUdDEpiehLP8rf-PUFsQe_g&callback=initAutocomplete&libraries=places&v=weekly"
         defer></script>
     <script>
         let autocomplete;
@@ -325,14 +325,14 @@
 
                             <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <label for="description">
-                                    Event Description <span class="text-red-600">*</span>
+                                    Venue Description <span class="text-red-600">*</span>
                                     <textarea name="e_descrip" id="e_descrip" rows="3"
                                         placeholder="Write briefly about your Event"
                                         class="input-field">{{ old('e_descrip') }}</textarea>
                                 </label>
                                 <small id="display_count" name="display_count" class="float-right px-3">0/20</small>
                                 @error('e_descrip') <small class="text-red-600">Please write some description about
-                                    event</small>@enderror
+                                    venue</small>@enderror
                             </div>
 
                             <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
