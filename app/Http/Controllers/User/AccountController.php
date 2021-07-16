@@ -76,12 +76,19 @@ class AccountController extends Controller
     {
         $permissions = ['user_posts','pages_show_list','pages_read_engagement']; // Optional permissions
         $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions);
+            $csrfState = csrf_token() ;
+            $url = 'https://open-api.tiktok.com/platform/oauth/connect/';
 
+            $url .= '?client_key='.env('TIKTOK_CLIENT_KEY');
+            $url .= '&scope=user.info.basic,video.list';
+            $url .= '&response_type=code';
+            $url .= '&redirect_uri='.env('TIKTOK_SERVER_ENDPOINT_REDIRECT');
+            $url .= '&state='.$csrfState;
         // Render Facebook login button
         $output = $loginURL;
 
 
-        return view('users.content.addsocialaccount',['url'=>$output]);
+        return view('users.content.addsocialaccount',['url'=>$output,'tt_url'=>$url]);
     }
 
      public function redirectToFacebook()
