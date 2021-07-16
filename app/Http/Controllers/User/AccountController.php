@@ -128,7 +128,7 @@ class AccountController extends Controller
             }
         }
 
-        return back();
+        return redirect()->route('attach.social.account');
         
     }
 
