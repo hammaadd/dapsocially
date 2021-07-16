@@ -213,6 +213,7 @@ Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback')
 
 Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('login.facebook');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+Route::get('tiktok/callback','User\AccountController@getTTtoken')->name('tiktok.callback');
 
 Route::get('get/facebook/token','User\AccountController@getFbToken')->name('get.token.facebook');
 
