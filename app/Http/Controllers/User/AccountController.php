@@ -96,13 +96,13 @@ class AccountController extends Controller
 
     public function getTTtoken(Request $request){
         if(!isset($request->error)){
-            $url = 'https://open-api.tiktok.com/platform/oauth/access_token/';
-
-            $url .= '?client_key='.env('TIKTOK_CLIENT_KEY');
-            $url .= '&scope=user.info.basic,video.list';
-            $url .= '&code='.$request->code;
-            $url .= '&grant_type=authorization_code';
-            $response = Http::get($url);
+            $url = 'https://open-api.tiktok.com/oauth/access_token/';
+            $response = Http::get($url,[
+                'client_key' => env('TIKTOK_CLIENT_KEY'),
+                'client_secret'=> env('TIKTOK_SECRET_KEY'),
+                'code'=> $request->code,
+                'grant_type'=>'authorization_code'
+            ]);
             dd($response->object());
         }    
         
