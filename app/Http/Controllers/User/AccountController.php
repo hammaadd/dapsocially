@@ -103,7 +103,7 @@ class AccountController extends Controller
             $url .= '&code='.$request->code;
             $url .= '&grant_type=authorization_code';
             $response = Http::get($url);
-            dd($response);
+            dd($response->object());
         }    
         
     }
