@@ -63,4 +63,8 @@ class User extends Authenticatable
         return $this->accounts->where('verified_acc','facebook')->first();
     }
 
+    public function tiktok(){
+        return $this->accounts->where('verified_acc','tiktok')->first();
+    }
+
 }

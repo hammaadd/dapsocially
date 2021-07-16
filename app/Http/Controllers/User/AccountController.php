@@ -103,7 +103,21 @@ class AccountController extends Controller
                 'code'=> $request->code,
                 'grant_type'=>'authorization_code'
             ]);
-            dd($response->object());
+            if($response->message == 'success'){
+                $data = $response->data;
+                $accessToken = $data->access_token;
+                $res = Attached_Account::updateOrCreate(
+                    ['verified_acc'=>'tiktok', 'user_id'=>Auth::id()],
+                    ['token'=>$accessToken,'user_social_id'=>json_encode($data)]
+                );
+
+                if($res){
+                    Session::flash('message', 'Tiktok Attached Successfully');
+                }else{
+                    Session::flash('error', 'Unable To Attach Tiktok Try Later.');
+                }
+                
+            }
         }    
         
     }
