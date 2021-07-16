@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Atymic\Twitter\Facade\Twitter;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
+use Square\Http\HttpRequest;
+
 class AccountController extends Controller
 {
     protected $hepler, $fb;
@@ -92,7 +95,17 @@ class AccountController extends Controller
     }
 
     public function getTTtoken(Request $request){
-        dd($request->code);
+        if(!isset($request->error)){
+            $url = 'https://open-api.tiktok.com/platform/oauth/access_token/';
+
+            $url .= '?client_key='.env('TIKTOK_CLIENT_KEY');
+            $url .= '&scope=user.info.basic,video.list';
+            $url .= '&code='.$request->code;
+            $url .= '&grant_type=authorization_code';
+            $response = Http::get($url);
+            dd($response);
+        }    
+        
     }
 
      public function redirectToFacebook()
