@@ -59,10 +59,10 @@
                                     </div>
                                 </a>
 
-                                <button type="button" onClick={(e) => {
+                                {{-- <button type="button" onClick={(e) => {
                                     e.preventDefault();
                                     window.location.href='{SERVER_ENDPOINT_OAUTH}';
-                                  }}>Continue with TikTok</button>
+                                  }}>Continue with TikTok</button> --}}
                             </div>
                         </div>
 
