@@ -91,6 +91,10 @@ class AccountController extends Controller
         return view('users.content.addsocialaccount',['url'=>$output,'tt_url'=>$url]);
     }
 
+    public function getTTtoken(Request $request){
+        dd($request->code);
+    }
+
      public function redirectToFacebook()
      {
 
