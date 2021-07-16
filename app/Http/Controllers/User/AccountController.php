@@ -103,20 +103,28 @@ class AccountController extends Controller
                 'code'=> $request->code,
                 'grant_type'=>'authorization_code'
             ]);
-            if($response->message == 'success'){
-                $data = $response->data;
-                $accessToken = $data->access_token;
-                $res = Attached_Account::updateOrCreate(
-                    ['verified_acc'=>'tiktok', 'user_id'=>Auth::id()],
-                    ['token'=>$accessToken,'user_social_id'=>json_encode($data)]
-                );
-
-                if($res){
-                    Session::flash('message', 'Tiktok Attached Successfully');
-                }else{
-                    Session::flash('error', 'Unable To Attach Tiktok Try Later.');
+            $response = $response->object();
+            //Check the condition if message present or not
+            if(isset($response->message)){
+                //Again Double check
+                if($response->message == 'success'){
+                    //Assign data to the variable
+                    $data = $response->data;
+                    //Get AccessToken
+                    $accessToken = $data->access_token;
+                    //Save the accessToken for later use
+                    $res = Attached_Account::updateOrCreate(
+                        ['verified_acc'=>'tiktok', 'user_id'=>Auth::id()],
+                        ['token'=>$accessToken,'user_social_id'=>json_encode($data)]
+                    );
+    
+                    if($res){
+                        Session::flash('message', 'Tiktok Attached Successfully');
+                    }else{
+                        Session::flash('error', 'Unable To Attach Tiktok Try Later.');
+                    }
+    
                 }
-                
             }
         }    
         
