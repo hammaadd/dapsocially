@@ -147,8 +147,8 @@ class FetchSocialWallEventPosts implements ShouldQueue
                 $tw->platform = 'tiktok';
                 $tw->user_img = $avatar_img;
                 $tw->username = $response3->data->display_name;
-                $tw->posted_at = gmdate('Y-m-d h:i', $response->create_time);
-                $tw->url = $response->share_url ;
+                $tw->posted_at = gmdate('Y-m-d h:i', $video->create_time);
+                $tw->url = $video->share_url ;
                 $tw->event_id = $this->event->id;
                 $tw->save();
             }
@@ -169,7 +169,7 @@ class FetchSocialWallEventPosts implements ShouldQueue
             //         'url' => $share
             // ]);
             // $response = $response->object();
-
+            
 
         endif;
         Session::flash('message', 'Social Wall Created succesfully');
