@@ -128,7 +128,7 @@ class FetchSocialWallEventPosts implements ShouldQueue
             $response = $response->object();
             $url2 = 'https://www.tiktok.com/oembed';
             $url3 = 'https://open-api.tiktok.com/oauth/userinfo/';
-            $response3=Http::get($url3,[
+            $response3 = Http::get($url3,[
                 'open_id' => $open_id,
                 'access_token'=> $ttoken,
                 ]);
