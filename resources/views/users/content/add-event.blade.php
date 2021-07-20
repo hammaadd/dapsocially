@@ -348,7 +348,7 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                            </div>
 
-                           {{-- <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                           <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
                             <div
                                 class=" flex py-1.5">
@@ -358,14 +358,17 @@ for (var i=0, n=checkboxes.length;i<n;i++)
                                         <img src="{{ asset('assets/tiktok.png') }}" class="w-6 h-6 mx-auto" alt="">
                                     </label>
                                 </div>
-                                <input type="text" name="inp[]" class="input--field w--52 min-h-40"
-                                    placeholder="Enter your Public Page id or Username*" >
+                                {{-- <input type="text" name="inp[]" class="input--field w--52 min-h-40"
+                                    placeholder="Enter your Public Page id or Username*" > --}}
+                                <select id="" name="tt_page" class="input--field w--52 min-h-40">
+                                    <option value="{{$tname}}">{{$tname}}</option>
+                                </select>
 
 
                             </div>
 
                             @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
-                           </div> --}}
+                           </div>
 
                         @error('c') <small class="text-red-600">Please select atleast one platform</small>@enderror
 
