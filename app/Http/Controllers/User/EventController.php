@@ -78,8 +78,8 @@ class EventController extends Controller
             ]);
             
             $response = $response->object();
-            dd($response);
-            $tname = $response->display_name;
+            //dd($response);
+            $tname = $response->data->display_name;
             
         endif;
          
