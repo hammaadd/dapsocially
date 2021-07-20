@@ -213,7 +213,7 @@ class EventController extends Controller
         //FetchSocialWallEventPosts::dispatchAfterResponse($event);
 
         if($event->tiktok_added()->count() > 0):
-            $tiktok=Attached_Account::where('user_id',$this->event->created_by)->where('verified_acc','tiktok')->first();
+            $tiktok=Attached_Account::where('user_id',$event->created_by)->where('verified_acc','tiktok')->first();
             $ttoken = $tiktok->token;
             $user_data = json_decode($tiktok->user_social_id);
             $open_id = $user_data->open_id;
