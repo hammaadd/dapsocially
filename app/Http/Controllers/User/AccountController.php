@@ -137,8 +137,14 @@ class AccountController extends Controller
         $token = $tiktok->token;
         $user_data = json_decode($tiktok->user_social_id);
         $open_id = $user_data->open_id;
+        $url = 'https://open-api.tiktok.com/video/list/';
+        $response = Http::get($url,[
+                'open_id' => $open_id,
+                'access_token'=> $token,
+        ]);
+        $response = $response->object();
 
-        dd($open_id);
+        dd($response);
     }
 
      public function redirectToFacebook()
