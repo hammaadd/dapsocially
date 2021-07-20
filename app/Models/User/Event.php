@@ -22,4 +22,8 @@ class Event extends Model
     public function facebook_added(){
         return $this->platform->where('platform','facebook')->first();
     }
+
+    public function tiktok_added(){
+        return $this->platform->where('platform','tiktok')->first();
+    }
 }

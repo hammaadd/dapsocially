@@ -260,7 +260,7 @@ class EventController extends Controller
                if($request->c[$i]=='tiktok'){
                 $posts=new Event_Social_Post();
                 $posts->platform='tiktok';
-                $posts->page_name=$request->inp[3];
+                $posts->page_name=$request->tt_page;
                 $posts->event_id=$event_id;
                 $posts->save();
                }
