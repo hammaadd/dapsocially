@@ -143,8 +143,8 @@ class AccountController extends Controller
                 'access_token'=> $token,
         ]);
         $response = $response->object();
-
-        dd($response);
+        
+        dd($response->data->video_list);
     }
 
      public function redirectToFacebook()
