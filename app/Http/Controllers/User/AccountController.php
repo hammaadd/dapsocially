@@ -143,14 +143,14 @@ class AccountController extends Controller
                 'access_token'=> $token,
         ]);
         $response = $response->object();
-        //Here loop is needed
-        $share = $response->data->video_list[0]->share_url;
+        // //Here loop is needed
+        // $share = $response->data->video_list[0]->share_url;
 
-        $url2 = 'https://www.tiktok.com/oembed';
-        $response = Http::get($url2,[
-                'url' => $share
-        ]);
-        $response = $response->object();
+        // $url2 = 'https://www.tiktok.com/oembed';
+        // $response = Http::get($url2,[
+        //         'url' => $share
+        // ]);
+        // $response = $response->object();
         
         dd($response);
     }
