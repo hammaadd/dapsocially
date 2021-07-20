@@ -134,7 +134,11 @@ class AccountController extends Controller
 
     public function getVideos(){
         $tiktok = Auth::user()->tiktok();
-        dd($tiktok);
+        $token = $tiktok->token;
+        $user_data = json_decode($tiktok->user_social_id);
+        $open_id = $user_data->open_id;
+
+        dd($open_id);
     }
 
      public function redirectToFacebook()
