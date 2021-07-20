@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Atymic\Twitter\Facade\Twitter;
+use Illuminate\Support\Facades\Http;
 
 class EventController extends Controller
 {
@@ -64,6 +65,22 @@ class EventController extends Controller
             $tw_user = $this->getTwUserProfile();
             
         endif;
+
+        if(Auth::user()->tiktok()):
+            $tiktok = Auth::user()->tiktok();
+            $ttoken = $tiktok->token;
+            $user_data = json_decode($tiktok->user_social_id);
+            $open_id = $user_data->open_id;
+            $url = 'https://open-api.tiktok.com/oauth/userinfo/';
+            $response = Http::get($url,[
+                    'open_id' => $open_id,
+                    'access_token'=> $ttoken,
+            ]);
+            
+            $response = $response->object();
+            $tname = $response->display_name;
+            
+        endif;
          
 
          
@@ -71,7 +88,7 @@ class EventController extends Controller
          // dd($tw_user);
          
         // $data = [];
-        return view('users.content.add-event', compact('locations','P_plans','tw_user','data'));
+        return view('users.content.add-event', compact('locations','P_plans','tw_user','data','tname'));
 
     }
     public function events()
@@ -241,7 +258,7 @@ class EventController extends Controller
                }
                if($request->c[$i]=='tiktok'){
                 $posts=new Event_Social_Post();
-                $posts->platform=$request->c[$i];
+                $posts->platform='tiktok';
                 $posts->page_name=$request->inp[3];
                 $posts->event_id=$event_id;
                 $posts->save();
