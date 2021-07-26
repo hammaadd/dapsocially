@@ -16,6 +16,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -152,24 +153,6 @@ class FetchSocialWallEventPosts implements ShouldQueue
                 $tw->event_id = $this->event->id;
                 $tw->save();
             }
-
-
-
-            // $url = 'https://open-api.tiktok.com/video/list/';
-            // $response = Http::get($url,[
-            //         'open_id' => $open_id,
-            //         'access_token'=> $token,
-            // ]);
-            // $response = $response->object();
-            // // //Here loop is needed
-            // $share = $response->data->video_list[0]->share_url;
-
-            // $url2 = 'https://www.tiktok.com/oembed';
-            // $response = Http::get($url2,[
-            //         'url' => $share
-            // ]);
-            // $response = $response->object();
-            
 
         endif;
         Session::flash('message', 'Social Wall Created succesfully');
