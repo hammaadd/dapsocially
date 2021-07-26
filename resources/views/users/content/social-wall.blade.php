@@ -61,7 +61,13 @@
                 <div class="masonry-item">
                     <div class="masonry-content">
                         <div class="relative">
-                            <img class=" rounded-lg" src="{{$post->image}}" alt="Dummy Image">
+                            @if($post->platform !='tiktok')
+                                <img class=" rounded-lg" src="{{$post->image}}" alt="Dummy Image">
+                                
+                            @elseif($post->platform =='tiktok')
+                                {!! $post->image !!}
+                            @endif
+
                             @if($post->platform == 'facebook')
                                 <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                             @elseif($post->platform =='twitter')
