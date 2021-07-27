@@ -6,6 +6,7 @@
         <div class="w-full mx-auto flex overflow-hidden flex-col justify-between h-full">
             <div class="bg-transparent py-4">
                 <div class="max-w-full mx-auto">
+                    <marquee>
                     <div class="flex flex-wrap overflow-hidden justify-around items-center">
                         <label class="shadow-md rounded-xl bg-white flex items-center my-1">
                             <div class=" inline-block w-10 h-10 pt-1.5 shadow-md rounded-xl">
@@ -44,6 +45,7 @@
                             <span class="px-3">#partytonight</span>
                         </label>
                     </div>
+                    </marquee>
                 </div>
             </div>
             <h3 class="text-white py-4 text-center text-9xl uppercase" ><marquee>{{$event->wall_location_msg}}</marquee></h3>
