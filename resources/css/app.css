@@ -94,3 +94,6 @@ body {
 .masonry-content {
     @apply rounded-lg overflow-hidden
 }
+.nav-item-active{
+    @apply text-blue-550 bg-white p-2 rounded;
+}

@@ -15,7 +15,7 @@
                     <!-- Column Content -->
                     <div class="flex items-center justify-between">
                         <!-- Column Content -->
-                        <a href="/" class="nav-item">Home</a>
+                        <a href="/" class="nav-item {{Request::is('/')?'nav-item-active':''}}">Home</a>
                         <a href="{{ route('events') }}" class="nav-item">Events</a>
                         <a href="{{ route('venue') }}" class="nav-item">Venue</a>
                         <a href="{{ route('signin') }}" class="nav-item">Get Started</a>
@@ -54,7 +54,7 @@
                             <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
                         </div>
                         <ul class="text-center text-white">
-                            <li class="py-1"><a href="/" class="nav-item text-xl font-normal">Home</a></li>
+                            <li class="py-1"><a href="/" class="nav-item text-xl font-normal {{Request::is('/')?'nav-item-active':''}}">Home</a></li>
                             <li class="py-1"><a href="{{route('events')}}" class="nav-item text-xl font-normal">Events</a></li>
                             <li class="py-1"><a href="{{route('venue')}}" class="nav-item text-xl font-normal">Venue</a></li>
                             <li class="py-1"><a href="#" class="nav-item text-xl font-normal">Get Started</a></li>

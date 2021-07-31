@@ -1,12 +1,12 @@
 module.exports = {
-    // purge: {
-    //       enabled: true,
-    //       content:[
-    //           './resources/**/*.blade.php',
-    //           './resources/**/*.js',
-    //           './resources/**/**/*.blade.php',
-    //       ]
-    // },
+    purge: {
+          enabled: true,
+          content:[
+              './resources/**/*.blade.php',
+              './resources/**/*.js',
+              './resources/**/**/*.blade.php',
+          ]
+    },
     darkMode: false, // or 'media' or 'class'
     theme: {
       extend: {

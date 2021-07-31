@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,7 @@ Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
 Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
 
 
-Route::get('sign-in', function () {
+Route::get('signin', function () {
     return view('visitor.content.signin');
 })->name('signin');
 Route::get('sign-up', function () {
@@ -35,7 +37,8 @@ Route::get('sign-up', function () {
 
 //Public views
 Route::get('events','User\EventController@events' )->name('events');
-
+Route::get('more_venues','User\VenueController@load_more_venues' )->name('load.venues');
+Route::get('venues', 'User\VenueController@venue')->name('venue');
 
 // User Side
 Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
@@ -44,7 +47,7 @@ Route::middleware(['auth'=>'role:user'])->group(function(){
 Route::get('profile', 'User\ProfileController@index')->name('profile');
 Route::get('my-account', 'User\AccountController@index')->name('my.account');
 Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
-Route::get('venue', 'User\VenueController@venue')->name('venue');
+
 
 Route::get('add-event','User\EventController@index' )->name('add-event');
 
@@ -52,7 +55,7 @@ Route::get('more_events','User\EventController@load_more_events' )->name('load.e
 Route::get('load-my-events','User\EventController@load_my_events' )->name('load.my.events');
 Route::get('delete_my-event/{event}','User\EventController@delete_myevent' )->name('delete.my.event');
 
-Route::get('more_venues','User\VenueController@load_more_venues' )->name('load.venues');
+
 Route::post('search-event','User\EventController@search_Event' )->name('search.event');
 Route::post('search-my-event','User\EventController@search_my_Event' )->name('search.my.event');
 Route::post('search-my-venue','User\VenueController@search_my_Venue' )->name('search.my.venue');
@@ -101,8 +104,8 @@ Route::get('/filter_location', 'User\VenueController@filter_location')->name('fi
 Route::get('/admin/login', function () {
     if (!Auth::check()) {
         return view('auth.login');
-    }
-    else{
+    }else{
+    Session::flash('message', "Logout the user id to login as admin");
         return back();
     }
 
@@ -259,6 +262,10 @@ Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('
 
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
+
+Route::get('/admin', function (){
+    return redirect()->route('admin.login');
+});
 
 
 
