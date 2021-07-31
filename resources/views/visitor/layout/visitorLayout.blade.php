@@ -36,14 +36,11 @@
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-      <script>
             $(window).on('load',function () {
                 $(function () {
                     $("#preloader").fadeOut("slow");
                 });
-            });
-
-          </script>
+            })
         @if(Session::has('message'))
           toastr.options =
           {
