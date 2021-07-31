@@ -81,6 +81,23 @@
 
                         </ul>
                     </li>
+
+                    <li class="sidebar-item  has-sub {{Request::is('short-code')? 'active' : '' }} {{Request::is('list-shortcode')? 'active' : '' }} ">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-file-code-fill"></i>
+                            <span>Images</span>
+                        </a>
+                        <ul class="submenu " style="{{Request::is('short-code')? 'display:block; ' : '' }} {{Request::is('list-shortcode')? 'display:block;' : '' }}">
+                            <li class="submenu-item {{Request::is('short-code') ? 'active' : '' }} ">
+                                <a href="{{route('short.code')}}"></a>
+                            </li>
+
+                            <li class="submenu-item {{Request::is('list-shortcode')? 'active' : '' }} ">
+                                <a href="{{route('list.shortcode')}}">List Short codes</a>
+                            </li>
+
+                        </ul>
+                    </li>
                     <li class="sidebar-title">Payment Plans</li>
                     <li class="sidebar-item  has-sub {{Request::is('price-packages')? 'active' : '' }} {{Request::is('all-payment_plans')? 'active d-block' : '' }}">
                         <a href="#" class='sidebar-link'>

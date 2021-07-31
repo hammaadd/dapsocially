@@ -85,4 +85,9 @@ class ContentController extends Controller
         return back();
     }
 
+    public function addImages(Request $request){
+
+        return view('admin.content.images');
+    }
+
 }

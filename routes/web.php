@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\Role;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +33,9 @@ Route::get('signup', function () {
     return view('visitor.content.signup');
 })->name('signup');
 
+//Public views
+Route::get('events','User\EventController@events' )->name('events');
+
 
 // User Side
 Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
@@ -41,7 +47,7 @@ Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
 Route::get('venue', 'User\VenueController@venue')->name('venue');
 
 Route::get('add-event','User\EventController@index' )->name('add-event');
-Route::get('events','User\EventController@events' )->name('events');
+
 Route::get('more_events','User\EventController@load_more_events' )->name('load.events');
 Route::get('load-my-events','User\EventController@load_my_events' )->name('load.my.events');
 Route::get('delete_my-event/{event}','User\EventController@delete_myevent' )->name('delete.my.event');
@@ -96,6 +102,9 @@ Route::get('/admin/login', function () {
     if (!Auth::check()) {
         return view('auth.login');
     }
+    else{
+        return back();
+    }
 
 
 })->name('admin.login');
@@ -103,7 +112,7 @@ Route::get('/admin/login', function () {
 Auth::routes(['verify'=>true,'login'=>true,]);
 
 //middleware(['auth'=>'role:superadministrator'])->
-Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
+Route::prefix('adm')->middleware(['auth'=>'role:superadministrator'])->group(function(){
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
     Route::get('/profile-setting', 'Admin\ProfileController@profileSetting')->name('profile.setting');
     Route::post('/update-password', 'Admin\ProfileController@update_password')->name('update.password');
@@ -201,6 +210,8 @@ Route::middleware(['auth'=>'role:superadministrator'])->group(function(){
 
     Route::get('layout-control', 'Admin\LayoutController@index')->name('layout.control');
 
+    Route::get('ev/images','Admin\ContentController@addImages')->name('ev.image');
+
 
 
 
@@ -248,6 +259,7 @@ Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('
 
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
+
 
 
 
