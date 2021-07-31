@@ -36,6 +36,7 @@
                     x-transition:leave-start="opacity-100 scale-100"
                     x-transition:leave-end="opacity-0 scale-75"
                     class="absolute bg-white shadow overflow-hidden rounded-xl w-60 mt-2 py-1 right-0 top-full z-20">
+                    @auth
                     <li class="border-b border-green-150 px-3 py-1">
                         <a href="{{ route('profile') }}" class="">
                             <i class="fas fa-user text-blue-550"></i>
@@ -48,6 +49,7 @@
                             <span class="ml-2">My Account</span>
                         </a>
                     </li>
+                    
                     <li class=" px-3 py-1">
                         <a href="#" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" class="">
@@ -55,6 +57,22 @@
                             <span class="ml-2">Logout</span>
                         </a>
                     </li>
+                    @endauth
+                    @guest
+                    <li class="border-b border-green-150 px-3 py-1">
+                        <a href="{{ route('login') }}" class="">
+                            <i class="fas fa-user text-blue-550"></i>
+                            <span class="ml-2">Login</span>
+                        </a>
+                    </li>
+                    <li class="border-b border-green-150 px-3 py-1">
+                        <a href="{{ route('register') }}" class="">
+                            <i class="fas fa-home text-blue-550"></i>
+                            <span class="ml-2">Register</span>
+                        </a>
+                    </li>
+                
+                    @endguest
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
