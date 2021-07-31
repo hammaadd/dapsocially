@@ -18,7 +18,7 @@
                     @endauth
 
                     @guest
-                        <img src="https://ui-avatars.com/api/?background=random?name=Guest" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                        <img src="https://ui-avatars.com/api/?name=Guest?background=F3f3f3" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
                         <div class="text-white pl-2">
                             <a href="javascript:void(0);"> <p class="font-medium">GUEST</p>
                              <p class="text-xs" title="Account Type">FREE</p></a>
