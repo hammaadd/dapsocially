@@ -9,7 +9,13 @@
             </a>
             <div class=" relative" x-data="{ isOpen: false}">
                 <div class="hidden md:flex flex-wrap overflow-hidden items-center cursor-pointer" @click=" isOpen = !isOpen ">
-                    <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                    @auth
+                        <img src="{{asset('user/profile/'.Auth::user()->image)}}" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                    @endauth
+
+                    @guest
+                        <img src="https://ui-avatars.com/api/?background=random?name=Guest" class="w-12 h-12 rounded-full object-contain bg-white avatar" alt="">
+                    @endguest
                     <div class="text-white pl-2">
                        <a href="javascript:void(0);"> <p class="font-medium">{{Auth::user()->name}}</p>
                         <p class="text-xs">{{Auth::user()->account_type}}</p></a>
