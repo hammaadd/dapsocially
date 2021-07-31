@@ -26,10 +26,10 @@ Route::post('search', 'Visitor\HomeController@search')->name('search');
 Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
 Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
 
-Route::get('signin', function () {
+Route::get('sign-in', function () {
     return view('visitor.content.signin');
 })->name('signin');
-Route::get('signup', function () {
+Route::get('sign-up', function () {
     return view('visitor.content.signup');
 })->name('signup');
 

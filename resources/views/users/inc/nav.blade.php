@@ -60,13 +60,13 @@
                     @endauth
                     @guest
                     <li class="border-b border-green-150 px-3 py-1">
-                        <a href="{{ route('login') }}" class="">
+                        <a href="{{ route('signin') }}" class="">
                             <i class="fas fa-user text-blue-550"></i>
-                            <span class="ml-2">Login</span>
+                            <span class="ml-2">Sign in</span>
                         </a>
                     </li>
                     <li class="border-b border-green-150 px-3 py-1">
-                        <a href="{{ route('register') }}" class="">
+                        <a href="{{ route('signup') }}" class="">
                             <i class="fas fa-home text-blue-550"></i>
                             <span class="ml-2">Register</span>
                         </a>
