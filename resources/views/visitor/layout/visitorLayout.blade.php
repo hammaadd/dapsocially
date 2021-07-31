@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('visitor.inc.header')
-<body>
+<style>
+  .preloader{
+    display:flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: #ededed;
+    position: fixed;
+    margin: auto;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+</style>
+<body class="antialiased overflow-x-hidden">
+  <div class="preloader" id="preloader">
+    <img src="{{asset('bars.svg')}}" style="width: 10rem;" alt="loader">
+</div>
     @yield('content')
     <script src="{{ asset('js/app.js')}}"></script>
     @yield('bodyExtra')
@@ -10,6 +36,14 @@
 
    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
+      <script>
+            $(window).on('load',function () {
+                $(function () {
+                    $("#preloader").fadeOut("slow");
+                });
+            });
+
+          </script>
         @if(Session::has('message'))
           toastr.options =
           {
