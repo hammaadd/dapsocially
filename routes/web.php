@@ -39,7 +39,7 @@ Route::get('sign-up', function () {
 Route::get('events','User\EventController@events' )->name('events');
 Route::get('more_venues','User\VenueController@load_more_venues' )->name('load.venues');
 Route::get('venues', 'User\VenueController@venue')->name('venue');
-
+Route::get('more_events','User\EventController@load_more_events' )->name('load.events');
 // User Side
 Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
 
@@ -51,7 +51,7 @@ Route::get('add-venue', 'User\VenueController@index')->name('add-venue');
 
 Route::get('add-event','User\EventController@index' )->name('add-event');
 
-Route::get('more_events','User\EventController@load_more_events' )->name('load.events');
+
 Route::get('load-my-events','User\EventController@load_my_events' )->name('load.my.events');
 Route::get('delete_my-event/{event}','User\EventController@delete_myevent' )->name('delete.my.event');
 
