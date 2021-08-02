@@ -51,6 +51,9 @@ class HomeController extends Controller
 
                }
         }
+
+        // var_dump($loc);return;
+
         return view('visitor.content.main',compact('events','venues','locations','contents','loc'));
     }
     public function about_us()
