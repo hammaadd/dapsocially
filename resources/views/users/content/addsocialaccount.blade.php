@@ -39,7 +39,7 @@
                                 </a> --}}
                                 <a href="{{route('attach.twitter')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
-                                        <img src="{{asset('assets/Twitter@2x.png')}}" class="mx-auto w-5 h-5" alt="">
+                                        <img src="{{asset('assets/twitter@2x.png')}}" class="mx-auto w-5 h-5" alt="">
                                         @if(Auth::user()->twitter())
                                             <div class="text-green-500" title="Account Attached">
                                                 <svg class="w-6 sm:w-5 h-6 sm:h-5" fill="white" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>

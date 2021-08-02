@@ -28,38 +28,17 @@ class AddsController extends Controller
 
     public function upload_image_add(Request $request)
     {
-        $validated = $request->validate([
-
-            'time' => 'required',
-            'title'=>'required',
-            'img'=>'required|image',
-            'a_type'=>'required|min:1',
-            'cat'=>'required|min:1'
-            ]);
+        $validated = $request->validate(['img'=>'required|image',]);
 
 
             $adds=new Adds();
             if ($request->has('img')) {
                 $newImagename=$request->file('img');
                 $newImagename=str_replace(' ','',time().'-'.$newImagename->getClientOriginalName());
+                // $newImagename = $newImagename->getClientOriginalName();
                 $request->img->move(public_path("admin/assets/adds"),$newImagename);
 
-                    $adds->add=$newImagename;
-                    $adds->time=$request->time;
-                    $adds->add_title=$request->title;
-                    $adds->add_type='image';
-                    $adds->save();
-                    foreach($request->cat as $cat){
-                            foreach($request->a_type as $type){
-                                $table=new Adds_details();
-                                $table->category=$cat;
-                                $table->account_type=$type;
-                                $table->add_id=$adds->id;
-                                $table->add_type='image';
-                                $table->save();
-                            }
-
-                    }
+                   
                     Session::flash('message', 'Ad Uploaded succesfully');
                     return back();
 

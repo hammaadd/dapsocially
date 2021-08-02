@@ -23,8 +23,9 @@ class CreateVenuesTable extends Migration
             $table->string('wall_bg_image',191)->nullable();
             $table->string('start_time',191);
             $table->string('start_date',191);
-            $table->string('end_time',191);
-            $table->string('end_date',191);
+            # Removed as client's requirement
+            // $table->string('end_time',191);
+            // $table->string('end_date',191);
             $table->longText('wall_location_msg')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('set null');

@@ -47,6 +47,10 @@ class VenueController extends Controller
             $data=$this->getPages($accestoken);
             $this->page_data=$data['data'];
             $data=$data['data'];
+            $accestoken=$attach_acc->token;
+            $data=$this->getPages($accestoken);
+            $this->page_data=$data['data'];
+            $data=$data['data'];
         endif;
       
         if(Auth::user()->twitter()):
@@ -56,10 +60,7 @@ class VenueController extends Controller
             
         endif;
 
-        $accestoken=$attach_acc->token;
-        $data=$this->getPages($accestoken);
-        $this->page_data=$data['data'];
-        $data=$data['data'];
+      
         return view('users.content.add-venue', compact('P_plans','tw_user','data'));
     }
 
@@ -104,8 +105,6 @@ class VenueController extends Controller
 
     public function add_venue(Request $request)
     {
-
-
         $request->validate([
             'vname' => 'required',
             'e_descrip' => 'required',
@@ -166,6 +165,8 @@ class VenueController extends Controller
         $venue->end_time = $request->e_time;
         $venue->created_by = Auth::user()->id;
         $venue->save();
+
+        
         $this->add_venue_social_posts($venue->id,$request);
         $p=Payment_Plans::where('id',$request->plan)->first();
         $odr=new Order();
@@ -197,7 +198,7 @@ class VenueController extends Controller
         //     $hashtag->venue_id = $venue->id;
         //     $hashtag->save();
         // }
-        FetchSocialWallVenuePosts::dispatchAfterResponse();
+        FetchSocialWallVenuePosts::dispatchAfterResponse($venue);
 
         Session::flash('message', 'Venue added succesfully succesfully');
 
@@ -207,7 +208,7 @@ class VenueController extends Controller
     {
             $count=count($request->c);
 
-            for($i=0;$i<$count;$i++){
+            for($i=1;$i<$count;$i++){
                if($request->c[$i]=='facebook'){
                 foreach($request->fb_page as $fb){
                     $posts=new Venue_Social_Post();
@@ -612,7 +613,6 @@ public function load_my_venues()
         $request->validate([
             'vname' => 'required',
             'e_descrip' => 'required',
-
             'country' => 'required',
             'loc_address'=>'required',
             'locality'=>'required',
@@ -622,11 +622,11 @@ public function load_my_venues()
            'plan'=>'required',
            's_date'=>'required',
            's_time'=>'required',
-           'e_date'=>'required',
+        //    'e_date'=>'required',
 
-           'e_date'=>'required',
-           'e_time'=>'required',
-           'h_tags'=>'required|min:1',
+        //    'e_date'=>'required',
+        //    'e_time'=>'required',
+        //    'h_tags'=>'required|min:1',
         //    'c_posts'=>'sometimes',
         //    'p_fb'=>'required_with:c_posts,on'
             ]);
@@ -661,18 +661,18 @@ public function load_my_venues()
             }
 
             $vTags=Collect_Venue_Htag::where('venue_id',$venue->id)->get();
+            if($vTags)
             foreach($vTags as $vTag){
                 $vTag->delete();
-
             }
             $Posts=Venue_Social_Post::where('venue_id',$venue->id)->get();
-
             foreach($Posts as $Post){
 
                 $Post->delete();
 
             }
             $this->update_venue_social_posts($venue->id,$request);
+            // $h_tags = explode(' ',$request->h_tag);
             foreach($request->h_tags as $h_tag){
                 $hashtag=new Collect_Venue_Htag();
                $hashtag->account_name=$h_tag;
@@ -693,8 +693,7 @@ public function load_my_venues()
     }
     public function update_venue_social_posts($venue_id, Request $request)
     {
-            $count=count($request->c);
-
+            $count=(is_array($request->c))?count($request->c):0;
             for($i=0;$i<$count;$i++){
                if($request->c[$i]=='facebook'){
                 $posts=new Venue_Social_Post();
