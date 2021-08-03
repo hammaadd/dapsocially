@@ -117,19 +117,14 @@ $(document).ready(function (e) {
                 <label for="activity" class=" w-3/12">
                     City
                     <select name="city" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-                        {{-- @foreach ($loc as $city)
 
-                                    <option value="{{$city}}" >{{$city}}</option>
-                        @endforeach --}}
+                
                     </select>
                 </label>
                 <label for="location" class=" w-4/12">
                     LOCATION
-                    <select name="location" id="location" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-                        {{-- @foreach ($locations as $location)
+                    <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
-                                    <option value="{{$location}}" >{{$location}}</option>
-                        @endforeach --}}
                     </select>
                 </label>
 

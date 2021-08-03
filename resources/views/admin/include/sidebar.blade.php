@@ -96,6 +96,10 @@
                                 <a href="{{route('list.shortcode')}}">List Short codes</a>
                             </li>
 
+                            <li class="submenu-item {{Request::is('ev/images')? 'active' : '' }} ">
+                                <a href="{{route('ev.image')}}">Add Background Images</a>
+                            </li>
+
                         </ul>
                     </li>
                     <li class="sidebar-title">Payment Plans</li>

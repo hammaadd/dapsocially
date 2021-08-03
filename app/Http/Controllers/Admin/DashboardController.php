@@ -20,29 +20,24 @@ class DashboardController extends Controller
     public function index()
     {
         return view('admin/content/dashboard');
-        
     }
-    
-public function getUsers(Request $request){
-    if ($request->ajax()) {
-        $data = User::select('id','name','email','image')->whereRoleIs('user');
-        
-        return Datatables::of($data)
-                ->addColumn('action', function($row){
 
-                       $btn = '<a href="'.route('usersprofile.view',$row).'" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
-                        <a href="'.route('assign.role',$row).'" class="btn btn-success btn-sm" title="Role"><i class="bi  bi-bootstrap-reboot"></i></a>
+    public function getUsers(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::select('id', 'name', 'email', 'image')->whereRoleIs('user');
+
+            return Datatables::of($data)
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<a href="' . route('usersprofile.view', $row) . '" class="btn btn-primary btn-sm" title="View"><i class="bi bi-eye"></i></a>
+                        <a href="' . route('assign.role', $row) . '" class="btn btn-success btn-sm" title="Role"><i class="bi  bi-bootstrap-reboot"></i></a>
                         ';
 
 
-                        return $btn;
+                    return $btn;
                 })
                 ->make();
+        }
     }
-     
-
-
-
-}
-    
 }

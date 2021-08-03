@@ -33,7 +33,8 @@
   <script src="{{ asset('js/app.js')}}"></script>
   @yield('bodyExtra')
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+  <!-- Select2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <script>
     $(window).on('load', function() {
@@ -56,6 +57,78 @@
     toastr.error("{{ session('error') }}");
     @endif
   </script>
+
+
+  <!-- Select2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+  <script>
+    // Select2 For Location Search
+    $('#c').select2({
+      placeholder: 'Select a city',
+      ajax: {
+        url: '/select2-autocomplete-city-ajax',
+        dataType: 'json',
+        delay: 100,
+        processResults: function(data) {
+
+          return {
+
+            results: $.map(data, function(item) {
+
+              return {
+
+                text: item.name + ' ( ' + item.region_name+' )',
+
+                id: item.id
+
+              }
+
+            })
+
+          };
+
+        },
+
+        cache: true
+
+      }
+
+    });
+
+    $('#l').select2({
+      placeholder: 'Select a location',
+      ajax: {
+        url: '/select2-autocomplete-location-ajax',
+        dataType: 'json',
+        delay: 100,
+        processResults: function(data) {
+
+          return {
+
+            results: $.map(data, function(item) {
+
+              return {
+
+                text: item.venue_name ,
+
+                id: item.id
+
+              }
+
+            })
+
+          };
+
+        },
+
+        cache: true
+
+      }
+
+    });
+  </script>
+
 </body>
 
 </html>

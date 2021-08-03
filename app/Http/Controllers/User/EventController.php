@@ -10,6 +10,7 @@ use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
 use App\Models\User\Event;
 use App\Models\Location;
+use App\Models\User\Venue;
 use App\Models\Order;
 use App\Models\Payment_Plans;
 use App\Models\User;
@@ -30,7 +31,7 @@ class EventController extends Controller
     public $page_data = [];
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -84,10 +85,6 @@ class EventController extends Controller
         endif;
 
 
-        # Redirect In Case No Social Account Attached
-        #if (is_null($tname)) {
-        # code...
-        #}
 
         return view('users.content.add-event', compact('locations', 'P_plans', 'tw_user', 'data', 'tname'));
     }
@@ -97,24 +94,18 @@ class EventController extends Controller
 
 
         $events = Event::all()->take(8);
-        $locations = Location::all();
-        $loc = [];
-        foreach ($locations as $location) {
-            if (Arr::has($loc, $location->address)) {
-            } else {
-                $loc = Arr::add($loc, $location->address, $location->address);
-            }
+
+        /**
+         * 
+         * Location should have all the venue as drop down
+         */
+        $locations = [];
+        $location = Venue::all();
+        foreach ($location as $key => $value) {
+            $locations[] = $value['venue_name'];
         }
-        $locations = $loc;
-        $locationss = Location::all();
-        $loc = [];
-        foreach ($locationss as $location) {
-            if (Arr::has($loc, $location->city)) {
-            } else {
-                $loc = Arr::add($loc, $location->city, $location->city);
-            }
-        }
-        return view('users.content.events', compact('events', 'locations', 'loc'));
+
+        return view('users.content.events', compact('events', 'locations'));
     }
     public function add_event(Request $request)
     {
@@ -541,7 +532,7 @@ class EventController extends Controller
         Order::where('event_id', $event->id)->update(['account_type' => $plans->name, 'payment_plan_id' => $request->plan, 'total_payment' => $plans->price]);
         Event::where('id', $event->id)->update([
             'event_name' => $request->ename, 'e_description' => $request->e_descrip, 'hashtag' => $request->h_tag, 'approve_htag' => $request->app_htag,
-            'wall_location_msg'=>$request->m_dap_wall,
+            'wall_location_msg' => $request->m_dap_wall,
             'start_time' => $request->s_time, 'start_date' => $request->s_date, 'end_time' => $request->e_time, 'end_date' => $request->e_date, 'created_by' => Auth::user()->id, 'location' => $request->location
         ]);
 
@@ -644,6 +635,7 @@ class EventController extends Controller
 
         return view('users.content.social-wall', compact('posts', 'event'));
     }
+    
     public function getPost($accesstoken, $page_id)
     {
 

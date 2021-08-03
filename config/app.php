@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -235,6 +235,7 @@ return [
         'Datatables' => yajra\Datatables\Datatables::class,
         // 'Twitter'=> Atymic\Twitter::class,
         'Twitter'=> Atymic\Twitter\Facade\Twitter::class,
+        'Image' => Intervention\Image\Facades\Image::class
     ],
 
 ];

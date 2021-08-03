@@ -20,6 +20,8 @@
     <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.svg')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('admin/assets/css/pages/auth.css')}}">
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
 
     <title>@yield('title')</title>
   @yield('headcontent')
