@@ -280,3 +280,8 @@ Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
 Route::get('/admin', function () {
     return redirect()->route('admin.login');
 });
+
+Route::get('clear-cache', function(){
+Artisan::call('clear:cache');
+Artisan::call('config:clear');
+});
