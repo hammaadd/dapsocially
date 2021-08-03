@@ -81,7 +81,6 @@
                     </a>
 	        	</div>
                 <div class="px-4 pt-4">
-                    <h4 class="font-bold pb-1"><a href="#">2 Title of post</a></h4>
                     <p>
                         {{$post->text}}
                     </p>

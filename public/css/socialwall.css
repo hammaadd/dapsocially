@@ -82,3 +82,6 @@
 .tiktok-embed {
     margin: 0 !important;
 }
+.tiktok-embed iframe {
+    height: 400px !important;
+}
