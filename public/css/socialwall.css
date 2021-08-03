@@ -75,3 +75,10 @@
         content: '5 .column.size-1of5';
     }
 }
+
+.tiktok-embed>section {
+    display: none !important;
+}
+.tiktok-embed {
+    margin: 0 !important;
+}
