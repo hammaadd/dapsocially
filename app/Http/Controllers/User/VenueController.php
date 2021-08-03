@@ -76,31 +76,11 @@ class VenueController extends Controller
 
     public function venue()
     {
-
-        $locations = Location::all();
-        $loc = [];
-        foreach ($locations as $location) {
-            if (Arr::has($loc, $location->address)) {
-            } else {
-                $loc = Arr::add($loc, $location->address, $location->address);
-            }
-        }
-        $locations = $loc;
-        $locations=$loc;
-        $locationss=Location::all();
-        $loc=[];
-        foreach($locationss as $location ){
-            if (Arr::has($loc,$location->city)) {
-
-               }
-               else{
-                $loc=Arr::add($loc,$location->city,$location->city);
-
-               }
-        }
+        
         $venues = Venue::all();
+        
 
-        return view('users.content.venues', compact('locations', 'venues','loc'));
+        return view('users.content.venues', compact('venues'));
     }
 
     public function add_venue(Request $request)

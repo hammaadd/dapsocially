@@ -11,22 +11,14 @@
         </a>
         <a href="{{route('signup')}}" class="hidden md:block bg-white text-blue-550 md:text-lg uppercase px-6 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">SIGNUP</a>
     </div>
-    <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10"
-        x-show="nav"
-        @click.away="nav = !nav"
-        x-transition:enter="transition transform origin-top-left ease-out duration-300"
-        x-transition:enter-start="opacity-0 scale-75"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition transform origin-top-left ease-out duration-300"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-75">
+    <div class="w-full sm:w-64 bg-gradient-to-tr from-blue-250 to-blue-550 absolute top-0 left-0 h-screen z-10" x-show="nav" @click.away="nav = !nav" x-transition:enter="transition transform origin-top-left ease-out duration-300" x-transition:enter-start="opacity-0 scale-75" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition transform origin-top-left ease-out duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-75">
         <div class="text-right p-5">
-            <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav " ></i>
+            <i class="fas fa-times text-xl cursor-pointer text-white" @click=" nav = !nav "></i>
         </div>
         <ul class="text-center text-white">
-                <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
-                <li class="py-1"><a href="{{route('events')}}" class="text-xl">Events</a></li>
-                <li class="py-1"><a href="{{route('venue')}}" class="text-xl">Venues</a></li>
+            <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
+            <li class="py-1"><a href="{{route('events')}}" class="text-xl">Events</a></li>
+            <li class="py-1"><a href="{{route('venue')}}" class="text-xl">Venues</a></li>
             <li class="py-1"><a href="{{route('signin')}}" class="text-xl">Get Started</a></li>
             <li class="py-2">
                 <a href="{{route('signin')}}" class="bg-white text-blue-550 md:text-lg uppercase px-6 py-1 border-2 border-white rounded-3xl hover:text-white hover:bg-transparent">LOGIN</a>
@@ -50,13 +42,11 @@
             <div class="flex flex-wrap overflow-hidden">
                 <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10 relative md:form-side">
                     <h3 class="text-white md:text-lg font-medium">Sign in to Your Account</h3>
-                    <form action="{{ route('login') }}" method="POST" class="pt-3" >
+                    <form action="{{ route('login') }}" method="POST" class="pt-3">
                         @csrf
-                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4 @error('email') is-invalid @enderror" name="email"
-                        value="{{ old('email') }}" required  autofocus placeholder="Email">
+                        <input type="email" class="w-full bg-white rounded-3xl border-gray-200 px-4 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
                         <div class="my-3 relative rounded-3xl" x-data="{ ptoggle: true}">
-                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 @error('password') is-invalid @enderror"
-                            required autocomplete="current-password" placeholder="Password"/>
+                            <input :type="ptoggle ? 'password' : 'text'" name="password" class="block w-full rounded-3xl border-gray-200 px-4 @error('password') is-invalid @enderror" required autocomplete="current-password" placeholder="Password" />
                             <div class="absolute inset-y-0 right-0 pr-5 flex items-center">
                                 <span class="text-lg">
                                     <i class="text-blue-550 fas" @click=" ptoggle = !ptoggle" :class="{'fa-eye-slash': !ptoggle, 'fa-eye':ptoggle }"></i>
@@ -64,8 +54,7 @@
                             </div>
                         </div>
                         <label class="flex items-center mx-auto pl-3">
-                            <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember"
-                            {{ old('remember') ? 'checked' : '' }}/>
+                            <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
                             <span class="block ml-2 text-white cursor-pointer">Remember Me</span>
                         </label>
                         <div class="pt-3 flex flex-wrap flex-col md:flex-row items-center justify-between">
@@ -73,28 +62,32 @@
                             @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-white font-medium">Forget Password?</a>
                             @endif
+
+
                         </div>
                     </form>
-                        <div class="pt-4 text-center">
-                            <p class="text-gray-300 text-sm">Sign-in with</p>
-                            <div class="pt-2 text-center">
-                                <a href="{{route('login.google')}}" class="mx-1">
-                                    <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
-                                        <img src="{{asset('assets/icons8_google.png')}}" class="mx-auto" alt="">
-                                    </div>
-                                </a>
-                                <a href="{{route('login.facebook')}}" class="mx-1">
-                                    <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
-                                        <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
-                                    </div>
-                                </a>
-                                <a href="{{route('login.google')}}" class="mx-1">
-                                    <div class="bg-white rounded-xl w-10 h-10 pt-3 inline-block">
-                                        <img src="{{asset('assets/icons8_twitter_1.png')}}" class="mx-auto" alt="">
-                                    </div>
-                                </a>
-                            </div>
+                    <div class="pt-4 text-center">
+
+                        <p class="text-gray-300 text-sm">Sign-in with</p>
+                        <div class="pt-2 text-center">
+                            <a href="{{route('login.google')}}" class="mx-1">
+                                <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
+                                    <img src="{{asset('assets/icons8_google.png')}}" class="mx-auto" alt="">
+                                </div>
+                            </a>
+                            <a href="{{route('login.facebook')}}" class="mx-1">
+                                <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
+                                    <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
+                                </div>
+                            </a>
+                            <a href="{{route('login.google')}}" class="mx-1">
+                                <div class="bg-white rounded-xl w-10 h-10 pt-3 inline-block">
+                                    <img src="{{asset('assets/icons8_twitter_1.png')}}" class="mx-auto" alt="">
+                                </div>
+                            </a>
                         </div>
+                        <a href="{{route('signup')}}" class="text-white font-medium">Or Signup Here!</a>
+                    </div>
 
                 </div>
                 <div class="w-full md:w-1/2 p-5 md:p-8 lg:p-10">
