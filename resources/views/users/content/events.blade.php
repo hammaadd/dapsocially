@@ -1,6 +1,7 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Events')
 @section('headerExtra')
+<link rel="stylesheet" href="{{asset('css/masonry.css')}}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
     $(document).ready(function(e) {
@@ -111,13 +112,22 @@
                 <label for="activity" class=" w-3/12">
                     City
                     <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-
+                        {{-- @foreach ($loc as $city)
+                         <option value="{{$city}}" >{{$city}}</option>
+                        @endforeach --}}
                     </select>
                 </label>
                 <label for="location" class=" w-4/12">
                     LOCATION
                     <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         
+
+                  
+                        {{-- @foreach ($locations as $location)
+
+                                    <option value="{{$location}}" >{{$location}}</option>
+                        @endforeach --}}
+
                     </select>
                 </label>
 
@@ -129,7 +139,8 @@
         </form>
 
         <div class=" max-w-7xl mx-auto pt-10">
-            <div class="masonry md:cols--3 lg:cols--4">
+            {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
+            <div class="clearfix" id="fh5co-board" data-columns>
                 @foreach ($events as $event)
                 <div class="masonry-item">
                     <div class="masonry-content">
@@ -154,11 +165,34 @@
                                     <p class="font-medium">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->name}}</p>
                                     <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                                 </div>
+                
+                <div class="item">
+                    <div class="">
+                        <a href="#" class="fh5co-board-img">
+                            <div class="relative">
+                                <img class=" rounded-lg" src="{{asset('Users/EventImages/'.$event->c_image)}}" alt="Event Image">
 
                             </div>
-                            <div>
-                                <i class="far fa-clock"></i><span class="text-sm pl-2"> {{ date('h:i A', strtotime($event->start_time))}}</span>
+                        </a>
+                    </div>
+                    <div class="px-4 pt-4">
+                        <h4 class="font-bold pb-1">
+                            <a href="{{route('socialwall.event',$event)}}">{{$event->event_name}}</a>
+                        </h4>
+                        <p>
+                            {{$event->e_description}}
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
+                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
+                            <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$event->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                            <div class="pl-2">
+                                <p class="font-medium">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->name}}</p>
+                                <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                             </div>
+                        </div>
+                        <div>
+                            <i class="far fa-clock"></i><span class="text-sm pl-1"> {{ date('h:i A', strtotime($event->start_time))}}</span>
                         </div>
                     </div>
                 </div>
@@ -563,3 +597,7 @@
 </main>
 @include('users.inc.footer')
 @endsection
+@section('bodyExtra')
+<script src="{{asset('js/salvattore.min.js')}}"></script>
+@endsection
+

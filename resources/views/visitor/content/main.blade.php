@@ -90,8 +90,8 @@
 
                     <label for="location" class="w-full md:w-1/2 lg:w-4/12 py-2 lg:py-0">
                         LOCATION
-                        <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
+                        <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         </select>
                     </label>
 
@@ -99,6 +99,9 @@
                         City
                         <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
+                            {{-- @foreach ($loc as $city)
+                            <option value="{{$city}}">{{$city}}</option>
+                            @endforeach --}}
                         </select>
                     </label>
 
