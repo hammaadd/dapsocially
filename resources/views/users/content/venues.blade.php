@@ -117,11 +117,14 @@ $(document).ready(function (e) {
                 <label for="activity" class=" w-3/12">
                     City
                     <select name="city" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+
+                
                     </select>
                 </label>
                 <label for="location" class=" w-4/12">
                     LOCATION
                     <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
+
                     </select>
                 </label>
 
@@ -558,10 +561,11 @@ $(document).ready(function (e) {
                 </div> --}}
             </div>
 
-
+            @if($load_more)
             <div class="w-full text-center py-10">
                 <a href="{{route('load.venues')}}" class="bg-transparent text-blue-550 uppercase px-5 py-2 border-2 border-blue-550 rounded-3xl hover:bg-blue-550 hover:text-white mx-3">Load More</a>
             </div>
+            @endif
         </div>
     </section>
 </main>

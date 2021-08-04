@@ -4,8 +4,7 @@
             <div class="sidebar-header">
                 <div class="d-flex justify-content-between">
                     <div class="logo">
-                        <a href="{{route('dashboard')}}"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}" alt="Logo" style="height: 40px;"
-                                srcset=""></a>
+                        <a href="{{route('dashboard')}}"><img src="{{ asset('admin/assets/images/logo/logo1.png') }}" alt="Logo" style="height: 40px;" srcset=""></a>
                     </div>
                     <div class="toggler">
                         <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -30,7 +29,7 @@
                     </li>
 
 
-                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }} {{Request::is('assignpermission-form')? 'active' : '' }}"  >
+                    <li class="sidebar-item  has-sub {{Request::is('add-roles')? 'active' : '' }} {{Request::is('all-roles')? 'active' : '' }} {{Request::is('assignpermission-form')? 'active' : '' }}">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-person-check-fill"></i>
                             <span>Roles</span>
@@ -146,11 +145,11 @@
                             </li>
                         </ul>
                     </li>
-                    {{-- <li class="sidebar-item {{Request::is('send-notifications')? 'active' : '' }}  ">
-                        <a href="{{route('send-notifications')}}" class='sidebar-link'>
-                            <i class="bi bi-chat-left-text-fill"></i>
-                            <span>Notification management</span>
-                        </a>
+                    {{-- <li class="sidebar-item {{Request::is('send-notifications')? 'active' : '' }} ">
+                    <a href="{{route('send-notifications')}}" class='sidebar-link'>
+                        <i class="bi bi-chat-left-text-fill"></i>
+                        <span>Notification management</span>
+                    </a>
                     </li> --}}
                     <li class="sidebar-item  has-sub {{Request::is('image-adds')? 'active' : '' }} {{Request::is('video-adds')? 'active d-block' : '' }} {{Request::is('list-adds')? 'active d-block' : '' }}">
                         <a href="#" class='sidebar-link'>
@@ -184,16 +183,16 @@
                                 <a href="{{route('list.category')}}">All categories</a>
                             </li>
                             {{-- <li class="submenu-item {{Request::is('show.adds')? 'active' : '' }} ">
-                                <a href="{{route('show.adds')}}">All Adds</a>
-                            </li> --}}
-                        </ul>
-                    </li>
-                    <li class="sidebar-item {{Request::is('layout-control')? 'active' : '' }}  ">
-                        <a href="{{route('layout.control')}}" class='sidebar-link'>
-                            <i class="bi bi-chat-left-text-fill"></i>
-                            <span>Layout Control</span>
-                        </a>
-                    </li>
+                            <a href="{{route('show.adds')}}">All Adds</a>
+                    </li> --}}
+                </ul>
+                </li>
+                <li class="sidebar-item {{Request::is('layout-control')? 'active' : '' }}  ">
+                    <a href="{{route('layout.control')}}" class='sidebar-link'>
+                        <i class="bi bi-chat-left-text-fill"></i>
+                        <span>Layout Control</span>
+                    </a>
+                </li>
                 </ul>
             </div>
             <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

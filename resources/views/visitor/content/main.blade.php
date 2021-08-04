@@ -90,8 +90,8 @@
 
                     <label for="location" class="w-full md:w-1/2 lg:w-4/12 py-2 lg:py-0">
                         LOCATION
-                        <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
+                        <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                         </select>
                     </label>
 
@@ -99,6 +99,9 @@
                         City
                         <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
+                            {{-- @foreach ($loc as $city)
+                            <option value="{{$city}}">{{$city}}</option>
+                            @endforeach --}}
                         </select>
                     </label>
 
@@ -131,7 +134,7 @@
             </p>
             @endif
             @if (count($venues) < 1) <div class="text-center w-full">
-                <h3 class=" mt-6  text-center text-xl font-medium">NO VENUES </h3>
+                <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO VENUES FOUND <i class="fas fa-exclamation"></i></h3>
                 </div>
                 @else
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-8">
@@ -147,7 +150,7 @@
                                 <p class="text-base">{{Illuminate\Support\Str::substr($venue->start_date, 0,4)}}</p>
                             </div>
                             <div class="left-0 right-0 bottom-4 absolute text-white px-5">
-                                <a href="#" class="text-xl font-medium">{{$venue->venue_name}}</a>
+                                <a href="{{route('socialwall.venue',$venue)}}" class="text-xl font-medium">{{$venue->venue_name}}</a>
                                 <p>
                                     <span class="text-sm m-1">{{$venue->hashtag}}</span>
 
@@ -161,9 +164,11 @@
 
                 </div>
                 @endif
+                @if($load_more_venues)
                 <div class="pt-10 text-center">
                     <a href="{{route('venue')}}" class="text-blue-550 py-2 px-5 border-2 border-blue-550 rounded-3xl hover:text-white hover:bg-blue-550">VIEW ALL VENUES</a>
                 </div>
+                @endif
         </section>
 
         {{-- Events Section --}}
@@ -187,7 +192,7 @@
                 </div>
             </div>
             @if (count($events) < 1) <div class="text-center w-full">
-                <h3 class=" mt-6  text-center text-xl font-medium">NO EVENTS </h3>
+                <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO EVENTS FOUND <i class="fas fa-exclamation"></i></h3>
                 </div>
 
                 @else

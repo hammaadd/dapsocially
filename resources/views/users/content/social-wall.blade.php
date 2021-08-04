@@ -1,5 +1,8 @@
 @extends('visitor.layout.visitorLayout')
 @section('title','Social Wall')
+@section('headerExtra')
+<link rel="stylesheet" href="{{asset('css/socialwall.css')}}">
+@endsection
 @section('content')
 <main class="relative" x-data="{ ad: false, card: false }">
     <section class="page-title bg-blue-550 h-60 bg-center bg-cover" style="background-image: url({{asset('assets/Group-397.png')}})">
@@ -53,49 +56,48 @@
     </section>
 
     <section class="p-5 bg-black w-full">
-        <div class="masonry md:cols--3 lg:cols--5">
-@if(count($posts)>1)
-    {{-- @for($i = 0 ; $i< 5 ; $i++) --}}
-    @foreach($posts as $post)
+        {{-- <div class="masonry md:cols--3 lg:cols--5"> --}}
+        <div class="clearfix" id="fh5co-board" data-columns>
+        @if(count($posts)>1)
+        {{-- @for($i = 0 ; $i< 5 ; $i++) --}}
+        @foreach($posts as $post)
         {{-- @if(array_key_exists($i,$posts)) --}}
         {{-- @php $post = $posts[$i]; @endphp --}}
-            <a target="_blank" href="{{$post->url}}">
-                <div class="masonry-item">
-                    <div class="masonry-content">
+            <div class="item">
+        		<div class="">
+                    <a href="{{$post->url}}" target="_blank" class="fh5co-board-img">
                         <div class="relative">
                             @if($post->platform !='tiktok')
                                 <img class=" rounded-lg" src="{{$post->image}}" alt="Dummy Image">
-                                
                             @elseif($post->platform =='tiktok')
                                 {!! $post->image !!}
                             @endif
-
                             @if($post->platform == 'facebook')
                                 <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                             @elseif($post->platform =='twitter')
                                 <img src="{{asset('assets/twitter.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt="">
                             @endif
                         </div>
-                        <div class="p-4">
-                            <p>
-                                {{$post->text}}
-                            </p>
-                        </div>
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                            <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                                <img src="{{$post->user_img}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                                <div class="pl-2">
-                                    <p class="font-medium">{{$post->username}}</p>
-                                    <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
-                                </div>
-                            </div>
-                            <div>
-                                <i class="far fa-clock"></i><span class="text-sm pl-2">{{$post->posted_at}}</span>
-                            </div>
+                    </a>
+	        	</div>
+                <div class="px-4 pt-4">
+                    <p>
+                        {{$post->text}}
+                    </p>
+                </div>
+                <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
+                    <div class="flex flex-wrap overflow-hidden justify-between items-center">
+                        <img src="{{$post->user_img}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                        <div class="pl-2">
+                            <p class="font-medium">{{$post->username}}</p>
+                            <p class="text-xs">{{App\Models\User::where('id','=',$event->created_by)->get()[0]->account_type}}</p>
                         </div>
                     </div>
+                    <div>
+                        <i class="far fa-clock"></i><span class="text-sm pl-1">12:34 PM</span>
+                    </div>
                 </div>
-            </a>
+        	</div>
         {{-- @endif --}}
         {{-- @if(array_key_exists($i,$user_tweets))
         @php $tweet = $user_tweets[$i]; @endphp
@@ -203,4 +205,7 @@
         </div>
     </section>
 </main>
+@endsection
+@section('bodyExtra')
+<script src="{{asset('js/salvattore.min.js')}}"></script>
 @endsection

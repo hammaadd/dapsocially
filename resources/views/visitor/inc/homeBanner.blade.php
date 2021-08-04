@@ -18,7 +18,7 @@
                         <a href="/" class="nav-item {{Request::is('/')?'nav-item-active':''}}">Home</a>
                         <a href="{{ route('events') }}" class="nav-item">Events</a>
                         <a href="{{ route('venue') }}" class="nav-item">Venue</a>
-                        <a href="{{ route('signin') }}" class="nav-item">Get Started</a>
+                        <a href="{{ route('signup') }}" class="nav-item">Get Started</a>
                     </div>
                     @if (!Auth::user())
                         <a href="{{ route('signin') }}" class="btn-login">Login</a>

@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 use SquareConnect\Configuration;
 use SquareConnect\ApiClient;
+
+# New Square SDK Client
+use Square\SquareClient;
+use Square\Environment;
+
 class SquareApiController extends Controller
 {
     public function index()
     {
         return view('Apis.squarepayment');
     }
+
+
     public function payment_process(Request $request)
     {
 
@@ -53,4 +60,23 @@ class SquareApiController extends Controller
             var_dump($e->getResponseBody());
         }
     }
+
+
+    function sample_process(Request $request){
+
+        $client = new SquareClient([
+            'accessToken' => env('SQUARE_SANDBOX_TOKEN'),
+            'environment' => Environment::SANDBOX,
+        ]);
+
+        $locationsApi = $client->getLocationsApi();
+
+        $apiResponse = $locationsApi->listLocations();
+        echo "<h1>Location</h1>";
+        var_dump($locationsApi);
+        echo "<hr><h1>Api Response</h1>";
+        var_dump($apiResponse);
+
+    }
+
 }

@@ -36,7 +36,7 @@
         </div>
     </div>
 </nav>
-<main class="min-h-55 bg-gradient-to-tr from-blue-250 to-blue-550">
+<main class="min-h-55 bg-white">
     <div class="max-w-6xl mx-auto p-5 md:p-8 lg:py-16">
         <div class="bg-gradient-to-tr from-blue-350 to-blue-450 w-full md:w-11/12 lg:w-3/4 mx-auto rounded-xl">
             <div class="flex flex-wrap overflow-hidden">
@@ -53,14 +53,21 @@
                                 </span>
                             </div>
                         </div>
-                        <label class="flex items-center mx-auto pl-3">
-                            <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
-                            <span class="block ml-2 text-white cursor-pointer">Remember Me</span>
-                        </label>
+                        <div class="flex flex-wrap justify-between items-center">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="text-blue-550 border-blue-550 focus:ring-blue-550" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
+                                <span class="block ml-2 text-white cursor-pointer">Remember Me</span>
+                            </label>
+                            <div>
+                                @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}" class="text-white font-medium">Forget Password?</a>
+                                @endif
+                            </div>
+                        </div>
                         <div class="pt-3 flex flex-wrap flex-col md:flex-row items-center justify-between">
                             <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Login</button>
                             @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}" class="text-white font-medium">Forget Password?</a>
+                            <a class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Signup</a>
                             @endif
 
 
@@ -86,7 +93,7 @@
                                 </div>
                             </a>
                         </div>
-                        <a href="{{route('signup')}}" class="text-white font-medium">Or Signup Here!</a>
+                        <!-- <a href="{{route('signup')}}" class="text-white font-medium">Or Signup Here!</a> -->
                     </div>
 
                 </div>
@@ -108,4 +115,5 @@
         </div>
     </div>
 </main>
+@include('visitor.inc.footer')
 @endsection

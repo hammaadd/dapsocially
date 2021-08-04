@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "250ca72f86d605dacf026289c3748cf3",
+    "content-hash": "b9b884dd44f779d9096eb67cd68b05e4",
     "packages": [
         {
             "name": "apimatic/jsonmapper",
@@ -4139,16 +4139,16 @@
         },
         {
             "name": "square/square",
-            "version": "11.0.0.20210513",
+            "version": "13.0.0.20210721",
             "source": {
                 "type": "git",
                 "url": "https://github.com/square/square-php-sdk.git",
-                "reference": "f471596d3b8eadba859165820f9b789e16a124be"
+                "reference": "03d90445854cd3b500f75061a9c63956799b8ecf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/square/square-php-sdk/zipball/f471596d3b8eadba859165820f9b789e16a124be",
-                "reference": "f471596d3b8eadba859165820f9b789e16a124be",
+                "url": "https://api.github.com/repos/square/square-php-sdk/zipball/03d90445854cd3b500f75061a9c63956799b8ecf",
+                "reference": "03d90445854cd3b500f75061a9c63956799b8ecf",
                 "shasum": ""
             },
             "require": {
@@ -4188,11 +4188,7 @@
                 "sdk",
                 "square"
             ],
-            "support": {
-                "issues": "https://github.com/square/square-php-sdk/issues",
-                "source": "https://github.com/square/square-php-sdk/tree/11.0.0.20210513"
-            },
-            "time": "2021-05-13T15:22:16+00:00"
+            "time": "2021-07-21T06:43:15+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -9301,6 +9297,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {

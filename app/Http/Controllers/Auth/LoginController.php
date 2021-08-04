@@ -49,26 +49,26 @@ class LoginController extends Controller
     {
 
         //  oauth_request_token
-    //  oauth_request_token_secret
-    //  access_token
-    //  tw_screen_name
+        //  oauth_request_token_secret
+        //  access_token
+        //  tw_screen_name
 
-    //Set the twitter session after login
+        //Set the twitter session after login
 
-    
+
 
 
 
         if ($user->hasRole('superadministrator')) {
             return redirect()->route('dashboard');
-        } elseif ($user->hasRole('user') && $user->isactive==1) {
+        } elseif ($user->hasRole('user') && $user->isactive == 1) {
 
             return redirect()->route('my.account');
         }
     }
     protected function logout(Request $request)
     {
-        $user=User::find(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
         $this->guard()->logout();
 
         $request->session()->invalidate();
@@ -86,12 +86,9 @@ class LoginController extends Controller
 
         if ($user->hasRole('superadministrator')) {
             return redirect('/admin/login');
-         }
-         elseif ($user->hasRole('user') ) {
+        } elseif ($user->hasRole('user')) {
             return redirect('signin');
-         }
-
-
+        }
     }
     public function redirectToGoogle()
     {
@@ -100,16 +97,12 @@ class LoginController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver("google")->stateless()->user();
-        $this->_registerOrLoginUser($user,'google');
-
-
-
-
+        $this->_registerOrLoginUser($user, 'google');
     }
     public function redirectToFacebook()
     {
         return Socialite::driver('facebook')->fields([
-            'first_name', 'last_name', 'email', 'gender', 'birthday','user_posts'
+            'first_name', 'last_name', 'email', 'gender', 'birthday', 'user_posts'
         ])->scopes([
             'email', 'user_birthday'
         ])->redirect();
@@ -117,31 +110,27 @@ class LoginController extends Controller
     public function handleFacebookCallback()
     {
         $user = Socialite::driver('facebook')->fields([
-            'first_name', 'last_name', 'email', 'gender', 'birthday','user_posts'
+            'first_name', 'last_name', 'email', 'gender', 'birthday', 'user_posts'
         ])->user();
 
         //dd($user);
-       $this->_registerOrLoginUser($user,'facebook');
-
-
-
+        $this->_registerOrLoginUser($user, 'facebook');
     }
-    protected function _registerOrLoginUser($data,$attached_account)
+    protected function _registerOrLoginUser($data, $attached_account)
     {
         // dd($data);
         $user = User::where('email', '=', $data->email)->first();
         // Session::put('fb_token',$data->token);
         // Session::put('user_id',$data->id);
-        if(!$user && Auth::user()){
-            $ac=new Attached_Account();
-            $ac->user_id=Auth::user()->id;
-            $ac->verified_acc=$attached_account;
+        if (!$user && Auth::user()) {
+            $ac = new Attached_Account();
+            $ac->user_id = Auth::user()->id;
+            $ac->verified_acc = $attached_account;
             $ac->token = $data->token;
             $ac->user_social_id = $data->id;
             $ac->save();
             //return redirect()->route('my.account');
-        }
-        else if (!$user) {
+        } else if (!$user) {
             $user = new User();
             $user->name = $data->name;
             $user->email = $data->email;
@@ -150,25 +139,18 @@ class LoginController extends Controller
             $user->password = Hash::make($data->name);
             $user->save();
             $user->attachRole('user');
-            $ac=new Attached_Account();
-            $ac->user_id=$user->id;
-            $ac->verified_acc=$attached_account;
+            $ac = new Attached_Account();
+            $ac->user_id = $user->id;
+            $ac->verified_acc = $attached_account;
             $ac->token = $data->token;
             $ac->user_social_id = $data->id;
             $ac->save();
-           
+
             Auth::login($user);
         }
 
-        
+
         // dd(Session::get('fb_token'));
         // return redirect()->route('my.account');
     }
-
-    
-
-
-
-
-
 }

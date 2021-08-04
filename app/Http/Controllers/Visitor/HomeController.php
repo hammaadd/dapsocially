@@ -17,8 +17,15 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $events = Event::all()->take(6);
-        $venues = Venue::all()->take(3);
+        $events = Event::orderBy('created_at','DESC')->take(6)->get();
+        $venues = Venue::orderBy('created_at','DESC')->take(3)->get();
+        
+        /**
+         * Check for Load More Buttons
+         */
+        $load_more_venues = Venue::count()>3;
+        $load_more_events = Event::count()>6;
+        
         $venuecontent = Content::where('key', 'venues')->first();
         $eventcontent = Content::where('key', 'events')->first();
         $platform = Content::where('key', 'platforms')->first();
@@ -29,25 +36,66 @@ class HomeController extends Controller
             'platform' => $platform,
 
         ];
-        $locations = [];
-        $location = Venue::all();
-        foreach ($venues as $key => $value) {
-            $locations[] = $value['venue_name'];
-        }
-        
-        return view('visitor.content.main', compact('events', 'venues', 'locations', 'contents'));
+      
+
+        return view('visitor.content.main', compact('events', 'venues', 'load_more_events','load_more_venues', 'contents'));
     }
+    
     public function about_us()
     {
         $about_us = Content::where('key', 'aboutus')->first();
         return view('visitor.content.aboutus', compact('about_us'));
     }
+
+    public function terms_of_services()
+    {
+        $terms = Content::where('key', 'termsofservices')->first();
+        return view('visitor.content.terms', compact('terms'));
+    }
+
+    public function privacy_policy()
+    {
+        $policy = Content::where('key', 'privacypolicy')->first();
+        return view('visitor.content.privacy', compact('policy'));
+    }
+
+    public function report_abuse()
+    {
+        $abuse = Content::where('key', 'reportabuse')->first();
+        return view('visitor.content.abuse', compact('abuse'));
+    }
+
+    public function contact_support()
+    {
+        $support = Content::where('key', 'contactsupport')->first();
+        return view('visitor.content.support', compact('support'));
+    }
+
+    public function help_center()
+    {
+        $help = Content::where('key', 'helpcenter')->first();
+        return view('visitor.content.help', compact('help'));
+    }
+
+    public function our_work()
+    {
+        $work = Content::where('key', 'ourwork')->first();
+        return view('visitor.content.work', compact('work'));
+    }
+
+    public function features()
+    {
+        $features = Content::where('key', 'features')->first();
+        return view('visitor.content.features', compact('features'));
+    }
+
     public function pricing()
     {
         $P_plans = Payment_Plans::all();
 
         return view('visitor.content.pricing', compact('P_plans'));
     }
+
     public function search(Request $request)
     {
 
@@ -105,6 +153,9 @@ class HomeController extends Controller
                 $loc = Arr::add($loc, $location->city, $location->city);
             }
         }
-        return view('visitor.content.main', compact('events', 'venues', 'locations', 'contents', 'loc'));
+
+        $load_more_venues = false;
+
+        return view('visitor.content.main', compact('events', 'venues', 'locations', 'contents', 'loc','load_more_venues'));
     }
 }
