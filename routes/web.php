@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
+Route::get('gen', function () {
+    return password_hash('user12345',PASSWORD_DEFAULT);
+});
+
 // Visitor Side
 Route::get('/', 'Visitor\HomeController@index')->name('homepage');
 Route::post('search', 'Visitor\HomeController@search')->name('search');
@@ -94,7 +98,7 @@ Route::middleware(['auth' => 'role:user'])->group(function () {
     Route::get('delete_my-event/{event}', 'User\EventController@delete_myevent')->name('delete.my.event');
 
 
-    Route::post('search-event', 'User\EventController@search_Event')->name('search.event');
+    Route::post('search-event', 'User\EventController@search_event')->name('search.event');
     Route::post('search-my-event', 'User\EventController@search_my_Event')->name('search.my.event');
     Route::post('search-my-venue', 'User\VenueController@search_my_Venue')->name('search.my.venue');
 

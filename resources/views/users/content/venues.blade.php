@@ -40,13 +40,13 @@ $(document).ready(function (e) {
     <section class="page-title bg-white py-5 shadow-md">
         <h2 class="uppercase text-center text-xl font-medium">All Venues</h2>
     </section>
-    <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+    {{-- <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
         <ol class="list-reset flex text-grey-dark">
           <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
           <li><span class="mx-2">/</span></li>
-          <li>My Venues</li>
+          <li>venues</li>
         </ol>
-      </nav>
+      </nav> --}}
     <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
         <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
@@ -145,7 +145,7 @@ $(document).ready(function (e) {
                         </div>
                         <div class="pl-4 pt-2 pr-4 pb-2">
                             <h4>
-                                <a href="{{route('facebook.posts.venue',$venue)}}">  <b>{{$venue->venue_name}}</b></a>
+                                <a href="{{route('socialwall.venue',$venue)}}">  <b>{{$venue->venue_name}}</b></a>
                             </h4>
                         </div>
                         <div class="pb-4 pl-4 pr-4">
