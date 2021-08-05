@@ -15,18 +15,18 @@ class Select2AutocompleteController extends Controller
     public function dataCitiesAjax(Request $request)
     {
 
-        $data = $data = DB::table('cities')
-        ->orderBy('cities.name')
-        ->select('cities.id', 'cities.name', 'regions.name AS region_name')
-        ->join('regions', 'cities.region_id', '=', 'regions.id');
+        $data = $data = DB::table('cities_dd')
+        ->orderBy('cities_dd.id')
+        ->select('cities_dd.id', 'cities_dd.name');
+        // ->join('regions', 'cities_dd.region_id', '=', 'regions.id');
         if ($request->has('q')) {
             $search = $request->q;
             # Query City Name
-            $data->where('cities.name', 'LIKE', "%$search%");
+            $data->where('cities_dd.name', 'LIKE', "%$search%")
+            ->orderBy('cities_dd.name');
         }
 
-        $data = $data->where('cities.country_id', '=', '230')  # Only US Cities ( US Country ID )
-                ->take(10)  # Limit Search Record
+        $data = $data->take(env('cities_dd_limit'))  # Limit Search Record
                 ->get()
                 ->toArray();
 
@@ -45,7 +45,7 @@ class Select2AutocompleteController extends Controller
             $data->where('venues.venue_name', 'LIKE', "%$search%");
         }
 
-        $data = $data->take(10)  # Limit Search Record
+        $data = $data->take(env('locations_dd_limit'))  # Limit Search Record
                 ->get()
                 ->toArray();
 

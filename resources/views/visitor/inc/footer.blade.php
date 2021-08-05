@@ -24,6 +24,7 @@
                     <li class="py-1"><a href="{{route('help.center')}}" class="hover:text-white">Help Center</a></li>
                     <li class="py-1"><a href="{{route('contact.support')}}" class="hover:text-white">Contact Support</a></li>
                     <li class="py-1"><a href="{{route('reportabuse')}}" class="hover:text-white">Report Abuse</a></li>
+
                 </ul>
             </div>
             <div class="w-full md:w-1/3 lg:w-4/12 text-white pt-5 lg:pt-0">
@@ -44,6 +45,8 @@
         <div class="max-w-6xl mx-auto py-2 px-5 text-gray-300 flex flex-col items-center md:flex-row justify-between">
             <p>Copyright © 2021. All rights reserved.</p>
             <div>
+                Designed & Developed By<a href="{{ (App\Models\Shortcode::where('key','virtuenetz')->first())->content}}" class="hover:text-white"> VirtueNetz</a>
+
                 <a href="{{route('privacypolicy')}}" class="mx-2 hover:text-white">Privacy Policy</a>
                 <a href="{{route('termsofservices')}}" class="mx-2 hover:text-white">Terms of Services</a>
             </div>
