@@ -1,1 +1,67 @@
+#fh5co-board .item {
+    margin: 10px 10px 20px 10px;
+    background: #fff;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    -webkit-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
 
+.column {
+    float: left;
+}
+.clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+}
+@media screen and (max-width: 480px) {
+    .column {
+        float: none;
+        position: relative;
+        clear: both;
+    }
+}
+.size-1of4 {
+    width: 25%;
+}
+.size-1of3 {
+    width: 33.333%;
+}
+.size-1of2 {
+    width: 50%;
+}
+
+
+#fh5co-board[data-columns]::before {
+    content: '4 .column.size-1of4';
+}
+
+/* Configurate salvattore with media queries */
+@media screen and (max-width: 450px) {
+    #fh5co-board[data-columns]::before {
+        content: '1 .column';
+    }
+}
+
+@media screen and (min-width: 451px) and (max-width: 700px) {
+    #fh5co-board[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
+}
+
+@media screen and (min-width: 701px) and (max-width: 991px) {
+    #fh5co-board[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #fh5co-board[data-columns]::before {
+        content: '4 .column.size-1of4';
+    }
+}

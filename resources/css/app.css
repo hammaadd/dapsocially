@@ -50,7 +50,6 @@
         .cols--5 {
             columns: 5;
         }
-
         .select2-container--default .select2-selection--single {
             background-color: #fff;
             border: 1px solid #aaaaaa3d !important;

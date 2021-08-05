@@ -307,7 +307,4 @@ Route::get('/admin', function () {
     return redirect()->route('admin.login');
 });
 
-Route::get('clear-cache', function () {
-    Artisan::call('clear:cache');
-    Artisan::call('config:clear');
-});
+

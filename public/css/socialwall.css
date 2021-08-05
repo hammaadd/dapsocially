@@ -26,10 +26,10 @@
         clear: both;
     }
 }
-.size-1of5 {
+/* .size-1of5 {
     width: 20%;
     background-color: black;
-}
+} */
 .size-1of4 {
     width: 25%;
 }
@@ -58,20 +58,30 @@
     }
 }
 
-@media screen and (min-width: 701px) and (max-width: 850px) {
+@media screen and (min-width: 701px) and (max-width: 991px) {
     #fh5co-board[data-columns]::before {
         content: '3 .column.size-1of3';
     }
 }
 
-@media screen and (min-width: 851px) and (max-width: 1279px) {
+@media screen and (min-width: 992px) {
     #fh5co-board[data-columns]::before {
         content: '4 .column.size-1of4';
     }
 }
 
-@media screen and (min-width: 1280px) {
+/* @media screen and (min-width: 1280px) {
     #fh5co-board[data-columns]::before {
         content: '5 .column.size-1of5';
     }
+} */
+
+.tiktok-embed>section {
+    display: none !important;
 }
+.tiktok-embed {
+    margin: 0 !important;
+}
+/* .tiktok-embed iframe {
+    height: 400px !important;
+} */
