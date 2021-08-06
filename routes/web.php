@@ -20,15 +20,32 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
+Route::get('gen', function (Request $req) {
+
+    var_dump(Auth::user()->name);
+
+});
+
 // Visitor Side
-
-// Route::get('/test', 'Visitable\EventsController@events')->name('events');
-
 Route::get('/', 'Visitor\HomeController@index')->name('homepage');
 Route::post('search', 'Visitor\HomeController@search')->name('search');
 // Route::post('search', 'Visitable\HomeController@search')->name('search');
 
+
+/**
+ * 
+ * Footer Links/Pages
+ * 
+ */
 Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
+Route::get('our-work', 'Visitor\HomeController@our_work')->name('our.work');
+Route::get('support', 'Visitor\HomeController@contact_support')->name('contact.support');
+Route::get('terms', 'Visitor\HomeController@terms_of_services')->name('termsofservices');
+Route::get('privacy', 'Visitor\HomeController@privacy_policy')->name('privacypolicy');
+Route::get('abuse', 'Visitor\HomeController@report_abuse')->name('reportabuse');
+Route::get('help', 'Visitor\HomeController@help_center')->name('help.center');
+Route::get('features', 'Visitor\HomeController@features')->name('features');
+
 Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
 
 /**
@@ -57,12 +74,24 @@ Route::get('sign-up', function () {
 // Route::get('events','User\EventController@events' )->name('events');
 
 Route::get('events', 'Visitable\EventsController@events')->name('events');
+Route::get('venues', 'Visitable\VenueController@venue')->name('venue');
 
-Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
-Route::get('socialwall/venue/{venue}', 'User\EventController@show_venue')->name('socialwall.venue');
+Route::get('socialwall/event/{event}', 'Visitable\EventsController@show_posts')->name('socialwall.event');
+Route::get('socialwall/venue/{venue}', 'Visitable\EventsController@show_venue')->name('socialwall.venue');
+Route::post('search-my-event', 'User\EventController@search_my_Event')->name('search.my.event');
+Route::post('search-my-venue', 'User\VenueController@search_my_Venue')->name('search.my.venue');
+
+// Route::post('search-venue', 'User\VenueController@search_Venue')->name('search.venue');
+// Route::post('search-event', 'User\EventController@search_event')->name('search.event');
+
+Route::post('search-event', 'Visitable\EventsController@search_event')->name('search.event');
+Route::post('search-venue', 'Visitable\VenueController@search_Venue')->name('search.venue');
+
+
+// Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
+// Route::get('socialwall/venue/{venue}', 'User\EventController@show_venue')->name('socialwall.venue');
 
 Route::get('more_venues', 'User\VenueController@load_more_venues')->name('load.venues');
-Route::get('venues', 'User\VenueController@venue')->name('venue');
 Route::get('more_events', 'User\EventController@load_more_events')->name('load.events');
 // User Side
 
@@ -79,11 +108,7 @@ Route::middleware(['auth' => 'role:user'])->group(function () {
     Route::get('delete_my-event/{event}', 'User\EventController@delete_myevent')->name('delete.my.event');
 
 
-    Route::post('search-event', 'User\EventController@search_Event')->name('search.event');
-    Route::post('search-my-event', 'User\EventController@search_my_Event')->name('search.my.event');
-    Route::post('search-my-venue', 'User\VenueController@search_my_Venue')->name('search.my.venue');
-
-    Route::post('search-venue', 'User\VenueController@search_Venue')->name('search.venue');
+ 
     Route::get('load-my-venues', 'User\VenueController@load_my_venues')->name('load.my.venues');
     Route::get('delete_my-venue/{venue}', 'User\VenueController@delete_myvenue')->name('delete.my.venue');
     Route::get('my-event', 'User\EventController@my_events')->name('my.events');
@@ -277,11 +302,22 @@ Route::get('get-post', 'TestingApi\FetchFacebookPostController@getPost')->name('
 
 Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
 
+
+
+/**
+ * 
+ * Square Payment NEW SDK
+ * 
+ */
+Route::get('square/test', 'TestingApi\SquareApiController@sample_process')->name('square.sample_process');
+Route::get('square/customers/list','TestingApi\SquareApiController@list_customers')->name('square.listc');
+Route::get('square/customers/checkout','TestingApi\SquareApiController@checkout')->name('square.checkout');
+Route::get('user/events/payments','TestingApi\SquareApiController@events')->name('payment.events');
+Route::get('payment/confirm','TestingApi\SquareApiController@confirm')->name('payment.confirm');
+
+
 Route::get('/admin', function () {
     return redirect()->route('admin.login');
 });
 
-Route::get('clear-cache', function(){
-Artisan::call('clear:cache');
-Artisan::call('config:clear');
-});
+

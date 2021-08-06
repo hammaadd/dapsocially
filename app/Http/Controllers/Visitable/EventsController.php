@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Visitable;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\E_social_wall;
 
 use App\Models\User\Event;
 use App\Models\Venues;
@@ -22,17 +23,66 @@ class EventsController extends Controller
         
         /**
          * 
-         * Location should have all the venues as drop down
+         * Check if more records exits
+         * 
          */
+        $load_more = Event::count() > 8;
+        
+        return view('users.content.events', compact('events', 'load_more'));
+    }
+
+
+    public function show_posts(Event $event)
+    {
+        
+        /**
+         * 
+         * Viewing a single event
+         * 
+         */
+
+        $posts = E_social_wall::where('event_id', $event->id)->get();
+
+        return view('users.content.social-wall', compact('posts', 'event'));
+    }
+
+
+    public function show_venue(Event $event)
+    {
+
+         /**
+         * 
+         * Viewing a single venue
+         * 
+         */
+
+        $posts = E_social_wall::where('event_id', $event->id)->get();
+
+
+
+        return view('users.content.social-wall', compact('posts', 'event'));
+    }
+
+
+    public function search_event(Request $request)
+    {
+
+
+        $events = [];
         $locations = [];
-        $location = Venues::select('venue_name')->get();
-        foreach ($location as $key => $value) {
-            $locations[] = $value['venue_name'];
+
+        if (!is_null($request->keyword) && !is_null($request->location)) {
+            $events = Event::where('hashtag', '=', $request->keyword)->where('location', '=', $request->location)->get();
+        } elseif (is_null($request->keyword) && !is_null($request->location)) {
+            $events = Event::where('location', '=', $request->location)->get();
         }
-        
-        // return $loc;
-        
-        return view('users.content.events', compact('events', 'locations'));
+        if (!is_null($request->keyword)) {
+            $events = Event::where('hashtag', '=', $request->keyword)->get();
+        }
+
+        $load_more = (count($events)>0)?true:false;
+
+        return view('users.content.events', compact('events','load_more'));
     }
 
 }

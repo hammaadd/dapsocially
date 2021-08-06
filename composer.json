@@ -18,7 +18,7 @@
         "laravel/ui": "^3.2",
         "protoqol/prequel": "v1.22.4",
         "santigarcor/laratrust": "^6.3",
-        "square/square": "11.0.0.20210513",
+        "square/square": "13.0.0.20210721",
         "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {

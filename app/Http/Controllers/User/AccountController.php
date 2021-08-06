@@ -22,12 +22,20 @@ use Square\Http\HttpRequest;
 class AccountController extends Controller
 {
     protected $hepler, $fb;
+
+
+
+
     public function __construct()
     {
+        // $this->middleware('auth');
+
         if (session_status() === PHP_SESSION_NONE) :
             session_start();
         endif;
-        
+
+
+
         $this->fb = new Facebook(array(
             'app_id' => env('FACEBOOK_APP_ID'),
             'app_secret' => env('FACEBOOK_APP_SECRET'),

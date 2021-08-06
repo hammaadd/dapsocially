@@ -80,7 +80,7 @@
             </div>
             <ul class="text-center text-white">
                 <li class="py-1"><a href="{{ route('homepage') }}" class="text-xl">Home</a></li>
-                <li class="py-1"><a href="{{ route('profile') }}" class="text-xl">Profile</a></li>
+                <li class="py-1"><a href="{{ route('profile') }}" class="text-xl">My Profile</a></li>
                 <li class="py-1"><a href="{{ route('events') }}" class="text-xl">All Events</a></li>
                 <li class="py-1"><a href="{{ route('venue') }}" class="text-xl">All Venues</a></li>
                 @auth
@@ -88,6 +88,7 @@
                 
                 <li class="py-1"><a href="{{route('add-event')}}" class="text-xl">Add Event</a></li>
                 <li class="py-1"><a href="{{route('add-venue')}}" class="text-xl">Add Venue</a></li>
+                <li class="py-1"><a href="{{route('payment.events')}}" class="text-xl">Payments</a></li>
 
                 <li class="py-1"><a href="{{ route('attach.social.account') }}" class="text-xl"> Attach Social Accounts</a></li>
 

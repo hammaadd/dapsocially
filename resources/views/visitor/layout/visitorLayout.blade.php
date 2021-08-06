@@ -78,7 +78,7 @@
 
               return {
 
-                text: item.name + ' ( ' + item.region_name+' )',
+                text: item.name ,
 
                 id: item.id
 
