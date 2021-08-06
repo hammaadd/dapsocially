@@ -101,15 +101,15 @@
         </div>
 
         <section class="py-10 max-w-full mx-auto">
-
-            <div class=" mx-auto pt-10">
+            <h3>All Orders Invoices</h3>
+            <div class=" mx-auto p-10">
                 {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
                 <div class="clearfix">
                     @if (count($events) == 0)
                         <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO EVENTS FOUND <i
                                 class="fas fa-exclamation"></i></h3>
                     @else
-                        <table class=" border-separate border border-blue-800 w-full">
+                        <table class=" border-separate border border-blue-800 w-full rounded">
                             <thead>
                                 <tr>
                                     <th>Event Name</th>
