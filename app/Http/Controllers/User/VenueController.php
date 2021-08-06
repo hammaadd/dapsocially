@@ -257,8 +257,9 @@ class VenueController extends Controller
             }
         }
 
+        $load_more = false;
 
-        return view('users.content.venues', compact('venues', 'locations', 'loc'));
+        return view('users.content.venues', compact('venues', 'locations', 'loc','load_more'));
     }
     public function filter_location(Request $request)
     {

@@ -393,7 +393,10 @@ class EventController extends Controller
                 $loc = Arr::add($loc, $location->city, $location->city);
             }
         }
-        return view('users.content.events', compact('events', 'locations', 'loc'));
+
+        $load_more = false;
+
+        return view('users.content.events', compact('events', 'locations', 'loc','load_more'));
     }
     public function my_events()
     {
