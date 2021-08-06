@@ -98,18 +98,18 @@
             var checkboxes = document.getElementsByName('c[]');
             var inp = document.getElementsByName('inp[]');
             var fb_page = document.getElementsByName('fb_page[]');
-            alert(inp);
+            // alert(inp);
 
             for (var i = 0, n = checkboxes.length; i < n; i++) {
                 if (checkboxes[i].checked && checkboxes[i].value == 'facebook' && fb_page[0].value == "") {
-                    alert('Please add facebook page id or name ');
+                    // alert('Please add facebook page id or name ');
 
                     if (window.history.replaceState) {
                         window.history.replaceState(null, null, window.location.href);
                     }
                     return false;
                 } else if (checkboxes[i].checked && checkboxes[i].value == 'twitter' && inp[2].value == "") {
-                    alert('Please add twitter page id or name ');
+                    // alert('Please add twitter page id or name ');
 
                     if (window.history.replaceState) {
                         window.history.replaceState(null, null, window.location.href);
@@ -117,13 +117,13 @@
                     return false;
 
                 } else if (checkboxes[i].checked && checkboxes[i].value == 'insta' && inp[1].value == "") {
-                    alert('Please add instagram page id or name ');
+                    // alert('Please add instagram page id or name ');
                     if (window.history.replaceState) {
                         window.history.replaceState(null, null, window.location.href);
                     }
                     return false;
                 } else if (checkboxes[i].checked && checkboxes[i].value == 'tiktok' && inp[3].value == "") {
-                    alert('Please add tiktok page id or name ');
+                    // alert('Please add tiktok page id or name ');
                     if (window.history.replaceState) {
                         window.history.replaceState(null, null, window.location.href);
                     }
