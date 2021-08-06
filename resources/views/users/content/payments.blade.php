@@ -1,5 +1,5 @@
 @extends('visitor.layout.visitorLayout')
-@section('title', 'Events')
+@section('title', 'Events Payments')
 @section('headerExtra')
     <link rel="stylesheet" href="{{ asset('css/masonry.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -39,7 +39,7 @@
     @include('users.inc.nav')
     <main>
         <section class="page-title bg-white py-5 shadow-md">
-            <h2 class="uppercase text-center text-xl font-medium">All Events</h2>
+            <h2 class="uppercase text-center text-xl font-medium">All Pyaments</h2>
         </section>
 
         <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
@@ -50,10 +50,8 @@
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                     <p class="text-white">
                         <span
-                            class="px-16 py-4 border-2 border-white text-2xl uppercase block text-center">Events</span><br>
-                        Find the latest events updates or create events, concerts,
-                        conferences, workshops, exhibitions and cultural events
-                        in all cities of United States.
+                            class="px-16 py-4 border-2 border-white text-2xl uppercase block text-center">Payments</span><br>
+                        ...
                     </p>
                 </div>
             </div>
@@ -103,44 +101,6 @@
         </div>
 
         <section class="py-10 max-w-7xl mx-auto">
-            <form action="{{ route('search.event') }}" method="POST">
-                @csrf
-                <div class="flex space-x-8 justify-center items-end">
-                    <label for="keyword" class=" w-4/12">
-                        SEARCH KEYWORD
-                        <input type="text" id="keyword" name="keyword"
-                            class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md" placeholder="#party">
-                    </label>
-                    <label for="activity" class=" w-3/12">
-                        City
-                        <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-                            {{-- @foreach ($loc as $city)
-                         <option value="{{$city}}" >{{$city}}</option>
-                        @endforeach --}}
-                        </select>
-                    </label>
-                    <label for="location" class=" w-4/12">
-                        LOCATION
-                        <select name="location" id="l"
-                            class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
-
-
-
-                            {{-- @foreach ($locations as $location)
-
-                                    <option value="{{$location}}" >{{$location}}</option>
-                        @endforeach --}}
-
-                        </select>
-                    </label>
-
-                    <div class="lg:w-2/12 xl:w-1/12">
-                        <input type="submit" value="SEARCH"
-                            class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
-
-                    </div>
-                </div>
-            </form>
 
             <div class=" max-w-7xl mx-auto pt-10">
                 {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
@@ -148,54 +108,52 @@
                     @if (count($events) == 0)
                         <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO EVENTS FOUND <i
                                 class="fas fa-exclamation"></i></h3>
+                    @else
+                        <table class=" border-separate border border-blue-800 w-auto">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Starts</th>
+                                    <th>Ends</th>
+                                    <th>Pricing</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($events as $event)
+                                    <tr class="text-center">
+                                        <td class="border-separate border border-blue-800">{{ $event->event_name }}</td>
+                                        <td class="border-separate border border-blue-800">{{ $event->start_date }}</td>
+                                        <td class="border-separate border border-blue-800">{{ $event->end_date }}</td>
+                                        <td class="border-separate border border-blue-800">{{ $event->charges }}$</td>
+                                        <td class="border-separate border border-blue-800">
+                                            @if ($event->payment_status == 0)
+                                                <span class='text-red-300'>Pending</span>
+                                            @elseif($event->payment_status==1)
+                                                <span class='text-green-300'>Done</span>
+                                            @endif
+                                        </td>
+                                        <td class="border-separate border border-blue-800">
+                                            @if ($event->payment_status == 0)
+                                                <a href='{{ $event->checkout_page_url }}'><i
+                                                        class="fas fa-receipt"></i></span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     @endif
-                    @foreach ($events as $event)
-                        <div class="item">
-                            <div class="">
-                                <a href="{{ route('socialwall.event', $event) }}" class="fh5co-board-img">
-                                    <div class="relative">
-                                        <img class=" rounded-lg" src="{{ asset('Users/EventImages/' . $event->c_image) }}"
-                                            alt="Event Image">
-
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="px-4 pt-4">
-                                <h4 class="font-bold pb-1">
-                                    <a href="{{ route('socialwall.event', $event) }}">{{ $event->event_name }}</a>
-                                </h4>
-                                <p>
-                                    {{ $event->e_description }}
-                                </p>
-                            </div>
-                            <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                                <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                                    <img src="{{ asset('user/profile/' . App\Models\User::where('id', '=', $event->created_by)->get()[0]->image) }}"
-                                        class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                                    <div class="pl-2">
-                                        <p class="font-medium">
-                                            {{ App\Models\User::where('id', '=', $event->created_by)->get()[0]->name }}</p>
-                                        <p class="text-xs">
-                                            {{ App\Models\User::where('id', '=', $event->created_by)->get()[0]->account_type }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <i class="far fa-clock"></i><span class="text-sm pl-1">
-                                        {{ date('h:i A', strtotime($event->start_time)) }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
-            @if ($load_more)
+            {{-- @if ($load_more)
                 <div class="w-full text-center py-10">
                     <a href="{{ route('load.events') }}"
                         class="bg-transparent text-blue-550 uppercase px-5 py-2 border-2 border-blue-550 rounded-3xl hover:bg-blue-550 hover:text-white mx-3">Load
                         More</a>
                 </div>
-            @endif
+            @endif --}}
         </section>
     </main>
     @include('users.inc.footer')

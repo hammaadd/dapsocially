@@ -20,8 +20,10 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('gen', function () {
-    return password_hash('user12345',PASSWORD_DEFAULT);
+Route::get('gen', function (Request $req) {
+
+    var_dump(Auth::user()->name);
+
 });
 
 // Visitor Side
@@ -76,6 +78,14 @@ Route::get('venues', 'Visitable\VenueController@venue')->name('venue');
 
 Route::get('socialwall/event/{event}', 'Visitable\EventsController@show_posts')->name('socialwall.event');
 Route::get('socialwall/venue/{venue}', 'Visitable\EventsController@show_venue')->name('socialwall.venue');
+Route::post('search-my-event', 'User\EventController@search_my_Event')->name('search.my.event');
+Route::post('search-my-venue', 'User\VenueController@search_my_Venue')->name('search.my.venue');
+
+// Route::post('search-venue', 'User\VenueController@search_Venue')->name('search.venue');
+// Route::post('search-event', 'User\EventController@search_event')->name('search.event');
+
+Route::post('search-event', 'Visitable\EventsController@search_event')->name('search.event');
+Route::post('search-venue', 'Visitable\VenueController@search_Venue')->name('search.venue');
 
 
 // Route::get('socialwall/event/{event}', 'User\EventController@show_posts')->name('socialwall.event');
@@ -98,11 +108,7 @@ Route::middleware(['auth' => 'role:user'])->group(function () {
     Route::get('delete_my-event/{event}', 'User\EventController@delete_myevent')->name('delete.my.event');
 
 
-    Route::post('search-event', 'User\EventController@search_event')->name('search.event');
-    Route::post('search-my-event', 'User\EventController@search_my_Event')->name('search.my.event');
-    Route::post('search-my-venue', 'User\VenueController@search_my_Venue')->name('search.my.venue');
-
-    Route::post('search-venue', 'User\VenueController@search_Venue')->name('search.venue');
+ 
     Route::get('load-my-venues', 'User\VenueController@load_my_venues')->name('load.my.venues');
     Route::get('delete_my-venue/{venue}', 'User\VenueController@delete_myvenue')->name('delete.my.venue');
     Route::get('my-event', 'User\EventController@my_events')->name('my.events');
@@ -304,7 +310,10 @@ Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
  * 
  */
 Route::get('square/test', 'TestingApi\SquareApiController@sample_process')->name('square.sample_process');
-
+Route::get('square/customers/list','TestingApi\SquareApiController@list_customers')->name('square.listc');
+Route::get('square/customers/checkout','TestingApi\SquareApiController@checkout')->name('square.checkout');
+Route::get('user/events/payments','TestingApi\SquareApiController@events')->name('payment.events');
+Route::get('payment/confirm','TestingApi\SquareApiController@confirm')->name('payment.confirm');
 
 
 Route::get('/admin', function () {

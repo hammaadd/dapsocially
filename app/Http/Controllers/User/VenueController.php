@@ -284,7 +284,6 @@ class VenueController extends Controller
 
 
         $venues = [];
-        $events = [];
         $locations = [];
 
         if (!is_null($request->keyword) && !is_null($request->location)) {
@@ -309,61 +308,11 @@ class VenueController extends Controller
                 }
             }
         }
-        $locations = Location::all();
-        $loc = [];
-        foreach ($locations as $location) {
-            if (Arr::has($loc, $location->address)) {
-            } else {
-                $loc = Arr::add($loc, $location->address, $location->address);
-            }
-        }
-        $locations = $loc;
-        $locationss = Location::all();
-        $loc = [];
-        foreach ($locationss as $location) {
-            if (Arr::has($loc, $location->city)) {
-            } else {
-                $loc = Arr::add($loc, $location->city, $location->city);
-            }
-        }
-
-
-        //     $venues=[];
-        //     $events=[];
-        //     $locations=[];
-
-        //     if(!is_null($request->keyword) && !is_null($request->location)){
-
-        //     $locations=Location::where('address','=',$request->location)->get();
-
-        //     foreach($locations as $location){
-        //         if(!is_null(Venue::where('created_by', '=', Auth::user()->id)->where('location_id','=',$location->id)->where('hashtag','=',$request->keyword)->first())){
-        //         $venues=Arr::add($venues,$location->id,Venue::where('location_id','=',$location->id)->where('hashtag','=',$request->keyword)->first());
-        //         }
-        //     }
-
-
-
-        // }
-        // elseif(is_null($request->keyword) && !is_null($request->location) ){
-
-        //     $locations=Location::where('address','=',$request->location)->get();
-
-        //     foreach($locations as $location){
-
-
-
-        //         if(!is_null(Venue::where('created_by', '=', Auth::user()->id)->where('location_id','=',$location->id)->first())){
-        //         $venues=Arr::add($venues,$location->id,Venue::where('location_id','=',$location->id)->first());
-        //         }
-        //     }
-
-        // }
-
-
-
-        return view('users.content.myvenues', compact('venues', 'locations', 'loc'));
+        
+        $load_more = false;
+        return view('users.content.myvenues', compact('venues', 'load_more'));
     }
+    
     public function search_Venue(Request $request)
     {
 
@@ -413,6 +362,7 @@ class VenueController extends Controller
         }
         return view('users.content.venues', compact('venues', 'locations', 'loc'));
     }
+
     public function my_venues()
     {
 
@@ -425,16 +375,12 @@ class VenueController extends Controller
             }
         }
         $locations = $loc;
+        
         $venues = Venue::where('created_by', '=', Auth::user()->id)->take(9)->get();
-        $locationss = Location::all();
-        $loc = [];
-        foreach ($locationss as $location) {
-            if (Arr::has($loc, $location->city)) {
-            } else {
-                $loc = Arr::add($loc, $location->city, $location->city);
-            }
-        }
-        return view('users.content.myvenues', compact('locations', 'venues', 'loc'));
+        
+        $load_more = (count($venues)>9)?true:false;
+        
+        return view('users.content.myvenues', compact('venues', 'load_more'));
     }
 
     public function load_my_venues()

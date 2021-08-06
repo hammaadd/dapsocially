@@ -63,4 +63,26 @@ class EventsController extends Controller
         return view('users.content.social-wall', compact('posts', 'event'));
     }
 
+
+    public function search_event(Request $request)
+    {
+
+
+        $events = [];
+        $locations = [];
+
+        if (!is_null($request->keyword) && !is_null($request->location)) {
+            $events = Event::where('hashtag', '=', $request->keyword)->where('location', '=', $request->location)->get();
+        } elseif (is_null($request->keyword) && !is_null($request->location)) {
+            $events = Event::where('location', '=', $request->location)->get();
+        }
+        if (!is_null($request->keyword)) {
+            $events = Event::where('hashtag', '=', $request->keyword)->get();
+        }
+
+        $load_more = (count($events)>0)?true:false;
+
+        return view('users.content.events', compact('events','load_more'));
+    }
+
 }

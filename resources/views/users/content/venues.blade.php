@@ -136,6 +136,11 @@ $(document).ready(function (e) {
 
         <div class=" max-w-7xl mx-auto pt-10">
             <div class="masonry md:cols--3 lg:cols--4">
+
+                @if(count($venues)==0)
+                <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO VENUES FOUND <i class="fas fa-exclamation"></i></h3>
+                @endif
+
                 @foreach ($venues as $venue)
                 <div class="masonry-item">
                     <div class="masonry-content">
