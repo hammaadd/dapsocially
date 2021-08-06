@@ -109,7 +109,7 @@
                         <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO EVENTS FOUND <i
                                 class="fas fa-exclamation"></i></h3>
                     @else
-                        <table class=" border-separate border border-blue-800 w-auto">
+                        <table class=" border-separate border border-blue-800 w-full">
                             <thead>
                                 <tr>
                                     <th>Event Name</th>
