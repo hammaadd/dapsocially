@@ -100,11 +100,11 @@
             </div>
         </div>
 
-        <section class="py-10 max-w-7xl mx-auto">
+        <section class="py-10 max-w-full mx-auto">
 
-            <div class=" max-w-7xl mx-auto pt-10">
+            <div class=" mx-auto pt-10">
                 {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
-                <div class="clearfix" id="fh5co-board" data-columns>
+                <div class="clearfix">
                     @if (count($events) == 0)
                         <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO EVENTS FOUND <i
                                 class="fas fa-exclamation"></i></h3>
