@@ -148,7 +148,7 @@ $(document).ready(function (e) {
                     <div class="">
                         <a href="{{route('socialwall.venue',$venue)}}" class="fh5co-board-img">
                             <div class="relative">
-                                <img class=" rounded-lg" src="{{asset('Users/VenueImages/'.$venue->c_image)}}"
+                                <img class=" rounded-lg w-full object-cover" src="{{asset('Users/VenueImages/'.$venue->c_image)}}"
                                     alt="Venue Image">
 
                             </div>
