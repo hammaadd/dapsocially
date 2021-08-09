@@ -45,7 +45,7 @@
         <section class="page-title bg-blue-550 md:h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
             <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full p-4 md:p-0">
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
-                    <img src="{{ asset('assets/Event Illustration.png') }}" alt="" class="w-1/2 md:w-56 mx-auto">
+                    <img src="{{ asset('assets/Event Illustration.png') }}" alt="" class="w-1/2 sm:w-56 mx-auto">
                 </div>
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                     <p class="text-white pt-3 md:pt-0">
