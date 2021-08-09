@@ -50,7 +50,7 @@
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                     <p class="text-white pt-3 md:pt-0">
                         <span
-                            class="px-16 py-4 border-2 border-white text-2xl uppercase block text-center">Events</span><br>
+                            class="px-16 py-4 border-2 border-white text-lg md:text-2xl uppercase block text-center">Events</span><br>
                         Find the latest events updates or create events, concerts,
                         conferences, workshops, exhibitions and cultural events
                         in all cities of United States.
