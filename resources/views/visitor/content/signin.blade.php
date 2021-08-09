@@ -36,7 +36,7 @@
         </div>
     </div>
 </nav>
-<main class="min-h-55 bg-white">
+<main class="bg-white">
     <div class="max-w-6xl mx-auto p-5 md:p-8 lg:py-16">
         <div class="bg-gradient-to-tr from-blue-350 to-blue-450 w-full md:w-11/12 lg:w-3/4 mx-auto rounded-xl">
             <div class="flex flex-wrap overflow-hidden">
