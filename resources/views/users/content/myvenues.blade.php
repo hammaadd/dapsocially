@@ -49,7 +49,7 @@
             </ol>
         </nav>
 
-        <section class="px-4 pt-5 lg:pt-10 max-w-7xl mx-auto">
+        <section class="p-4 max-w-7xl mx-auto">
             <form action="{{ route('search.my.venue') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -80,7 +80,7 @@
             </form>
 
             <div class=" max-w-7xl mx-auto pt-5">
-                <section class="px-4 pb-10">
+                <section class="pb-10">
 
                     @if (count($venues) < 1)
                         <div class="text-center w-full">
