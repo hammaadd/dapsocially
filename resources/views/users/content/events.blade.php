@@ -38,17 +38,17 @@
 @section('content')
     @include('users.inc.nav')
     <main>
-        <section class="page-title bg-white py-5 shadow-md">
+        {{-- <section class="page-title bg-white py-5 shadow-md">
             <h2 class="uppercase text-center text-xl font-medium">All Events</h2>
-        </section>
+        </section> --}}
 
-        <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
-            <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
+        <section class="page-title bg-blue-550 md:h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
+            <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full p-4 md:p-0">
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
-                    <img src="{{ asset('assets/Event Illustration.png') }}" alt="">
+                    <img src="{{ asset('assets/Event Illustration.png') }}" alt="" class="w-1/2 md:w-full mx-auto">
                 </div>
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
-                    <p class="text-white">
+                    <p class="text-white pt-3 md:pt-0">
                         <span
                             class="px-16 py-4 border-2 border-white text-2xl uppercase block text-center">Events</span><br>
                         Find the latest events updates or create events, concerts,
@@ -60,7 +60,7 @@
         </section>
 
         <div class="bg-white py-4 shadow-md">
-            <div class=" max-w-7xl mx-auto">
+            <div class="max-w-7xl mx-auto">
                 <div class="flex flex-wrap overflow-hidden justify-between items-center">
                     <label class="shadow-md rounded-xl bg-white flex items-center my-1">
                         <div class=" inline-block w-10 h-10 pt-1.5 shadow-md rounded-xl">
