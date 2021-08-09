@@ -59,7 +59,7 @@
             </div>
         </section>
 
-        <div class="bg-white py-4 shadow-md">
+        <div class="bg-white p-4 shadow-md">
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-wrap overflow-hidden justify-between items-center">
                     <label class="shadow-md rounded-xl bg-white flex items-center my-1">
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <section class="py-10 max-w-7xl mx-auto">
+        <section class="px-4 py-10 max-w-7xl mx-auto">
             <form action="{{ route('search.event') }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -134,7 +134,7 @@
                         </select>
                     </label>
 
-                    <div class="w-full">
+                    <div class="w-full flex items-end">
                         <input type="submit" value="SEARCH"
                             class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
 
