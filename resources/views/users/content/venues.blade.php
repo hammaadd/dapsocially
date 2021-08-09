@@ -55,7 +55,7 @@ $(document).ready(function (e) {
             </div>
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                 <p class="text-white pt-3 md:pt-0">
-                    <span class="px-16 py-4 border-2 border-white text-lg md:text-2xl uppercase block text-center">Venues</span><br>
+                    <span class="px-16 py-2 md:py-4 border-2 border-white text-lg md:text-2xl uppercase block text-center">Venues</span><br>
                     Find the latest venues updates or create venues for concerts,
                     conferences, workshops, exhibitions and cultural events
                     in all cities of United States.
