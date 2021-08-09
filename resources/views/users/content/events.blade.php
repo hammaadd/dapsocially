@@ -105,13 +105,13 @@
         <section class="py-10 max-w-7xl mx-auto">
             <form action="{{ route('search.event') }}" method="POST">
                 @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-                    <label for="keyword" class="w-full md:w-1/2 lg:w-4/12">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <label for="keyword" class="w-full">
                         SEARCH KEYWORD
                         <input type="text" id="keyword" name="keyword"
                             class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md" placeholder="#party">
                     </label>
-                    <label for="activity" class="w-full md:w-1/2 lg:w-3/12">
+                    <label for="activity" class="w-full">
                         City
                         <select name="c" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
                             {{-- @foreach ($loc as $city)
@@ -119,7 +119,7 @@
                         @endforeach --}}
                         </select>
                     </label>
-                    <label for="location" class="w-full md:w-1/2 lg:w-4/12">
+                    <label for="location" class="w-full">
                         LOCATION
                         <select name="location" id="l"
                             class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
@@ -134,7 +134,7 @@
                         </select>
                     </label>
 
-                    <div class="w-full lg:w-2/12 xl:w-1/12">
+                    <div class="w-full">
                         <input type="submit" value="SEARCH"
                             class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
 
