@@ -51,7 +51,7 @@
                     </marquee>
                 </div>
             </div>
-            <h3 class="text-white py-4 text-center text-9xl uppercase" ><marquee>{{$event->wall_location_msg ?? ''}}</marquee></h3>
+            <h3 class="text-white py-4 text-center text-2xl md:text-4xl lg:text-9xl uppercase" ><marquee>{{$event->wall_location_msg ?? ''}}</marquee></h3>
         </div>
     </section>
 
