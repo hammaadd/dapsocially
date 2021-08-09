@@ -1,4 +1,4 @@
-<footer>
+<footer class=" absolute w-full bottom-0">
     <div class="bg-gradient-to-tr from-blue-250 to-blue-550 pt-8">
         <div class="flex flex-wrap overflow-hidden max-w-7xl mx-auto pb-6 px-5">
             <div class="w-full lg:w-4/12 text-center lg:text-left">
