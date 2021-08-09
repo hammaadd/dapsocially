@@ -54,7 +54,7 @@ $(document).ready(function (e) {
             </div>
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                 <p class="text-white pt-3 md:pt-0">
-                    <span class="px-16 py-4 border-2 border-white text-lg md:text-2xl uppercase block w-1/2 text-center">Venues</span><br>
+                    <span class="px-16 py-4 border-2 border-white text-lg md:text-2xl uppercase block text-center">Venues</span><br>
                     Find the latest venues updates or create venues for concerts,
                     conferences, workshops, exhibitions and cultural events
                     in all cities of United States.
@@ -135,41 +135,47 @@ $(document).ready(function (e) {
         </form>
 
         <div class=" max-w-7xl mx-auto pt-10">
-            <div class="masonry md:cols--3 lg:cols--4">
+            {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
+            <div class="clearfix" id="fh5co-board" data-columns>
 
                 @if(count($venues)==0)
                 <h3 class=" mt-6 text-red-600 text-center text-xl font-medium">NO VENUES FOUND <i class="fas fa-exclamation"></i></h3>
                 @endif
 
                 @foreach ($venues as $venue)
-                <div class="masonry-item">
-                    <div class="masonry-content">
-                        <div class="relative">
-                            <img class=" rounded-lg" src="{{asset('Users/VenueImages/'.$venue->c_image)}}" alt="Event Image">
-                            {{-- <img src="{{asset('assets/fb.png')}}" class=" absolute w-8 h-8 bottom-4 left-4" alt=""> --}}
-                        </div>
-                        <div class="pl-4 pt-2 pr-4 pb-2">
-                            <h4>
-                                <a href="{{route('socialwall.venue',$venue)}}">  <b>{{$venue->venue_name}}</b></a>
-                            </h4>
-                        </div>
-                        <div class="pb-4 pl-4 pr-4">
-                            <p>
-                                {{$venue->v_description}}
-                            </p>
-                        </div>
-                        <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
-                            <div class="flex flex-wrap overflow-hidden justify-between items-center">
-                                <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$venue->created_by)->get()[0]->image)}}" class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
-                                <div class="pl-2">
-                                    <p class="font-medium">{{App\Models\User::where('id','=',$venue->created_by)->get()[0]->name}}</p>
-                                    <p class="text-xs">{{App\Models\User::where('id','=',$venue->created_by)->get()[0]->account_type}}</p>
-                                </div>
+                <div class="item">
+                    <div class="">
+                        <a href="{{route('socialwall.venue',$venue)}}" class="fh5co-board-img">
+                            <div class="relative">
+                                <img class=" rounded-lg" src="{{asset('Users/VenueImages/'.$venue->c_image)}}"
+                                    alt="Venue Image">
 
                             </div>
-                            <div>
-                                <i class="far fa-clock"></i><span class="text-sm pl-2"> {{ date('h:i A', strtotime($venue->start_time))}}</span>
+                        </a>
+                    </div>
+                    <div class="px-4 pt-4">
+                        <h4 class="font-bold pb-1">
+                            <a href="{{route('socialwall.venue',$venue)}}">{{$venue->venue_name}}</a>
+                        </h4>
+                        <p>
+                            {{$venue->v_description}}
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap overflow-hidden justify-between items-center p-4">
+                        <div class="flex flex-wrap overflow-hidden justify-between items-center">
+                            <img src="{{asset('user/profile/'. App\Models\User::where('id','=',$venue->created_by)->get()[0]->image)}}"
+                                class="w-10 h-10 rounded-full object-contain bg-white avatar" alt="">
+                            <div class="pl-2">
+                                <p class="font-medium">
+                                    {{App\Models\User::where('id','=',$venue->created_by)->get()[0]->name}}</p>
+                                <p class="text-xs">
+                                    {{App\Models\User::where('id','=',$venue->created_by)->get()[0]->account_type}}
+                                </p>
                             </div>
+                        </div>
+                        <div>
+                            <i class="far fa-clock"></i><span class="text-sm pl-1">
+                                {{ date('h:i A', strtotime($venue->start_time))}}</span>
                         </div>
                     </div>
                 </div>
