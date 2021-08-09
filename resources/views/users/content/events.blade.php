@@ -105,7 +105,7 @@
         <section class="py-10 max-w-7xl mx-auto">
             <form action="{{ route('search.event') }}" method="POST">
                 @csrf
-                <div class="flex space-x-8 justify-center items-end">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                     <label for="keyword" class="w-full md:w-1/2 lg:w-4/12">
                         SEARCH KEYWORD
                         <input type="text" id="keyword" name="keyword"
