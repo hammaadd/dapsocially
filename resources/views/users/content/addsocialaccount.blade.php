@@ -4,7 +4,7 @@
 @include('users.inc.nav')
 
 
-<main class="min-h-55 bg-gradient-to-tr from-blue-250 to-blue-550">
+<main class="bg-white">
     <div class="max-w-6xl mx-auto p-5 md:p-8 lg:py-16">
         <div class="bg-gradient-to-tr from-blue-350 to-blue-450 w-full md:w-11/12 lg:w-3/4 mx-auto rounded-xl">
             <div class="flex flex-wrap overflow-hidden">
@@ -28,13 +28,13 @@
                                             </div>
                                         @endif
                                     </div>
-                                    
+
                                 </a>
-                                
+
                                 {{-- <a href="{{route('attach.facebook')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-2.5 inline-block">
                                         <img src="{{asset('assets/Insta@2x.png')}}" class="mx-auto w-5 h-5" alt="">
-                                       
+
                                     </div>
                                 </a> --}}
                                 <a href="{{route('attach.twitter')}}" class="mx-1">
@@ -85,4 +85,5 @@
         </div>
     </div>
 </main>
+@include('users.inc.footer')
 @endsection
