@@ -64,7 +64,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="pt-3 flex flex-wrap flex-col md:flex-row items-center justify-between">
+                        <div class="pt-3 flex flex-wrap flex-col space-y-2 md:flex-row items-center justify-between">
                             <button type="submit" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Login</button>
                             @if (Route::has('password.request'))
                             <a href="{{route('signup')}}" class="bg-blue-550 text-white uppercase px-5 py-1.5 rounded-3xl hover:text-blue-550 hover:bg-white">Signup</a>
