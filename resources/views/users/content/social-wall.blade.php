@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <main class="relative" x-data="{ ad: false, card: false }">
-    <section class="page-title bg-blue-550 h-60 bg-center bg-cover" style="background-image: url({{asset('assets/Group-397.png')}})">
+    <section class="page-title bg-blue-550 h-36 lg:h-60 bg-center bg-cover" style="background-image: url({{asset('assets/Group-397.png')}})">
         <div class="w-full mx-auto flex overflow-hidden flex-col justify-between h-full">
             <div class="bg-transparent py-4">
                 <div class="max-w-full mx-auto">
