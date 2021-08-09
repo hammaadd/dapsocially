@@ -37,7 +37,7 @@
 @endsection
 @section('content')
     @include('users.inc.nav')
-    <main class="">
+    <main class="min-h-600">
         <section class="page-title bg-white py-5 shadow-md">
             <h2 class="uppercase text-center text-xl font-medium">All Pyaments</h2>
         </section>
