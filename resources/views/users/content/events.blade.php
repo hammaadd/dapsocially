@@ -154,7 +154,7 @@
                             <div class="">
                                 <a href="{{ route('socialwall.event', $event) }}" class="fh5co-board-img">
                                     <div class="relative">
-                                        <img class=" rounded-lg" src="{{ asset('Users/EventImages/' . $event->c_image) }}"
+                                        <img class=" rounded-lg w-full object-cover" src="{{ asset('Users/EventImages/' . $event->c_image) }}"
                                             alt="Event Image">
 
                                     </div>
