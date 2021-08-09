@@ -57,15 +57,7 @@
 
             {{-- Events Section --}}
             <section class="py-5 lg:py-10">
-                <div class="flex flex-wrap flex-col md:flex-row overflow-hidden">
-                    <div class="w-full md:w-3/4 pl-2">
-                        <h3 class="section-title relative text-xl font-medium">MY EVENTS</h3>
-
-                    </div>
-                    <div class="w-full md:w-1/4 pt-5 md:pt-0 flex items-center justify-center md:justify-end">
-                        <a href="{{route('my.events')}}" class="bg-blue-550 text-white py-1.5 px-3 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">VIEW MY ALL EVENTS</a>
-                    </div>
-                </div>
+                <h3 class="section-title relative text-xl font-medium">MY EVENTS</h3>
                 @if (count($events) < 1)
                 <div class="text-center w-full">  <h3 class=" mt-6  text-center text-xl font-medium">NO EVENTS </h3></div>
 
@@ -100,6 +92,9 @@
 
                 </div>
                 @endif
+                <div class="pt-10 text-center">
+                    <a href="{{route('my.events')}}" class="text-blue-550 py-2 px-5 border-2 border-blue-550 rounded-3xl hover:text-white hover:bg-blue-550">VIEW MY ALL EVENTS</a>
+                </div>
             </section>
         </div>
     </section>
