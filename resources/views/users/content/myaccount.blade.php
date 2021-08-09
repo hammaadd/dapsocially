@@ -20,7 +20,7 @@
                 @if (count($venues) < 1)
                 <div class="text-center w-full">  <h3 class=" mt-6  text-center text-xl font-medium">NO VENUES </h3></div>
                 @else
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-10 lg:pt-16">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-10 lg:pt-16">
 
 
                     @foreach ($venues as $venue)
@@ -62,7 +62,7 @@
                 <div class="text-center w-full">  <h3 class=" mt-6  text-center text-xl font-medium">NO EVENTS </h3></div>
 
                  @else
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-8">
 
 
                     @foreach ($events as $event)
