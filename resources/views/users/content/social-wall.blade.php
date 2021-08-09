@@ -68,7 +68,7 @@
                     <a href="{{$post->url}}" target="_blank" class="fh5co-board-img">
                         <div class="relative">
                             @if($post->platform !='tiktok')
-                                <img class=" rounded-lg" src="{{$post->image}}" alt="Dummy Image">
+                                <img class=" rounded-lg w-full object-cover" src="{{$post->image}}" alt="Dummy Image">
                             @elseif($post->platform =='tiktok')
                                 {!! $post->image !!}
                             @endif
