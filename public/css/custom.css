@@ -16,9 +16,6 @@
     max-width: 100% !important;
     min-width: 100% !important;
 }
-.min-h-600 {
-    min-height: 600px !important;
-}
 .social-multiselect span.select2-selection {
     max-width: calc(100% - 52px) !important;
     min-height: 40px;
@@ -28,4 +25,9 @@
 }
 .social-multiselect .select2-container {
     max-width: calc(100% - 52px) !important;
+}
+@media (min-width: 1024px) {
+    .min-h-600 {
+        min-height: 600px !important;
+    }
 }
