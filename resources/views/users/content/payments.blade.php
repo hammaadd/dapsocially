@@ -42,7 +42,7 @@
             <h2 class="uppercase text-center text-xl font-medium">All Pyaments</h2>
         </section>
 
-        <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
+        {{-- <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
             <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
                 <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
                     <img src="{{ asset('assets/Event Illustration.png') }}" alt="">
@@ -98,11 +98,11 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
-        <section class="py-10 max-w-full mx-auto">
+        <section class="p-4 max-w-full mx-auto">
             <h3>All Orders Invoices</h3>
-            <div class=" mx-auto p-10">
+            <div class=" mx-auto py-5">
                 {{-- <div class="masonry md:cols--3 lg:cols--4"> --}}
                 <div class="clearfix">
                     @if (count($events) == 0)
