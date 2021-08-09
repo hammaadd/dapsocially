@@ -36,9 +36,11 @@
         </div>
     </div>
 </nav>
+<section class="page-title bg-white py-5 shadow-md">
+    <h2 class="uppercase text-center text-xl font-medium">Help Center</h2>
+</section>
 <section>
     <main class="max-w-6xl mx-auto min-h-600">
-        <h3 class="text-xl font-medium text-center uppercase mt-5">Help Center</h3>
         {{-- Social Plateforms Section --}}
         <section class="py-5 px-5 lg:py-10">
             <p class=" text-center uppercase font-medium text-xl">{{$help->heading}}</p>
