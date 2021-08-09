@@ -10,7 +10,7 @@
             <div class="bg-transparent py-4">
                 <div class="max-w-full mx-auto">
                     <marquee>
-                    <div class="flex flex-wrap overflow-hidden justify-around items-center">
+                    <div class="flex flex-wrap overflow-hidden justify-around items-center w-max space-x-2">
                         <label class="shadow-md rounded-xl bg-white flex items-center my-1">
                             <div class=" inline-block w-10 h-10 pt-1.5 shadow-md rounded-xl">
                                 <img src="{{asset('assets/fb.png')}}" class="w-6 h-6 mx-auto" alt="">
