@@ -158,7 +158,7 @@
                 <li>Add Event</li>
             </ol>
         </nav>
-        <section class="py-10 max-w-5xl mx-auto">
+        <section class="p-4 lg:py-10 max-w-5xl mx-auto">
             <form action="{{ route('add.event') }}" method="POST" enctype="multipart/form-data"
                 onsubmit="return checkInputBox()">
                 @csrf
@@ -167,7 +167,7 @@
                         <div class="flex flex-wrap overflow-hidden md:-mx-2 lg:-mx-3 xl:-mx-3">
 
                             <div
-                                class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                                class="w-full overflow-hidden my-2 md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                                 <label for="vname">
                                     Event Name <span class="text-red-600">*</span>
                                     <input type="text" name="ename" class="input-field" placeholder="Write your venue name"
@@ -177,7 +177,7 @@
                             </div>
 
                             <div
-                                class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                                class="w-full overflow-hidden my-2 md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                                 <label for="location">
                                     Venue <span class="text-red-600">*</span>
 
@@ -189,7 +189,7 @@
                             <div class="ml-4">
                                 @error('location') <small class="text-red-600">Please enter the location</small>@enderror
                             </div>
-                            <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                            <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <label for="cover">
                                     Add Cover Image <span class="text-red-600">*</span>
                                     <div class="w-full h-60 relative border-gray-200 border bg-gray-200 rounded-md mt-1">
@@ -211,7 +211,7 @@
                             <div class="ml-4">
                                 @error('cover_img') <small class="text-red-600">Please add cover image</small>@enderror
                             </div>
-                            <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                            <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <label for="description">
                                     Event Description <span class="text-red-600">*</span>
                                     <textarea name="e_descrip" id="e_descrip" rows="3"
@@ -223,7 +223,7 @@
                                     event</small>@enderror
                             </div>
 
-                            <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                            <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <label for="hashtag">
                                     Hashtag(s)
                                     <input type="text" name="h_tag" placeholder="party,partytime"
@@ -244,7 +244,7 @@
                                 </div>
                             </div>
 
-                            <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                            <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <p class="">Where would you like to collect social media hashtags from?</p>
                                 <ul class="list-none pt-3">
                                     {{-- <li class="inline-block mx-2">
@@ -384,7 +384,7 @@
 
                             @error('c') <small class="text-red-600">Please select atleast one platform</small>@enderror
 
-                            <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                            <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                 <label for="description">
                                     Message for Dapsocially Locations Wall <span class="text-red-600">*</span>
                                     <textarea name="m_dap_wall" id="m_dap_wall" rows="3"
@@ -396,7 +396,7 @@
                                     wall</small>@enderror
                             </div>
                             <div class="w-full">
-                                <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
+                                <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3">
                                     <label for="cover">
                                         Select Background image for your Social Wall <span class="text-red-600">*</span>
                                         <div
@@ -422,7 +422,7 @@
                                 </div>
                             </div>
                             <div
-                                class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                                class="w-full overflow-hidden my-2 md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                                 <label for="vname">
                                     Starts at <span class="text-red-600">*</span>
                                     <div class="flex">
@@ -445,7 +445,7 @@
                             </div>
 
                             <div
-                                class="w-full overflow-hidden md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
+                                class="w-full overflow-hidden my-2 md:my-2 md:px-2 md:w-1/2 lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
                                 <label for="location">
                                     Ends at <span class="text-red-600">*</span>
                                     <div class="flex">
@@ -468,7 +468,7 @@
                             </div>
                         </div>
 
-                        <div class="w-full overflow-hidden md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3"
+                        <div class="w-full overflow-hidden my-2 md:my-2 md:px-2 lg:my-3 lg:px-3 xl:my-3 xl:px-3"
                             x-data="{isPkg:'Free', message:''}">
                             <h3 class="text-xl font-medium text-center uppercase mt-5">Pricing</h3>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 py-5 ">
