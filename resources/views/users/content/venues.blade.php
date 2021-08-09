@@ -63,7 +63,7 @@ $(document).ready(function (e) {
         </div>
     </section>
 
-    <div class="bg-white py-4 shadow-md">
+    <div class="bg-white p-4 shadow-md">
         <div class=" max-w-7xl mx-auto">
             <div class="flex flex-wrap overflow-hidden justify-between items-center">
                 <label class="shadow-md rounded-xl bg-white flex items-center my-1">
@@ -106,29 +106,29 @@ $(document).ready(function (e) {
         </div>
     </div>
 
-    <section class="py-10 max-w-7xl mx-auto">
+    <section class="px-4 py-10 max-w-7xl mx-auto">
         <form action="{{route('search.venue')}}" method="POST">
             @csrf
-            <div class="flex space-x-8 justify-center items-end">
-                <label for="keyword" class=" w-4/12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <label for="keyword" class="w-full">
                     SEARCH KEYWORD
                     <input type="text" id="keyword" name="keyword" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md" placeholder="#party">
                 </label>
-                <label for="activity" class=" w-3/12">
+                <label for="activity" class="w-full">
                     City
                     <select name="city" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
 
                     </select>
                 </label>
-                <label for="location" class=" w-4/12">
+                <label for="location" class="w-full">
                     LOCATION
                     <select name="location" id="l" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
                     </select>
                 </label>
 
-                <div class="lg:w-2/12 xl:w-1/12">
+                <div class="w-full flex items-end">
                     <input type="submit" value="SEARCH" class="w-full bg-blue-550 text-white py-1 border-2 border-blue-550 rounded-3xl cursor-pointer hover:text-blue-550 hover:bg-transparent">
                 </div>
             </div>
