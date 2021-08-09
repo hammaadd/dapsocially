@@ -220,7 +220,7 @@
         <section class="page-title bg-white py-5 shadow-md">
             <h2 class="uppercase text-center text-xl font-medium">Add Your Venue</h2>
         </section>
-        <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <nav class="bg-grey-light p-3 rounded font-sans w-4/5 m-4">
             <ol class="list-reset flex text-grey-dark">
               <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
               <li><span class="mx-2">/</span></li>
