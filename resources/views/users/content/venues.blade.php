@@ -37,9 +37,9 @@ $(document).ready(function (e) {
 @section('content')
 @include('users.inc.nav')
 <main>
-    <section class="page-title bg-white py-5 shadow-md">
+    {{-- <section class="page-title bg-white py-5 shadow-md">
         <h2 class="uppercase text-center text-xl font-medium">All Venues</h2>
-    </section>
+    </section> --}}
     {{-- <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
         <ol class="list-reset flex text-grey-dark">
           <li><a href="{{route('homepage')}}" class="text-blue-550 font-bold">Home</a></li>
@@ -47,14 +47,14 @@ $(document).ready(function (e) {
           <li>venues</li>
         </ol>
       </nav> --}}
-    <section class="page-title bg-blue-550 h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
-        <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full">
+    <section class="page-title bg-blue-550 md:h-80 bg-center bg-cover" style="background-image: url(assets/BG.png)">
+        <div class="w-full md:w-4/5 lg:w-1/2 mx-auto flex flex-wrap overflow-hidden h-full p-4 md:p-0">
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
-                <img src="{{asset('assets/Event Illustration.png')}}" alt="">
+                <img src="{{asset('assets/Event Illustration.png')}}" alt="" class="w-1/2 sm:w-56 mx-auto">
             </div>
             <div class="w-full  md:w-1/2 overflow-hidden flex flex-wrap justify-center items-center">
-                <p class="text-white">
-                    <span class="px-16 py-4 border-2 border-white text-2xl uppercase block w-1/2 text-center">Venues</span><br>
+                <p class="text-white pt-3 md:pt-0">
+                    <span class="px-16 py-4 border-2 border-white text-lg md:text-2xl uppercase block w-1/2 text-center">Venues</span><br>
                     Find the latest venues updates or create venues for concerts,
                     conferences, workshops, exhibitions and cultural events
                     in all cities of United States.
@@ -118,7 +118,7 @@ $(document).ready(function (e) {
                     City
                     <select name="city" id="c" class="w-full bg-white shadow-md border-1 border-gray-200 rounded-md">
 
-                
+
                     </select>
                 </label>
                 <label for="location" class=" w-4/12">
