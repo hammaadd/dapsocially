@@ -292,7 +292,7 @@
                                             check the icon from which service you want to fetch data?</small></span></p>
                             </div>
                             <div
-                                class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                                class="social-multiselect w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
                                 <div class=" flex py-1.5">
                                     <div class="inline-block mr-3">
                                         <input type="checkbox" class="cb-input hidden" id="fb" name="c[]" value="facebook"
