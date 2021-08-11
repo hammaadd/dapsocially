@@ -79,6 +79,7 @@ class EventController extends Controller
 
         if (Auth::user()->tiktok()) :
             $tiktok = Auth::user()->tiktok();
+            //dd($tiktok);
             $ttoken = $tiktok->token;
             $user_data = json_decode($tiktok->user_social_id);
             $open_id = $user_data->open_id;
@@ -89,8 +90,8 @@ class EventController extends Controller
             ]);
 
             $response = $response->object();
-            //dd($response);
-            $tname = $response->data->display_name;
+
+            $tname = $response->data->display_name ?? '';
 
         endif;
 
