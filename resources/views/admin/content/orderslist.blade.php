@@ -1,6 +1,6 @@
 @extends('admin.layout.adminlayout')
 @section('title','Orders')
-    
+
 @section('content')
 <div class="m-5">
     <nav aria-label="breadcrumb" class="main-breadcrumb">
@@ -19,12 +19,12 @@
                 <th>Status</th>
                 <th>Total payment(USD $)</th>
                 <th>Action</th>
-                
+
             </tr>
         </thead>
         <tbody>
-          
-            
+
+
     </table>
  </div>
 </div>
@@ -33,7 +33,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
-            
+
           var table = $('.yajra-data-table').DataTable({
               processing: true,
               serverSide: true,
@@ -45,7 +45,8 @@
                   {data: 'order_status', name: 'Status'},
                   {data: 'total_payment', name: 2},
                   {data: 'action', name: 3, orderable: false, searchable: false},
-              ]
+              ],
+              order: [ 0, 'desc' ],
           });
         });
 

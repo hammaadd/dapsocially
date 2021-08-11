@@ -106,7 +106,7 @@ class EventController extends Controller
         $events = Event::all()->take(8);
 
         /**
-         * 
+         *
          * Location should have all the venue as drop down
          */
         $locations = [];
@@ -191,21 +191,17 @@ class EventController extends Controller
                 $q->where('name', 'superadministrator');
             }
         )->get();
-
         if ($p->price > 0) {
-            /**
-             * 
-             * Create Checkout Request
-             * 
-             */
 
 
             try {
-                # Create Connection 
+                # Create Connection
                 $client = new SquareClient([
                     'accessToken' => env('SQUARE_SANDBOX_TOKEN'),
                     'environment' => Environment::SANDBOX,
                 ]);
+
+
                 # Setting Params
                 $checkoutApi = $client->getCheckoutApi();
 
@@ -213,10 +209,13 @@ class EventController extends Controller
                 # Unique Key for Transection
                 $body_idempotencyKey = "EV-" . sprintf("%04d", $event->id);
                 $body_order = new CreateOrderRequest;
+
+
                 $body_order_order_locationId = $locationId;
                 $body_order->setOrder(new SOrder(
                     $body_order_order_locationId
                 ));
+
                 # Setting Reference ID
                 $body_order->getOrder()->setReferenceId('reference_id');
                 $body_order->getOrder()->setSource(new OrderSource);
@@ -259,7 +258,7 @@ class EventController extends Controller
                 // $body->setAskForShippingAddress(false);
                 $body->setMerchantSupportEmail('admin@dapsocially.com');
                 $body->setPrePopulateBuyerEmail(Auth::user()->email);
-                $body->setRedirectUrl('https://dapsocially.com/payment/confirm');
+                $body->setRedirectUrl('https://dapsocially.theairtech.com/payment/confirm');
                 $body_additionalRecipients = [];
 
                 $body->setAdditionalRecipients($body_additionalRecipients);
@@ -268,7 +267,6 @@ class EventController extends Controller
                 // die('I am here !');
 
                 $apiResponse = $checkoutApi->createCheckout($locationId, $body);
-
                 if ($apiResponse->isSuccess()) {
                     $createCheckoutResponse = $apiResponse->getResult();
                     // var_dump($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
@@ -276,7 +274,6 @@ class EventController extends Controller
                     // die($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
                     // echo "<script>window.open('".$createCheckoutResponse->getCheckout()->getCheckoutPageUrl()."', '_blank')</script>";
                     // $request->session->set('checkout_page_url',$createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
-
                     $event_checkout = new Event_checkouts();
                     $event_checkout->event_id = $event->id;
                     $event_checkout->checkout_id = $createCheckoutResponse->getCheckout()->getId();
@@ -723,5 +720,5 @@ class EventController extends Controller
     }
 
 
-    
+
 }
