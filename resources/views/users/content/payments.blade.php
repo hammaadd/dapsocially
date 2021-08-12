@@ -112,7 +112,8 @@
                         <table class=" border-separate border border-blue-800 w-full rounded">
                             <thead>
                                 <tr>
-                                    <th>Event Name</th>
+                                    <th>Type</th>
+                                    <th>Name</th>
                                     <th>Starts</th>
                                     <th>Ends</th>
                                     <th>Pricing</th>
@@ -121,27 +122,40 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach ($events as $event)
-                                    <tr class="text-center">
-                                        <td class="border-separate border border-blue-800">{{ $event->event_name }}</td>
-                                        <td class="border-separate border border-blue-800">{{ $event->start_date }}</td>
-                                        <td class="border-separate border border-blue-800">{{ $event->end_date }}</td>
-                                        <td class="border-separate border border-blue-800">{{ $event->charges }}$</td>
-                                        <td class="border-separate border border-blue-800">
-                                            @if ($event->payment_status == 0)
-                                                <span class='text-red-300'>Pending</span>
-                                            @elseif($event->payment_status==1)
-                                                <span class='text-green-300'>Done</span>
-                                            @endif
-                                        </td>
-                                        <td class="border-separate border border-blue-800">
-                                            @if ($event->payment_status == 0)
-                                                <a href='{{ $event->checkout_page_url }}'><i
-                                                        class="fas fa-receipt"></i></span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if ($event->events != null || $event->veneus)
+                                <tr class="text-center">
+                                    @if(!empty($event->event_id))
+                                    <td class="border-separate border border-blue-800">{{ ($event->type) ? $event->type :'Event'}}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->events->event_name }}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->events->start_date }}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->events->end_date }}</td>
+                                    @else
+                                    <td class="border-separate border border-blue-800">{{ ($event->type) ? $event->type :'Veneu'}}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->veneus->venue_name }}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->veneus->start_date }}</td>
+                                    <td class="border-separate border border-blue-800">{{ $event->veneus->end_date }}</td>
+                                    @endif
+                                    <td class="border-separate border border-blue-800">{{ $event->charges }}$</td>
+                                    <td class="border-separate border border-blue-800">
+                                        @if ($event->payment_status == 0)
+                                            <span class='text-red-300'>Pending</span>
+                                        @elseif($event->payment_status==1)
+                                            <span class='text-green-300'>Done</span>
+                                        @endif
+                                    </td>
+                                    <td class="border-separate border border-blue-800">
+                                        @if ($event->payment_status == 0)
+                                            <a href='{{ $event->checkout_page_url }}'><i
+                                                    class="fas fa-receipt"></i></span>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endif
+                            @endforeach
+
+
                             </tbody>
                         </table>
                     @endif

@@ -276,12 +276,16 @@ class EventController extends Controller
                     // echo "<script>window.open('".$createCheckoutResponse->getCheckout()->getCheckoutPageUrl()."', '_blank')</script>";
                     // $request->session->set('checkout_page_url',$createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
                     $event_checkout = new Event_checkouts();
+                    $event_checkout->veneu_id = null;
                     $event_checkout->event_id = $event->id;
+                    $event_checkout->type = 'Event';
                     $event_checkout->checkout_id = $createCheckoutResponse->getCheckout()->getId();
                     $event_checkout->checkout_page_url = $createCheckoutResponse->getCheckout()->getCheckoutPageUrl();
                     $event_checkout->payment_status = false;
                     $event_checkout->charges = $p->price;
                     $event_checkout->save();
+
+                    return redirect($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
                 } else {
                     // $errors = $apiResponse->getErrors();
                     Session::flash('error', 'Something went wrong while processing payment !');

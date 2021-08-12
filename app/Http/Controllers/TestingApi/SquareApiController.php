@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use SquareConnect\Configuration;
 use SquareConnect\ApiClient;
+use App\Models\Event_checkouts;
 
 # New Square SDK Client
 use Square\SquareClient;
@@ -235,12 +236,18 @@ class SquareApiController extends Controller
          * Listing all events/payments here
          */
 
-        $events = DB::table('event_checkouts')
-            ->select('events.event_name', 'events.start_date', 'events.end_date', 'event_checkouts.*')
-            ->join('events', 'events.id', '=', 'event_checkouts.event_id')
-            ->where('created_by', '=', Auth::user()->id)
-            ->get();
-
+        // $events = DB::table('event_checkouts')
+        //     ->select('events.*', 'event_checkouts.*')
+        //     ->join('events', 'events.id', '=', 'event_checkouts.event_id', 'left')
+        //     ->join('venues', 'venues.id', '=', 'event_checkouts.veneu_id', 'left')
+        //     ->orderBy('event_checkouts.id', 'desc')
+        //     ->where('events.created_by', '=', Auth::user()->id)
+        //     ->get();
+         $userID = Auth::user()->id;
+        $events = Event_checkouts::with(['veneus', 'events' => function($q) use($userID ){
+            $q->where('created_by', '=', $userID);
+        }])->orderBy('id', 'desc')->get();
+        //dd($events);
         return view('users.content.payments', compact('events'));
     }
 

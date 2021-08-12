@@ -14,6 +14,7 @@ use App\Models\User\Attached_Account;
 use App\Models\User\Venue;
 use App\Models\User\Collect_Venue_Htag;
 use App\Models\Venue_Social_Post;
+use App\Models\Event_checkouts;
 
 use App\Notifications\OrdersNotifications;
 use Facebook\Exceptions\FacebookResponseException;
@@ -24,6 +25,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Arr;
 use Atymic\Twitter\Facade\Twitter;
+
+
+# New Square SDK Client
+use Square\SquareClient;
+use Square\Environment;
+use Square\Exceptions\ApiException;
+use Square\Models\CreateCustomerRequest;
+use Square\Models\Order as SORDER;
+use Square\Models\CreateOrderRequest;
+use Square\Models\OrderSource;
+use Square\Models\OrderLineItem;
+use Square\Models\OrderQuantityUnit;
+use Square\Models\MeasurementUnit;
+use Square\Models\Currency;
+use Square\Models\Money;
+use Square\Models\MeasurementUnitCustom;
+use Square\Models\CreateCheckoutRequest;
 
 use Illuminate\Support\Facades\Notification;
 
@@ -168,6 +186,116 @@ class VenueController extends Controller
             }
         )->get();
 
+
+        if ($p->price > 0) {
+
+
+            try {
+                # Create Connection
+                $client = new SquareClient([
+                    'accessToken' => env('SQUARE_SANDBOX_TOKEN'),
+                    'environment' => Environment::SANDBOX,
+                ]);
+
+
+                # Setting Params
+                $checkoutApi = $client->getCheckoutApi();
+
+                $locationId = env('SQUARE_SANDBOX_LOCATION_ID');
+                # Unique Key for Transection
+                $body_idempotencyKey = "VE-" . sprintf("%04d", $venue->id);
+                $body_order = new CreateOrderRequest;
+
+
+                $body_order_order_locationId = $locationId;
+                $body_order->setOrder(new SOrder(
+                    $body_order_order_locationId
+                ));
+
+                # Setting Reference ID
+                $body_order->getOrder()->setReferenceId('reference_id');
+                $body_order->getOrder()->setSource(new OrderSource);
+                $body_order->getOrder()->getSource()->setName('name');
+                $body_order->getOrder()->setCustomerId(Auth::user()->id);
+                $body_order_order_lineItems = [];
+
+                $body_order_order_lineItems_0_quantity = '1';
+                $body_order_order_lineItems[0] = new OrderLineItem(
+                    $body_order_order_lineItems_0_quantity
+                );
+                $body_order_order_lineItems[0]->setUid($venue->id);
+                $body_order_order_lineItems[0]->setName($p->name);
+                $body_order_order_lineItems[0]->setQuantityUnit(new OrderQuantityUnit);
+                $body_order_order_lineItems[0]->getQuantityUnit()->setMeasurementUnit(new MeasurementUnit);
+
+
+                $body_order_order_lineItems_0_quantityUnit_measurementUnit_customUnit_name = Auth::user()->name;
+                $body_order_order_lineItems_0_quantityUnit_measurementUnit_customUnit_abbreviation = '';
+                $body_order_order_lineItems[0]->getQuantityUnit()->getMeasurementUnit()->setCustomUnit(new MeasurementUnitCustom(
+                    $body_order_order_lineItems_0_quantityUnit_measurementUnit_customUnit_name,
+                    $body_order_order_lineItems_0_quantityUnit_measurementUnit_customUnit_abbreviation
+                ));
+
+                $body_order_order_lineItems[0]->getQuantityUnit()->setPrecision(0);
+                $body_order_order_lineItems[0]->setNote($venue->v_description);
+
+                $body_order_order_lineItems[0]->setBasePriceMoney(new Money);
+                # amount is considerd to be in cents
+                $body_order_order_lineItems[0]->getBasePriceMoney()->setAmount($p->price * 100);
+                $body_order_order_lineItems[0]->getBasePriceMoney()->setCurrency(Currency::USD);
+                $body_order->getOrder()->setLineItems($body_order_order_lineItems);
+
+                $body_order->setIdempotencyKey($body_idempotencyKey);
+                $body = new CreateCheckoutRequest(
+                    $body_idempotencyKey,
+                    $body_order
+                );
+
+                // $body->setAskForShippingAddress(false);
+                $body->setMerchantSupportEmail('admin@dapsocially.com');
+                $body->setPrePopulateBuyerEmail(Auth::user()->email);
+                $body->setRedirectUrl('https://dapsocially.theairtech.com/payment/confirm');
+                $body_additionalRecipients = [];
+
+                $body->setAdditionalRecipients($body_additionalRecipients);
+
+                // var_dump($body);
+                // die('I am here !');
+
+                $apiResponse = $checkoutApi->createCheckout($locationId, $body);
+                if ($apiResponse->isSuccess()) {
+                    $createCheckoutResponse = $apiResponse->getResult();
+                    // var_dump($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
+                    // redirect();
+                    // die($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
+                    // echo "<script>window.open('".$createCheckoutResponse->getCheckout()->getCheckoutPageUrl()."', '_blank')</script>";
+                    // $request->session->set('checkout_page_url',$createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
+                    $event_checkout = new Event_checkouts();
+                    $event_checkout->veneu_id = $venue->id;
+                    $event_checkout->event_id = null;
+                    $event_checkout->type = 'Veneu';
+                    $event_checkout->checkout_id = $createCheckoutResponse->getCheckout()->getId();
+                    $event_checkout->checkout_page_url = $createCheckoutResponse->getCheckout()->getCheckoutPageUrl();
+                    $event_checkout->payment_status = false;
+                    $event_checkout->charges = $p->price;
+                    $event_checkout->save();
+
+                    return redirect($createCheckoutResponse->getCheckout()->getCheckoutPageUrl());
+                } else {
+                    // $errors = $apiResponse->getErrors();
+                    Session::flash('error', 'Something went wrong while processing payment !');
+                    // echo 'Something went wrong while processing payment !<hr>';
+                    // var_dump($errors);
+                    // die();
+                }
+            } catch (\Throwable $th) {
+                throw $th;
+            }
+        }
+
+
+
+
         $details = [
             'greeting' => 'Hi ',
             'body' => 'A new Order is placed by user named ' . Auth::user()->name . ' ',
@@ -309,11 +437,11 @@ class VenueController extends Controller
                 }
             }
         }
-        
+
         $load_more = false;
         return view('users.content.myvenues', compact('venues', 'load_more'));
     }
-    
+
     public function search_Venue(Request $request)
     {
 
@@ -376,11 +504,11 @@ class VenueController extends Controller
             }
         }
         $locations = $loc;
-        
+
         $venues = Venue::where('created_by', '=', Auth::user()->id)->take(9)->get();
-        
+
         $load_more = (count($venues)>9)?true:false;
-        
+
         return view('users.content.myvenues', compact('venues', 'load_more'));
     }
 
