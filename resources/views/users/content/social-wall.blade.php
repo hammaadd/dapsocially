@@ -63,7 +63,7 @@
         @foreach($posts as $post)
         {{-- @if(array_key_exists($i,$posts)) --}}
         {{-- @php $post = $posts[$i]; @endphp --}}
-            <div class="item">
+            <div class="item" @click = " ad = true ">
         		<div class="">
                     <a href="{{$post->url}}" target="_blank" class="fh5co-board-img">
                         <div class="relative">
@@ -137,7 +137,7 @@
         @endif --}}
 
     @endforeach
-@endif
+    @endif
 
         </div>
     </section>
