@@ -21,7 +21,8 @@ use Square\Http\HttpRequest;
 
 class AccountController extends Controller
 {
-    protected $hepler, $fb;
+    protected $hepler;
+    protected $fb;
 
 
 
@@ -44,6 +45,59 @@ class AccountController extends Controller
         $this->helper = $this->fb->getRedirectLoginHelper();
         $this->middleware('auth');
     }
+
+    public function instaRedirect()
+    {
+        $appId = config('services.instagram.client_id');
+        $redirectUri = urlencode(config('services.instagram.redirect'));
+        return redirect()->to("https://api.instagram.com/oauth/authorize?app_id={$appId}&redirect_uri={$redirectUri}&scope=user_profile,user_media&response_type=code");
+    }
+
+    public function instagramProviderCallback(Request $request)
+    {
+        $code = $request->code;
+        if (empty($code)) {
+            return redirect()->route('home')->with('error', 'Failed to login with Instagram.');
+        }
+
+        $appId = config('services.instagram.client_id');
+        $secret = config('services.instagram.client_secret');
+        $redirectUri = config('services.instagram.redirect');
+
+        $client = new Client();
+
+        // Get access token
+        $response = $client->request('POST', 'https://api.instagram.com/oauth/access_token', [
+        'form_params' => [
+            'app_id' => $appId,
+            'app_secret' => $secret,
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $redirectUri,
+            'code' => $code,
+        ]
+    ]);
+
+        if ($response->getStatusCode() != 200) {
+            return redirect()->route('home')->with('error', 'Unauthorized login to Instagram.');
+        }
+
+        $content = $response->getBody()->getContents();
+        $content = json_decode($content);
+
+        $accessToken = $content->access_token;
+        $userId = $content->user_id;
+
+        // Get user info
+        $response = $client->request('GET', "https://graph.instagram.com/me?fields=id,username,account_type&access_token={$accessToken}");
+
+        $content = $response->getBody()->getContents();
+        $oAuth = json_decode($content);
+
+        // Get instagram user name
+        $username = $oAuth->username;
+
+        // do your code here
+    }
     public function index()
     {
         $account = Attached_Account::where('user_id', Auth::user()->id)->first();
@@ -60,8 +114,6 @@ class AccountController extends Controller
     }
     public function search_Event(Request $request)
     {
-
-
         $venues = [];
         $events = [];
         $locations = [];
@@ -79,7 +131,7 @@ class AccountController extends Controller
     public function attach_account()
     {
         $permissions = ['user_posts', 'pages_show_list', 'pages_read_engagement']; // Optional permissions
-        $loginURL = $this->helper->getLoginUrl(env('FACEBOOK_REDIRECT_URL'), $permissions);
+        $loginURL = $this->helper->getLoginUrl(url('/get/facebook/token'), $permissions);
         $csrfState = csrf_token();
         $url = 'https://open-api.tiktok.com/platform/oauth/connect/';
 
@@ -158,7 +210,6 @@ class AccountController extends Controller
 
     public function redirectToFacebook()
     {
-
         return Socialite::driver('facebook')->redirect();
     }
 
@@ -166,22 +217,26 @@ class AccountController extends Controller
     {
         try {
             $accessToken = $this->helper->getAccessToken();
-            $accessToken = $accessToken->getValue();
-            $response = $this->fb->get(
-                '/me',
-                $accessToken
-            );
+            if (!empty($accessToken)) {
+                $accessToken = $accessToken->getValue();
+                $response = $this->fb->get(
+                    '/me',
+                    $accessToken
+                );
 
-            $data = $response->getDecodedBody();
-            Session::put('fb_id', $data['id']);
-            Session::put('fb_token', $accessToken);
-            Attached_Account::updateOrCreate(
-                ['verified_acc' => 'facebook', 'user_id' => Auth::id()],
-                ['token' => $accessToken, 'user_social_id' => $data['id']]
-            );
+                $data = $response->getDecodedBody();
+                Session::put('fb_id', $data['id']);
+                Session::put('fb_token', $accessToken);
+                Attached_Account::updateOrCreate(
+                    ['verified_acc' => 'facebook', 'user_id' => Auth::id()],
+                    ['token' => $accessToken, 'user_social_id' => $data['id']]
+                );
 
 
-            Session::flash('message', 'Facebook Attached Successfully');
+                Session::flash('message', 'Facebook Attached Successfully');
+            } else {
+                Session::flash('error', 'Error in attaching Facebook account!');
+            }
         } catch (FacebookResponseException $e) {
             //  echo 'Graph returned an error: ' . $e->getMessage();
             Session::flash('error', 'Unable to add contact support for help.');
@@ -213,6 +268,65 @@ class AccountController extends Controller
         }
 
         // return Redirect::route('twitter.error');
+    }
+
+    public function attachInstagram(){
+
+        $appId = config('services.instagram.client_id');
+        $redirectUri = urlencode(config('services.instagram.redirect'));
+        return redirect()->away("https://api.instagram.com/oauth/authorize?app_id={$appId}&redirect_uri=https://dapsocially.theairtech.com/attach/instagram/callback/&scope=user_profile,user_media&response_type=code");
+
+    }
+
+    public function attachInstagramCallback(){
+        $code = $request->code;
+        if (empty($code)) {
+            return redirect()->route('home')->with('error', 'Failed to login with Instagram.');
+        }
+
+        $appId = config('services.instagram.client_id');
+        $secret = config('services.instagram.client_secret');
+        $redirectUri = config('services.instagram.redirect');
+
+        $client = new \GuzzleHttp\Client();
+
+        // Get access token
+        $response = $client->request('POST', 'https://api.instagram.com/oauth/access_token', [
+        'form_params' => [
+            'app_id' => $appId,
+            'app_secret' => $secret,
+            'grant_type' => 'authorization_code',
+            'redirect_uri' => $redirectUri,
+            'code' => $code,
+        ]
+        ]);
+
+        if ($response->getStatusCode() != 200) {
+            return redirect()->route('home')->with('error', 'Unauthorized login to Instagram.');
+        }
+
+        $content = $response->getBody()->getContents();
+        $content = json_decode($content);
+
+
+
+        $accessToken = $content->access_token;
+        $userId = $content->user_id;
+
+
+        // Get user info
+        $response = $client->request('GET', "https://graph.instagram.com/me?fields=id,username,account_type&access_token={$accessToken}");
+
+        $content = $response->getBody()->getContents();
+        $oAuth = json_decode($content);
+
+        Attached_Account::updateOrCreate(
+            ['verified_acc' => 'instagram', 'user_id' => Auth::id()],
+            ['token' => $accessToken, 'user_social_id' => $userId]
+        );
+        Session::flash('message', 'Facebook Attached Successfully');
+
+        return redirect()->route('attach.social.account');
     }
 
 

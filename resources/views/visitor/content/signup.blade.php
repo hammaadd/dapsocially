@@ -106,7 +106,7 @@
                                         <img src="{{asset('assets/icons8_facebook_2.png')}}" class="mx-auto" alt="">
                                     </div>
                                 </a>
-                                <a href="{{route('login.google')}}" class="mx-1">
+                                <a href="{{route('login.twitter')}}" class="mx-1">
                                     <div class="bg-white rounded-xl w-10 h-10 pt-3 inline-block">
                                         <img src="{{asset('assets/icons8_twitter_1.png')}}" class="mx-auto" alt="">
                                     </div>

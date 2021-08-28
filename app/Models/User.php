@@ -28,7 +28,7 @@ class User extends Authenticatable
         'profession',
         'mobile',
         'isactive',
-        
+
 
     ];
 
@@ -65,6 +65,10 @@ class User extends Authenticatable
 
     public function tiktok(){
         return $this->accounts->where('verified_acc','tiktok')->first();
+    }
+
+    public function instagram(){
+        return $this->accounts->where('verified_acc','instagram')->first();
     }
 
 }

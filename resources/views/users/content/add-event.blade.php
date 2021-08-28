@@ -319,21 +319,48 @@
                                 @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
                             </div>
 
-                            {{-- <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
+                            <div class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">
 
-                            <div
-                                class="flex py-1.5">
+                            <div class="flex py-1.5">
                                 <div class="inline-block mr-3">
+                                    @if (!Auth::user()->facebook())
+                                    <input type="checkbox" class="cb-input hidden" disabled>
+                                @else
+
+
+                                @if (!Auth::user()->instagram())
+                                    <input type="checkbox" class="cb-input hidden" disabled>
+                                @else
                                     <input type="checkbox" class="cb-input hidden" id="insta" name="c[]" value="insta" >
+                                @endif
+
+                                @endif
+
                                     <label for="insta" class="cb--label">
                                         <img src="{{ asset('assets/Insta.png') }}" class="w-6 h-6 mx-auto" alt="">
-                        </label>
-                    </div>
+                                    </label>
+                                </div>
+                                @if (!Auth::user()->facebook())
+                                    <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" disabled>
+                                @else
+                                        @if (!Auth::user()->instagram())
+                                        <input type="text" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*" disabled>
+                                        @else
+                                            <input type="text" name="insta_page_value" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*">
+                                        @endif
 
-                    <input type="text" name="inp[]" class="input--field w--52 min-h-40" placeholder="Enter your Public Page id or Username*">
-                </div>
-                @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
-            </div> --}}
+                                @endif
+                                </div>
+                                @if (!Auth::user()->instagram())
+                                <a href="{{ route('attach.social.account') }}"
+                                    class="text-red-600 underline text-right">Attach Instagram Account</a>
+                                 @endif
+                                    @if (!Auth::user()->facebook())
+                                        <a href="{{ route('attach.social.account') }}"
+                                        class="text-red-600 underline text-right">Attach Facebook Account to use Instagram Hashtrag search</a>
+                                    @endif
+                                @error('inp') <small class="text-red-600">Please add page name or id</small>@enderror
+                            </div>
 
                             <div
                                 class="w-full overflow-hidden md:mb-2 md:px-2 md:w-1/2 lg:mb-3 lg:px-3 lg:w-1/2 xl:mb-3 xl:px-3 xl:w-1/2">

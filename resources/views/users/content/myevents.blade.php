@@ -64,7 +64,7 @@
                             </div>
                             <div class="left-0 right-0 bottom-4 absolute text-white px-5 flex flex-wrap items-center">
                                 <div class="w-3/4">
-                                    <a href="#" class="text-xl font-medium">{{$event->event_name}}</a>
+                                    <a href="{{route('socialwall.event',$event)}}" class="text-xl font-medium">{{$event->event_name}}</a>
                                     <p><span class="text-sm m-1">{{$event->hashtag}}</span></p>
                                 </div>
                                 <div class="w-1/4 flex justify-end items-center">
@@ -76,8 +76,6 @@
                         </div>
                     </div>
                     @endforeach
-
-
                 </div>
                 @endif
             </section>

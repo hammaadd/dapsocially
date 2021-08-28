@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Session;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('gen', function (Request $req) {
 
     var_dump(Auth::user()->name);
@@ -33,9 +32,9 @@ Route::post('search', 'Visitor\HomeController@search')->name('search');
 
 
 /**
- * 
+ *
  * Footer Links/Pages
- * 
+ *
  */
 Route::get('about-us', 'Visitor\HomeController@about_us')->name('about.us');
 Route::get('our-work', 'Visitor\HomeController@our_work')->name('our.work');
@@ -49,18 +48,18 @@ Route::get('features', 'Visitor\HomeController@features')->name('features');
 Route::get('pricing', 'Visitor\HomeController@pricing')->name('pricing');
 
 /**
- * 
+ *
  * Ajax Request Handling Select2
- * 
+ *
  */
 Route::get('select2-autocomplete-city-ajax', 'Visitable\Select2AutocompleteController@dataCitiesAjax')->name('datacities');
 Route::get('select2-autocomplete-location-ajax', 'Visitable\Select2AutocompleteController@dataLocationsAjax')->name('datalocations');
 
 
 /**
- * 
+ *
  * Ajax Request Handling Select2 Ends
- * 
+ *
  */
 
 Route::get('signin', function () {
@@ -108,7 +107,7 @@ Route::middleware(['auth' => 'role:user'])->group(function () {
     Route::get('delete_my-event/{event}', 'User\EventController@delete_myevent')->name('delete.my.event');
 
 
- 
+
     Route::get('load-my-venues', 'User\VenueController@load_my_venues')->name('load.my.venues');
     Route::get('delete_my-venue/{venue}', 'User\VenueController@delete_myvenue')->name('delete.my.venue');
     Route::get('my-event', 'User\EventController@my_events')->name('my.events');
@@ -120,7 +119,6 @@ Route::middleware(['auth' => 'role:user'])->group(function () {
     Route::post('update-event/{event}', 'User\EventController@update_event')->name('update.event');
 
     Route::get('attach/facebook', 'User\AccountController@redirectToFacebook')->name('attach.facebook');
-
 
 
     Route::get('facebook/posts/venue/{venue}', 'User\VenueController@show_posts')->name('facebook.posts.venue');
@@ -262,11 +260,15 @@ Route::prefix('adm')->middleware(['auth' => 'role:superadministrator'])->group(f
 
 
 //Social Login routes
-Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('login.google');
-Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
+Route::get('login/google', 'Auth\SocailLoginController@redirectToGoogle')->name('login.google');
+Route::get('login/google/callback', 'Auth\SocailLoginController@handleGoogleCallback');
 
-Route::get('login/facebook', 'Auth\LoginController@redirectToFacebook')->name('login.facebook');
-Route::get('login/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
+Route::get('login/facebook', 'Auth\SocailLoginController@facebookLogin')->name('login.facebook');
+Route::get('login/facebook/callback', 'Auth\SocailLoginController@handleFacebookCallback');
+Route::get('login/instagram', 'Auth\SocailLoginController@instagramLogin')->name('get.token.insta');
+Route::get('login/instagram/callback', 'Auth\SocailLoginController@handleInstagramCallback');
+Route::get('login/twitter', 'Auth\SocailLoginController@twitterLogin')->name('login.twitter');
+Route::get('login/twitter/callback', 'Auth\SocailLoginController@handletwitterCallback');
 Route::get('tiktok/callback', 'User\AccountController@getTTtoken')->name('tiktok.callback');
 Route::get('tiktok/videos', 'User\AccountController@getVideos')->name('tiktok.videos');
 
@@ -274,8 +276,12 @@ Route::get('get/facebook/token', 'User\AccountController@getFbToken')->name('get
 
 
 
+
 Route::get('get/twitter/token', 'User\AccountController@getTwitterToken')->name('get.token.twitter');
 Route::get('attach/twitter/account', 'User\AccountController@attachTwitter')->name('attach.twitter');
+Route::get('attach/instagram/account', 'User\AccountController@attachInstagram')->name('attach.instagram');
+Route::get('attach/instagram/callback', 'User\AccountController@attachInstagramCallback')->name('attach.instagram.callback');
+
 
 Route::get('/search/tweet', 'User\AccountController@searchTweet')->name('search.tweet');
 
@@ -305,9 +311,9 @@ Route::get('log-out/{id}', 'Auth\LogOutController@index')->name('log.out');
 
 
 /**
- * 
+ *
  * Square Payment NEW SDK
- * 
+ *
  */
 Route::get('square/test', 'TestingApi\SquareApiController@sample_process')->name('square.sample_process');
 Route::get('square/customers/list','TestingApi\SquareApiController@list_customers')->name('square.listc');

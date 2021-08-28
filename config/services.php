@@ -32,14 +32,26 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost/login/google/callback',
+        'redirect' => 'https://dapsocially.theairtech.com/login/google/callback/',
     ],
     'facebook' => [
-        'app_id' =>env('FACEBOOK_APP_ID'),
-        'app_secret' => env('FACEBOOK_APP_SECRET'),
-        'redirect' => 'https://virtuehost.net/clients/dap-socially/login/facebook/callback',
+        'client_id' =>env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT_URL'),
         'default_graph_version' => 'v11.0',
     ],
+
+    'instagram' => [
+        'client_id' => env('INSTAGRAM_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAM_CLIENT_SECRET'),
+        'redirect' => env('INSTAGRAM_REDIRECT_URI')
+      ],
+
+      'twitter' => [
+        'client_id' => '4jECDyzYQlbedFoodgBUj7CqO',
+        'client_secret' => 'evbcEMDD8Hh7wYvGW5hMfyUVpWbkUd7Xteffch2uaqxQCO00bU',
+        'redirect' =>  'https://dapsocially.theairtech.com/login/twitter/callback/',
+      ],
 
 
 

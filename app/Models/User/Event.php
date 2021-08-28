@@ -26,4 +26,8 @@ class Event extends Model
     public function tiktok_added(){
         return $this->platform->where('platform','tiktok')->first();
     }
+
+    public function instagram_added(){
+        return $this->platform->where('platform','insta')->first();
+    }
 }

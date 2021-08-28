@@ -10,6 +10,7 @@ use App\Models\Event_Social_Post;
 use Illuminate\Http\Request;
 use App\Models\User\Event;
 use App\Models\Location;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\User\Venue;
 use App\Models\Order;
 use App\Models\Payment_Plans;
@@ -66,8 +67,10 @@ class EventController extends Controller
         if (Auth::user()->facebook()) :
             $accestoken = Auth::user()->facebook()->token;
             $data = $this->getPages($accestoken);
+            //dd($data);
             $this->page_data = $data['data'];
             $data = $data['data'];
+
         endif;
 
         if (Auth::user()->twitter()) :
@@ -121,7 +124,7 @@ class EventController extends Controller
     public function add_event(Request $request)
     {
 
-        //dd($request->file('cover_img'));
+        //dd($request->all());
 
         $request->validate([
             'ename' => 'required',
@@ -298,6 +301,8 @@ class EventController extends Controller
             }
         }
 
+        //dd('ok');
+
 
         FetchSocialWallEventPosts::dispatchAfterResponse($event);
 
@@ -334,7 +339,7 @@ class EventController extends Controller
             if ($request->c[$i] == 'insta') {
                 $posts = new Event_Social_Post();
                 $posts->platform = $request->c[$i];
-                $posts->page_name = $request->inp[1];
+                $posts->page_name = $request->insta_page_value;
                 $posts->event_id = $event_id;
                 $posts->save();
             }
@@ -577,7 +582,8 @@ class EventController extends Controller
         // var_dump($request);
 
         $this->update_event_social_posts($event->id, $request);
-        foreach ($request->h_tags as $h_tag) {
+        $array = explode(',', $request->h_tags);
+        foreach ($array as $h_tag) {
             $hashtag = new Collect_Event_Htag();
             $hashtag->account_name = $h_tag;
             $hashtag->event_id = $event->id;
@@ -635,6 +641,7 @@ class EventController extends Controller
     }
     public function getPages($accestoken)
     {
+        $appsecret_proof= hash_hmac('sha256', $accestoken, env('FACEBOOK_APP_SECRET'));
         // $fb_token =Session::get('fb_token');
         $fb = new Facebook(array(
             'app_id' => env('FACEBOOK_APP_ID'),
@@ -642,14 +649,18 @@ class EventController extends Controller
             'default_graph_version' => 'v11.0',
         ));
 
+       // dd($fb);
 
 
         try {
             // Returns a `FacebookFacebookResponse` object
             $response = $fb->get(
-                '/me/accounts',
-                $accestoken
+                '/me/accounts?appsecret_proof='.$appsecret_proof,
+                $accestoken,
+
             );
+
+
         } catch (FacebookResponseException $e) {
             dd('Graph returned an error: ' . $e->getMessage());
             exit;

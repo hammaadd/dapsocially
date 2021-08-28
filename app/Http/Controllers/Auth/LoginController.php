@@ -96,40 +96,32 @@ class LoginController extends Controller
     }
     public function handleGoogleCallback()
     {
-        $user = Socialite::driver("google")->stateless()->user();
+        $user = Socialite::driver('google')->stateless()->user();
         $this->_registerOrLoginUser($user, 'google');
+        return redirect()->route('my.account');
     }
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->fields([
-            'first_name', 'last_name', 'email', 'gender', 'birthday', 'user_posts'
-        ])->scopes([
-            'email', 'user_birthday'
-        ])->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->fields([
-            'first_name', 'last_name', 'email', 'gender', 'birthday', 'user_posts'
-        ])->user();
-
-        //dd($user);
+        $user = Socialite::driver('facebook')->stateless()->user();
         $this->_registerOrLoginUser($user, 'facebook');
+        return redirect()->route('my.account');
     }
-    protected function _registerOrLoginUser($data, $attached_account)
+    public function _registerOrLoginUser($data, $attached_account)
     {
-        // dd($data);
         $user = User::where('email', '=', $data->email)->first();
-        // Session::put('fb_token',$data->token);
-        // Session::put('user_id',$data->id);
-        if (!$user && Auth::user()) {
+        //dd($user);
+        if ($user) {
             $ac = new Attached_Account();
-            $ac->user_id = Auth::user()->id;
+            $ac->user_id = $user->id;
             $ac->verified_acc = $attached_account;
             $ac->token = $data->token;
             $ac->user_social_id = $data->id;
             $ac->save();
-            //return redirect()->route('my.account');
+            Auth::login($user);
         } else if (!$user) {
             $user = new User();
             $user->name = $data->name;
@@ -145,12 +137,7 @@ class LoginController extends Controller
             $ac->token = $data->token;
             $ac->user_social_id = $data->id;
             $ac->save();
-
             Auth::login($user);
         }
-
-
-        // dd(Session::get('fb_token'));
-        // return redirect()->route('my.account');
     }
 }
