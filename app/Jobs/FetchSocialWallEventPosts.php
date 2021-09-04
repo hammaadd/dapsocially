@@ -24,8 +24,8 @@ use Facebook\Exceptions\FacebookResponseException;
 class FetchSocialWallEventPosts implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    protected $event;
 
+    public $event;
     /**
      * Create a new job instance.
      *
@@ -35,6 +35,10 @@ class FetchSocialWallEventPosts implements ShouldQueue
     {
         //
         $this->event = $event;
+
+        $this->media = array();
+
+        $this->index = 0;
     }
 
     /**
@@ -199,7 +203,7 @@ class FetchSocialWallEventPosts implements ShouldQueue
         $sec = env('INSTAGRAM_CLIENT_SECRET');
         $app_id = env('INSTAGRAM_CLIENT_ID');
 
-        $media = $this->getHastagMediaByID($userId, $IGtoken);
+        $media = $this->getData($userId, $IGtoken);
         $hasharray = explode(',', $htags);
 
         if (isset($hasharray) && !empty($hasharray)) {
@@ -216,7 +220,6 @@ class FetchSocialWallEventPosts implements ShouldQueue
                 }
             });
         }
-
         if(isset($filteredArray) && !empty($filteredArray))
         {
             foreach($filteredArray as $post)
@@ -235,26 +238,36 @@ class FetchSocialWallEventPosts implements ShouldQueue
         }
     }
 
-    public function getHastagMediaByID($userId, $token)
+    public function getHastagMediaByID($userId, $token, $after)
     {
         $client = new \GuzzleHttp\Client();
-
-        $response = $client->request('GET', "https://graph.instagram.com/v11.0/$userId/media?fields=caption,media_type,timestamp,username,permalink,media_url&access_token=$token");
+        $response = $client->request('GET', "https://graph.instagram.com/v11.0/$userId/media?fields=caption,media_type,timestamp,username,permalink,media_url&access_token=$token&after=$after");
 
         $content = $response->getBody()->getContents();
         $data = json_decode($content);
-        return $data->data;
+        $media['data'] = $data->data;
+        $media['next'] = (isset($data->paging->next) ? true : false);
+        $media['after'] = (isset($data->paging->cursors->after) ? $data->paging->cursors->after : '');
+
+        return $media;
+
     }
+    public function getData($userId, $token, $after = ''){
+        $res = $this->getHastagMediaByID($userId, $token, $after);
+               if(!empty($res['data']))
+               {
+                    foreach($res['data'] as $key => $value)
+                    {
+                        $this->media[$this->index] =  $value;
+                        $this->index++;
+                    }
+                   if($res['next'] == true)
+                   {
+                       $after = $res['after'];
+                       $this->getData($userId, $token, $after);
+                   }
+               }
 
-    // public function getMediaByID($mediaID, $token){
-
-    //     $client = new \GuzzleHttp\Client();
-
-    //     $media = $client->request('GET', "https://graph.facebook.com/$mediaID/recent_media?user_id=17841405309211844");
-
-    //     $Med = $media->getBody()->getContents();
-    //     $dataMed = json_decode($Med);
-    //     dd($dataMed);
-    //     return $dataMed;
-    // }
+            return $this->media;
+    }
 }

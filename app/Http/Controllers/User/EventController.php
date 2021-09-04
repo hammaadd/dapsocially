@@ -600,18 +600,6 @@ class EventController extends Controller
         FetchPostsUpdateEvent::dispatchAfterResponse($event);
         Session::flash('message', 'Event updated  succesfully');
         return back();
-        // if(!is_null($request->longitude && $request->latitude))
-        // {
-
-        //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address,'lng'=>$request->longitude,'lat'=>$request->latitude]);
-        // }
-        // else{
-        //     Location::where('id',$event->location_id)->update(['country'=>$request->country,'state'=>$request->state,'city'=>$request->locality,'address'=>$request->loc_address]);
-        // }
-
-
-
-
     }
 
     public function update_event_social_posts($event_id, Request $request)

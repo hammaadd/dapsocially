@@ -273,8 +273,8 @@ class AccountController extends Controller
     public function attachInstagram(){
 
         $appId = config('services.instagram.client_id');
-        $redirectUri = urlencode(config('services.instagram.redirect'));
-        return redirect()->away("https://api.instagram.com/oauth/authorize?app_id={$appId}&redirect_uri=https://dapsocially.theairtech.com/attach/instagram/callback/&scope=user_profile,user_media&response_type=code");
+        $redirectUri = "https://dapsocially.theairtech.com/login/instagram/callback/";
+        return redirect()->away("https://api.instagram.com/oauth/authorize?app_id={$appId}&redirect_uri={$redirectUri}&scope=user_profile,user_media&response_type=code");
 
     }
 
@@ -324,7 +324,7 @@ class AccountController extends Controller
             ['verified_acc' => 'instagram', 'user_id' => Auth::id()],
             ['token' => $accessToken, 'user_social_id' => $userId]
         );
-        Session::flash('message', 'Facebook Attached Successfully');
+        Session::flash('message', 'Instagram Attached Successfully');
 
         return redirect()->route('attach.social.account');
     }

@@ -280,7 +280,6 @@ Route::get('get/facebook/token', 'User\AccountController@getFbToken')->name('get
 Route::get('get/twitter/token', 'User\AccountController@getTwitterToken')->name('get.token.twitter');
 Route::get('attach/twitter/account', 'User\AccountController@attachTwitter')->name('attach.twitter');
 Route::get('attach/instagram/account', 'User\AccountController@attachInstagram')->name('attach.instagram');
-Route::get('attach/instagram/callback', 'User\AccountController@attachInstagramCallback')->name('attach.instagram.callback');
 
 
 Route::get('/search/tweet', 'User\AccountController@searchTweet')->name('search.tweet');

@@ -201,9 +201,6 @@ class FetchPostsUpdateEvent implements ShouldQueue
     {
         $client = new \GuzzleHttp\Client();
 
-        $sec = env('INSTAGRAM_CLIENT_SECRET');
-        $app_id = env('INSTAGRAM_CLIENT_ID');
-
         $media = $this->getData($userId, $IGtoken);
         $hasharray = explode(',', $htags);
 

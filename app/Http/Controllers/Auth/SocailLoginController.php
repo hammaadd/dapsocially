@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 ini_set("allow_url_fopen", 1);
 
-use App\Models\User;
 use File;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User\Attached_Account;
+use Illuminate\Support\Facades\Session;
+use Laravel\Socialite\Facades\Socialite;
 
 class SocailLoginController extends Controller
 {
@@ -77,8 +78,16 @@ class SocailLoginController extends Controller
 
         $content = $response->getBody()->getContents();
         $oAuth = json_decode($content);
-        $this->registerOrLoginUserInsta($oAuth, 'instagram', $accessToken, $userId);
-        return redirect()->route('my.account');
+        $check = $this->registerOrLoginUserInsta($oAuth, 'instagram', $accessToken, $userId);
+        if(isset($check) && !empty($check) && $check == 'attached-accounts')
+        {
+            Session::flash('message', 'Instagram Attached Successfully');
+            return redirect()->route('attach.social.account');
+
+        }else{
+            return redirect()->route('my.account');
+        }
+
     }
 
     public function handleFacebookCallback(Request $request)
@@ -165,31 +174,53 @@ class SocailLoginController extends Controller
         $user = User::where('username', '=', $data->username)->first();
         //dd($user);
         if ($user) {
-            $ac = new Attached_Account();
-            $ac->user_id = $user->id;
-            $ac->verified_acc = $attached_account;
-            $user->save();
-            $ac->user_social_id = $IGID;
-            $ac->token = $accessToken;
-            $ac->save();
-            Auth::login($user);
+
+            if(Auth::check() == false)
+            {
+                $ac = new Attached_Account();
+                $ac->user_id = $user->id;
+                $ac->verified_acc = $attached_account;
+                $user->save();
+                $ac->user_social_id = $IGID;
+                $ac->token = $accessToken;
+                $ac->save();
+                Auth::login($user);
+            }else{
+                Attached_Account::updateOrCreate(
+                    ['verified_acc' => 'instagram', 'user_id' => Auth::id()],
+                    ['token' => $accessToken, 'user_social_id' => $IGID]
+                );
+
+                return "attached-accounts";
+            }
+
         } else if (!$user) {
-            $email = $data->username.'@gmail.com';
-            $user = new User();
-            $user->name = $data->username;
-            $user->email = $email;
-            $user->username = $data->username;
-            $user->isactive = 1;
-            $user->password = Hash::make($data->username);
-            $user->save();
-            $user->attachRole('user');
-            $ac = new Attached_Account();
-            $ac->user_id = $user->id;
-            $ac->verified_acc = $attached_account;
-            $ac->token = $accessToken;
-            $ac->user_social_id = $IGID;
-            $ac->save();
-            Auth::login($user);
+
+            if(Auth::check() == false)
+            {
+                $email = $data->username.'@gmail.com';
+                $user = new User();
+                $user->name = $data->username;
+                $user->email = $email;
+                $user->username = $data->username;
+                $user->isactive = 1;
+                $user->password = Hash::make($data->username);
+                $user->save();
+                $user->attachRole('user');
+                $ac = new Attached_Account();
+                $ac->user_id = $user->id;
+                $ac->verified_acc = $attached_account;
+                $ac->token = $accessToken;
+                $ac->user_social_id = $IGID;
+                $ac->save();
+                Auth::login($user);
+            }else{
+                Attached_Account::updateOrCreate(
+                    ['verified_acc' => 'instagram', 'user_id' => Auth::id()],
+                    ['token' => $accessToken, 'user_social_id' => $IGID]
+                );
+                return "attached-accounts";
+            }
         }
 
     }
